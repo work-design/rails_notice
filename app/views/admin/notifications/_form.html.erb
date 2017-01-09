@@ -1,0 +1,6 @@
+<%= default_form_for [:admin, @user, @notification] do |f| %>
+  <%= f.text_field :title, label: '标题:' %>
+  <%= f.text_area :body, label: '内容:' %>
+  <%= f.text_field :link, label: 'Link:' %>
+  <%= f.submit %>
+<% end %>

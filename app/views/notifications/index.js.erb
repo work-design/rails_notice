@@ -1,0 +1,8 @@
+$('#notify_container').html('<%= j(render 'notifications') %>');
+
+$('#notify_show').popup({
+  popup: '#notify_container',
+  position: 'bottom right',
+  debug: true,
+  on: 'click'
+}).popup('toggle');
