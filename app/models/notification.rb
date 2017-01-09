@@ -1,6 +1,4 @@
 class Notification < ApplicationRecord
-  belongs_to :user
-
   default_scope -> { order(id: :desc) }
   scope :unread, -> { where(read_at: nil) }
   scope :have_read, -> { where.not(read_at: nil) }
@@ -16,22 +14,22 @@ class Notification < ApplicationRecord
   end
 
   def unread_count
-    Rails.cache.read("user_#{self.user_id}_unread") || 0
+    Rails.cache.read("receiver_#{self.receiver_id}_unread") || 0
   end
 
   def update_unread
     if read_at.blank?
       update(read_at: Time.now)
-      Rails.cache.decrement "user_#{self.user_id}_unread"
+      Rails.cache.decrement "receiver_#{self.receiver_id}_unread"
     end
   end
 
   def update_unread_count
-    Rails.cache.write "user_#{self.user_id}_unread", Notification.where(user_id: self.user_id, read_at: nil).count, raw: true
+    Rails.cache.write "receiver_#{self.receiver_id}_unread", Notification.where(receiver_id: self.receiver_id, read_at: nil).count, raw: true
   end
 
-  def self.update_unread_count(user_id)
-    Rails.cache.write "user_#{user_id}_unread", Notification.where(user_id: user_id, read_at: nil).count, raw: true
+  def self.update_unread_count(receiver_id)
+    Rails.cache.write "receiver_#{receiver_id}_unread", Notification.where(receiver_id: user_id, read_at: nil).count, raw: true
   end
 
 end
