@@ -1,9 +1,9 @@
 class Admin::NotificationsController < Admin::BaseController
-  before_action :set_receiver
+  #before_action :set_receiver
   before_action :set_notification, only: [:show, :push, :edit, :update, :destroy]
 
   def index
-    @notifications = @user.notifications.page(params[:page])
+    #@notifications = @user.notifications.page(params[:page])
   end
 
   def show
