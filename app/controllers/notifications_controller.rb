@@ -59,6 +59,33 @@ class Work::NotificationsController < Work::BaseController
     end
   end
 
+  def index
+    employee_id = current_employee.id
+    redis = Redis::HashKey.new("employee_#{employee_id}")
+    if redis.blank?
+      render :json=> nil
+    else
+      render :json=> redis.to_json
+    end
+  end
+
+  def show_massage
+    employee_id = current_employee.id
+    redis = Redis::HashKey.new("employee_#{employee_id}")
+    redis.delete( CGI.escape(params[:url]) )
+    redirect_to CGI.unescape(params[:url])
+  end
+
+  def wait_messages
+    @q = SearchParams.new(params[:search_params] || {  })
+    @notifications = Notification.where(employee_id: current_employee.id).default_where(@q.attributes).page(params[:page]).per(10)
+  end
+
+  def handle_message
+    @notification =  Notification.find_by_id(params[:id])
+    @notification.read!
+  end
+
   def destroy
     @notification.destroy
     redirect_to(notifications_path, notice: "删除成功。")

@@ -28,8 +28,16 @@ class Notification < ApplicationRecord
     Rails.cache.write "receiver_#{self.receiver_id}_unread", Notification.where(receiver_id: self.receiver_id, read_at: nil).count, raw: true
   end
 
+  def add_redis_message
+    message_hash = Redis::HashKey.new("employee_#{self.employee_id}")
+    message_hash["#{CGI.escape(self.link)}"] = "#{self.msg}"
+  end
+
   def self.update_unread_count(receiver_id)
     Rails.cache.write "receiver_#{receiver_id}_unread", Notification.where(receiver_id: user_id, read_at: nil).count, raw: true
   end
 
 end
+
+# notifiable_type:
+#notifiable_id:

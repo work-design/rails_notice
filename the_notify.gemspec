@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = TheNotify::VERSION
   s.authors     = ["qinmingyuan"]
   s.email       = ["mingyuan0715@foxmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of TheNotify."
-  s.description = "TODO: Description of TheNotify."
+  s.homepage    = 'https://github.com/whmall/the_notify'
+  s.summary     = "Summary of TheNotify."
+  s.description = "Description of TheNotify."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]

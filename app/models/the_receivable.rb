@@ -1,4 +1,4 @@
-module TheNotifiable
+module TheReceivable
 
   included do
     Notification.belongs_to :receiver, class_name: name, foreign_key: 'receiver_id', optional: true, inverse_of: :notifications
