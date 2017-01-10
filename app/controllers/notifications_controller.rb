@@ -1,4 +1,4 @@
-class Work::NotificationsController < Work::BaseController
+class NotificationsController < ApplicationController
   before_action :set_notification, only: [:show, :url, :read, :edit, :update, :destroy]
 
   def index
@@ -59,7 +59,7 @@ class Work::NotificationsController < Work::BaseController
     end
   end
 
-  def index
+  def index_new
     employee_id = current_employee.id
     redis = Redis::HashKey.new("employee_#{employee_id}")
     if redis.blank?
