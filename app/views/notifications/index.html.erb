@@ -1,9 +1,9 @@
 <div class="ui top attached menu borderless">
-  <%= link_to 'Unread', work_notifications_path, class: active_params(scope: '', active_class: 'item active', item_class: 'item') %>
-  <%= link_to 'Have Read', work_notifications_path(scope: 'have_read'), class: active_params(scope: 'have_read', active_class: 'item active', item_class: 'item') %>
+  <%= link_to 'Unread', notifications_path, class: active_params(scope: '', active_class: 'item active', item_class: 'item') %>
+  <%= link_to 'Have Read', notifications_path(scope: 'have_read'), class: active_params(scope: 'have_read', active_class: 'item active', item_class: 'item') %>
   <div class="right menu">
     <% unless params[:scope] == 'have_read' %>
-    <%= link_to read_all_work_notifications_path, class: 'item', remote: true do %>
+    <%= link_to read_all_notifications_path, class: 'item', remote: true do %>
       <i class="checkmark red icon"></i>Mark All
     <% end %>
     <% end %>
@@ -16,16 +16,16 @@
       <div class="content">
         <% if notification.title %>
           <div class="header">
-            <%= link_to notification.title, url_work_notification_path(notification) %>
+            <%= link_to notification.title, url_notification_path(notification) %>
           </div>
         <% end %>
         <div class="description">
-          <%= link_to notification.body, url_work_notification_path(notification) %>
+          <%= link_to notification.body, url_notification_path(notification) %>
         </div>
         <div class="extra">
           <span class="local_time"><%= notification.created_at.to_s %></span>
           <% unless params[:scope] == 'have_read' %>
-          <%= link_to read_work_notification_path(notification), class: 'right floated notification', id: "check_#{notification.id}", remote: true do %>
+          <%= link_to read_notification_path(notification), class: 'right floated notification', id: "check_#{notification.id}", remote: true do %>
             <i class="checkmark red icon"></i>Mark
           <% end %>
           <% end %>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>消息列表</title>
+  <%= stylesheet_link_tag 'the_notify/application', media: 'all', 'data-turbolinks-track': true %>
+  <%= javascript_include_tag 'the_notify/application', 'data-turbolinks-track': true %>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
+</head>
+
+<body>
+  <%= render 'layouts/the_notify/nav_bar' %>
+
+  <%= yield %>
+
+  <%= yield :controller_script %>
+  <%= js_load(root: TheNotify::Engine.root) %>
+
+</body>
+
+</html>

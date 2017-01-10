@@ -1,8 +1,9 @@
 class NotificationsController < ApplicationController
+  layout 'the_notify/application'
   before_action :set_notification, only: [:show, :url, :read, :edit, :update, :destroy]
 
   def index
-    @notifications = current_user.notifications.order(read_at: :asc)
+    @notifications = current_user.received_notifications.order(read_at: :asc)
     if params[:scope] == 'have_read'
       @notifications = @notifications.have_read
     else
@@ -17,7 +18,7 @@ class NotificationsController < ApplicationController
   end
 
   def read_all
-    @notifications = current_user.notifications
+    @notifications = current_user.received_notifications
     @notifications.update_all(read_at: Time.now)
     Notification.update_unread_count(current_user.id)
   end
@@ -52,10 +53,10 @@ class NotificationsController < ApplicationController
   end
 
   def update
-    if @notification.update_attributes(params[:notification].permit!)
+    if @notification.update(params[:notification].permit!)
       redirect_to(notifications_path, notice: 'Notification 更新成功。')
     else
-      render action: "edit"
+      render action: 'edit'
     end
   end
 
