@@ -13,7 +13,7 @@ module TheNotifyConnection
 
   protected
   def find_verified_receiver
-    receiver_id = cookies.encrypted['receiver_id']
+    receiver_id = cookies.signed['receiver_id']
 
     if receiver_id
       User.find_by id: receiver_id
