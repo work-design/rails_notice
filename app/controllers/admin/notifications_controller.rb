@@ -4,6 +4,7 @@ class Admin::NotificationsController < Admin::BaseController
 
   def index
     #@notifications = @user.notifications.page(params[:page])
+    head :ok
   end
 
   def show
