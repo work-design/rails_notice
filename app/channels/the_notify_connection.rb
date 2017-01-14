@@ -1,6 +1,5 @@
 # prepend this module
 module TheNotifyConnection
-  extend ActiveSupport::Concern
 
   def self.prepended(model)
     model.identified_by :current_receiver_id
@@ -19,6 +18,5 @@ module TheNotifyConnection
       User.find_by id: receiver_id
     end
   end
-
 
 end
