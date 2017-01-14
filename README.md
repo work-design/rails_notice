@@ -2,7 +2,13 @@
 Short description and motivation.
 
 ## Usage
-How to use my plugin.
+### Set the cable.yml
+Should set adapter as redis in development
+```
+development:
+  adapter: redis
+  url: redis://localhost:6379/1
+```
 
 ## Installation
 Add this line to your application's Gemfile:

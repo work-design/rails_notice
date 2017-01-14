@@ -6,7 +6,7 @@ module TheNotifyController
   end
 
   def set_receiver_id
-    cookies.signed['receiver_id'] = current_user&.id
+    cookies.encrypted['receiver_id'] = current_user&.id
   end
 
 end

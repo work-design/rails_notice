@@ -14,6 +14,7 @@ class CreateNotification < ActiveRecord::Migration[5.0]
       t.datetime :read_at, index: true
       t.string :notifiable_type
       t.integer :notifiable_id
+      t.datetime :sending_at
       t.timestamps
     end
   end

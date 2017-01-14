@@ -8,7 +8,8 @@ App.cable.subscriptions.create('NoticesChannel', {
     Messenger().post({
       message: data.body,
       type: 'info',
-      showCloseButton: true
+      showCloseButton: true,
+      hideAfter: 60
     });
     $('#notify_show').css('color', '#ff7f24');
     $('#notice_count').html(data.count);
