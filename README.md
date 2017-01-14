@@ -10,6 +10,12 @@ development:
   url: redis://localhost:6379/1
 ```
 
+### Import the js and css in the page which you want show notifications
+```
+<%= javascript_include_tag 'the_notify/cable' %>
+<%= stylesheet_link_tag 'the_notify/cable' %>
+```
+
 ## Installation
 Add this line to your application's Gemfile:
 
