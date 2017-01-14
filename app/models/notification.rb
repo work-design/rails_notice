@@ -1,4 +1,6 @@
 class Notification < ApplicationRecord
+  belongs_to :receiver, polymorphic: true
+
   default_scope -> { order(id: :desc) }
   scope :unread, -> { where(read_at: nil) }
   scope :have_read, -> { where.not(read_at: nil) }

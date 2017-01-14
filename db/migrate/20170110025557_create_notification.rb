@@ -2,7 +2,7 @@ class CreateNotification < ActiveRecord::Migration[5.0]
   def change
     drop_table :notifications, if_exists: true
     create_table :notifications do |t|
-      t.references :receiver
+      t.references :receiver, polymorphic: true, index: true
       t.references :publisher
       t.integer :state, default: 0
       t.string :title
