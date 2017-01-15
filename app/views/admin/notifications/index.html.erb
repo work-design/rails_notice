@@ -1,21 +1,9 @@
-<div class="sixteen wide column">
-  <div class="ui breadcrumb">
-    <%= link_to '返回', admin_users_path, class: 'section' %>
-    <div class="divider"> / </div>
-    <div class="active section">详细</div>
-  </div>
-</div>
-
-<div class="three wide column">
-  <%= render 'admin/users/nav' %>
-</div>
-
 <div class="thirteen wide column">
 
   <div class="ui top attached menu borderless">
     <div class="item"><strong>通知列表</strong></div>
     <div class="right menu">
-      <div class="item"><%= link_to '新建', new_admin_user_notification_path, class: 'ui teal button' %></div>
+      <div class="item"><%= link_to '新建', new_admin_notification_path, class: 'ui teal button' %></div>
     </div>
   </div>
 
@@ -47,7 +35,7 @@
           <code><%= notification.sent_result %></code>
         </td>
         <td>
-          <%= link_to '推送', push_admin_user_notification_path(@user, notification), method: :patch, data: { confirm: 'Are you sure?' }, class: 'ui green label' %>
+          <%= link_to '推送', push_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: 'Are you sure?' }, class: 'ui green label' %>
         </td>
       </tr>
     <% end %>

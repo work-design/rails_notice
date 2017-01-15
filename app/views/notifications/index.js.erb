@@ -1,4 +1,4 @@
-$('#notify_container').html('<%= j(render 'notifications') %>');
+$('body').append('<%= j(render 'notifications') %>');
 
 $('#notify_show').popup({
   popup: '#notify_container',
