@@ -10,9 +10,12 @@
 </head>
 
 <body>
+
   <%= render 'layouts/the_notify/nav_bar' %>
 
-  <%= yield %>
+  <div class="ui container">
+    <%= yield %>
+  </div>
 
   <%= yield :controller_script %>
   <%= js_load(root: TheNotify::Engine.root) %>
