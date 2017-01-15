@@ -1,5 +1,5 @@
 class Admin::NotificationsController < Admin::BaseController
-  before_action :set_receiver
+  before_action :set_receiver, only: [:index, :new, :create]
   before_action :set_notification, only: [:show, :push, :edit, :update, :destroy]
 
   def index

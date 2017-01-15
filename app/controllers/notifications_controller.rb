@@ -1,9 +1,10 @@
 class NotificationsController < ApplicationController
   layout 'the_notify/application'
   before_action :set_notification, only: [:show, :url, :read, :edit, :update, :destroy]
+  before_action :set_receiver, only: [:index, :read_all]
 
   def index
-    @notifications = current_user.received_notifications.order(read_at: :asc)
+    @notifications = @receiver.received_notifications.order(read_at: :asc)
     if params[:scope] == 'have_read'
       @notifications = @notifications.have_read
     else
@@ -18,7 +19,7 @@ class NotificationsController < ApplicationController
   end
 
   def read_all
-    @notifications = current_user.received_notifications
+    @notifications = @receiver.received_notifications
     @notifications.update_all(read_at: Time.now)
     Notification.update_unread_count(current_user.id)
   end
@@ -77,22 +78,17 @@ class NotificationsController < ApplicationController
     redirect_to CGI.unescape(params[:url])
   end
 
-  def wait_messages
-    @q = SearchParams.new(params[:search_params] || {  })
-    @notifications = Notification.where(employee_id: current_employee.id).default_where(@q.attributes).page(params[:page]).per(10)
-  end
-
-  def handle_message
-    @notification =  Notification.find_by_id(params[:id])
-    @notification.read!
-  end
-
   def destroy
     @notification.destroy
     redirect_to(notifications_path, notice: "删除成功。")
   end
 
   private
+  def set_receiver
+    receiver_method = params[:receiver] || :current_user
+    @receiver = send receiver_method
+  end
+
   def set_notification
     @notification = Notification.find(params[:id])
   end
