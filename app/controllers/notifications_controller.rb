@@ -21,7 +21,7 @@ class NotificationsController < ApplicationController
   def read_all
     @notifications = @receiver.received_notifications
     @notifications.update_all(read_at: Time.now)
-    Notification.update_unread_count(current_user.id)
+    Notification.update_unread_count(@receiver.id)
   end
 
   def new
@@ -85,7 +85,7 @@ class NotificationsController < ApplicationController
 
   private
   def set_receiver
-    receiver_method = params[:receiver] || :current_user
+    receiver_method = params[:receiver].presence || :current_user
     @receiver = send receiver_method
   end
 

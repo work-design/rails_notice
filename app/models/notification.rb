@@ -36,10 +36,10 @@ class Notification < ApplicationRecord
   end
 
   def self.update_unread_count(receiver_id)
-    Rails.cache.write "receiver_#{receiver_id}_unread", Notification.where(receiver_id: user_id, read_at: nil).count, raw: true
+    Rails.cache.write "receiver_#{receiver_id}_unread", Notification.where(receiver_id: receiver_id, read_at: nil).count, raw: true
   end
 
 end
 
 # notifiable_type:
-#notifiable_id:
+# notifiable_id:

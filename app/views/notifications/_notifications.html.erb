@@ -16,5 +16,5 @@
     <% end %>
   </div>
   <div class="ui divider"></div>
-  <%= link_to 'All Notification', notifications_path, class: 'ui right floated tiny button' %>
+  <%= link_to t('the_notify.all_notification'), notifications_path(receiver: params[:receiver]), class: 'ui right floated tiny button' %>
 </div>
