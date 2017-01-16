@@ -21,7 +21,7 @@ class NotificationsController < ApplicationController
   def read_all
     @notifications = @receiver.received_notifications
     @notifications.update_all(read_at: Time.now)
-    Notification.update_unread_count(@receiver.id)
+    Notification.update_unread_count(@receiver)
   end
 
   def new

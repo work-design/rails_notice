@@ -16,18 +16,18 @@ class Notification < ApplicationRecord
   end
 
   def unread_count
-    Rails.cache.read("receiver_#{self.receiver_id}_unread") || 0
+    Rails.cache.read("#{receiver_type}_#{self.receiver_id}_unread") || 0
   end
 
   def update_unread
     if read_at.blank?
       update(read_at: Time.now)
-      Rails.cache.decrement "receiver_#{self.receiver_id}_unread"
+      Rails.cache.decrement "#{receiver_type}_#{self.receiver_id}_unread"
     end
   end
 
   def update_unread_count
-    Rails.cache.write "receiver_#{self.receiver_id}_unread", Notification.where(receiver_id: self.receiver_id, read_at: nil).count, raw: true
+    Rails.cache.write "#{receiver_type}_#{self.receiver_id}_unread", Notification.where(receiver_id: self.receiver_id, read_at: nil).count, raw: true
   end
 
   def add_redis_message
@@ -35,8 +35,8 @@ class Notification < ApplicationRecord
     message_hash["#{CGI.escape(self.link)}"] = "#{self.msg}"
   end
 
-  def self.update_unread_count(receiver_id)
-    Rails.cache.write "receiver_#{receiver_id}_unread", Notification.where(receiver_id: receiver_id, read_at: nil).count, raw: true
+  def self.update_unread_count(receiver)
+    Rails.cache.write "#{receiver.class.name}_#{receiver.id}_unread", Notification.where(receiver_id: receiver.id, read_at: nil).count, raw: true
   end
 
 end

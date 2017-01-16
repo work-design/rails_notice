@@ -6,7 +6,7 @@ module TheReceivable
   end
 
   def unread_count
-    Rails.cache.read("receiver_#{self.id}_unread") || 0
+    Rails.cache.read("#{self.class.name}_#{self.id}_unread") || 0
   end
 
 end
