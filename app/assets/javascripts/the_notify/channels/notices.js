@@ -5,12 +5,19 @@ App.cable.subscriptions.create('NoticesChannel', {
   received: function(data) {
     this.collection().css('color', '#ff7f24');
     this.collection().html(data.body);
-    Messenger().post({
+
+    var msg = Messenger().post({
       message: data.body,
       type: 'info',
       showCloseButton: true,
-      hideAfter: 5
+      hideAfter: false,
+      events: {
+        'click': function(e){
+          window.location.href = data.link;
+        }
+      }
     });
+
     $('#notify_show').css('color', '#ff7f24');
     $('#notice_count').html(data.count);
   },
