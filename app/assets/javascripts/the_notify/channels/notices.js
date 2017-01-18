@@ -9,7 +9,7 @@ App.cable.subscriptions.create('NoticesChannel', {
       message: data.body,
       type: 'info',
       showCloseButton: true,
-      hideAfter: 60
+      hideAfter: 5
     });
     $('#notify_show').css('color', '#ff7f24');
     $('#notice_count').html(data.count);
