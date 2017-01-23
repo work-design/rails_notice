@@ -8,12 +8,10 @@ class Notification < ApplicationRecord
   after_create_commit :process_job, :update_unread_count
 
   def process_job
-    if receiver
-      if sending_at
-        NotificationJob.set(wait_until: sending_at).perform_later id
-      else
-        NotificationJob.perform_later(self.id)
-      end
+    if sending_at
+      NotificationJob.set(wait_until: sending_at).perform_later id
+    else
+      NotificationJob.perform_later(self.id)
     end
   end
 
