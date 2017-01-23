@@ -27,16 +27,11 @@ class Notification < ApplicationRecord
   end
 
   def update_unread_count
-    Rails.cache.write "#{receiver_type}_#{self.receiver_id}_unread", Notification.where(receiver_id: self.receiver_id, read_at: nil).count, raw: true
-  end
-
-  def add_redis_message
-    message_hash = Redis::HashKey.new("employee_#{self.employee_id}")
-    message_hash["#{CGI.escape(self.link)}"] = "#{self.msg}"
+    Rails.cache.write "#{receiver_type}_#{self.receiver_id}_unread", Notification.where(receiver_id: self.receiver_id, receiver_type: self.receiver_type, read_at: nil).count, raw: true
   end
 
   def self.update_unread_count(receiver)
-    Rails.cache.write "#{receiver.class.name}_#{receiver.id}_unread", Notification.where(receiver_id: receiver.id, read_at: nil).count, raw: true
+    Rails.cache.write "#{receiver.class.name}_#{receiver.id}_unread", Notification.where(receiver_id: receiver.id, receiver_type: receiver.class.name, read_at: nil).count, raw: true
   end
 
 end
