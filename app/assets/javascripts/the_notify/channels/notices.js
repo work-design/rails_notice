@@ -11,9 +11,12 @@ App.cable.subscriptions.create('NoticesChannel', {
       type: 'info',
       showCloseButton: true,
       hideAfter: false,
-      events: {
-        'click': function(e){
-          window.location.href = data.link;
+      actions: {
+        confirm: {
+          label: 'Confirm',
+          action: function(e){
+            window.location.href = data.link;
+          }
         }
       }
     });
