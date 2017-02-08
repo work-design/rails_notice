@@ -15,6 +15,7 @@ App.cable.subscriptions.create('NoticesChannel', {
         confirm: {
           label: 'Confirm',
           action: function(e){
+            fetch('/notifications/' + data.id + '/read');
             window.location.href = data.link;
           }
         }

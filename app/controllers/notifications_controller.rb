@@ -2,6 +2,7 @@ class NotificationsController < ApplicationController
   layout 'the_notify/application'
   before_action :set_notification, only: [:show, :url, :read, :edit, :update, :destroy]
   before_action :set_receiver, only: [:index, :read_all]
+  protect_from_forgery except: :read
 
   def index
     @notifications = @receiver.received_notifications.order(read_at: :asc)

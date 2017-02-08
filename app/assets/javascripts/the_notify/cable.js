@@ -1,6 +1,7 @@
 //= require action_cable
 //= require ./messenger.min
 //= require ./messenger-theme-future
+//= require ./fetch
 //= require_self
 //= require_tree ./channels
 
