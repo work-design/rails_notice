@@ -8,7 +8,8 @@ class NotificationJob < ApplicationJob
                                    id: notify.id,
                                    body: notify.body,
                                    count: notify.unread_count,
-                                   link: notify.link
+                                   link: notify.link,
+                                   showtime: notify.notification_setting&.showtime
     end
   end
 

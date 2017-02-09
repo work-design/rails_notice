@@ -10,7 +10,7 @@ App.cable.subscriptions.create('NoticesChannel', {
       message: data.body,
       type: 'info',
       showCloseButton: true,
-      hideAfter: false,
+      hideAfter: data.showtime,
       actions: {
         confirm: {
           label: 'Confirm',
