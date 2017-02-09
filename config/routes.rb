@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get 'read', on: :member
     get 'read_all', on: :collection
   end
+  resource :notification_settings, only: [:show, :edit, :update]
 
   mount ActionCable.server => '/cable'
 

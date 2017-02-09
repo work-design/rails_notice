@@ -3,6 +3,7 @@ module TheReceivable
 
   included do
     has_many :received_notifications, as: 'receiver', class_name: 'Notification', dependent: :destroy
+    has_one :notification_setting, as: 'receiver', dependent: :destroy
   end
 
   def unread_count

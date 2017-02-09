@@ -1,43 +1,38 @@
-<div class="ui breadcrumb">
-  <%= link_to '返回', :back %>
-  <div class="divider"> / </div>
-</div>
+<%= render 'navbar' %>
 
-<div class="ui top attached menu borderless">
-  <%= link_to t('the_notify.unread'), notifications_path(receiver: params[:receiver]), class: active_params(scope: '', active_class: 'item active', item_class: 'item') %>
-  <%= link_to t('the_notify.readed'), notifications_path(receiver: params[:receiver], scope: 'have_read'), class: active_params(scope: 'have_read', active_class: 'item active', item_class: 'item') %>
-  <div class="right menu">
-    <% unless params[:scope] == 'have_read' %>
-    <%= link_to read_all_notifications_path(receiver: params[:receiver]), class: 'item', remote: true do %>
-      <i class="checkmark box icon"></i>Mark All
-    <% end %>
-    <% end %>
+<div class="ui grid">
+  <div class="three wide column">
+    <%= render 'nav' %>
+  </div>
+
+  <div class="thirteen wide column">
+    <div class="ui divided items bottom attached segment">
+      <% @notifications.each do |notification| %>
+        <div class="ui info item">
+          <div class="content">
+            <% if notification.title %>
+              <div class="header">
+                <%= link_to notification.title, url_notification_path(notification) %>
+              </div>
+            <% end %>
+            <div class="description">
+              <%= link_to notification.body, url_notification_path(notification) %>
+            </div>
+            <div class="extra">
+              <span class="local_time"><%= notification.created_at.to_s %></span>
+              <% unless params[:scope] == 'have_read' %>
+                <%= link_to read_notification_path(notification), class: 'right floated notification', id: "check_#{notification.id}", remote: true do %>
+                  <i class="checkmark red icon"></i>Mark
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= paginate @notifications %>
   </div>
 </div>
 
-<div class="ui divided items bottom attached segment">
-  <% @notifications.each do |notification| %>
-    <div class="ui info item">
-      <div class="content">
-        <% if notification.title %>
-          <div class="header">
-            <%= link_to notification.title, url_notification_path(notification) %>
-          </div>
-        <% end %>
-        <div class="description">
-          <%= link_to notification.body, url_notification_path(notification) %>
-        </div>
-        <div class="extra">
-          <span class="local_time"><%= notification.created_at.to_s %></span>
-          <% unless params[:scope] == 'have_read' %>
-          <%= link_to read_notification_path(notification), class: 'right floated notification', id: "check_#{notification.id}", remote: true do %>
-            <i class="checkmark red icon"></i>Mark
-          <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
 
-<%= paginate @notifications %>
