@@ -3,3 +3,7 @@
 *= require ./messenger-theme-air
 *= require_self
 */
+
+.ui.items > .item:before {
+  width: 0;
+}
