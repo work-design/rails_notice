@@ -1,4 +1,4 @@
-<%= default_form_for notification_setting, url: notification_settings_path, method: 'patch', html: { class: 'ui segment form' } do |f| %>
-  <%= f.number_field :showtime %>
-  <%= f.submit %>
+<%= default_form_for notification_setting, url: notification_settings_path(receiver: params[:receiver]), method: 'patch', html: { class: 'ui segment form' } do |f| %>
+  <%= f.number_field :showtime, css: { wrapper_all: 'inline field', label: 'six wide field', wrapper_input: 'nine wide field' }, class: '' %>
+  <%= f.submit 'save', class: 'ui button', css: { wrapper_all: 'inline field', offset: 'six wide field', wrapper_submit: 'nine wide field' } %>
 <% end %>
