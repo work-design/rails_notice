@@ -6,7 +6,7 @@ class NotificationJob < ApplicationJob
     if notify.receiver
       ActionCable.server.broadcast "receiver:#{notify.receiver_id}",
                                    id: notify.id,
-                                   body: notify.body,
+                                   body: notify.body + "  #{notify.job_id}",
                                    count: notify.unread_count,
                                    link: notify.link,
                                    showtime: notify.notification_setting&.showtime

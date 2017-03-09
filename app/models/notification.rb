@@ -12,7 +12,10 @@ class Notification < ApplicationRecord
     if sending_at
       NotificationJob.set(wait_until: sending_at).perform_later id
     else
-      NotificationJob.perform_later(self.id)
+      # debug
+      #NotificationJob.perform_later(self.id)
+      s = NotificationJob.set(wait: 30.seconds).perform_later id
+      self.update job_id: s.job_id
     end
   end
 
