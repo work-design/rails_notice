@@ -1,7 +1,7 @@
 class NoticesChannel < ApplicationCable::Channel
 
   def subscribed
-    stream_from "receiver:#{current_receiver_id}"
+    stream_from "#{current_receiver.class.name}:#{current_receiver&.id}"
   end
 
 end

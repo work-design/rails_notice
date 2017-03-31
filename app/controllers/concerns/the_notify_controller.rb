@@ -2,11 +2,12 @@ module TheNotifyController
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_receiver_id
+    before_action :set_receiver
   end
 
-  def set_receiver_id
-    cookies.encrypted['receiver_id'] = current_user&.id
+  def set_receiver
+    session['receiver_type'] = current_user.class.name
+    session['receiver_id'] = current_user&.id
   end
 
 end
