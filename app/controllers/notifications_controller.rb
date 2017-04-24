@@ -35,7 +35,7 @@ class NotificationsController < ApplicationController
     if @notification.save
       redirect_to(notifications_path, notice: 'Notification 创建成功。')
     else
-      render action: "new"
+      render action: 'new'
     end
   end
 
@@ -86,8 +86,11 @@ class NotificationsController < ApplicationController
 
   private
   def set_receiver
-    receiver_method = params[:receiver].presence || :current_user
-    @receiver = send receiver_method
+    if session['receiver_id'] && session['receiver_type']
+      @receiver = session['receiver_type'].constantize.find session['receiver_id']
+    else
+      logger.error 'An unauthorized connection attempt was rejected'
+    end
   end
 
   def set_notification

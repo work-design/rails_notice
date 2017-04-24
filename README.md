@@ -16,13 +16,41 @@ development:
 <%= stylesheet_link_tag 'the_notify/cable' %>
 ```
 
-### add link
+### View: add link
 ```erb
-<%= link_to notifications_path(receiver: 'current_employee', class: 'icon item pointer', remote: true, id: 'notify_show' do %>
+<%= link_to notifications_path, class: 'icon item pointer', remote: true, id: 'notify_show' do %>
   <i class="bell icon"></i>
   <span id="notice_count" style="padding-left: 5px"><%= current_user.unread_count %></span>
 <% end %>
 ```
+
+### Model Setting
+```ruby
+# which model can receive notifications
+class User < ApplicationRecord
+  include TheReceivable
+end
+
+```
+
+### Controller Setting
+```ruby
+class ApplicationController < ActionController::Base
+  include TheNotifyController
+  
+end
+```
+
+### Channel Setting
+```ruby
+module ApplicationCable
+  class Connection < ActionCable::Connection::Base
+    prepend TheNotifyConnection
+
+  end
+end
+```
+
 
 ## Installation
 Add this line to your application's Gemfile:
