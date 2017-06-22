@@ -1,6 +1,6 @@
 <div class="ui tabular menu">
-  <%= link_to t('the_notify.all_notification'), notifications_path(receiver: params[:receiver]), class: active_action(notifications: 'index', active_class: 'item active', item_class: 'item') %>
-  <%= link_to t('the_notify.notification_setting'), notification_settings_path(receiver: params[:receiver]), class: active_helper(controller: ['notification_settings']) %>
+  <%= link_to t('the_notify.all_notification'), notifications_path(receiver: params[:receiver]), class: active_helper(notifications: 'index', active_class: 'item active', item_class: 'item') %>
+  <%= link_to t('the_notify.notification_setting'), notification_settings_path(receiver: params[:receiver]), class: active_helper(controllers: ['notification_settings']) %>
   <div class="right menu">
     <% unless params[:scope] == 'have_read' %>
     <%= link_to read_all_notifications_path(receiver: params[:receiver]), class: 'item', remote: true do %>
