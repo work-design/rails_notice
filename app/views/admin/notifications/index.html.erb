@@ -14,6 +14,8 @@
     <thead>
     <tr>
       <th>ID</th>
+      <th>Receiver Type</th>
+      <th>Receiver ID</th>
       <th>Title</th>
       <th>Body</th>
       <th>Link</th>
@@ -27,6 +29,8 @@
     <% @notifications.each do |notification| %>
       <tr>
         <td><%= notification.id %></td>
+        <td><%= notification.receiver_type %></td>
+        <td><%= notification.receiver_id %></td>
         <td><%= notification.title %></td>
         <td><%= notification.body %></td>
         <td><%= notification.link %></td>
