@@ -1,5 +1,4 @@
-class NotificationSettingsController < ApplicationController
-  layout 'the_notify/application'
+class My::NotificationSettingsController < My::TheNotifyController
   before_action :set_notification_setting, only: [:show, :edit, :update]
 
   def show
