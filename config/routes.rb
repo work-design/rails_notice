@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     resource :notification_settings, only: [:show, :edit, :update]
   end
 
+  resources :receivers do
+    get :search, on: :collection
+  end
+
   mount ActionCable.server => '/cable'
 
 end

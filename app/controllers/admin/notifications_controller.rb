@@ -6,7 +6,7 @@ class Admin::NotificationsController < Admin::TheNotifyController
     if @receiver
       @notifications = @receiver.notifications.page(params[:page])
     else
-      @notifications = Notification.page(params[:page])
+      @notifications = Notification.default_where(params.fetch(:q, {}).permit(:id, :'body-like', :receiver_type, :receiver_id)).page(params[:page])
     end
   end
 
