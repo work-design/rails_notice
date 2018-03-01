@@ -1,4 +1,4 @@
-class My::NotificationSettingsController < My::TheNotifyController
+class TheNotifyMy::NotificationSettingsController < TheNotifyMy::BaseController
   before_action :set_notification_setting, only: [:show, :edit, :update]
 
   def show

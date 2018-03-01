@@ -1,7 +1,7 @@
 //= require action_cable
 //= require ./messenger.min
 //= require ./messenger-theme-future
-//= require ./fetch
+//= require rails_com/fetch_xhr_script
 //= require_self
 //= require_tree ./channels
 
@@ -14,5 +14,6 @@
 
 Messenger.options = {
   extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
-  theme: 'air'
+  theme: 'air',
+  parentLocations: ['footer']
 };

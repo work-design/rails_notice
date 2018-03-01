@@ -15,7 +15,15 @@ App.cable.subscriptions.create('NoticesChannel', {
         confirm: {
           label: 'Confirm',
           action: function(e){
-            fetch('/notifications/' + data.id + '/read');
+            var url = '/notifications/' + data.id + '/read';
+            var params = {
+              credentials: 'same-origin',
+              headers: {
+                'Accept': 'application/javascript',
+                'X-CSRF-Token': document.head.querySelector("[name=csrf-token]").content
+              }
+            };
+            fetch_xhr_script(url, params);
             window.location.href = data.link;
           }
         }

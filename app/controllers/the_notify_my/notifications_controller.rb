@@ -1,4 +1,4 @@
-class My::NotificationsController < My::TheNotifyController
+class TheNotifyMy::NotificationsController < TheNotifyMy::BaseController
   before_action :set_notification, only: [:show, :url, :read, :edit, :update, :destroy]
   before_action :set_receiver, only: [:index, :read_all]
   protect_from_forgery except: :read
@@ -21,7 +21,7 @@ class My::NotificationsController < My::TheNotifyController
   def read_all
     @notifications = @receiver.received_notifications
     @notifications.update_all(read_at: Time.now)
-    Notification.update_unread_count(@receiver)
+    @count = Notification.update_unread_count(@receiver)
   end
 
   def new
@@ -42,12 +42,12 @@ class My::NotificationsController < My::TheNotifyController
   end
 
   def url
-    @notification.update_unread
+    @notification.make_as_read
     redirect_to @notification.link
   end
 
   def read
-    @notification.update_unread
+    @notification.make_as_read
   end
 
   def edit

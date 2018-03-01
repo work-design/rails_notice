@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = TheNotify::VERSION
   s.authors     = ["qinmingyuan"]
   s.email       = ["mingyuan0715@foxmail.com"]
-  s.homepage    = 'https://github.com/whmall/the_notify'
+  s.homepage    = 'https://github.com/yigexiangfa/the_notify'
   s.summary     = "Summary of TheNotify."
   s.description = "Description of TheNotify."
   s.license     = "MIT"

@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
+  scope :admin, as: 'admin', module: 'the_notify_admin' do
     resources :notifications do
       patch 'push', on: :member
     end
   end
 
-  scope module: :my do
+  scope module: 'the_notify_my' do
     resources :notifications do
       get 'url', on: :member
       get 'read', on: :member

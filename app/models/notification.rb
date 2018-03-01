@@ -9,6 +9,7 @@ class Notification < ApplicationRecord
   after_create_commit :process_job, :update_unread_count
 
   def process_job
+    make_as_unread
     if sending_at
       NotificationJob.set(wait_until: sending_at).perform_later id
     else
@@ -17,23 +18,33 @@ class Notification < ApplicationRecord
   end
 
   def unread_count
-    Rails.cache.read("#{receiver_type}_#{self.receiver_id}_unread") || 0
+    Rails.cache.read("#{self.receiver_type}_#{self.receiver_id}_unread") || 0
   end
 
-  def update_unread
+  def make_as_unread
+    if read_at.present?
+      self.update(read_at: nil)
+      Rails.cache.increment "#{self.receiver_type}_#{self.receiver_id}_unread"
+    end
+  end
+
+  def make_as_read
     if read_at.blank?
       update(read_at: Time.now)
-      Rails.cache.decrement "#{receiver_type}_#{self.receiver_id}_unread"
+      Rails.cache.decrement "#{self.receiver_type}_#{self.receiver_id}_unread"
     end
   end
 
   def update_unread_count
-    Rails.cache.write "#{receiver_type}_#{self.receiver_id}_unread", Notification.where(receiver_id: self.receiver_id, receiver_type: self.receiver_type, read_at: nil).count, raw: true
+    Rails.cache.write "#{self.receiver_type}_#{self.receiver_id}_unread", Notification.where(receiver_id: self.receiver_id, receiver_type: self.receiver_type, read_at: nil).count, raw: true
   end
 
   def self.update_unread_count(receiver)
-    Rails.cache.write "#{receiver.class.name}_#{receiver.id}_unread", Notification.where(receiver_id: receiver.id, receiver_type: receiver.class.name, read_at: nil).count, raw: true
+    if Rails.cache.write "#{receiver.class.name}_#{receiver.id}_unread", Notification.where(receiver_id: receiver.id, receiver_type: receiver.class.name, read_at: nil).count, raw: true
+      Rails.cache.read "#{receiver.class.name}_#{receiver.id}_unread"
+    end
   end
+
 
 end
 
