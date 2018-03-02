@@ -17,6 +17,10 @@ class Notification < ApplicationRecord
     end
   end
 
+  def send_email
+    TheNotifyMailer.notify(self.id).deliver_later
+  end
+
   def unread_count
     Rails.cache.read("#{self.receiver_type}_#{self.receiver_id}_unread") || 0
   end

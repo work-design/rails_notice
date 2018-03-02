@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   scope :admin, as: 'admin', module: 'the_notify_admin' do
     resources :notifications do
       patch 'push', on: :member
+      patch :email, on: :member
     end
   end
 

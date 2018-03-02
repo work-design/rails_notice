@@ -39,8 +39,9 @@
         <td>
           <code><%= notification.sent_result %></code>
         </td>
-        <td>
-          <%= link_to '推送', push_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: 'Are you sure?' }, class: 'ui green label' %>
+        <td class="ui labels">
+          <%= link_to '推送', push_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: 'Are you sure?' }, class: 'ui mini green label' %>
+          <%= link_to 'Email', email_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: 'Are you sure?' }, class: 'ui mini green label' %>
         </td>
       </tr>
     <% end %>

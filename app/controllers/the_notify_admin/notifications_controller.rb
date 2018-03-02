@@ -1,6 +1,6 @@
 class TheNotifyAdmin::NotificationsController < TheNotifyAdmin::BaseController
   before_action :set_receiver, only: [:index, :new, :create]
-  before_action :set_notification, only: [:show, :push, :edit, :update, :destroy]
+  before_action :set_notification, only: [:show, :push, :email, :edit, :update, :destroy]
 
   def index
     if @receiver
@@ -15,6 +15,11 @@ class TheNotifyAdmin::NotificationsController < TheNotifyAdmin::BaseController
 
   def push
     @notification.process_job
+    head :ok
+  end
+
+  def email
+    @notification.send_email
     head :ok
   end
 
