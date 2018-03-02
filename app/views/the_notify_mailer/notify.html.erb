@@ -2,4 +2,27 @@
 
 <p><%= @notification.body %></p>
 
+<% if @notification.notifiable %>
+
+<table>
+  <tbody>
+    <% @notification.notifiable.attributes.each do |key, value| %>
+    <tr>
+      <td><%= key %></td>
+      <td>
+        <% if value.is_a?(Hash) %>
+          <%= simple_format_hash(value) %>
+        <% elsif value.is_a?(String) && @notification.notifiable.column_for_attribute(key).limit.to_i > 255 %>
+          <%= simple_format(value) %>
+        <% else %>
+          <%= value %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>
+
 <p>Detail: <%= link_to @notification.link, @notification.link %></p>
