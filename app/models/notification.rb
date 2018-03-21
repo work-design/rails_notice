@@ -1,6 +1,6 @@
 class Notification < ApplicationRecord
   belongs_to :receiver, polymorphic: true
-  belongs_to :notifiable, polymorphic: true
+  belongs_to :notifiable, polymorphic: true, optional: true
   has_one :notification_setting, ->(o) { where(receiver_type: o.receiver_type) }, primary_key: :receiver_id, foreign_key: :receiver_id
 
   default_scope -> { order(id: :desc) }
