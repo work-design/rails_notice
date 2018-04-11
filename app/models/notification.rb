@@ -1,4 +1,7 @@
 class Notification < ApplicationRecord
+  serialize :only_verbose_columns
+  serialize :except_verbose_columns
+
   belongs_to :receiver, polymorphic: true
   belongs_to :notifiable, polymorphic: true, optional: true
   has_one :notification_setting, ->(o) { where(receiver_type: o.receiver_type) }, primary_key: :receiver_id, foreign_key: :receiver_id
@@ -26,6 +29,14 @@ class Notification < ApplicationRecord
 
   def email_enable?
     receiver&.notification_setting&.accept_email
+  end
+
+  def notifiable_attributes
+    if only_verbose_columns.present?
+      self.notifiable.attributes.slice(*verbose_columns_array)
+    else
+      self.notifiable.attributes.except(*except_verbose_columns)
+    end
   end
 
   def unread_count
