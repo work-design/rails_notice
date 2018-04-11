@@ -32,11 +32,7 @@ class Notification < ApplicationRecord
   end
 
   def notifiable_attributes
-    if only_verbose_columns.present?
-      self.notifiable.attributes.slice(*only_verbose_columns)
-    else
-      self.notifiable.attributes.except(*except_verbose_columns)
-    end
+    self.notifiable.as_json(only: only_verbose_columns, except: except_verbose_columns)
   end
 
   def unread_count
