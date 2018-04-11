@@ -1,7 +1,8 @@
 <div class="thirteen wide column">
 
-  <div class="ui top attached menu borderless">
-    <div class="item"><strong>通知列表</strong></div>
+  <div class="ui top attached borderless menu">
+    <div class="header item">通知列表</div>
+    <%= link_to '通知设置', admin_notification_settings_path, class: 'item' %>
     <div class="right menu">
       <div class="item"><%= link_to '新建', new_admin_notification_path, class: 'ui teal button' %></div>
     </div>

@@ -2,7 +2,8 @@ class TheNotifyAdmin::NotificationSettingsController < TheNotifyAdmin::BaseContr
   before_action :set_notification_setting, only: [:show, :edit, :update, :destroy]
 
   def index
-    @notification_settings = Rails::Generators::ActiveModel.page(params[:page])
+    q_params = params.fetch(:q, {}).permit(:id, :receiver_type, :receiver_id)
+    @notification_settings = NotificationSetting.default_where(q_params).page(params[:page])
   end
 
   def new
@@ -13,7 +14,7 @@ class TheNotifyAdmin::NotificationSettingsController < TheNotifyAdmin::BaseContr
     @notification_setting = NotificationSetting.new(notification_setting_params)
 
     if @notification_setting.save
-      redirect_to notification_settings_url, notice: 'Notification setting was successfully created.'
+      redirect_to admin_notification_settings_url, notice: 'Notification setting was successfully created.'
     else
       render :new
     end
@@ -26,16 +27,20 @@ class TheNotifyAdmin::NotificationSettingsController < TheNotifyAdmin::BaseContr
   end
 
   def update
-    if @notification_setting.update(notification_setting_params)
-      redirect_to notification_settings_url, notice: 'Notification setting was successfully updated.'
-    else
-      render :edit
+    respond_to do |format|
+      if @notification_setting.update(notification_setting_params)
+        format.html { redirect_to admin_notification_settings_url, notice: 'Notification setting was successfully updated.' }
+        format.js
+      else
+        format.html { render :edit }
+        format.js
+      end
     end
   end
 
   def destroy
     @notification_setting.destroy
-    redirect_to notification_settings_url, notice: 'Notification setting was successfully destroyed.'
+    redirect_to admin_notification_settings_url, notice: 'Notification setting was successfully destroyed.'
   end
 
   private
@@ -44,7 +49,7 @@ class TheNotifyAdmin::NotificationSettingsController < TheNotifyAdmin::BaseContr
   end
 
   def notification_setting_params
-    params.fetch(:notification_setting, {}).permit(:showtime, :accept_email)
+    params.fetch(:notification_setting, {}).permit(:showtime, :accept_email, notifiable_types: [])
   end
 
 end
