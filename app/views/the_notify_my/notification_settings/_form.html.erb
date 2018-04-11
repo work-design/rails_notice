@@ -1,4 +1,5 @@
 <%= form_with model: notification_setting, url: notification_settings_path(receiver: params[:receiver]), method: 'patch' do |f| %>
-  <%= f.number_field :showtime, css: { wrapper_all: 'inline fields', label: 'six wide field', wrapper_input: 'nine wide field' }, class: '' %>
+  <%= f.number_field :showtime %>
+  <%= f.check_box :accept_email %>
   <%= f.submit 'save', class: 'ui button' %>
 <% end %>

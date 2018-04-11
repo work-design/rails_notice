@@ -61,23 +61,6 @@ class TheNotifyMy::NotificationsController < TheNotifyMy::BaseController
     end
   end
 
-  def index_new
-    employee_id = current_employee.id
-    redis = Redis::HashKey.new("employee_#{employee_id}")
-    if redis.blank?
-      render :json=> nil
-    else
-      render :json=> redis.to_json
-    end
-  end
-
-  def show_massage
-    employee_id = current_employee.id
-    redis = Redis::HashKey.new("employee_#{employee_id}")
-    redis.delete( CGI.escape(params[:url]) )
-    redirect_to CGI.unescape(params[:url])
-  end
-
   def destroy
     @notification.destroy
     redirect_to(notifications_path, notice: "删除成功。")
@@ -85,11 +68,7 @@ class TheNotifyMy::NotificationsController < TheNotifyMy::BaseController
 
   private
   def set_receiver
-    if session['receiver_id'] && session['receiver_type']
-      @receiver = session['receiver_type'].constantize.find session['receiver_id']
-    else
-      logger.error 'An unauthorized connection attempt was rejected'
-    end
+    @receiver = current_receiver
   end
 
   def set_notification

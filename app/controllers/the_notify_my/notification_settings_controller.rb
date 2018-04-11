@@ -17,13 +17,12 @@ class TheNotifyMy::NotificationSettingsController < TheNotifyMy::BaseController
 
   private
   def set_notification_setting
-    receiver_method = params[:receiver].presence || :current_user
-    @receiver = send receiver_method
+    @receiver = current_receiver
     @notification_setting = @receiver.notification_setting || @receiver.build_notification_setting
   end
 
   def notification_setting_params
-    params.fetch(:notification_setting, {}).permit(:showtime)
+    params.fetch(:notification_setting, {}).permit(:showtime, :accept_email)
   end
 
 end

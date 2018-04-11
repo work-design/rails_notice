@@ -2,16 +2,17 @@ Rails.application.routes.draw do
 
   scope :admin, as: 'admin', module: 'the_notify_admin' do
     resources :notifications do
-      patch 'push', on: :member
+      patch :push, on: :member
       patch :email, on: :member
     end
+    resources :notification_settings
   end
 
   scope module: 'the_notify_my' do
     resources :notifications do
-      get 'url', on: :member
-      get 'read', on: :member
-      get 'read_all', on: :collection
+      get :url, on: :member
+      get :read, on: :member
+      get :read_all, on: :collection
     end
     resource :notification_settings, only: [:show, :edit, :update]
   end

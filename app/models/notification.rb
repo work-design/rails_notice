@@ -13,8 +13,10 @@ class Notification < ApplicationRecord
     make_as_unread
     if sending_at
       NotificationJob.set(wait_until: sending_at).perform_later id
+      TheNotifyMailer.notify(self.id).deliver_later(wait_until: sending_at)
     else
       NotificationJob.perform_later(self.id)
+      TheNotifyMailer.notify(self.id).deliver_later
     end
   end
 
