@@ -2,7 +2,7 @@
 
 <p><%= @notification.body %></p>
 
-<% if @notification.notifiable %>
+<% if @notification.notifiable && @notification.verbose %>
 
 <table>
   <tbody>

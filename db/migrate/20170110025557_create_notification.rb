@@ -15,6 +15,7 @@ class CreateNotification < ActiveRecord::Migration[5.0]
       t.string :notifiable_type
       t.integer :notifiable_id
       t.datetime :sending_at
+      t.boolean :verbose, default: false
       t.timestamps
     end
   end
