@@ -33,7 +33,7 @@ class Notification < ApplicationRecord
 
   def notifiable_attributes
     if only_verbose_columns.present?
-      self.notifiable.attributes.slice(*verbose_columns_array)
+      self.notifiable.attributes.slice(*only_verbose_columns)
     else
       self.notifiable.attributes.except(*except_verbose_columns)
     end
