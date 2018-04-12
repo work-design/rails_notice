@@ -1,6 +1,7 @@
 class Notification < ApplicationRecord
-  serialize :only_verbose_columns
-  serialize :except_verbose_columns
+  serialize :only_verbose_columns, Array
+  serialize :except_verbose_columns, Array
+  serialize :cc_emails, Array
 
   belongs_to :receiver, polymorphic: true
   belongs_to :notifiable, polymorphic: true, optional: true
@@ -62,7 +63,6 @@ class Notification < ApplicationRecord
       Rails.cache.read "#{receiver.class.name}_#{receiver.id}_unread"
     end
   end
-
 
 end
 

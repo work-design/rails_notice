@@ -6,7 +6,9 @@ class TheNotifyMailer < ApplicationMailer
 
     return unless @notification.receiver.respond_to?(:email) && @notification.receiver.email
 
-    mail(to: @notification.receiver.email, subject: @notification.title || 'Notification')
+    mail to: @notification.receiver.email,
+         cc: @notification.cc_emails,
+         subject: @notification.title || 'Notification'
   end
 
 end

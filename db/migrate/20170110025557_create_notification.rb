@@ -9,7 +9,6 @@ class CreateNotification < ActiveRecord::Migration[5.0]
       t.string :body, limit: 5000
       t.string :link
       t.datetime :sent_at
-      t.string :sent_code
       t.string :sent_result
       t.datetime :read_at, index: true
       t.string :notifiable_type
@@ -18,6 +17,7 @@ class CreateNotification < ActiveRecord::Migration[5.0]
       t.boolean :verbose, default: false
       t.string :only_verbose_columns
       t.string :except_verbose_columns
+      t.string :cc_emails
       t.timestamps
     end
   end
