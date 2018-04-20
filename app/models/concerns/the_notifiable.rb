@@ -9,4 +9,14 @@ module TheNotifiable
     TheNotify.notifiable_types << self.name unless TheNotify.notifiable_types.include?(self.name)
   end
 
+  def to_notification(receiver: , **other_params)
+    n = self.notifications.build
+    n.receiver_id = receiver.id
+    n.receiver_type = receiver.class
+
+    n.assign_attributes other_params
+
+    n.save!
+  end
+
 end
