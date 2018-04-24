@@ -1,5 +1,5 @@
 class TheNotifyMailer < ApplicationMailer
-  add_template_helper(RailsComHelper)
+  add_template_helper(RailsCom::CommonHelper)
 
   def notify(notification_id)
     @notification = Notification.find(notification_id)
