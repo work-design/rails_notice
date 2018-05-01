@@ -14,7 +14,11 @@ module TheNotifiable
     n.receiver_id = receiver.id
     n.receiver_type = receiver.class
 
-    n.assign_attributes other_params
+    n.assign_attributes other_params.slice(
+      :title, :body, :link,
+      :verbose, :code,
+      :cc_emails
+    )
 
     n.save!
   end
