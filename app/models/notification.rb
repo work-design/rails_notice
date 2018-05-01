@@ -1,11 +1,9 @@
 class Notification < ApplicationRecord
-  serialize :only_verbose_columns, Array
-  serialize :except_verbose_columns, Array
   serialize :cc_emails, Array
 
   belongs_to :receiver, polymorphic: true
   belongs_to :notifiable, polymorphic: true, optional: true
-  belongs_to :notify_setting, ->(o) { where(_type: o.code) }, primary_key: :notifiable_type, foreign_key: :notifiable_type
+  belongs_to :notify_setting, ->(o) { where(code: o.code) }, primary_key: :notifiable_type, foreign_key: :notifiable_type
   has_one :notification_setting, ->(o) { where(receiver_type: o.receiver_type) }, primary_key: :receiver_id, foreign_key: :receiver_id
 
   default_scope -> { order(id: :desc) }
@@ -36,6 +34,16 @@ class Notification < ApplicationRecord
   end
 
   def notifiable_attributes
+    if notify_setting
+      only_verbose_columns = notify_setting.only_verbose_columns
+      except_verbose_columns = notify_setting.except_verbose_columns
+    elsif verbose
+      only_verbose_columns = nil
+      except_verbose_columns = []
+    else
+      only_verbose_columns = []
+      except_verbose_columns = nil
+    end
     self.notifiable.as_json(only: only_verbose_columns, except: except_verbose_columns)
   end
 

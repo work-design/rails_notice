@@ -1,9 +1,7 @@
 class NotifySetting < ApplicationRecord
-  belongs_to :receiver, polymorphic: true
-  serialize :notifiable_types, Array
+  serialize :only_verbose_columns, Array
+  serialize :except_verbose_columns, Array
+  serialize :cc_emails, Array
 
 
-  def notifiable_types
-    super + TheNotify.config.default_notifiable_types
-  end
 end
