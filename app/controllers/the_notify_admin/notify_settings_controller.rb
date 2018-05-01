@@ -57,12 +57,17 @@ class TheNotifyAdmin::NotifySettingsController < TheNotifyAdmin::BaseController
   end
 
   def notify_setting_params
-    params.fetch(:notify_setting, {}).permit(:notifiable_type,
-                                             :notify_mailer,
-                                             :notify_method,
-                                             only_verbose_columns: [],
-                                             except_verbose_columns: [],
-                                             cc_emails: [])
+    result = params.fetch(:notify_setting, {}).permit(
+      :notifiable_type,
+      :notify_mailer,
+      :notify_method,
+      only_verbose_columns: [],
+      except_verbose_columns: [],
+      cc_emails: []
+    )
+    result[:only_verbose_columns].reject! { |i| i.blank? }
+    result[:except_verbose_columns].reject! { |i| i.blank? }
+    result
   end
 
 end
