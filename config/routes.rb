@@ -5,7 +5,9 @@ Rails.application.routes.draw do
       patch :push, on: :member
       patch :email, on: :member
     end
-    resources :notify_settings
+    resources :notify_settings do
+      get :columns, on: :collection
+    end
     resources :notification_settings
   end
 

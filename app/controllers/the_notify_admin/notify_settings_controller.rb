@@ -1,5 +1,6 @@
 class TheNotifyAdmin::NotifySettingsController < TheNotifyAdmin::BaseController
   before_action :set_notify_setting, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token, only: [:columns] #todo removed
 
   def index
     q_params = {}
@@ -18,6 +19,15 @@ class TheNotifyAdmin::NotifySettingsController < TheNotifyAdmin::BaseController
       redirect_to admin_notify_settings_url, notice: 'Notify setting was successfully created.'
     else
       render :new
+    end
+  end
+
+  def columns
+    @notify_setting = NotifySetting.new
+    if params[:notifiable_type].present?
+      @columns = params[:notifiable_type].constantize.column_names
+    else
+      @columns = []
     end
   end
 
