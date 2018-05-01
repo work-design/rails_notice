@@ -5,5 +5,14 @@
 </div>
 
 <div class="ui segment">
-  <%= render 'form' %>
+  <%= form_with model: [:admin, @notify_setting], local: true do |f| %>
+    <%= render 'shared/error_messages', target: @notify_setting %>
+    <%= f.collection_select :notifiable_type, TheNotify.notifiable_types, :to_s, :to_s %>
+    <%= f.text_field :code, on: {wrapper_id: true} %>
+    <%= f.collection_select :only_verbose_columns, @columns, :to_s, :to_s, {}, {multiple: true} %>
+    <%= f.collection_select :except_verbose_columns, @columns, :to_s, :to_s, {}, {multiple: true} %>
+    <%= f.text_field :notify_mailer, on: {wrapper_id: true} %>
+    <%= f.text_field :notify_method %>
+    <%= f.submit %>
+  <% end %>
 </div>

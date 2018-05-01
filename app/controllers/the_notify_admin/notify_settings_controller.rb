@@ -35,6 +35,7 @@ class TheNotifyAdmin::NotifySettingsController < TheNotifyAdmin::BaseController
   end
 
   def edit
+    @columns = @notify_setting.notifiable_type.constantize.column_names
   end
 
   def update
