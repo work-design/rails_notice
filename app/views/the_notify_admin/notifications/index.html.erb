@@ -1,53 +1,44 @@
-<div class="thirteen wide column">
+<%= render 'menu' %>
 
-  <div class="ui top attached borderless menu">
-    <div class="header item">通知列表</div>
-    <%= link_to '通知设置', admin_notification_settings_path, class: 'item' %>
-    <div class="right menu">
-      <div class="item"><%= link_to '新建', new_admin_notification_path, class: 'ui teal button' %></div>
-    </div>
-  </div>
-
-  <div class="ui segment bottom attached">
-    <%= render 'search_form' %>
-  </div>
-
-  <table class="ui table">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Receiver Type</th>
-      <th>Receiver ID</th>
-      <th>Title</th>
-      <th>Body</th>
-      <th>Link</th>
-      <th>Read At</th>
-      <th>Sent Result</th>
-      <th>操作</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% @notifications.each do |notification| %>
-      <tr>
-        <td><%= notification.id %></td>
-        <td><%= notification.receiver_type %></td>
-        <td><%= notification.receiver_id %></td>
-        <td><%= notification.title %></td>
-        <td><%= notification.body %></td>
-        <td><%= notification.link %></td>
-        <td><%= notification.read_at %></td>
-        <td>
-          <code><%= notification.sent_result %></code>
-        </td>
-        <td class="ui labels">
-          <%= link_to '推送', push_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: 'Are you sure?' }, class: 'ui mini green label' %>
-          <%= link_to 'Email', email_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: 'Are you sure?' }, class: 'ui mini green label' %>
-        </td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-
-  <%= paginate @notifications %>
+<div class="ui attached segment">
+  <%= render 'search_form' %>
 </div>
+
+<table class="ui table">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Receiver Type</th>
+    <th>Receiver ID</th>
+    <th>Title</th>
+    <th>Body</th>
+    <th>Link</th>
+    <th>Read At</th>
+    <th>Sent Result</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @notifications.each do |notification| %>
+    <tr>
+      <td><%= notification.id %></td>
+      <td><%= notification.receiver_type %></td>
+      <td><%= notification.receiver_id %></td>
+      <td><%= notification.title %></td>
+      <td><%= notification.body %></td>
+      <td><%= notification.link %></td>
+      <td><%= notification.read_at %></td>
+      <td>
+        <code><%= notification.sent_result %></code>
+      </td>
+      <td class="ui labels">
+        <%= link_to '推送', push_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: 'Are you sure?' }, class: 'ui mini green label' %>
+        <%= link_to 'Email', email_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: 'Are you sure?' }, class: 'ui mini green label' %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @notifications %>

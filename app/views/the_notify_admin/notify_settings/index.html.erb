@@ -2,7 +2,7 @@
   <div class="header item">Notify Settings</div>
   <div class="right menu">
     <div class="item">
-      <%= link_to 'New Notify Setting', new_notify_setting_path, class: 'ui teal button' %>
+      <%= link_to 'New Notify Setting', new_admin_notify_setting_path, class: 'ui teal button' %>
     </div>
   </div>
 </div>
@@ -13,17 +13,38 @@
 
 <table class="ui bottom attached table">
   <thead>
-  <tr>
+    <tr>
+      <th><%= NotifySetting.human_attribute_name(:id) %></th>
+      <th><%= NotifySetting.human_attribute_name(:notifiable_type) %></th>
+      <th><%= NotifySetting.human_attribute_name(:code) %></th>
+      <th>
+        <p><%= NotifySetting.human_attribute_name(:notify_mailer) %></p>
+        <p><%= NotifySetting.human_attribute_name(:notify_method) %></p>
+      </th>
+      <th><%= NotifySetting.human_attribute_name(:only_verbose_columns) %></th>
+      <th><%= NotifySetting.human_attribute_name(:except_verbose_columns) %></th>
+      <th><%= NotifySetting.human_attribute_name(:cc_emails) %></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
   <% @notify_settings.each do |notify_setting| %>
     <tr>
+      <td><%= notify_setting.id %></td>
+      <td><%= notify_setting.notifiable_type %></td>
+      <td><%= notify_setting.code %></td>
       <td>
-        <%= link_to 'Show', notify_setting_path(notify_setting), class: 'ui blue label' %>
-        <%= link_to 'Edit', edit_notify_setting_path(notify_setting), class: 'ui pink label' %>
-        <%= link_to 'Destroy', notify_setting_path(notify_setting), method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui red label' %>
+        <p><%= notify_setting.notify_mailer %></p>
+        <p><%= notify_setting.notify_method %></p>
+      </td>
+      <td><%= notify_setting.only_verbose_columns %></td>
+      <td><%= notify_setting.except_verbose_columns %></td>
+      <td><%= notify_setting.cc_emails %></td>
+      <td class="ui labels">
+        <%= link_to 'Show', admin_notify_setting_path(notify_setting), class: 'ui blue label' %>
+        <%= link_to 'Edit', edit_admin_notify_setting_path(notify_setting), class: 'ui pink label' %>
+        <%= link_to 'Destroy', admin_notify_setting_path(notify_setting), method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui red label' %>
       </td>
     </tr>
   <% end %>

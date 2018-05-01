@@ -1,58 +1,52 @@
-<div>
-
-  <div class="ui top attached menu borderless">
-    <%= link_to '通知', admin_notifications_path, class: 'item' %>
-    <div class="header item">Notification Settings</div>
-    <div class="right menu">
-      <div class="item"><%= link_to 'New Notification Setting', new_admin_notification_setting_path, class: 'ui teal button' %></div>
-    </div>
+<div class="ui top attached menu borderless">
+  <div class="header item">Notification Settings</div>
+  <div class="right menu">
+    <div class="item"><%= link_to 'New Notification Setting', new_admin_notification_setting_path, class: 'ui teal button' %></div>
   </div>
-
-  <div class="ui attached segment">
-    <%= render 'search_form' %>
-  </div>
-
-  <table class="ui bottom attached table">
-    <thead>
-      <tr>
-        <th><%= NotificationSetting.human_attribute_name(:id) %></th>
-        <th><%= NotificationSetting.human_attribute_name(:receiver_type) %></th>
-        <th><%= NotificationSetting.human_attribute_name(:receiver_id) %></th>
-        <th><%= NotificationSetting.human_attribute_name(:showtime) %></th>
-        <th><%= NotificationSetting.human_attribute_name(:accept_email) %></th>
-        <th><%= NotificationSetting.human_attribute_name(:notifiable_types) %></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-    <% @notification_settings.each do |notification_setting| %>
-      <tr>
-        <td><%= notification_setting.id %></td>
-        <td><%= notification_setting.receiver_type %></td>
-        <td><%= notification_setting.receiver_id %></td>
-        <td><%= notification_setting.showtime %></td>
-        <td>
-          <%= form_with model: notification_setting, url: admin_notification_setting_path(notification_setting.id), method: :patch, remote: true do |f| %>
-            <%= f.check_box :accept_email, onChange: "Rails.fire(this.form, 'submit')", label: false, on: {wrapper_all: false, offset: false} %>
-          <% end %>
-        </td>
-        <td class="ui labels">
-          <% notification_setting.notifiable_types.each do |notifiable_type| %>
-            <span class="ui label"><%= notifiable_type %></span>
-          <% end %>
-        </td>
-        <td class="ui labels">
-          <%= link_to 'Show', admin_notification_setting_path(notification_setting), class: 'ui blue label' %>
-          <%= link_to 'Edit', edit_admin_notification_setting_path(notification_setting), class: 'ui pink label' %>
-          <%= link_to 'Destroy', admin_notification_setting_path(notification_setting), method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui red label' %>
-        </td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-
-  <%= paginate @notification_settings %>
 </div>
 
+<div class="ui attached segment">
+  <%= render 'search_form' %>
+</div>
 
+<table class="ui bottom attached table">
+  <thead>
+    <tr>
+      <th><%= NotificationSetting.human_attribute_name(:id) %></th>
+      <th><%= NotificationSetting.human_attribute_name(:receiver_type) %></th>
+      <th><%= NotificationSetting.human_attribute_name(:receiver_id) %></th>
+      <th><%= NotificationSetting.human_attribute_name(:showtime) %></th>
+      <th><%= NotificationSetting.human_attribute_name(:accept_email) %></th>
+      <th><%= NotificationSetting.human_attribute_name(:notifiable_types) %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @notification_settings.each do |notification_setting| %>
+    <tr>
+      <td><%= notification_setting.id %></td>
+      <td><%= notification_setting.receiver_type %></td>
+      <td><%= notification_setting.receiver_id %></td>
+      <td><%= notification_setting.showtime %></td>
+      <td>
+        <%= form_with model: notification_setting, url: admin_notification_setting_path(notification_setting.id), method: :patch, remote: true do |f| %>
+          <%= f.check_box :accept_email, onChange: "Rails.fire(this.form, 'submit')", label: false, on: {wrapper_all: false, offset: false} %>
+        <% end %>
+      </td>
+      <td class="ui labels">
+        <% notification_setting.notifiable_types.each do |notifiable_type| %>
+          <span class="ui label"><%= notifiable_type %></span>
+        <% end %>
+      </td>
+      <td class="ui labels">
+        <%= link_to 'Show', admin_notification_setting_path(notification_setting), class: 'ui blue label' %>
+        <%= link_to 'Edit', edit_admin_notification_setting_path(notification_setting), class: 'ui pink label' %>
+        <%= link_to 'Destroy', admin_notification_setting_path(notification_setting), method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui red label' %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @notification_settings %>
