@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       patch :push, on: :member
       patch :email, on: :member
     end
-    resources :notification_settings
+    resources :notify_settings
   end
 
   scope module: 'the_notify_my' do

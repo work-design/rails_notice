@@ -5,6 +5,7 @@ class Notification < ApplicationRecord
 
   belongs_to :receiver, polymorphic: true
   belongs_to :notifiable, polymorphic: true, optional: true
+  belongs_to :notify_setting, ->(o) { where(_type: o.code) }, primary_key: :notifiable_type, foreign_key: :notifiable_type
   has_one :notification_setting, ->(o) { where(receiver_type: o.receiver_type) }, primary_key: :receiver_id, foreign_key: :receiver_id
 
   default_scope -> { order(id: :desc) }
@@ -17,15 +18,17 @@ class Notification < ApplicationRecord
     make_as_unread
     if sending_at
       NotificationJob.set(wait_until: sending_at).perform_later id
-      TheNotifyMailer.notify(self.id).deliver_later(wait_until: sending_at)
     else
       NotificationJob.perform_later(self.id)
-      TheNotifyMailer.notify(self.id).deliver_later
     end
   end
 
   def send_email
-    TheNotifyMailer.notify(self.id).deliver_later
+    if sending_at
+      TheNotifyMailer.notify(self.id).deliver_later(wait_until: sending_at)
+    else
+      TheNotifyMailer.notify(self.id).deliver_later
+    end
   end
 
   def email_enable?

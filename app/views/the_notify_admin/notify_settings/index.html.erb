@@ -1,0 +1,33 @@
+<div class="ui top attached borderless menu">
+  <div class="header item">Notify Settings</div>
+  <div class="right menu">
+    <div class="item">
+      <%= link_to 'New Notify Setting', new_notify_setting_path, class: 'ui teal button' %>
+    </div>
+  </div>
+</div>
+
+<div class="ui attached segment">
+  <%= render 'search_form' %>
+</div>
+
+<table class="ui bottom attached table">
+  <thead>
+  <tr>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @notify_settings.each do |notify_setting| %>
+    <tr>
+      <td>
+        <%= link_to 'Show', notify_setting_path(notify_setting), class: 'ui blue label' %>
+        <%= link_to 'Edit', edit_notify_setting_path(notify_setting), class: 'ui pink label' %>
+        <%= link_to 'Destroy', notify_setting_path(notify_setting), method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui red label' %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @notify_settings %>

@@ -7,5 +7,17 @@ class CreateNotificationSettings < ActiveRecord::Migration[5.0]
       t.boolean :accept_email, default: true
       t.timestamps
     end
+
+    create_table :notify_settings do |t|
+      t.string :notifiable_type
+      t.string :code
+      t.string :notify_mailer
+      t.string :notify_method
+      t.string :only_verbose_columns
+      t.string :except_verbose_columns
+      t.string :cc_emails
+      t.timestamps
+    end
+
   end
 end
