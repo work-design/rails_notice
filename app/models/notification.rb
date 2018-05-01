@@ -22,6 +22,15 @@ class Notification < ApplicationRecord
   end
 
   def send_email
+    if notify_setting&.mailer_class
+      notify_method = notify_setting.notify_method || 'notify'
+      if sending_at
+        notify_setting.mailer_class.public_send(notify_method, self.notifiable_id).deliver_later(wait_until: sending_at)
+      else
+        notify_setting.mailer_class.public_send(notify_method, self.notifiable_id).deliver_later
+      end
+    end
+
     if sending_at
       TheNotifyMailer.notify(self.id).deliver_later(wait_until: sending_at)
     else
