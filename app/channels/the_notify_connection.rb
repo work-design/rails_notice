@@ -13,7 +13,9 @@ module TheNotifyConnection
   protected
   def find_verified_receiver
     if session['receiver_id'] && session['receiver_type']
-      session['receiver_type'].constantize.find session['receiver_id']
+      Rails.logger.silence do
+        session['receiver_type'].constantize.find session['receiver_id']
+      end
     else
       logger.error 'An unauthorized connection attempt was rejected'
       nil
