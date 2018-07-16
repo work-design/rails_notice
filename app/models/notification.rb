@@ -43,11 +43,15 @@ class Notification < ApplicationRecord
   end
 
   def email_enable?
-    if receiver.notification_setting && !receiver.notification_setting.accept_email
-      false
-    else
-      true
+    if receiver.notification_setting&.accept_email
+      return true
     end
+
+    unless receiver.notification_setting && !receiver.notification_setting&.accept_email
+      return false
+    end
+
+    TheNotify.default_send_mail
   end
 
   def notifiable_attributes
