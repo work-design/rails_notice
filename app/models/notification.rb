@@ -10,7 +10,9 @@ class Notification < ApplicationRecord
   scope :unread, -> { where(read_at: nil) }
   scope :have_read, -> { where.not(read_at: nil) }
 
-  after_create_commit :process_job, :update_unread_count
+  after_create_commit :process_job,
+                      :send_email,
+                      :update_unread_count
 
   def process_job
     make_as_unread
@@ -22,6 +24,8 @@ class Notification < ApplicationRecord
   end
 
   def send_email
+    return unless email_enable?
+
     if notify_setting&.mailer_class
       notify_method = notify_setting.notify_method || 'notify'
       if sending_at
@@ -39,7 +43,11 @@ class Notification < ApplicationRecord
   end
 
   def email_enable?
-    receiver&.notification_setting&.accept_email
+    if receiver.notification_setting && !receiver.notification_setting.accept_email
+      false
+    else
+      true
+    end
   end
 
   def notifiable_attributes
