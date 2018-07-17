@@ -55,17 +55,11 @@ class Notification < ApplicationRecord
   end
 
   def notifiable_attributes
-    if notify_setting.present?
-      only_verbose_columns = notify_setting[:only_verbose_columns]
-      except_verbose_columns = notify_setting[:except_verbose_columns]
-    elsif verbose
-      only_verbose_columns = nil
-      except_verbose_columns = []
+    if verbose
+      self.notifiable.as_json(**notify_setting.slice(:only, :except, :include, :methods))
     else
-      only_verbose_columns = []
-      except_verbose_columns = nil
+      {}
     end
-    self.notifiable.as_json(only: only_verbose_columns, except: except_verbose_columns)
   end
 
   def notify_setting
