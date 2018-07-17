@@ -51,7 +51,7 @@ class Notification < ApplicationRecord
       return false
     end
 
-    TheNotify.default_send_mail
+    TheNotify.config.default_send_email
   end
 
   def notifiable_attributes
