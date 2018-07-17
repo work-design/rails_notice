@@ -1,9 +1,9 @@
 class Notification < ApplicationRecord
   serialize :cc_emails, Array
 
+  attribute :code, :string, default: 'default'
   belongs_to :receiver, polymorphic: true
   belongs_to :notifiable, polymorphic: true, optional: true
-  belongs_to :notify_setting, ->(o) { where(code: o.code) }, primary_key: :notifiable_type, foreign_key: :notifiable_type, optional: true
   has_one :notification_setting, ->(o) { where(receiver_type: o.receiver_type) }, primary_key: :receiver_id, foreign_key: :receiver_id
 
   default_scope -> { order(id: :desc) }
@@ -55,9 +55,9 @@ class Notification < ApplicationRecord
   end
 
   def notifiable_attributes
-    if notify_setting
-      only_verbose_columns = notify_setting.only_verbose_columns
-      except_verbose_columns = notify_setting.except_verbose_columns
+    if notify_setting.present?
+      only_verbose_columns = notify_setting[:only_verbose_columns]
+      except_verbose_columns = notify_setting[:except_verbose_columns]
     elsif verbose
       only_verbose_columns = nil
       except_verbose_columns = []
@@ -66,6 +66,11 @@ class Notification < ApplicationRecord
       except_verbose_columns = nil
     end
     self.notifiable.as_json(only: only_verbose_columns, except: except_verbose_columns)
+  end
+
+  def notify_setting
+    code = self.code || :default
+    notifiable.class.notifies[code] || {}
   end
 
   def unread_count

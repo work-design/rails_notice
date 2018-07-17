@@ -1,5 +1,6 @@
 require 'the_notify/engine'
 require 'the_notify/config'
+require 'the_notify/active_record'
 
 module TheNotify
   mattr_writer :notifiable_types do
