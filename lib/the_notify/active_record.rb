@@ -13,7 +13,7 @@ module TheNotify::ActiveRecord
   end
 
   def notifies
-    class_variables.include?(:@@notifies) && @@notifies
+    (class_variables.include?(:@@notifies) && @@notifies) || {}
   end
 
 end
