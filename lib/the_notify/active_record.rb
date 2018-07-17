@@ -8,6 +8,8 @@ module TheNotify::ActiveRecord
   def acts_as_notify(code = 'default', **options)
     @@notifies ||= {}
     @@notifies[code.to_sym] = options
+
+    include TheNotifiable
   end
 
   def notifies
