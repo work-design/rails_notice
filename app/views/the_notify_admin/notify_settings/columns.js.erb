@@ -1,8 +1,0 @@
-<% form_object = default_form_object(@notify_setting, on: { wrapper_id: true }) %>
-var template = '<%= j(render partial: 'columns_form', locals: { f: form_object }) %>'
-if ($('#notify_setting_code_wrapper').nextUntil('#notify_setting_notify_mailer_wrapper').length > 0) {
-  $('#notify_setting_code_wrapper').nextUntil('#notify_setting_notify_mailer_wrapper').remove();
-}
-$('#notify_setting_code_wrapper').after(template);
-$('#notify_setting_only_verbose_columns').dropdown();
-$('#notify_setting_except_verbose_columns').dropdown();

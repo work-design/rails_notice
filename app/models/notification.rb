@@ -26,12 +26,12 @@ class Notification < ApplicationRecord
   def send_email
     return unless email_enable?
 
-    if notify_setting&.mailer_class
-      notify_method = notify_setting.notify_method || 'notify'
+    if notify_setting[:mailer_class]
+      notify_method = notify_setting[:mailer_class] || 'notify'
       if sending_at
-        notify_setting.mailer_class.public_send(notify_method, self.notifiable_id).deliver_later(wait_until: sending_at)
+        notify_setting[:mailer_class].public_send(notify_method, self.notifiable_id).deliver_later(wait_until: sending_at)
       else
-        notify_setting.mailer_class.public_send(notify_method, self.notifiable_id).deliver_later
+        notify_setting[:mailer_class].public_send(notify_method, self.notifiable_id).deliver_later
       end
     end
 
