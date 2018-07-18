@@ -47,7 +47,7 @@ class Notification < ApplicationRecord
       return true
     end
 
-    unless receiver.notification_setting && !receiver.notification_setting&.accept_email
+    if receiver.notification_setting&.accept_email.is_a?(FalseClass)
       return false
     end
 
