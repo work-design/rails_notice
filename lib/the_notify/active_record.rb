@@ -6,14 +6,8 @@ module TheNotify::ActiveRecord
   # except
   # cc_emails
   def acts_as_notify(code = 'default', **options)
-    @@notifies ||= {}
-    @@notifies[code.to_sym] = options
-
     include TheNotifiable
-  end
-
-  def notifies
-    (class_variables.include?(:@@notifies) && @@notifies) || {}
+    notifies[code.to_sym] = options
   end
 
 end
