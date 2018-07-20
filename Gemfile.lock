@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/qinmingyuan/rails_com.git
+  revision: 2d1f930e094a4ec66a2462e19f33684161096104
+  specs:
+    rails_com (1.2.1)
+      rails
+
 PATH
   remote: .
   specs:
@@ -124,6 +131,7 @@ DEPENDENCIES
   mysql2
   puma
   rails (= 5.2.0)
+  rails_com!
   the_notify!
 
 BUNDLED WITH
