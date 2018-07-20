@@ -63,8 +63,8 @@ class Notification < ApplicationRecord
   end
 
   def notify_setting
-    _code = self.code.to_sym || :default
-    notifiable.class.notifies[_code] || {}
+    _code = self.code || :default
+    notifiable.class.notifies[_code.to_sym] || {}
   end
 
   def unread_count
