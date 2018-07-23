@@ -56,7 +56,16 @@ class Notification < ApplicationRecord
 
   def notifiable_attributes
     if verbose
-      self.notifiable.as_json(**notify_setting.slice(:only, :except, :include, :methods))
+      r = self.notifiable.as_json(**notify_setting.slice(:only, :except, :include, :methods))
+      r.transform_values! do |i|
+        next i unless i.acts_like?(:time)
+        if self.receiver.respond_to?(:timezone)
+          _zone = self.receiver.timezone
+        else
+          _zone = 'UTC'
+        end
+        i.in_time_zone(_zone).strftime '%Y-%m-%d %H:%M:%S'
+      end
     else
       {}
     end
