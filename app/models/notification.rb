@@ -66,14 +66,44 @@ class Notification < ApplicationRecord
         end
         i.in_time_zone(_zone).strftime '%Y-%m-%d %H:%M:%S'
       end
+      r.with_indifferent_access
     else
       {}
     end
   end
 
   def notify_setting
-    _code = self.code || :default
-    notifiable.class.notifies[_code.to_sym] || {}
+    notifiable.class.notifies[self.code] || {}
+  end
+
+  def tr_key(column)
+    "#{self.class.i18n_scope}.notify.#{notifiable.class.base_class.model_name.i18n_key}.#{self.code}.#{column}"
+  end
+
+  def code
+    super ? super.to_sym : :default
+  end
+
+  def title
+    tr_values = notifiable_attributes.slice *I18nHelper.interpolate_key(I18n.t(tr_key(:title)))
+    tr_values.merge! notify_setting.fetch(:tr_values, {})
+
+    if super.blank?
+      I18n.t tr_key(:title), tr_values
+    else
+      super
+    end
+  end
+
+  def body
+    tr_values = notifiable_attributes.slice *I18nHelper.interpolate_key(I18n.t(tr_key(:body)))
+    tr_values.merge! notify_setting.fetch(:tr_values, {})
+
+    if super.blank?
+      I18n.t tr_key(:body), tr_values
+    else
+      super
+    end
   end
 
   def unread_count

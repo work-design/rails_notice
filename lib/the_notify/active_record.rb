@@ -5,6 +5,7 @@ module TheNotify::ActiveRecord
   # only
   # except
   # cc_emails
+  # tr_values
   def acts_as_notify(code = 'default', **options)
     include TheNotifiable
     notifies[code.to_sym] = options
