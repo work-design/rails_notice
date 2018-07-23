@@ -9,7 +9,6 @@
     </a>
     <div class="<%= active_helper(controllers: ['notifications', 'notification_settings', 'notify_settings'], active_class: 'menu content active', item_class: 'menu content') %>">
       <%= link_to 'Notification', admin_notifications_path, class: active_helper(controllers: 'notifications') %>
-      <%= link_to 'Notify Settings', admin_notify_settings_path, class: active_helper(controllers: ['notify_settings']) %>
       <%= link_to 'Receiver Settings', admin_notification_settings_path, class: active_helper(controllers: ['notification_settings']) %>
     </div>
   </div>
