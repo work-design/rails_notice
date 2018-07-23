@@ -106,6 +106,14 @@ class Notification < ApplicationRecord
     end
   end
 
+  def cc_emails
+    r = notify_setting.fetch(:cc_emails, []).map do |i|
+      next i unless i.respond_to?(:call)
+      i.call(notifiable)
+    end
+    r.concat super
+  end
+
   def unread_count
     Rails.cache.read("#{self.receiver_type}_#{self.receiver_id}_unread") || 0
   end
