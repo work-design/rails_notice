@@ -8,7 +8,9 @@
   <tbody>
     <% @notification.notifiable_attributes.each do |key, value| %>
     <tr>
-      <td class="right aligned"><%= key %></td>
+      <td class="right aligned">
+        <%= @notification.notifiable.class.human_attribute_name(key) %>
+      </td>
       <td>
         <% if value.is_a?(Hash) %>
           <%= simple_format_hash(value) %>
