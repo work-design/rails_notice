@@ -12,7 +12,7 @@ module TheNotifyConnection
 
   protected
   def find_verified_receiver
-    if session['receiver_id'] && session['receiver_type']
+    if session && session['receiver_id'] && session['receiver_type']
       Rails.logger.silence do
         session['receiver_type'].constantize.find session['receiver_id']
       end
