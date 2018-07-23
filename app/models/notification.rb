@@ -62,7 +62,7 @@ class Notification < ApplicationRecord
         if self.receiver.respond_to?(:timezone)
           _zone = self.receiver.timezone
         else
-          _zone = Time.zone_default.name
+          _zone = Time.zone.name
         end
         i.in_time_zone(_zone).strftime '%Y-%m-%d %H:%M:%S'
       end
