@@ -73,7 +73,7 @@ class Notification < ApplicationRecord
   end
 
   def notify_setting
-    notifiable.class.notifies[self.code] || {}
+    notifiable_type.constantize.notifies[self.code] || {}
   end
 
   def tr_key(column)
