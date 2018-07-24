@@ -54,9 +54,13 @@ class Notification < ApplicationRecord
     TheNotify.config.default_send_email
   end
 
+  def notifiable_detail
+    self.notifiable.as_json(**notify_setting.slice(:only, :except, :include, :methods))
+  end
+
   def notifiable_attributes
     if verbose
-      r = self.notifiable.as_json(**notify_setting.slice(:only, :except, :include, :methods))
+      r = notifiable_detail
       r.transform_values! do |i|
         next i unless i.acts_like?(:time)
         if self.receiver.respond_to?(:timezone)
@@ -85,7 +89,7 @@ class Notification < ApplicationRecord
   end
 
   def title
-    tr_values = notifiable_attributes.slice *I18nHelper.interpolate_key(I18n.t(tr_key(:title)))
+    tr_values = notifiable_detail.slice *I18nHelper.interpolate_key(I18n.t(tr_key(:title)))
     tr_values.merge! notify_setting.fetch(:tr_values, {})
 
     if super.blank?
@@ -96,7 +100,7 @@ class Notification < ApplicationRecord
   end
 
   def body
-    tr_values = notifiable_attributes.slice *I18nHelper.interpolate_key(I18n.t(tr_key(:body)))
+    tr_values = notifiable_detail.slice *I18nHelper.interpolate_key(I18n.t(tr_key(:body)))
     tr_values.merge! notify_setting.fetch(:tr_values, {})
 
     if super.blank?
