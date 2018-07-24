@@ -7,7 +7,7 @@ class TheNotifyMailer < ApplicationMailer
       return
     end
     if @notification.receiver.respond_to?(:locale)
-      I18n.locale = self.receiver.locale
+      I18n.locale = @notification.receiver.locale
     end
 
     mail to: @notification.receiver.email,
