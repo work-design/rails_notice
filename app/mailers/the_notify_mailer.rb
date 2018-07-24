@@ -3,8 +3,12 @@ class TheNotifyMailer < ApplicationMailer
 
   def notify(notification_id)
     @notification = Notification.find(notification_id)
-
-    return unless @notification.receiver.respond_to?(:email) && @notification.receiver.email
+    unless @notification.receiver.respond_to?(:email) && @notification.receiver.email
+      return
+    end
+    if @notification.receiver.respond_to?(:locale)
+      I18n.locale = self.receiver.locale
+    end
 
     mail to: @notification.receiver.email,
          cc: @notification.cc_emails,
