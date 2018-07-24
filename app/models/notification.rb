@@ -55,7 +55,8 @@ class Notification < ApplicationRecord
   end
 
   def notifiable_detail
-    self.notifiable.as_json(**notify_setting.slice(:only, :except, :include, :methods))
+    r = self.notifiable.as_json(**notify_setting.slice(:only, :except, :include, :methods))
+    r.with_indifferent_access
   end
 
   def notifiable_attributes
@@ -70,9 +71,9 @@ class Notification < ApplicationRecord
         end
         i.in_time_zone(_zone).strftime '%Y-%m-%d %H:%M:%S'
       end
-      r.with_indifferent_access
+      r
     else
-      {}
+      {}.with_indifferent_access
     end
   end
 
