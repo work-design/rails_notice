@@ -10,4 +10,8 @@ module TheReceivable
     Rails.cache.read("#{self.class.name}_#{self.id}_unread") || 0
   end
 
+  def endearing_name
+    name
+  end
+
 end
