@@ -116,7 +116,7 @@ class Notification < ApplicationRecord
       next i unless i.respond_to?(:call)
       i.call(notifiable)
     end
-    r.concat super
+    r.flatten.concat super
   end
 
   def unread_count
