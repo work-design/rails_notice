@@ -4,12 +4,10 @@
       <div class="item">
         <div class="content">
           <i class="bell icon"></i>
-          <%= link_to url_notification_path(notification) do %>
-            <%= notification.title %>
-            <%= notification.body %>
-          <% end %>
+          <%= link_to notification.title, url_notification_path(notification) %>
+          <p><%= notification.body %></p>
           <div class="extra content">
-            <span class="local_time"><%= notification.created_at.to_s %></span>
+            <span><time><%= notification.created_at.to_s(:rfc822) %></time></span>
           </div>
         </div>
       </div>
