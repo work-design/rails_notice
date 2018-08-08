@@ -3,6 +3,7 @@ class Notification < ApplicationRecord
 
   attribute :code, :string, default: 'default'
   belongs_to :receiver, polymorphic: true
+  belongs_to :sender, polymorphic: true, optional: true
   belongs_to :notifiable, polymorphic: true, optional: true
   has_one :notification_setting, ->(o) { where(receiver_type: o.receiver_type) }, primary_key: :receiver_id, foreign_key: :receiver_id
 

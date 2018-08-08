@@ -10,9 +10,12 @@ class TheNotifyMailer < ApplicationMailer
       I18n.locale = @notification.receiver.locale
     end
 
-    mail to: @notification.receiver.email,
+    mail_params = {to: @notification.receiver.email,
          cc: @notification.cc_emails,
-         subject: @notification.title || 'Notification'
+         subject: @notification.title || 'Notification'}
+    mail_params[:from] = @notification.sender.email if @notification.sender && @notification.sender.respond_to?(:email) && @notification.sender.email
+
+    mail mail_params
   end
 
 end

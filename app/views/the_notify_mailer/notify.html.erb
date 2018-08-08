@@ -1,4 +1,4 @@
-<p>Dear <%= @notification.receiver.endearing_name %></p>
+<p>Dear <%= @notification.receiver.endearing_name %>,</p>
 
 <p><%= @notification.body %></p>
 
@@ -28,3 +28,8 @@
 <% end %>
 
 <p><%= t('the_notify.detail') %>: <%= link_to @notification.link, @notification.link %></p>
+
+<% if @notification.sender %>
+<p>Best,<br>
+<%= @notification.sender.endearing_name %></p>
+<% end %>
