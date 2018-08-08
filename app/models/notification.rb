@@ -33,12 +33,12 @@ class Notification < ApplicationRecord
       else
         notify_setting[:mailer_class].public_send(notify_method, self.notifiable_id).deliver_later
       end
-    end
-
-    if sending_at
-      TheNotifyMailer.notify(self.id).deliver_later(wait_until: sending_at)
     else
-      TheNotifyMailer.notify(self.id).deliver_later
+      if sending_at
+        TheNotifyMailer.notify(self.id).deliver_later(wait_until: sending_at)
+      else
+        TheNotifyMailer.notify(self.id).deliver_later
+      end
     end
   end
 
