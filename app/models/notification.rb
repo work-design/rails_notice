@@ -57,7 +57,7 @@ class Notification < ApplicationRecord
 
   def notifiable_detail
     r = self.notifiable.as_json(**notify_setting.slice(:only, :except, :include, :methods))
-    r.with_indifferent_access
+    Hash(r).with_indifferent_access
   end
 
   def notifiable_attributes
