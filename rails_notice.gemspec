@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/yougexiangfa/rails_notice'
   s.summary = "Summary of RailsNotice."
   s.description = "Description of RailsNotice."
-  s.license = 'MIT'
+  s.license = 'LGPL-3.0'
 
   s.files = Dir[
     "{app,config,db,lib}/**/*",
