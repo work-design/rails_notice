@@ -1,4 +1,4 @@
-$:.push File.expand_path('../lib', __FILE__)
+$:.push File.expand_path('lib', __dir__)
 require 'rails_notice/version'
 
 Gem::Specification.new do |s|
@@ -18,5 +18,5 @@ Gem::Specification.new do |s|
     "README.md"
   ]
 
-  s.add_dependency 'rails', '>= 5.0.1'
+  s.add_dependency 'rails', '~> 5.2'
 end
