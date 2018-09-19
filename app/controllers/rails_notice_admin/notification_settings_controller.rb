@@ -1,4 +1,4 @@
-class TheNotifyAdmin::NotificationSettingsController < TheNotifyAdmin::BaseController
+class RailsNoticeAdmin::NotificationSettingsController < RailsNoticeAdmin::BaseController
   before_action :set_notification_setting, only: [:show, :edit, :update, :destroy]
 
   def index

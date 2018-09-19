@@ -1,5 +1,5 @@
 en:
-  the_notify:
+  rails_notice:
     all_notification: All Notifications
     unread: Unread
     readed: Have Readed

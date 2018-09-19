@@ -1,6 +1,6 @@
 require 'active_support/configurable'
 
-module TheNotify
+module RailsNotice
   include ActiveSupport::Configurable
 
   configure do |config|

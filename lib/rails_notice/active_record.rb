@@ -1,4 +1,4 @@
-module TheNotify::ActiveRecord
+module RailsNotice::ActiveRecord
 
   # notify_mailer
   # notify_method
@@ -14,5 +14,5 @@ module TheNotify::ActiveRecord
 end
 
 ActiveSupport.on_load :active_record do
-  extend TheNotify::ActiveRecord
+  extend RailsNotice::ActiveRecord
 end

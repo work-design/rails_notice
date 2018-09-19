@@ -36,9 +36,9 @@ class Notification < ApplicationRecord
       end
     else
       if sending_at
-        TheNotifyMailer.notify(self.id).deliver_later(wait_until: sending_at)
+        RailsNoticeMailer.notify(self.id).deliver_later(wait_until: sending_at)
       else
-        TheNotifyMailer.notify(self.id).deliver_later
+        RailsNoticeMailer.notify(self.id).deliver_later
       end
     end
   end
@@ -52,7 +52,7 @@ class Notification < ApplicationRecord
       return false
     end
 
-    TheNotify.config.default_send_email
+    RailsNotice.config.default_send_email
   end
 
   def notifiable_detail

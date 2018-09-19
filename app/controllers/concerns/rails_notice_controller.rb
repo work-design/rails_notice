@@ -1,4 +1,4 @@
-module TheNotifyController
+module RailsNoticeController
   extend ActiveSupport::Concern
 
   included do
@@ -10,7 +10,7 @@ module TheNotifyController
     session['receiver_type'] = current_receiver.class.name
     session['receiver_id'] = current_receiver&.id
   end
-  
+
   def current_receiver
     current_user
   end

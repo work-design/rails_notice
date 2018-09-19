@@ -8,7 +8,7 @@ module TheNotifiable
 
     has_many :notifications, as: 'notifiable', dependent: :delete_all
 
-    TheNotify.notifiable_types << self.name unless TheNotify.notifiable_types.include?(self.name)
+    RailsNotice.notifiable_types << self.name unless RailsNotice.notifiable_types.include?(self.name)
   end
 
   def to_notification(receiver: , **other_params)

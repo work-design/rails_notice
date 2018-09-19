@@ -1,4 +1,4 @@
 # desc "Explaining what the task does"
-# task :the_notify do
+# task :rails_notice do
 #   # Task goes here
 # end

@@ -2,6 +2,6 @@
   <%= render 'shared/error_messages', target: @notification_setting %>
   <%= f.number_field :showtime %>
   <%= f.check_box :accept_email %>
-  <%= f.collection_check_boxes :notifiable_types, TheNotify.notifiable_types, :to_s, :to_s %>
+  <%= f.collection_check_boxes :notifiable_types, RailsNotice.notifiable_types, :to_s, :to_s %>
   <%= f.submit %>
 <% end %>

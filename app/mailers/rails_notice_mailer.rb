@@ -1,4 +1,4 @@
-class TheNotifyMailer < ApplicationMailer
+class RailsNoticeMailer < ApplicationMailer
   add_template_helper(RailsCom::FormatHelper)
 
   def notify(notification_id)

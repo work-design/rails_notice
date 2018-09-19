@@ -1,4 +1,4 @@
-class TheNotifyAdmin::NotificationsController < TheNotifyAdmin::BaseController
+class RailsNoticeAdmin::NotificationsController < RailsNoticeAdmin::BaseController
   before_action :set_receiver, only: [:index, :new, :create]
   before_action :set_notification, only: [:show, :push, :email, :edit, :update, :destroy]
 

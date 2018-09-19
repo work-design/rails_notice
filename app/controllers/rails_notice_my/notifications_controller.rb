@@ -1,4 +1,4 @@
-class TheNotifyMy::NotificationsController < TheNotifyMy::BaseController
+class RailsNoticeMy::NotificationsController < RailsNoticeMy::BaseController
   before_action :set_notification, only: [:show, :url, :read, :edit, :update, :destroy]
   before_action :set_receiver, only: [:index, :read_all]
   protect_from_forgery except: :read

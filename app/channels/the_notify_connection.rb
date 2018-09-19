@@ -1,5 +1,5 @@
 # prepend this module
-module TheNotifyConnection
+module RailsNoticeConnection
 
   def self.prepended(model)
     model.identified_by :current_receiver

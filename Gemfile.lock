@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    the_notify (0.1.0)
+    rails_notice (0.1.0)
       rails (>= 5.0.1)
 
 GEM
@@ -133,7 +133,7 @@ DEPENDENCIES
   puma
   rails (>= 5.2.0)
   rails_com!
-  the_notify!
+  rails_notice!
 
 BUNDLED WITH
    1.16.3

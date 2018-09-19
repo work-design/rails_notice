@@ -1,4 +1,4 @@
-# TheNotify
+# RailsNotice
 Short description and motivation.
 
 ## Usage
@@ -12,8 +12,8 @@ development:
 
 ### Import the js and css in the page which you want show notifications
 ```erb
-<%= javascript_include_tag 'the_notify/cable', 'data-turbolinks-eval': 'false' %>
-<%= stylesheet_link_tag 'the_notify/cable' %>
+<%= javascript_include_tag 'rails_notice/cable', 'data-turbolinks-eval': 'false' %>
+<%= stylesheet_link_tag 'rails_notice/cable' %>
 ```
 
 ### View: add link
@@ -36,7 +36,7 @@ end
 ### Controller Setting
 ```ruby
 class ApplicationController < ActionController::Base
-  include TheNotifyController
+  include RailsNoticeController
   
 end
 ```
@@ -45,7 +45,7 @@ end
 ```ruby
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
-    prepend TheNotifyConnection
+    prepend RailsNoticeConnection
 
   end
 end
@@ -56,7 +56,7 @@ end
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'the_notify'
+gem 'rails_notice'
 ```
 
 And then execute:
@@ -66,7 +66,7 @@ $ bundle
 
 Or install it yourself as:
 ```bash
-$ gem install the_notify
+$ gem install rails_notice
 ```
 
 ## Contributing
