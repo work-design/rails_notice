@@ -1,5 +1,9 @@
 class RailsNoticeMy::NotificationSettingsController < RailsNoticeMy::BaseController
-  before_action :set_notification_setting, only: [:show, :edit, :update]
+  before_action :set_notification_setting, only: [
+    :show,
+    :edit,
+    :update
+  ]
 
   def show
   end
