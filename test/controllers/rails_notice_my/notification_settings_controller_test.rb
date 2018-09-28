@@ -1,8 +1,9 @@
 require 'test_helper'
 
-class NotificationSettingsControllerTest < ActionDispatch::IntegrationTest
+class RailsNoticeMy::NotificationSettingsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @notification_setting = notification_settings(:one)
+    user = create :user
+    @notification_setting = create :notification_setting
   end
 
   test "should get index" do
