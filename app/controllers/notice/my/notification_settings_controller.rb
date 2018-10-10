@@ -1,4 +1,4 @@
-class RailsNoticeMy::NotificationSettingsController < RailsNoticeMy::BaseController
+class Notice::My::NotificationSettingsController < Notice::My::BaseController
   before_action :set_notification_setting, only: [
     :show,
     :edit,
@@ -26,7 +26,10 @@ class RailsNoticeMy::NotificationSettingsController < RailsNoticeMy::BaseControl
   end
 
   def notification_setting_params
-    params.fetch(:notification_setting, {}).permit(:showtime, :accept_email)
+    params.fetch(:notification_setting, {}).permit(
+      :showtime,
+      :accept_email
+    )
   end
 
 end

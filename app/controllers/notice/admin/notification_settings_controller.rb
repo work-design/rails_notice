@@ -1,4 +1,4 @@
-class RailsNoticeAdmin::NotificationSettingsController < RailsNoticeAdmin::BaseController
+class Notice::Admin::NotificationSettingsController < Notice::Admin::BaseController
   before_action :set_notification_setting, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -49,7 +49,11 @@ class RailsNoticeAdmin::NotificationSettingsController < RailsNoticeAdmin::BaseC
   end
 
   def notification_setting_params
-    params.fetch(:notification_setting, {}).permit(:showtime, :accept_email, notifiable_types: [])
+    params.fetch(:notification_setting, {}).permit(
+      :showtime,
+      :accept_email,
+      notifiable_types: []
+    )
   end
 
 end
