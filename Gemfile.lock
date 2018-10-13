@@ -1,16 +1,16 @@
 GIT
   remote: https://github.com/qinmingyuan/rails_com.git
-  revision: cf00662361a02af20a59d561db9f9406aa737abc
+  revision: 72e6739303a176c31631375b9382c604cdde1ee9
   branch: master
   specs:
-    rails_com (1.2.1)
-      rails
+    rails_com (1.2.4)
+      rails (>= 5.2, <= 6.0)
 
 PATH
   remote: .
   specs:
-    rails_notice (0.1.0)
-      rails (>= 5.0.1)
+    rails_notice (1.0.1)
+      rails (~> 5.2)
 
 GEM
   remote: https://rubygems.org/
