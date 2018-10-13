@@ -5,18 +5,18 @@ Gem::Specification.new do |s|
   s.name = 'rails_notice'
   s.version = RailsNotice::VERSION
   s.authors = ['qinmingyuan']
-  s.email = ["mingyuan0715@foxmail.com"]
+  s.email = ['mingyuan0715@foxmail.com']
   s.homepage = 'https://github.com/yougexiangfa/rails_notice'
-  s.summary = "Summary of RailsNotice."
-  s.description = "Description of RailsNotice."
+  s.summary = 'Notification Center for Rails Application'
+  s.description = 'Description of RailsNotice.'
   s.license = 'LGPL-3.0'
 
   s.files = Dir[
-    "{app,config,db,lib}/**/*",
-    "LICENSE",
-    "Rakefile",
-    "README.md"
+    '{app,config,db,lib}/**/*',
+    'LICENSE',
+    'Rakefile',
+    'README.md'
   ]
 
-  s.add_dependency 'rails', '~> 5.2'
+  s.add_dependency 'rails', '>= 5.0', '<= 6.0'
 end

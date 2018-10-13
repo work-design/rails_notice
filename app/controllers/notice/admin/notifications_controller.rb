@@ -1,4 +1,4 @@
-class RailsNoticeAdmin::NotificationsController < RailsNoticeAdmin::BaseController
+class Notice::Admin::NotificationsController < Notice::Admin::BaseController
   before_action :set_receiver, only: [:index, :new, :create]
   before_action :set_notification, only: [:show, :push, :email, :edit, :update, :destroy]
 
@@ -65,7 +65,11 @@ class RailsNoticeAdmin::NotificationsController < RailsNoticeAdmin::BaseControll
   end
 
   def notification_params
-    params[:notification].permit(:title, :body, :link)
+    params[:notification].permit(
+      :title,
+      :body,
+      :link
+    )
   end
 
 end
