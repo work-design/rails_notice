@@ -1,4 +1,4 @@
-module TheReceivable
+module RailsNoticeReceivable
   extend ActiveSupport::Concern
 
   included do

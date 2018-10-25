@@ -7,7 +7,7 @@ module RailsNotice::ActiveRecord
   # cc_emails
   # tr_values
   def acts_as_notify(code = 'default', **options)
-    include TheNotifiable
+    include RailsNoticeNotifiable
     notifies[code.to_sym] = options
   end
 

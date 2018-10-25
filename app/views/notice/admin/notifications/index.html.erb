@@ -4,17 +4,19 @@
   <%= render 'search_form' %>
 </div>
 
-<table class="ui table">
+<table class="ui bottom attached table">
   <thead>
   <tr>
-    <th>ID</th>
-    <th>Receiver Type</th>
-    <th>Receiver ID</th>
-    <th>Title</th>
-    <th>Body</th>
-    <th>Link</th>
-    <th>Read At</th>
-    <th>Sent Result</th>
+    <th><%= Notification.human_attribute_name(:id) %></th>
+    <th>
+      <p><%= Notification.human_attribute_name(:receiver_type) %></p>
+      <p><%= Notification.human_attribute_name(:receiver_id) %></p>
+    </th>
+    <th><%= Notification.human_attribute_name(:title) %></th>
+    <th><%= Notification.human_attribute_name(:body) %></th>
+    <th><%= Notification.human_attribute_name(:link) %></th>
+    <th><%= Notification.human_attribute_name(:read_at) %></th>
+    <th><%= Notification.human_attribute_name(:send_result) %></th>
     <th>Operation</th>
   </tr>
   </thead>
@@ -23,8 +25,10 @@
   <% @notifications.each do |notification| %>
     <tr>
       <td><%= notification.id %></td>
-      <td><%= notification.receiver_type %></td>
-      <td><%= notification.receiver_id %></td>
+      <td>
+        <p><%= notification.receiver_type %></p>
+        <p><%= notification.receiver_id %></p>
+      </td>
       <td><%= notification.title %></td>
       <td><%= notification.body %></td>
       <td><%= notification.link %></td>

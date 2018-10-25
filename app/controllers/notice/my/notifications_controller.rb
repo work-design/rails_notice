@@ -15,6 +15,7 @@ class Notice::My::NotificationsController < Notice::My::BaseController
     respond_to do |format|
       format.html
       format.js
+      format.json {  }
     end
   end
 
@@ -22,20 +23,6 @@ class Notice::My::NotificationsController < Notice::My::BaseController
     @notifications = @receiver.received_notifications
     @notifications.update_all(read_at: Time.now)
     @count = Notification.update_unread_count(@receiver)
-  end
-
-  def new
-    @notification = Notification.new
-  end
-
-  def create
-    @notification = Notification.new(params[:notification].permit!)
-
-    if @notification.save
-      redirect_to(notifications_path, notice: 'Notification 创建成功。')
-    else
-      render action: 'new'
-    end
   end
 
   def show
