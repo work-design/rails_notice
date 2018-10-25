@@ -28,7 +28,7 @@ development:
 ```ruby
 # which model can receive notifications
 class User < ApplicationRecord
-  include TheReceivable
+  include RailsNoticeReceivable
 end
 
 ```
@@ -49,24 +49,6 @@ module ApplicationCable
 
   end
 end
-```
-
-
-## Installation
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'rails_notice'
-```
-
-And then execute:
-```bash
-$ bundle
-```
-
-Or install it yourself as:
-```bash
-$ gem install rails_notice
 ```
 
 ## License
