@@ -1,3 +1,13 @@
+//= require ./messenger.min
+//= require ./messenger-theme-future
+//= require rails_com/fetch_xhr_script
+
+Messenger.options = {
+  extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
+  theme: 'air',
+  parentLocations: ['footer']
+};
+
 App.cable.subscriptions.create('NoticesChannel', {
   collection: function() {
     return $("[data-channel='notices']");
