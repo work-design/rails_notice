@@ -4,21 +4,23 @@
   <%= render 'search_form' %>
 </div>
 
-<table class="ui bottom attached table">
+<table class="ui bottom attached fixed table">
   <thead>
-  <tr>
-    <th><%= Notification.human_attribute_name(:id) %></th>
-    <th>
-      <p><%= Notification.human_attribute_name(:receiver_type) %></p>
-      <p><%= Notification.human_attribute_name(:receiver_id) %></p>
-    </th>
-    <th><%= Notification.human_attribute_name(:title) %></th>
-    <th><%= Notification.human_attribute_name(:body) %></th>
-    <th><%= Notification.human_attribute_name(:link) %></th>
-    <th><%= Notification.human_attribute_name(:read_at) %></th>
-    <th><%= Notification.human_attribute_name(:send_result) %></th>
-    <th>Operation</th>
-  </tr>
+    <tr>
+      <th class="one wide"><%= Notification.human_attribute_name(:id) %></th>
+      <th class="two wide">
+        <p><%= Notification.human_attribute_name(:receiver_type) %></p>
+        <p><%= Notification.human_attribute_name(:receiver_id) %></p>
+      </th>
+      <th class="four wide">
+        <p><%= Notification.human_attribute_name(:title) %></p>
+        <p><%= Notification.human_attribute_name(:body) %></p>
+      </th>
+      <th class="three wide"><%= Notification.human_attribute_name(:link) %></th>
+      <th class="two wide"><%= Notification.human_attribute_name(:read_at) %></th>
+      <th class="two wide"><%= Notification.human_attribute_name(:send_result) %></th>
+      <th class="two wide">Operation</th>
+    </tr>
   </thead>
 
   <tbody>
@@ -29,8 +31,10 @@
         <p><%= notification.receiver_type %></p>
         <p><%= notification.receiver_id %></p>
       </td>
-      <td><%= notification.title %></td>
-      <td><%= notification.body %></td>
+      <td>
+        <p><%= notification.title %></p>
+        <p><%= notification.body %></p>
+      </td>
       <td><%= notification.link %></td>
       <td><%= notification.read_at %></td>
       <td>
