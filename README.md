@@ -18,10 +18,7 @@ development:
 
 ### View: add link
 ```erb
-<%= link_to notifications_path, class: 'item', remote: true, id: 'notify_show' do %>
-  <i class="bell icon"></i>
-  <span id="notice_count" style="padding-left: 5px"><%= current_user.unread_count %></span>
-<% end %>
+<%= render 'rails_notice/link' %>
 ```
 
 ### Model Setting
