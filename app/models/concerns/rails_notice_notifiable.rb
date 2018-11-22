@@ -18,6 +18,9 @@ module RailsNoticeNotifiable
     if other_params[:sender]
       n.sender_id = other_params[:sender].id
       n.sender_type = other_params[:sender].class
+    else
+      n.sender_id = RailsNotice.config.default_sender_id
+      n.sender_type = RailsNotice.config.default_sender_type
     end
 
     n.assign_attributes other_params.slice(

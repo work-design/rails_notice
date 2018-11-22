@@ -66,11 +66,11 @@ class Notification < ApplicationRecord
       r.transform_values! do |i|
         next i unless i.acts_like?(:time)
         if self.receiver.respond_to?(:timezone)
-          _zone = self.receiver.timezone
+          time_zone = self.receiver.timezone
         else
-          _zone = Time.zone.name
+          time_zone = Time.zone.name
         end
-        i.in_time_zone(_zone).strftime '%Y-%m-%d %H:%M:%S'
+        i.in_time_zone(time_zone).strftime '%Y-%m-%d %H:%M:%S'
       end
       r
     else

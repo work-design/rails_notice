@@ -10,6 +10,8 @@ module RailsNotice
     config.default_notifiable_types = []
     config.default_send_email = true
     config.current_receiver = :current_user
+    config.default_sender_type = 'User'
+    config.default_sender_id = 1
   end
 
 end
