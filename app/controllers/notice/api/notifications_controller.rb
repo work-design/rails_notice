@@ -1,5 +1,5 @@
 class Notice::Api::NotificationsController < Notice::Api::BaseController
-  before_action :set_notification, only: [:show, :url, :read, :edit, :update, :destroy]
+  before_action :set_notification, only: [:show, :destroy]
   before_action :set_receiver, only: [:index, :read_all]
 
   def index
@@ -16,29 +16,11 @@ class Notice::Api::NotificationsController < Notice::Api::BaseController
     @notifications = @receiver.received_notifications
     @notifications.update_all(read_at: Time.now)
     @count = Notification.update_unread_count(@receiver)
+    render json: { count: @count }
   end
 
   def show
-  end
-
-  def url
     @notification.make_as_read
-    redirect_to @notification.link
-  end
-
-  def read
-    @notification.make_as_read
-  end
-
-  def edit
-  end
-
-  def update
-    if @notification.update(params[:notification].permit!)
-      redirect_to(notifications_path, notice: 'Notification 更新成功。')
-    else
-      render action: 'edit'
-    end
   end
 
   def destroy
