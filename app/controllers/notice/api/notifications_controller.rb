@@ -10,8 +10,6 @@ class Notice::Api::NotificationsController < Notice::Api::BaseController
       @notifications = @notifications.unread
     end
     @notifications = @notifications.page(params[:page])
-
-    render json: { notifications: @notifications }
   end
 
   def read_all
