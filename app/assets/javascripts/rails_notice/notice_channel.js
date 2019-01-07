@@ -1,6 +1,5 @@
 //= require ./messenger.min
 //= require ./messenger-theme-future
-//= require rails_com/fetch_xhr_script
 
 Messenger.options = {
   extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
@@ -26,7 +25,7 @@ App.cable.subscriptions.create('NoticesChannel', {
           label: 'Confirm',
           action: function(e){
             var url = '/notifications/' + data.id + '/read';
-            fetch_xhr_script(url);
+            Rails.ajax({ url: url, type: 'GET', dataType: 'script' });
             window.location.href = data.link;
           }
         }
