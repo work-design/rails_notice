@@ -151,6 +151,3 @@ class Notification < ApplicationRecord
   end
 
 end
-
-# notifiable_type:
-# notifiable_id:

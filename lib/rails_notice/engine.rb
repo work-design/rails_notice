@@ -1,3 +1,4 @@
+require 'rails_com'
 module RailsNotice
   class Engine < ::Rails::Engine
 

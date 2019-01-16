@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get :columns, on: :collection
     end
     resources :notification_settings
+    resources :annunciations
   end
 
   scope module: 'notice/my' do

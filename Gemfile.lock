@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rails_notice (1.0.2)
-      rails (>= 5.0, <= 6.0)
+      rails_com (~> 1.2)
 
 GEM
   remote: https://rubygems.org/
@@ -130,10 +130,9 @@ PLATFORMS
 DEPENDENCIES
   factory_bot_rails
   puma
-  rails
   rails_com
   rails_notice!
   sqlite3
 
 BUNDLED WITH
-   1.17.1
+   1.17.2

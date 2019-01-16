@@ -38,5 +38,14 @@ class RailsNoticeInit < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
+    create_table :annunciations do |t|
+      t.references :publisher, polymorphic: true
+      t.string :title
+      t.string :body
+      t.string :state
+      t.datetime :annunciated_at
+      t.timestamps
+    end
+
   end
 end
