@@ -1,4 +1,7 @@
 class Annunciation < ApplicationRecord
+
+  attribute :state, :string, default: 'init'
+
   belongs_to :publisher, polymorphic: true
   has_many :notifications
 

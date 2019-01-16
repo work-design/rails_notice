@@ -1,0 +1,6 @@
+<%= form_with model: [:admin, @annunciation], local: true do |f| %>
+  <%= render 'shared/error_messages', target: @annunciation %>
+  <%= f.text_field :title %>
+  <%= f.text_field :body %>
+  <%= f.submit %>
+<% end %>

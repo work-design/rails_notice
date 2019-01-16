@@ -1,0 +1,22 @@
+<div class="ui segment breadcrumb">
+  <%= link_to 'Back', admin_annunciations_path, class: 'section' %>
+  <div class="divider">/</div>
+  <div class="active section">Show</div>
+</div>
+
+<table class="ui very basic large table">
+  <tbody>
+    <tr>
+      <td class="right aligned"><%= Annunciation.human_attribute_name(:title) %></td>
+      <td><%= @annunciation.title %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= Annunciation.human_attribute_name(:body) %></td>
+      <td><%= @annunciation.body %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= Annunciation.human_attribute_name(:state) %></td>
+      <td><%= @annunciation.state %></td>
+    </tr>
+  </tbody>
+</table>
