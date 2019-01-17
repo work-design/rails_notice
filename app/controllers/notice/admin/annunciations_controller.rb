@@ -1,5 +1,5 @@
 class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
-  before_action :set_annunciation, only: [:show, :edit, :update, :destroy]
+  before_action :set_annunciation, only: [:show, :edit, :update, :publish, :destroy]
 
   def index
     @annunciations = Annunciation.page(params[:page])
@@ -32,6 +32,11 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
     else
       render :edit
     end
+  end
+
+  def publish
+    @annunciation.to_notifications
+    redirect_to admin_annunciations_url, notice: 'Annunciation was successfully published.'
   end
 
   def destroy

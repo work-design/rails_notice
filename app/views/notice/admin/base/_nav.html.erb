@@ -3,11 +3,12 @@
     <i class="content icon"></i>
   </div>
   <div class="item ui dropdown">
-    <a class="<%= active_helper(controllers: ['notifications', 'notification_settings', 'notify_settings'], active_class: 'title active', item_class: 'title') %>">
+    <a class="<%= active_helper(controllers: ['annunciations', 'notifications', 'notification_settings', 'notify_settings'], active_class: 'title active', item_class: 'title') %>">
       <i class="users icon"></i>
       <span>Notification</span>
     </a>
-    <div class="<%= active_helper(controllers: ['notifications', 'notification_settings', 'notify_settings'], active_class: 'menu content active', item_class: 'menu content') %>">
+    <div class="<%= active_helper(controllers: ['annunciations', 'notifications', 'notification_settings', 'notify_settings'], active_class: 'menu content active', item_class: 'menu content') %>">
+      <%= link_to '通告', admin_annunciations_path, class: active_helper(controllers: 'annunciations') %>
       <%= link_to 'Notification', admin_notifications_path, class: active_helper(controllers: 'notifications') %>
       <%= link_to 'Receiver Settings', admin_notification_settings_path, class: active_helper(controllers: ['notification_settings']) %>
     </div>

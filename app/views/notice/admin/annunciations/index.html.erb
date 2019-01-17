@@ -16,6 +16,7 @@
       <th><%= Annunciation.human_attribute_name(:title) %></th>
       <th><%= Annunciation.human_attribute_name(:body) %></th>
       <th><%= Annunciation.human_attribute_name(:state) %></th>
+      <th>Publish</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -25,7 +26,14 @@
       <td><%= annunciation.id %></td>
       <td><%= annunciation.title %></td>
       <td><%= annunciation.body %></td>
-      <td><%= annunciation.state %></td>
+      <td><%= annunciation.state_i18n %></td>
+      <td>
+        <% unless annunciation.published? %>
+        <%= link_to publish_admin_annunciation_path(annunciation), method: :patch, data: { tooltip: '发布' }, class: 'ui pink mini icon button' do %>
+          <i class="bullhorn icon"></i>
+        <% end %>
+        <% end %>
+      </td>
       <td class="ui labels">
         <%= link_to admin_annunciation_path(annunciation), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>

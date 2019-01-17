@@ -7,7 +7,7 @@ class Annunciation < ApplicationRecord
 
   enum state: {
     init: 'init',
-    done: 'done'
+    published: 'published'
   }
 
   def do_trigger(params = {})
@@ -24,7 +24,8 @@ class Annunciation < ApplicationRecord
     end
   end
 
-  def to_notifications()
+  def to_notifications
+    self.update(state: 'published')
     Notification.bulk_insert_from_model(
       User,
       select: { receiver_id: 'id' },
