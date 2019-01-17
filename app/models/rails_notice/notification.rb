@@ -92,6 +92,9 @@ class Notification < ApplicationRecord
 
   def title
     return super unless notifiable
+    if notifiable.respond_to?(:title)
+      return notifiable.title
+    end
     tr_values = notifiable_detail.slice *I18nHelper.interpolate_key(I18n.t(tr_key(:title)))
     tr_values.merge! notify_setting.fetch(:tr_values, {})
 
@@ -104,6 +107,9 @@ class Notification < ApplicationRecord
 
   def body
     return super unless notifiable
+    if notifiable.respond_to?(:title)
+      return notifiable.title
+    end
     tr_values = notifiable_detail.slice *I18nHelper.interpolate_key(I18n.t(tr_key(:body)))
     tr_values.merge! notify_setting.fetch(:tr_values, {})
 
