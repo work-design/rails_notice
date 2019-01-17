@@ -23,13 +23,6 @@ Rails.application.routes.draw do
     resource :notification_settings, only: [:show, :edit, :update]
   end
 
-  scope :api, module: 'notice/api', as: :api do
-    resources :notifications, only: [:index, :show, :destroy] do
-      get :read_all, on: :collection
-    end
-    resource :notification_settings, only: [:show, :edit, :update]
-  end
-
   resources :receivers do
     get :search, on: :collection
   end

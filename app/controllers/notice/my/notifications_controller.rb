@@ -23,6 +23,11 @@ class Notice::My::NotificationsController < Notice::My::BaseController
     @notifications = @receiver.received_notifications
     @notifications.update_all(read_at: Time.now)
     @count = Notification.update_unread_count(@receiver)
+
+    respond_to do |format|
+      format.json {  render json: { count: @count } }
+      format.html
+    end
   end
 
   def show
@@ -50,7 +55,10 @@ class Notice::My::NotificationsController < Notice::My::BaseController
 
   def destroy
     @notification.destroy
-    redirect_to(notifications_path, notice: "删除成功。")
+    respond_to do |format|
+      format.json
+      format.html { redirect_to(notifications_path, notice: '删除成功。') }
+    end
   end
 
   private
