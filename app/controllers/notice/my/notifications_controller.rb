@@ -15,7 +15,7 @@ class Notice::My::NotificationsController < Notice::My::BaseController
     respond_to do |format|
       format.html
       format.js
-      format.json {  }
+      format.json
     end
   end
 
@@ -25,12 +25,16 @@ class Notice::My::NotificationsController < Notice::My::BaseController
     @count = Notification.update_unread_count(@receiver)
 
     respond_to do |format|
-      format.json {  render json: { count: @count } }
+      format.json { render json: { count: @count } }
       format.html
     end
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.json { @notification.make_as_read }
+    end
   end
 
   def url
