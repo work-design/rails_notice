@@ -7,7 +7,7 @@ class Notice::My::NotificationsController < Notice::My::BaseController
     @notifications = @receiver.received_notifications.order(read_at: :asc)
     if params[:scope] == 'have_read'
       @notifications = @notifications.have_read
-    else
+    elsif params[:scope] == 'unread'
       @notifications = @notifications.unread
     end
     @notifications = @notifications.page(params[:page])
