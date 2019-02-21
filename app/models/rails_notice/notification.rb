@@ -24,6 +24,10 @@ class Notification < ApplicationRecord
     end
   end
 
+  def send
+    send_to_socket
+  end
+
   def send_email
     return unless email_enable?
 
@@ -41,6 +45,19 @@ class Notification < ApplicationRecord
         RailsNoticeMailer.notify(self.id).deliver_later
       end
     end
+  end
+
+  def send_to_socket
+    return unless self.receiver
+    ActionCable.server.broadcast(
+      "#{self.receiver_type}:#{self.receiver_id}",
+      id: id,
+      body: body,
+      count: unread_count,
+      link: link,
+      showtime: notification_setting&.showtime
+    )
+    self.update sent_at: Time.now
   end
 
   def email_enable?
