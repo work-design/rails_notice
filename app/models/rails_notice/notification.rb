@@ -24,7 +24,7 @@ class Notification < ApplicationRecord
     end
   end
 
-  def send
+  def send_out
     send_to_socket
   end
 

@@ -3,7 +3,7 @@ class NotificationJob < ApplicationJob
 
   def perform(notification_id)
     notify = Notification.find(notification_id)
-    notify.send
+    notify.send_out
   end
 
 end
