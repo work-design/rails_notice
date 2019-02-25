@@ -1,14 +1,14 @@
 module RailsNoticeGetui
 
-
   def getui_pusher
-    pusher = IGeTui.pusher(your_app_id, your_app_key, your_master_secret)
+    return @getui_pusher if defined?(@getui_pusher)
+    @getui_pusher = IGeTui.pusher('X1HEFkU8ID6p59ycdbql91', 'NxWOzrhZ6j7O2AvE7w1Dq3', 'B3u6uQUsHx6FQ3Y8134r2A')
   end
 
 
   def send_to_getui
     template = IGeTui::NotificationTemplate.new
-    template.logo = 'push.png'
+    template.logo = 'D_about_logo'
     template.title = self.title
     template.text = self.body
 
@@ -16,7 +16,7 @@ module RailsNoticeGetui
     single_message.data = template
 
     client = IGeTui::Client.new(receiver.getui_token)
-    pusher.push_message_to_single(single_message, client)
+    getui_pusher.push_message_to_single(single_message, client)
   end
 
 
