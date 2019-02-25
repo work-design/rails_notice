@@ -15,9 +15,16 @@
       <th class="four wide">
         <p><%= Notification.human_attribute_name(:title) %></p>
         <p><%= Notification.human_attribute_name(:body) %></p>
+        <p><%= Notification.human_attribute_name(:link) %></p>
       </th>
-      <th class="three wide"><%= Notification.human_attribute_name(:link) %></th>
-      <th class="two wide"><%= Notification.human_attribute_name(:read_at) %></th>
+      <th class="two wide">
+        <p><%= Notification.human_attribute_name(:notifiable_type) %></p>
+        <p><%= Notification.human_attribute_name(:notifiable_id) %></p>
+      </th>
+      <th class="two wide">
+        <p><%= Notification.human_attribute_name(:created_at) %></p>
+        <p><%= Notification.human_attribute_name(:read_at) %></p>
+      </th>
       <th class="two wide"><%= Notification.human_attribute_name(:send_result) %></th>
       <th class="two wide">Operation</th>
     </tr>
@@ -34,9 +41,16 @@
       <td>
         <p><%= notification.title %></p>
         <p><%= notification.body %></p>
+        <p><%= notification.link %></p>
       </td>
-      <td><%= notification.link %></td>
-      <td><%= notification.read_at %></td>
+      <td>
+        <p><%= notification.notifiable_type %></p>
+        <p><%= notification.notifiable_id %></p>
+      </td>
+      <td>
+        <p><time class="grey text"><%= notification.created_at %></time></p>
+        <p><time class="green text"><%= notification.read_at %></time></p>
+      </td>
       <td>
         <code><%= notification.sent_result %></code>
       </td>
