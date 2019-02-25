@@ -104,6 +104,11 @@ class Notification < ApplicationRecord
     "#{self.class.i18n_scope}.notify.#{notifiable.class.base_class.model_name.i18n_key}.#{self.code}.#{column}"
   end
 
+  def tr_value(column)
+    keys = I18nHelper.interpolate_key(I18n.t(tr_key(column)))
+    notifiable_detail.slice *keys
+  end
+
   def code
     super ? super.to_sym : :default
   end
@@ -111,19 +116,25 @@ class Notification < ApplicationRecord
   def title
     return super if super.present?
 
-    tr_values = notifiable_detail.slice *I18nHelper.interpolate_key(I18n.t(tr_key(:title)))
-    tr_values.merge! notify_setting.fetch(:tr_values, {})
-
-    I18n.t tr_key(:title), tr_values
+    tr_values = tr_value(:title)
+    if tr_values.present?
+      tr_values.merge! notify_setting.fetch(:tr_values, {})
+      I18n.t tr_key(:title), tr_values
+    elsif notifiable.respond_to?(:title)
+      notifiable.title
+    end
   end
 
   def body
     return super if super.present?
 
-    tr_values = notifiable_detail.slice *I18nHelper.interpolate_key(I18n.t(tr_key(:body)))
-    tr_values.merge! notify_setting.fetch(:tr_values, {})
-
-    I18n.t tr_key(:body), tr_values
+    tr_values = tr_value(:body)
+    if tr_values.present?
+      tr_values.merge! notify_setting.fetch(:tr_values, {})
+      I18n.t tr_key(:body), tr_values
+    elsif notifiable.respond_to?(:body)
+      notifiable.body
+    end
   end
 
   def cc_emails
