@@ -27,7 +27,6 @@ class Notification < ApplicationRecord
 
   def send_out
     send_to_socket
-    send_to_getui
   end
 
   def send_email
