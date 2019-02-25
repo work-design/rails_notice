@@ -109,33 +109,21 @@ class Notification < ApplicationRecord
   end
 
   def title
-    return super unless notifiable
-    if notifiable.respond_to?(:title)
-      return notifiable.title
-    end
+    return super if super.present?
+
     tr_values = notifiable_detail.slice *I18nHelper.interpolate_key(I18n.t(tr_key(:title)))
     tr_values.merge! notify_setting.fetch(:tr_values, {})
 
-    if super.blank?
-      I18n.t tr_key(:title), tr_values
-    else
-      super
-    end
+    I18n.t tr_key(:title), tr_values
   end
 
   def body
-    return super unless notifiable
-    if notifiable.respond_to?(:title)
-      return notifiable.title
-    end
+    return super if super.present?
+
     tr_values = notifiable_detail.slice *I18nHelper.interpolate_key(I18n.t(tr_key(:body)))
     tr_values.merge! notify_setting.fetch(:tr_values, {})
 
-    if super.blank?
-      I18n.t tr_key(:body), tr_values
-    else
-      super
-    end
+    I18n.t tr_key(:body), tr_values
   end
 
   def cc_emails
