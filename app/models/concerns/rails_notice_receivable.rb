@@ -7,7 +7,8 @@ module RailsNoticeReceivable
   end
 
   def unread_count
-    Rails.cache.read("#{self.class.name}_#{self.id}_unread") || 0
+    r = Rails.cache.read("#{self.class.name}_#{self.id}_unread") || 0
+    r.to_i
   end
 
   def endearing_name
