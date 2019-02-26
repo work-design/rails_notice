@@ -177,6 +177,7 @@ class Notification < ApplicationRecord
       { "#{nt}": Rails.cache.read("#{receiver.class.name}_#{receiver.id}_unread") }
     end
     r << { official: 0 }
+    r.to_combined_hash
   end
 
   def self.update_unread_count(receiver)
