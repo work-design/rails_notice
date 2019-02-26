@@ -8,7 +8,7 @@
   <thead>
     <tr>
       <th class="one wide"><%= Notification.human_attribute_name(:id) %></th>
-      <th class="two wide">
+      <th class="one wide">
         <p><%= Notification.human_attribute_name(:receiver_type) %></p>
         <p><%= Notification.human_attribute_name(:receiver_id) %></p>
       </th>
@@ -17,13 +17,17 @@
         <p><%= Notification.human_attribute_name(:body) %></p>
         <p><%= Notification.human_attribute_name(:link) %></p>
       </th>
-      <th class="two wide">
+      <th class="one wide">
         <p><%= Notification.human_attribute_name(:notifiable_type) %></p>
         <p><%= Notification.human_attribute_name(:notifiable_id) %></p>
       </th>
-      <th class="two wide">
+      <th class="one wide">
         <p><%= Notification.human_attribute_name(:sender_type) %></p>
         <p><%= Notification.human_attribute_name(:sender_id) %></p>
+      </th>
+      <th class="one wide">
+        <p><%= Notification.human_attribute_name(:linked_type) %></p>
+        <p><%= Notification.human_attribute_name(:linked_id) %></p>
       </th>
       <th class="two wide">
         <p><%= Notification.human_attribute_name(:created_at) %></p>
@@ -54,6 +58,10 @@
       <td>
         <p><%= notification.sender_type %></p>
         <p><%= notification.sender_id %></p>
+      </td>
+      <td>
+        <p><%= notification.linked_type %></p>
+        <p><%= notification.linked_id %></p>
       </td>
       <td>
         <p><time class="grey text"><%= notification.created_at %></time></p>
