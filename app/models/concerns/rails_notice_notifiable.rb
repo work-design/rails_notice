@@ -23,10 +23,16 @@ module RailsNoticeNotifiable
       n.sender_type = RailsNotice.config.default_sender_type
     end
 
+    if other_params[:linked]
+      n.linked_type = other_params[:linked].class.name
+      n.linked_id = other_params[:linked].id
+    end
+
     n.assign_attributes other_params.slice(
       :title, :body, :link,
       :verbose, :code,
-      :cc_emails
+      :cc_emails,
+      :linked_type, :linked_id
     )
 
     n.save!

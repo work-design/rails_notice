@@ -172,6 +172,10 @@ class Notification < ApplicationRecord
     Rails.cache.write "#{self.receiver_type}_#{self.receiver_id}_#{self.notifiable_type}_unread", no.where(notifiable_type: self.notifiable_type).count, raw: true
   end
 
+  def path
+    "#{linked_type}/#{linked_id}"
+  end
+
   def self.unread_count_details(receiver)
     r = RailsNotice.notifiable_types.map do |nt|
       { "#{nt}": Rails.cache.read("#{receiver.class.name}_#{receiver.id}_unread") }

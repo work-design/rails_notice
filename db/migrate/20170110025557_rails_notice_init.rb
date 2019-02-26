@@ -5,6 +5,7 @@ class RailsNoticeInit < ActiveRecord::Migration[5.0]
       t.references :receiver, polymorphic: true
       t.references :sender, polymorphic: true
       t.references :notifiable, polymorphic: true
+      t.references :linked, polymorphic: true
       t.string :code
       t.string :state
       t.string :title
