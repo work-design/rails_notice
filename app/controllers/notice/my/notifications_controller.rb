@@ -4,13 +4,15 @@ class Notice::My::NotificationsController < Notice::My::BaseController
   protect_from_forgery except: :read
 
   def index
+    q_params = {}.with_indifferent_access
+    q_params.merge! params.permit(:notifiable_type, :official)
     @notifications = @receiver.received_notifications.order(read_at: :asc)
     if params[:scope] == 'have_read'
       @notifications = @notifications.have_read
     elsif params[:scope] == 'unread'
       @notifications = @notifications.unread
     end
-    @notifications = @notifications.page(params[:page])
+    @notifications = @notifications.default_where(q_params).page(params[:page])
 
     respond_to do |format|
       format.html

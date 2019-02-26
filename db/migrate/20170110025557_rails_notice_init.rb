@@ -15,6 +15,7 @@ class RailsNoticeInit < ActiveRecord::Migration[5.0]
       t.string :sent_result
       t.datetime :read_at, index: true
       t.boolean :verbose, default: false
+      t.boolean :official, default: false
       t.string :cc_emails
       t.timestamps
     end

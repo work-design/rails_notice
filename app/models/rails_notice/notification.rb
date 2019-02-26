@@ -153,6 +153,7 @@ class Notification < ApplicationRecord
     if read_at.present?
       self.update(read_at: nil)
       Rails.cache.increment "#{self.receiver_type}_#{self.receiver_id}_unread"
+      Rails.cache.increment "#{self.receiver_type}_#{self.receiver_id}_#{self.notifiable_type}_unread"
     end
   end
 
@@ -160,16 +161,31 @@ class Notification < ApplicationRecord
     if read_at.blank?
       update(read_at: Time.now)
       Rails.cache.decrement "#{self.receiver_type}_#{self.receiver_id}_unread"
+      Rails.cache.decrement "#{self.receiver_type}_#{self.receiver_id}_#{self.notifiable_type}_unread"
     end
   end
 
   def update_unread_count
-    Rails.cache.write "#{self.receiver_type}_#{self.receiver_id}_unread", Notification.where(receiver_id: self.receiver_id, receiver_type: self.receiver_type, read_at: nil).count, raw: true
+    no = Notification.where(receiver_id: self.receiver_id, receiver_type: self.receiver_type, read_at: nil)
+
+    Rails.cache.write "#{self.receiver_type}_#{self.receiver_id}_unread", no.count, raw: true
+    Rails.cache.write "#{self.receiver_type}_#{self.receiver_id}_#{self.notifiable_type}_unread", no.where(notifiable_type: self.notifiable_type).count, raw: true
+  end
+
+  def unread_count_details(receiver)
+    RailsNotice.notifiable_types.map do |nt|
+      { "#{nt}_unread_count": Rails.cache.read("#{receiver.class.name}_#{receiver.id}_unread") }
+    end
   end
 
   def self.update_unread_count(receiver)
-    if Rails.cache.write "#{receiver.class.name}_#{receiver.id}_unread", Notification.where(receiver_id: receiver.id, receiver_type: receiver.class.name, read_at: nil).count, raw: true
+    no = Notification.where(receiver_id: receiver.id, receiver_type: receiver.class.name, read_at: nil)
+    if Rails.cache.write "#{receiver.class.name}_#{receiver.id}_unread", no.count, raw: true
       Rails.cache.read "#{receiver.class.name}_#{receiver.id}_unread"
+    end
+
+    RailsNotice.notifiable_types.map do |nt|
+      Rails.cache.write "#{receiver.class.name}_#{receiver.id}_#{nt}_unread", no.where(notifiable_type: nt).count, raw: true
     end
   end
 

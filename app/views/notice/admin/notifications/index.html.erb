@@ -22,10 +22,14 @@
         <p><%= Notification.human_attribute_name(:notifiable_id) %></p>
       </th>
       <th class="two wide">
+        <p><%= Notification.human_attribute_name(:sender_type) %></p>
+        <p><%= Notification.human_attribute_name(:sender_id) %></p>
+      </th>
+      <th class="two wide">
         <p><%= Notification.human_attribute_name(:created_at) %></p>
         <p><%= Notification.human_attribute_name(:read_at) %></p>
       </th>
-      <th class="two wide"><%= Notification.human_attribute_name(:send_result) %></th>
+      <th class="one wide"><%= Notification.human_attribute_name(:send_result) %></th>
       <th class="two wide">Operation</th>
     </tr>
   </thead>
@@ -46,6 +50,10 @@
       <td>
         <p><%= notification.notifiable_type %></p>
         <p><%= notification.notifiable_id %></p>
+      </td>
+      <td>
+        <p><%= notification.sender_type %></p>
+        <p><%= notification.sender_id %></p>
       </td>
       <td>
         <p><time class="grey text"><%= notification.created_at %></time></p>
