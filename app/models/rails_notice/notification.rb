@@ -174,7 +174,7 @@ class Notification < ApplicationRecord
 
   def self.unread_count_details(receiver)
     RailsNotice.notifiable_types.map do |nt|
-      { "#{nt}_unread_count": Rails.cache.read("#{receiver.class.name}_#{receiver.id}_unread") }
+      { "#{nt}": Rails.cache.read("#{receiver.class.name}_#{receiver.id}_unread") }
     end
   end
 
