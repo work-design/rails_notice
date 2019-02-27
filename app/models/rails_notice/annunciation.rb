@@ -1,6 +1,7 @@
 class Annunciation < ApplicationRecord
   class_attribute :notifies, default: {}
   attribute :state, :string, default: 'init'
+  attribute :link, :string
 
   belongs_to :publisher, polymorphic: true
   has_many :notifications, as: :notifiable
@@ -16,6 +17,7 @@ class Annunciation < ApplicationRecord
       User,
       select: { receiver_id: 'id' },
       value: {
+        link: self.link,
         receiver_type: 'User',
         sender_type: self.publisher_type,
         sender_id: self.publisher_id,

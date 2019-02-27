@@ -45,6 +45,7 @@ class RailsNoticeInit < ActiveRecord::Migration[5.0]
       t.string :title
       t.string :body
       t.string :state
+      t.string :link
       t.datetime :annunciated_at
       t.timestamps
     end

@@ -53,6 +53,7 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
     params.fetch(:annunciation, {}).permit(
       :title,
       :body,
+      :link,
       :state
     )
   end

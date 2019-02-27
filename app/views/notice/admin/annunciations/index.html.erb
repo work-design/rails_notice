@@ -15,6 +15,7 @@
       <th><%= Annunciation.human_attribute_name(:id) %></th>
       <th><%= Annunciation.human_attribute_name(:title) %></th>
       <th><%= Annunciation.human_attribute_name(:body) %></th>
+      <th><%= Annunciation.human_attribute_name(:link) %></th>
       <th><%= Annunciation.human_attribute_name(:state) %></th>
       <th>Publish</th>
       <th>Actions</th>
@@ -26,6 +27,7 @@
       <td><%= annunciation.id %></td>
       <td><%= annunciation.title %></td>
       <td><%= annunciation.body %></td>
+      <td><%= annunciation.link %></td>
       <td><%= annunciation.state_i18n %></td>
       <td>
         <% unless annunciation.published? %>

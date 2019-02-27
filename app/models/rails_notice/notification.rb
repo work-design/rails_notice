@@ -172,8 +172,14 @@ class Notification < ApplicationRecord
     Rails.cache.write "#{self.receiver_type}_#{self.receiver_id}_#{self.notifiable_type}_unread", no.where(notifiable_type: self.notifiable_type).count, raw: true
   end
 
-  def path
-    "#{linked_type}/#{linked_id}"
+  def link
+    if super
+      super
+    else
+      url = URI(RailsNotice.config.link_host)
+      url.path = "/#{linked_type}/#{linked_id}"
+      url.to_s
+    end
   end
 
   def self.unread_count_details(receiver)
