@@ -15,5 +15,5 @@ json.state notification.state_i18n
 json.notifiable notification.notifiable_detail
 json.sender notification.sender, :id, :name, :avatar_url
 if notification.linked
-  json.linked notification.linked, :cover_url
+  json.linked notification.linked
 end
