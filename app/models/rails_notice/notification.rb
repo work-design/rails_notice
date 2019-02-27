@@ -182,6 +182,10 @@ class Notification < ApplicationRecord
       url = URI(RailsNotice.config.link_host)
       url.path = "/#{linked_type.underscore}/#{linked_id}"
       url.to_s
+    else
+      url = URI(RailsNotice.config.link_host)
+      url.path = "/#{self.class.name.underscore}/#{self.id}"
+      url.to_s
     end
   end
 
