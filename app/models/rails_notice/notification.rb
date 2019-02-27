@@ -77,6 +77,11 @@ class Notification < ApplicationRecord
     Hash(r).with_indifferent_access
   end
 
+  def linked_detail
+    r = self.linked.as_json(methods: [:cover_url])
+    Hash(r)
+  end
+
   def notifiable_attributes
     if verbose
       r = notifiable_detail
