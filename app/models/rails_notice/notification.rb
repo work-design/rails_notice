@@ -83,7 +83,7 @@ class Notification < ApplicationRecord
   end
 
   def linked_setting
-    nt = linked_type.constantize
+    nt = linked_type&.constantize
     if nt.respond_to?(:notifies)
       r = nt.notifies
       Hash(r[self.code])
