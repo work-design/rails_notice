@@ -10,6 +10,7 @@ json.extract! notification,
               :created_at,
               :sent_at,
               :official,
-              :read_at
+              :read_at,
+              :notifiable_detail
 json.state notification.state_i18n
 json.sender notification.sender, :id, :name, :avatar_url
