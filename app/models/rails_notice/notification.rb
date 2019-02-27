@@ -174,6 +174,7 @@ class Notification < ApplicationRecord
       self.update(read_at: nil)
       Rails.cache.increment "#{self.receiver_type}_#{self.receiver_id}_unread"
       Rails.cache.increment "#{self.receiver_type}_#{self.receiver_id}_#{self.notifiable_type}_unread"
+      Rails.cache.increment "#{self.receiver_type}_#{self.receiver_id}_official_unread" if self.official
     end
   end
 
@@ -182,6 +183,7 @@ class Notification < ApplicationRecord
       update(read_at: Time.now)
       Rails.cache.decrement "#{self.receiver_type}_#{self.receiver_id}_unread"
       Rails.cache.decrement "#{self.receiver_type}_#{self.receiver_id}_#{self.notifiable_type}_unread"
+      Rails.cache.decrement "#{self.receiver_type}_#{self.receiver_id}_official_unread" if self.official
     end
   end
 
@@ -190,6 +192,7 @@ class Notification < ApplicationRecord
 
     Rails.cache.write "#{self.receiver_type}_#{self.receiver_id}_unread", no.count, raw: true
     Rails.cache.write "#{self.receiver_type}_#{self.receiver_id}_#{self.notifiable_type}_unread", no.where(notifiable_type: self.notifiable_type).count, raw: true
+    Rails.cache.write "#{self.receiver_type}_#{self.receiver_id}_official_unread", no.where(official: true).count, raw: true
   end
 
   def link
@@ -208,9 +211,9 @@ class Notification < ApplicationRecord
 
   def self.unread_count_details(receiver)
     r = RailsNotice.notifiable_types.map do |nt|
-      { "#{nt}": Rails.cache.read("#{receiver.class.name}_#{receiver.id}_#{nt}_unread") }
+      { "#{nt}": Rails.cache.read("#{receiver.class.name}_#{receiver.id}_#{nt}_unread").to_i }
     end
-    r << { official: 0 }
+    r << { official: Rails.cache.read("#{receiver.class.name}_#{receiver.id}_official_unread").to_i }
     r.to_combined_hash
   end
 
@@ -223,6 +226,8 @@ class Notification < ApplicationRecord
     RailsNotice.notifiable_types.map do |nt|
       Rails.cache.write "#{receiver.class.name}_#{receiver.id}_#{nt}_unread", no.where(notifiable_type: nt).count, raw: true
     end
+
+    Rails.cache.write "#{receiver.class.name}_#{receiver.id}_official_unread", no.where(official: true).count, raw: true
   end
 
 end
