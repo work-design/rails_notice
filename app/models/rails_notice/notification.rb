@@ -78,8 +78,18 @@ class Notification < ApplicationRecord
   end
 
   def linked_detail
-    r = self.linked.as_json(**notify_setting.slice(:only, :except, :include, :methods))
+    r = self.linked.as_json(**linked_setting.slice(:only, :except, :include, :methods))
     Hash(r).with_indifferent_access
+  end
+
+  def linked_setting
+    nt = linked_type.constantize
+    if nt.respond_to?(:notifies)
+      r = nt.notifies
+      Hash(r[self.code])
+    else
+      {}
+    end
   end
 
   def notifiable_attributes
