@@ -14,3 +14,4 @@ json.extract! notification,
               :notifiable_detail
 json.state notification.state_i18n
 json.sender notification.sender, :id, :name, :avatar_url
+json.linked notification.linked, :cover_url
