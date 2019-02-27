@@ -176,7 +176,7 @@ class Notification < ApplicationRecord
   end
 
   def link
-    if super
+    if super.present?
       super
     elsif linked_type && linked_id
       url = URI(RailsNotice.config.link_host)
