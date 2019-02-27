@@ -12,9 +12,7 @@ class Notification < ApplicationRecord
   scope :unread, -> { where(read_at: nil) }
   scope :have_read, -> { where.not(read_at: nil) }
 
-  after_create_commit :process_job,
-                      :send_email,
-                      :update_unread_count
+  after_create_commit :process_job, :update_unread_count
 
   def process_job
     make_as_unread
