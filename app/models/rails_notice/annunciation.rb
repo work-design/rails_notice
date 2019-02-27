@@ -6,6 +6,9 @@ class Annunciation < ApplicationRecord
   belongs_to :publisher, polymorphic: true
   has_many :notifications, as: :notifiable
 
+  acts_as_notify :default,
+                 only: [:title, :body, :link]
+
   enum state: {
     init: 'init',
     published: 'published'
