@@ -22,7 +22,8 @@ class Annunciation < ApplicationRecord
         sender_type: self.publisher_type,
         sender_id: self.publisher_id,
         notifiable_type: 'Annunciation',
-        notifiable_id: self.id
+        notifiable_id: self.id,
+        official: true
       }
     )
   end
