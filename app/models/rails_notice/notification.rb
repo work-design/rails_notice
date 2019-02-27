@@ -95,7 +95,12 @@ class Notification < ApplicationRecord
   end
 
   def notify_setting
-    notifiable_type.constantize.notifies[self.code] || {}
+    r = notifiable_type.constantize.notifies
+    if r.is_a?(Hash)
+      r[self.code]
+    else
+      {}
+    end
   end
 
   def tr_key(column)
