@@ -12,7 +12,7 @@ class Notice::My::NotificationsController < Notice::My::BaseController
     elsif params[:scope] == 'unread'
       @notifications = @notifications.unread
     end
-    @notifications = @notifications.default_where(q_params).page(params[:page])
+    @notifications = @notifications.default_where(q_params).page(params[:page]).per(params[:per])
 
     respond_to do |format|
       format.html
