@@ -136,13 +136,11 @@ class Notification < ApplicationRecord
   def title
     return super if super.present?
 
-    tr_values = tr_value(:title)
-    if tr_values.present?
+    if I18n.exists? tr_key(:title)
+      tr_values = tr_value(:title)
       tr_values.merge! notify_setting.fetch(:tr_values, {})
+      return I18n.t tr_key(:title), tr_values
     end
-
-    r = I18n.t tr_key(:title), tr_values
-    return r if r.present?
 
     if notifiable.respond_to?(:title)
       notifiable.title
@@ -152,13 +150,11 @@ class Notification < ApplicationRecord
   def body
     return super if super.present?
 
-    tr_values = tr_value(:body)
-    if tr_values.present?
+    if I18n.exists? tr_key(:body)
+      tr_values = tr_value(:body)
       tr_values.merge! notify_setting.fetch(:tr_values, {})
+      return I18n.t tr_key(:body), tr_values
     end
-
-    r = I18n.t tr_key(:body), tr_values
-    return r if r.present?
 
     if notifiable.respond_to?(:body)
       notifiable.body
