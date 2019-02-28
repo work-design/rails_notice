@@ -213,25 +213,17 @@ class Notification < ApplicationRecord
     end
   end
 
-  def self.unread_count_details(receiver)
-    r = RailsNotice.notifiable_types.map do |nt|
-      { "#{nt}": notification_setting.counters.fetch(nt, 0) }
-    end
-    r << { official: notification_setting.counters.fetch('official', 0) }
-    r.to_combined_hash
-  end
-
   def self.reset_unread_count(receiver)
     no = Notification.where(receiver_id: receiver.id, receiver_type: receiver.class.name, read_at: nil)
     counters = {}
 
     counters.merge! total: no.count
     RailsNotice.notifiable_types.map do |nt|
-      counters.merge! nt: no.where(notifiable_type: nt).count
+      counters.merge! nt => no.where(notifiable_type: nt).count
     end
     counters.merge! official: no.where(official: true).count
 
-    notification_setting.update counters: counters
+    receiver.notification_setting.update counters: counters
   end
 
 end
