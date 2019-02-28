@@ -4,8 +4,7 @@ class Notice::My::NotificationsController < Notice::My::BaseController
   protect_from_forgery except: :read
 
   def index
-    q_params = {}.with_indifferent_access
-    q_params.merge! params.permit(:notifiable_type, :official)
+
     @notifications = @receiver.received_notifications.order(read_at: :asc)
     if params[:scope] == 'have_read'
       @notifications = @notifications.have_read
@@ -68,6 +67,11 @@ class Notice::My::NotificationsController < Notice::My::BaseController
   end
 
   private
+  def q_params
+    q_params = {}.with_indifferent_access
+    q_params.merge! params.permit(:notifiable_type, :official)
+  end
+
   def set_receiver
     @receiver = current_receiver
   end
