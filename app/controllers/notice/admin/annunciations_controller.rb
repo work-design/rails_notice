@@ -36,6 +36,7 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
 
   def publish
     @annunciation.to_notifications
+    NotificationSettingResetJob.perform_later
     redirect_to admin_annunciations_url, notice: 'Annunciation was successfully published.'
   end
 

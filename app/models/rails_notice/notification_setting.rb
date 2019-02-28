@@ -25,4 +25,10 @@ class NotificationSetting < ApplicationRecord
     self.class.connection.execute sql
   end
 
+  def self.reset_counters
+    self.find_each do |ns|
+      Notification.reset_unread_count(ns.receiver)
+    end
+  end
+
 end
