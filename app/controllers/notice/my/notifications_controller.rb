@@ -24,7 +24,7 @@ class Notice::My::NotificationsController < Notice::My::BaseController
   def read_all
     @notifications = @receiver.received_notifications
     @notifications.update_all(read_at: Time.now)
-    @count = Notification.update_unread_count(@receiver)
+    @count = Notification.reset_unread_count(@receiver)
 
     respond_to do |format|
       format.json { render json: { count: @count } }

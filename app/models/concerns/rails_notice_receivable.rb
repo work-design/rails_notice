@@ -11,6 +11,10 @@ module RailsNoticeReceivable
     r.to_i
   end
 
+  def notification_setting
+    super || create_notification_setting
+  end
+
   def endearing_name
     name
   end

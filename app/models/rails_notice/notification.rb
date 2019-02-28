@@ -13,7 +13,11 @@ class Notification < ApplicationRecord
   scope :unread, -> { where(read_at: nil) }
   scope :have_read, -> { where.not(read_at: nil) }
 
-  after_create_commit :process_job, :update_unread_count
+  after_create_commit :process_job, :make_as_unread
+
+  def notification_setting
+    super || create_notification_setting
+  end
 
   def process_job
     make_as_unread
@@ -55,17 +59,17 @@ class Notification < ApplicationRecord
       body: body,
       count: unread_count,
       link: link,
-      showtime: notification_setting&.showtime
+      showtime: notification_setting.showtime
     )
     self.update sent_at: Time.now
   end
 
   def email_enable?
-    if receiver.notification_setting&.accept_email
+    if receiver.notification_setting.accept_email
       return true
     end
 
-    if receiver.notification_setting&.accept_email.is_a?(FalseClass)
+    if receiver.notification_setting.accept_email.is_a?(FalseClass)
       return false
     end
 
@@ -176,27 +180,23 @@ class Notification < ApplicationRecord
   def make_as_unread
     if read_at.present?
       self.update(read_at: nil)
-      Rails.cache.increment "#{self.receiver_type}_#{self.receiver_id}_unread"
-      Rails.cache.increment "#{self.receiver_type}_#{self.receiver_id}_#{self.notifiable_type}_unread"
-      Rails.cache.increment "#{self.receiver_type}_#{self.receiver_id}_official_unread" if self.official
+      notification_setting.increment_counter(notifiable_type)
+      notification_setting.increment_counter('total')
+      notification_setting.increment_counter('official') if self.official
     end
   end
 
   def make_as_read
     if read_at.blank?
       update(read_at: Time.now)
-      Rails.cache.decrement "#{self.receiver_type}_#{self.receiver_id}_unread"
-      Rails.cache.decrement "#{self.receiver_type}_#{self.receiver_id}_#{self.notifiable_type}_unread"
-      Rails.cache.decrement "#{self.receiver_type}_#{self.receiver_id}_official_unread" if self.official
+      notification_setting.decrement_counter(notifiable_type)
+      notification_setting.decrement_counter('total')
+      notification_setting.decrement_counter('official') if self.official
     end
   end
 
-  def update_unread_count
-    no = Notification.where(receiver_id: self.receiver_id, receiver_type: self.receiver_type, read_at: nil)
-
-    Rails.cache.write "#{self.receiver_type}_#{self.receiver_id}_unread", no.count, raw: true
-    Rails.cache.write "#{self.receiver_type}_#{self.receiver_id}_#{self.notifiable_type}_unread", no.where(notifiable_type: self.notifiable_type).count, raw: true
-    Rails.cache.write "#{self.receiver_type}_#{self.receiver_id}_official_unread", no.where(official: true).count, raw: true
+  def reset_unread_count
+    self.class.reset_unread_count(self.receiver)
   end
 
   def link
@@ -215,23 +215,23 @@ class Notification < ApplicationRecord
 
   def self.unread_count_details(receiver)
     r = RailsNotice.notifiable_types.map do |nt|
-      { "#{nt}": Rails.cache.read("#{receiver.class.name}_#{receiver.id}_#{nt}_unread").to_i }
+      { "#{nt}": notification_setting.counters.fetch(nt, 0) }
     end
-    r << { official: Rails.cache.read("#{receiver.class.name}_#{receiver.id}_official_unread").to_i }
+    r << { official: notification_setting.counters.fetch('official', 0) }
     r.to_combined_hash
   end
 
-  def self.update_unread_count(receiver)
+  def self.reset_unread_count(receiver)
     no = Notification.where(receiver_id: receiver.id, receiver_type: receiver.class.name, read_at: nil)
-    if Rails.cache.write "#{receiver.class.name}_#{receiver.id}_unread", no.count, raw: true
-      Rails.cache.read "#{receiver.class.name}_#{receiver.id}_unread"
-    end
+    counters = {}
 
+    counters.merge! total: no.count
     RailsNotice.notifiable_types.map do |nt|
-      Rails.cache.write "#{receiver.class.name}_#{receiver.id}_#{nt}_unread", no.where(notifiable_type: nt).count, raw: true
+      counters.merge! nt: no.where(notifiable_type: nt).count
     end
+    counters.merge! official: no.where(official: true).count
 
-    Rails.cache.write "#{receiver.class.name}_#{receiver.id}_official_unread", no.where(official: true).count, raw: true
+    notification_setting.update counters: counters
   end
 
 end
