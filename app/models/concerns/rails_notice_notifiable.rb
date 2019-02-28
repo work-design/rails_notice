@@ -16,6 +16,7 @@ module RailsNoticeNotifiable
     n.receiver_type = receiver.class
 
     if other_params[:sender]
+      return if sender == receiver  # do not send notification to himself
       n.sender_id = other_params[:sender].id
       n.sender_type = other_params[:sender].class
     else
