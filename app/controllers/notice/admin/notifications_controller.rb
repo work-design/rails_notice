@@ -28,6 +28,7 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
   end
 
   def edit
+    redirect_to admin_notifications_url
   end
 
   def create
@@ -68,7 +69,8 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
     params[:notification].permit(
       :title,
       :body,
-      :link
+      :link,
+      :read_at
     )
   end
 

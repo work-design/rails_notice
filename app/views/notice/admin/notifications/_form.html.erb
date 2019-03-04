@@ -1,6 +1,7 @@
-<%= default_form_with model: [:admin, @user, @notification] do |f| %>
-  <%= f.text_field :title, label: '标题:' %>
-  <%= f.text_area :body, label: '内容:' %>
-  <%= f.text_field :link, label: 'Link:' %>
+<%= form_with model: [:admin, @notification], local: true do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_area :body %>
+  <%= f.text_field :link %>
+  <%= f.datetime_field :read_at %>
   <%= f.submit %>
 <% end %>
