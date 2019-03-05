@@ -27,6 +27,9 @@ module RailsNoticeNotifiable
     if other_params[:linked]
       n.linked_type = other_params[:linked].class.name
       n.linked_id = other_params[:linked].id
+    else
+      n.linked_type = self.notifiable_type
+      n.linked_id = self.notifiable_id
     end
 
     n.assign_attributes other_params.slice(
