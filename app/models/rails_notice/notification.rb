@@ -145,7 +145,7 @@ class Notification < ApplicationRecord
     if I18n.exists? tr_key(:title)
       tr_values = tr_value(:title)
       tr_values.merge! notify_setting.fetch(:tr_values, {})
-      return I18n.t tr_key(:title), tr_values
+      return I18n.t tr_key(:title), tr_values.symbolize_keys
     end
 
     if notifiable.respond_to?(:title)
@@ -159,7 +159,7 @@ class Notification < ApplicationRecord
     if I18n.exists? tr_key(:body)
       tr_values = tr_value(:body)
       tr_values.merge! notify_setting.fetch(:tr_values, {})
-      return I18n.t tr_key(:body), tr_values
+      return I18n.t tr_key(:body), tr_values.symbolize_keys
     end
 
     if notifiable.respond_to?(:body)
