@@ -14,8 +14,9 @@ class Notification < ApplicationRecord
   scope :have_read, -> { where.not(read_at: nil) }
 
   after_create_commit :process_job
-  after_commit :increment_unread, if: -> { read_at.blank? && saved_change_to_read_at? }, on: [:create, :update]
-  after_commit :decrement_unread, if: -> { read_at.present? && saved_change_to_read_at? }, on: [:create, :update]
+  after_commit :increment_unread, if: -> { read_at.blank? && saved_change_to_read_at? }, on: [:update]
+  after_commit :create_increment_unread, if: -> { read_at.blank? }
+  after_commit :decrement_unread, if: -> { read_at.present? && saved_change_to_read_at? }, on: [:update]
   after_destroy_commit :destroy_decrement_unread, if: -> { read_at.blank? }
 
   def notification_setting
@@ -184,6 +185,7 @@ class Notification < ApplicationRecord
     notification_setting.increment_counter('total')
     notification_setting.increment_counter('official') if self.official
   end
+  alias_method :create_increment_unread, :increment_unread
 
   def decrement_unread
     notification_setting.decrement_counter(notifiable_type)
