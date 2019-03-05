@@ -1,13 +1,8 @@
 class Notice::Admin::NotificationsController < Notice::Admin::BaseController
-  before_action :set_receiver, only: [:index, :new, :create]
   before_action :set_notification, only: [:show, :push, :email, :edit, :update, :destroy]
 
   def index
-    if @receiver
-      @notifications = @receiver.notifications.page(params[:page])
-    else
-      @notifications = Notification.default_where(params.fetch(:q, {}).permit(:id, :'body-like', :receiver_type, :receiver_id)).page(params[:page])
-    end
+    @notifications = Notification.default_where(q_params).page(params[:page])
   end
 
   def show
@@ -24,18 +19,17 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
   end
 
   def new
-    @notification = @receiver.notifications.build
+    @notification = Notification.new
   end
 
   def edit
-    redirect_to admin_notifications_url
   end
 
   def create
-    @notification = @receiver.notifications.build(notification_params)
+    @notification = Notification.new(notification_params)
 
     if @notification.save
-      redirect_to admin_notifications_url(receiver_id: @receiver.id, receiver_type: @receiver.class.name), notice: 'User notification was successfully created.'
+      redirect_to admin_notifications_url(receiver_id: @notification.receiver_id, receiver_type: @notification.receiver_type), notice: 'User notification was successfully created.'
     else
       render :new
     end
@@ -43,7 +37,7 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
 
   def update
     if @notification.update(notification_params)
-      redirect_to admin_notifications_url(receiver_id: @receiver.id, receiver_type: @receiver.class.name), notice: 'User notification was successfully updated.'
+      redirect_to admin_notifications_url(receiver_id: @notification.receiver_id, receiver_type: @notification.receiver_type), notice: 'User notification was successfully updated.'
     else
       render :edit
     end
@@ -51,14 +45,15 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
 
   def destroy
     @notification.destroy
-    redirect_to admin_notifications_url(receiver_id: @receiver.id, receiver_type: @receiver.class.name), notice: 'User notification was successfully destroyed.'
+    redirect_to admin_notifications_url(receiver_id: @notification.receiver_id, receiver_type: @notification.receiver_type), notice: 'User notification was successfully destroyed.'
   end
 
   private
-  def set_receiver
-    if params[:receiver_type]
-      @receiver = params[:receiver_type].constantize.find(params[:receiver_id])
-    end
+  def q_params
+    q = {}.with_indifferent_access
+    q.merge! params.permit(:receiver_type, :receiver_id)
+    q.merge! params.fetch(:q, {}).permit(:id, :'body-like', :receiver_type, :receiver_id)
+    q
   end
 
   def set_notification
