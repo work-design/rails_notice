@@ -16,7 +16,7 @@ class Notification < ApplicationRecord
   after_create_commit :process_job
   after_commit :increment_unread, if: -> { read_at.blank? && saved_change_to_read_at? }, on: [:update]
   after_commit :create_increment_unread, if: -> { read_at.blank? }
-  after_commit :decrement_unread, if: -> { saved_change_to_read_at[0].blank? && saved_change_to_read_at[1].acts_like?(:time) }, on: [:update]
+  after_commit :decrement_unread, if: -> { saved_change_to_read_at && saved_change_to_read_at[0].blank? && saved_change_to_read_at[1].acts_like?(:time) }, on: [:update]
   after_destroy_commit :destroy_decrement_unread, if: -> { read_at.blank? }
 
   def notification_setting
