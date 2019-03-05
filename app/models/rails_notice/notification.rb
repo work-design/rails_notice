@@ -128,6 +128,7 @@ class Notification < ApplicationRecord
   end
 
   def tr_key(column)
+    return unless notifiable
     "#{self.class.i18n_scope}.notify.#{notifiable.class.base_class.model_name.i18n_key}.#{self.code}.#{column}"
   end
 
