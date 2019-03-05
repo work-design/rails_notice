@@ -13,14 +13,16 @@ class Notification < ApplicationRecord
   scope :unread, -> { where(read_at: nil) }
   scope :have_read, -> { where.not(read_at: nil) }
 
-  after_create_commit :process_job, :make_as_unread
+  after_create_commit :process_job
+  after_commit :increment_unread, if: -> { read_at.blank? && saved_change_to_read_at? }, on: [:create, :update]
+  after_commit :decrement_unread, if: -> { read_at.present? && saved_change_to_read_at? }, on: [:create, :update]
+  after_destroy_commit :destroy_decrement_unread, if: -> { read_at.blank? }
 
   def notification_setting
     super || create_notification_setting
   end
 
   def process_job
-    make_as_unread
     if sending_at
       NotificationJob.set(wait_until: sending_at).perform_later id
     else
@@ -177,23 +179,18 @@ class Notification < ApplicationRecord
     Rails.cache.read("#{self.receiver_type}_#{self.receiver_id}_unread") || 0
   end
 
-  def make_as_unread
-    if read_at.present?
-      self.update(read_at: nil)
-      notification_setting.increment_counter(notifiable_type)
-      notification_setting.increment_counter('total')
-      notification_setting.increment_counter('official') if self.official
-    end
+  def increment_unread
+    notification_setting.increment_counter(notifiable_type)
+    notification_setting.increment_counter('total')
+    notification_setting.increment_counter('official') if self.official
   end
 
-  def make_as_read
-    if read_at.blank?
-      update(read_at: Time.now)
-      notification_setting.decrement_counter(notifiable_type)
-      notification_setting.decrement_counter('total')
-      notification_setting.decrement_counter('official') if self.official
-    end
+  def decrement_unread
+    notification_setting.decrement_counter(notifiable_type)
+    notification_setting.decrement_counter('total')
+    notification_setting.decrement_counter('official') if self.official
   end
+  alias_method :destroy_decrement_unread, :decrement_unread
 
   def reset_unread_count
     self.class.reset_unread_count(self.receiver)

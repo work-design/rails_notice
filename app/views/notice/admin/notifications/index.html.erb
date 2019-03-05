@@ -33,7 +33,10 @@
         <p><%= Notification.human_attribute_name(:created_at) %></p>
         <p><%= Notification.human_attribute_name(:read_at) %></p>
       </th>
-      <th class="one wide"><%= Notification.human_attribute_name(:send_result) %></th>
+      <th class="one wide">
+        <p><%= Notification.human_attribute_name(:official) %></p>
+        <p><%= Notification.human_attribute_name(:send_result) %></p>
+      </th>
       <th class="two wide">Operation</th>
     </tr>
   </thead>
@@ -68,7 +71,8 @@
         <p><time class="green text"><%= notification.read_at %></time></p>
       </td>
       <td>
-        <code><%= notification.sent_result %></code>
+        <p><%= notification.official %></p>
+        <p><code><%= notification.sent_result %></code></p>
       </td>
       <td class="ui labels">
         <%= link_to edit_admin_notification_path(notification), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>

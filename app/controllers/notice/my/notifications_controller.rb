@@ -34,17 +34,17 @@ class Notice::My::NotificationsController < Notice::My::BaseController
   def show
     respond_to do |format|
       format.html
-      format.json { @notification.make_as_read }
+      format.json { @notification.update(read_at: Time.now) }
     end
   end
 
   def url
-    @notification.make_as_read
+    @notification.update(read_at: Time.now)
     redirect_to @notification.link
   end
 
   def read
-    @notification.make_as_read
+    @notification.update(read_at: Time.now)
   end
 
   def edit
