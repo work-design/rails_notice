@@ -1,12 +1,3 @@
-<div class="ui top attached borderless menu">
-  <div class="header item">Admin Annunciations</div>
-  <div class="right menu">
-    <div class="item">
-      <%= link_to 'New Admin Annunciation', new_admin_annunciation_path, class: 'ui teal button' %>
-    </div>
-  </div>
-</div>
-
 <%= render 'filter' %>
 
 <table class="ui bottom attached table">
@@ -18,7 +9,11 @@
       <th><%= Annunciation.human_attribute_name(:link) %></th>
       <th><%= Annunciation.human_attribute_name(:state) %></th>
       <th>Publish</th>
-      <th>Actions</th>
+      <th>
+        <%= link_to new_admin_annunciation_path, class: 'ui teal button' do %>
+          <i class="plus icon"></i><%= t('.new') %>
+        <% end %>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -36,14 +31,14 @@
         <% end %>
         <% end %>
       </td>
-      <td class="ui labels">
-        <%= link_to admin_annunciation_path(annunciation), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+      <td>
+        <%= link_to admin_annunciation_path(annunciation), data: { tooltip: t('.show') }, class: 'ui mini circular icon button' do %>
           <i class="location arrow icon"></i>
         <% end %>
-        <%= link_to edit_admin_annunciation_path(annunciation), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>
+        <%= link_to edit_admin_annunciation_path(annunciation), data: { tooltip: t('.edit') }, class: 'ui mini circular icon button' do %>
           <i class="pencil alternate icon"></i>
         <% end %>
-        <%= link_to admin_annunciation_path(annunciation), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
+        <%= link_to admin_annunciation_path(annunciation), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui mini circular icon button' do %>
           <i class="times icon"></i>
         <% end %>
       </td>
