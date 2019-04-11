@@ -1,0 +1,10 @@
+<div class="item">
+  <a class="<%= active_helper(controllers: ['annunciations', 'notifications', 'notification_settings', 'notify_settings'], active_class: 'title active', item_class: 'title') %>">
+    <i class="users icon"></i>
+    <span>通知管理</span>
+    <i class="dropdown icon"></i>
+  </a>
+  <div class="<%= active_helper(controllers: ['annunciations', 'notifications', 'notification_settings', 'notify_settings'], active_class: 'menu content active', item_class: 'menu content') %>">
+    <%= link_to '通告', admin_annunciations_path, class: active_helper(controllers: 'annunciations') %>
+  </div>
+</div>
