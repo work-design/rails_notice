@@ -1,4 +1,4 @@
-class Notice::My::BaseController < RailsNotice.config.my_class.constantize
+class Notice::My::BaseController < RailsNotice.config.my_controller.constantize
   before_action :require_login
 
   def current_receiver
