@@ -50,7 +50,7 @@
       <td class="ui labels">
         <%= link_to 'Show', admin_notification_setting_path(notification_setting), class: 'ui blue label' %>
         <%= link_to 'Edit', edit_admin_notification_setting_path(notification_setting), class: 'ui pink label' %>
-        <%= link_to 'Destroy', admin_notification_setting_path(notification_setting), method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui red label' %>
+        <%= link_to 'Destroy', admin_notification_setting_path(notification_setting), method: :delete, data: { confirm: t('.confirm') }, class: 'ui red label' %>
       </td>
     </tr>
   <% end %>
