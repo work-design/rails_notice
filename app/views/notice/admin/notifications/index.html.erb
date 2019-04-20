@@ -76,7 +76,7 @@
       </td>
       <td class="ui labels">
         <%= link_to edit_admin_notification_path(notification), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>
-          <i class="pencil alternate icon"></i>
+          <i class="fas fa-pencil-alt"></i>
         <% end %>
         <%= link_to 'Push', push_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: t('.confirm') }, class: 'ui mini green label' %>
         <%= link_to 'Email', email_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: t('.confirm') }, class: 'ui mini green label' %>
