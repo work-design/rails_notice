@@ -29,7 +29,7 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
     @notification = Notification.new(notification_params)
 
     if @notification.save
-      redirect_to admin_notifications_url(receiver_id: @notification.receiver_id, receiver_type: @notification.receiver_type), notice: 'User notification was successfully created.'
+      redirect_to admin_notifications_url(receiver_id: @notification.receiver_id, receiver_type: @notification.receiver_type)
     else
       render :new
     end
@@ -37,7 +37,7 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
 
   def update
     if @notification.update(notification_params)
-      redirect_to admin_notifications_url(receiver_id: @notification.receiver_id, receiver_type: @notification.receiver_type), notice: 'User notification was successfully updated.'
+      redirect_to admin_notifications_url(receiver_id: @notification.receiver_id, receiver_type: @notification.receiver_type)
     else
       render :edit
     end
@@ -45,7 +45,7 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
 
   def destroy
     @notification.destroy
-    redirect_to admin_notifications_url(receiver_id: @notification.receiver_id, receiver_type: @notification.receiver_type), notice: 'User notification was successfully destroyed.'
+    redirect_to admin_notifications_url(receiver_id: @notification.receiver_id, receiver_type: @notification.receiver_type)
   end
 
   private

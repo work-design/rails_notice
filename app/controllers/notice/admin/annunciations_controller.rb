@@ -14,7 +14,7 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
     @annunciation.publisher = current_user
 
     if @annunciation.save
-      redirect_to admin_annunciations_url, notice: 'Annunciation was successfully created.'
+      redirect_to admin_annunciations_url
     else
       render :new
     end
@@ -28,7 +28,7 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
 
   def update
     if @annunciation.update(annunciation_params)
-      redirect_to admin_annunciations_url, notice: 'Annunciation was successfully updated.'
+      redirect_to admin_annunciations_url
     else
       render :edit
     end
@@ -37,12 +37,12 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
   def publish
     @annunciation.to_notifications
     NotificationSettingResetJob.perform_later
-    redirect_to admin_annunciations_url, notice: 'Annunciation was successfully published.'
+    redirect_to admin_annunciations_url
   end
 
   def destroy
     @annunciation.destroy
-    redirect_to admin_annunciations_url, notice: 'Annunciation was successfully destroyed.'
+    redirect_to admin_annunciations_url
   end
 
   private

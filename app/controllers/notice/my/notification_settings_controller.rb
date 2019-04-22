@@ -13,7 +13,7 @@ class Notice::My::NotificationSettingsController < Notice::My::BaseController
 
   def update
     if @notification_setting.update(notification_setting_params)
-      redirect_to notification_settings_url(receiver: params[:receiver]), notice: 'Notification setting was successfully updated.'
+      redirect_to notification_settings_url(receiver: params[:receiver])
     else
       render :edit
     end

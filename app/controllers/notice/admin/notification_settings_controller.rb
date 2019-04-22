@@ -14,7 +14,7 @@ class Notice::Admin::NotificationSettingsController < Notice::Admin::BaseControl
     @notification_setting = NotificationSetting.new(notification_setting_params)
 
     if @notification_setting.save
-      redirect_to admin_notification_settings_url, notice: 'Notification setting was successfully created.'
+      redirect_to admin_notification_settings_url
     else
       render :new
     end
@@ -29,7 +29,7 @@ class Notice::Admin::NotificationSettingsController < Notice::Admin::BaseControl
   def update
     respond_to do |format|
       if @notification_setting.update(notification_setting_params)
-        format.html { redirect_to admin_notification_settings_url, notice: 'Notification setting was successfully updated.' }
+        format.html { redirect_to admin_notification_settings_url }
         format.js
       else
         format.html { render :edit }
@@ -40,7 +40,7 @@ class Notice::Admin::NotificationSettingsController < Notice::Admin::BaseControl
 
   def destroy
     @notification_setting.destroy
-    redirect_to admin_notification_settings_url, notice: 'Notification setting was successfully destroyed.'
+    redirect_to admin_notification_settings_url
   end
 
   private

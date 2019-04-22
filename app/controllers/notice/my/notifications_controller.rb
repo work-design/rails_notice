@@ -52,7 +52,7 @@ class Notice::My::NotificationsController < Notice::My::BaseController
 
   def update
     if @notification.update(params[:notification].permit!)
-      redirect_to(notifications_path, notice: 'Notification 更新成功。')
+      redirect_to(notifications_path)
     else
       render action: 'edit'
     end
@@ -62,7 +62,7 @@ class Notice::My::NotificationsController < Notice::My::BaseController
     @notification.destroy
     respond_to do |format|
       format.json
-      format.html { redirect_to(notifications_path, notice: '删除成功。') }
+      format.html { redirect_to(notifications_path) }
     end
   end
 
