@@ -1,4 +1,4 @@
-module RailsNoticeGetui
+module RailsNotice::Getui
 
   def send_to_getui
     return unless receiver.getui_token

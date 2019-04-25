@@ -1,4 +1,4 @@
-module RailsNoticePublishable
+module RailsNotice::Publisher
   extend ActiveSupport::Concern
 
   included do

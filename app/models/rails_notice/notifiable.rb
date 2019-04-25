@@ -1,4 +1,4 @@
-module RailsNoticeNotifiable
+module RailsNotice::Notifiable
   extend ActiveSupport::Concern
 
   included do

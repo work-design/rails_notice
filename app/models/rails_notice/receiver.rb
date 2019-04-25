@@ -1,6 +1,5 @@
-module RailsNoticeReceivable
+module RailsNotice::Receiver
   extend ActiveSupport::Concern
-
   included do
     has_many :received_notifications, as: 'receiver', class_name: 'Notification', dependent: :destroy
     has_one :notification_setting, as: 'receiver', dependent: :destroy
