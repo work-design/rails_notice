@@ -1,4 +1,4 @@
-class ReceiversController < ApplicationController
+class Notice::ReceiversController < ApplicationController
 
   def search
     if Notification.options_i18n(:receiver_type).values.include?(params[:receiver_type].to_sym) && params[:receiver_type].safe_constantize
