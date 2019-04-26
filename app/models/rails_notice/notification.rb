@@ -1,24 +1,25 @@
-class Notification < ApplicationRecord
-  include RailsNoticeGetui
-
-  serialize :cc_emails, Array
-  attribute :code, :string, default: 'default'
-  belongs_to :receiver, polymorphic: true
-  belongs_to :sender, polymorphic: true, optional: true
-  belongs_to :notifiable, polymorphic: true, optional: true
-  belongs_to :linked, polymorphic: true, optional: true
-  has_one :notification_setting, ->(o) { where(receiver_type: o.receiver_type) }, primary_key: :receiver_id, foreign_key: :receiver_id
-
-  default_scope -> { order(id: :desc) }
-  scope :unread, -> { where(read_at: nil) }
-  scope :have_read, -> { where.not(read_at: nil) }
-
-  after_create_commit :process_job
-  after_create_commit :create_increment_unread, if: -> { read_at.blank? }
-  after_update_commit :increment_unread, if: -> { read_at.blank? && saved_change_to_read_at? }, on: [:update]
-  after_commit :decrement_unread, if: -> { saved_change_to_read_at && saved_change_to_read_at[0].blank? && saved_change_to_read_at[1].acts_like?(:time) }, on: [:update]
-  after_destroy_commit :destroy_decrement_unread, if: -> { read_at.blank? }
-
+module RailsNotice::Notification
+  extend ActiveSupport::Concern
+  included do
+    serialize :cc_emails, Array
+    attribute :code, :string, default: 'default'
+    belongs_to :receiver, polymorphic: true
+    belongs_to :sender, polymorphic: true, optional: true
+    belongs_to :notifiable, polymorphic: true, optional: true
+    belongs_to :linked, polymorphic: true, optional: true
+    has_one :notification_setting, ->(o) { where(receiver_type: o.receiver_type) }, primary_key: :receiver_id, foreign_key: :receiver_id
+  
+    default_scope -> { order(id: :desc) }
+    scope :unread, -> { where(read_at: nil) }
+    scope :have_read, -> { where.not(read_at: nil) }
+  
+    after_create_commit :process_job
+    after_create_commit :create_increment_unread, if: -> { read_at.blank? }
+    after_update_commit :increment_unread, if: -> { read_at.blank? && saved_change_to_read_at? }, on: [:update]
+    after_commit :decrement_unread, if: -> { saved_change_to_read_at && saved_change_to_read_at[0].blank? && saved_change_to_read_at[1].acts_like?(:time) }, on: [:update]
+    after_destroy_commit :destroy_decrement_unread, if: -> { read_at.blank? }
+  end
+  
   def notification_setting
     super || create_notification_setting
   end

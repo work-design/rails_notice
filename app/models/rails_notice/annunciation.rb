@@ -4,7 +4,7 @@ module RailsNotice::Annunciation
     class_attribute :notifies, default: {}
     attribute :state, :string, default: 'init'
     attribute :link, :string
-  
+
     belongs_to :publisher, polymorphic: true
     has_many :notifications, as: :notifiable
   

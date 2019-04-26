@@ -1,3 +1,3 @@
 class Annunciation < ApplicationRecord
-  included RailsNotice::Annunciation
+  include RailsNotice::Annunciation
 end unless defined? Annunciation

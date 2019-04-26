@@ -1,3 +1,3 @@
 class Notification < ApplicationRecord
-  included RailsNotice::Notification
+  include RailsNotice::Notification
 end unless defined? Notification

@@ -1,12 +1,13 @@
-class NotificationSetting < ApplicationRecord
-  belongs_to :receiver, polymorphic: true
-  serialize :notifiable_types, Array
-  attribute :counters, :json, default: {}
-  attribute :showtime, :integer, default: 0
-  attribute :accept_email, :boolean, default: RailsNotice.config.default_send_email
-
-
-
+module RailsNotice::NotificationSetting
+  extend ActiveSupport::Concern
+  included do
+    belongs_to :receiver, polymorphic: true
+    serialize :notifiable_types, Array
+    attribute :counters, :json, default: {}
+    attribute :showtime, :integer, default: 0
+    attribute :accept_email, :boolean, default: RailsNotice.config.default_send_email
+  end
+  
   def notifiable_types
     super + RailsNotice.config.default_notifiable_types
   end

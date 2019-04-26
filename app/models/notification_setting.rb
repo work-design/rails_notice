@@ -1,3 +1,3 @@
 class NotificationSetting < ApplicationRecord
-  included RailsNotice::NotificationSetting
+  include RailsNotice::NotificationSetting
 end unless defined? NotificationSetting
