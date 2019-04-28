@@ -4,7 +4,7 @@
       <%= f.select :receiver_type, options_for_select(Notification.options_i18n(:receiver_type)), { on: { wrapper_input: false } }, { class: 'ui selection dropdown', id: 'q_receiver_type' } %>
       <%= f.select :receiver_id, options_for_select([]), { on: { wrapper_input: false } }, { id: 'q_receiver_id', class: 'ui search dropdown' } %>
     </div>
-    <%= f.submit 'Search' %>
+    <%= f.submit %>
   </div>
 <% end %>
 
