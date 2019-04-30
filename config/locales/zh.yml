@@ -5,3 +5,8 @@ zh:
     readed: 已读
     notification_setting: 通知设置
     detail: 详情请点击
+  notice:
+    admin:
+      annunciations:
+        index:
+          title: 通告
