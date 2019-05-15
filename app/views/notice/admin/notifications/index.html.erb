@@ -1,10 +1,8 @@
-<%= render 'menu' %>
-
-<div class="ui attached segment">
+<div class="ui top attached segment">
   <%= render 'search_form' %>
 </div>
 
-<table class="ui bottom attached fixed table">
+<table class="ui bottom attached table">
   <thead>
     <tr>
       <th class="one wide"><%= Notification.human_attribute_name(:id) %></th>
@@ -37,7 +35,7 @@
         <p><%= Notification.human_attribute_name(:official) %></p>
         <p><%= Notification.human_attribute_name(:send_result) %></p>
       </th>
-      <th class="two wide">Operation</th>
+      <th class="two wide"></th>
     </tr>
   </thead>
 
@@ -74,8 +72,8 @@
         <p><%= notification.official %></p>
         <p><code><%= notification.sent_result %></code></p>
       </td>
-      <td class="ui labels">
-        <%= link_to edit_admin_notification_path(notification), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>
+      <td>
+        <%= link_to edit_admin_notification_path(notification), data: { tooltip: t('.edit') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
         <%= link_to 'Push', push_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: t('.confirm') }, class: 'ui mini green label' %>

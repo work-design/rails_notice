@@ -1,10 +1,11 @@
+<% content_for :breadcrumb do %>
 <div class="ui segment breadcrumb">
   <%= link_to '返回', admin_notifications_path, class: 'section' %>
   <i class="fas fa-angle-right divider"></i>
-  <div class="active section">编辑</div>
+  <div class="active section"><%= t('.edit') %></div>
 </div>
+<% end %>
 
 <div class="ui segment">
   <%= render 'form' %>
 </div>
-
