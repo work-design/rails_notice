@@ -219,18 +219,20 @@ module RailsNotice::Notification
       url.to_s
     end
   end
-
-  def self.reset_unread_count(receiver)
-    no = Notification.where(receiver_id: receiver.id, receiver_type: receiver.class.name, read_at: nil)
-    counters = {}
-
-    counters.merge! total: no.count
-    RailsNotice.notifiable_types.map do |nt|
-      counters.merge! nt => no.where(notifiable_type: nt).count
+  
+  class_methods do
+    def reset_unread_count(receiver)
+      no = self.where(receiver_id: receiver.id, receiver_type: receiver.class.name, read_at: nil)
+      counters = {}
+  
+      counters.merge! total: no.count
+      RailsNotice.notifiable_types.map do |nt|
+        counters.merge! nt => no.where(notifiable_type: nt).count
+      end
+      counters.merge! official: no.where(official: true).count
+  
+      receiver.notification_setting.update counters: counters
     end
-    counters.merge! official: no.where(official: true).count
-
-    receiver.notification_setting.update counters: counters
   end
 
 end
