@@ -7,8 +7,10 @@ module RailsNotice::Controller
   end
 
   def set_receiver
-    session['receiver_type'] = current_receiver.class.name
-    session['receiver_id'] = current_receiver&.id
+    if current_receiver
+      session['receiver_type'] = current_receiver.class.name
+      session['receiver_id'] = current_receiver.id
+    end
   end
 
   def current_receiver
