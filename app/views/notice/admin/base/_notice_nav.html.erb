@@ -1,7 +1,7 @@
 <% if rails_role_user.any_role?('notice/admin') %>
 <div class="item">
   <a class="<%= active_helper(controllers: ['annunciations', 'notifications', 'notification_settings', 'notify_settings'], active_class: 'title active', item_class: 'title') %>">
-    <i class="fas fa-inbox"></i>
+    <i class="fas fa-inbox fa-fw"></i>
     <span>通知管理</span>
     <i class="dropdown icon"></i>
   </a>
