@@ -49,4 +49,4 @@ end
 ```
 
 ## License
-The gem is available as open source under the terms of the [LGPL License](https://opensource.org/licenses/LGPL-3.0).
+The gem is available as open source under the terms of the [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0).

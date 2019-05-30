@@ -2,7 +2,7 @@ module RailsNotice::NotificationSetting
   extend ActiveSupport::Concern
   included do
     belongs_to :receiver, polymorphic: true
-    serialize :notifiable_types, Array
+    attribute :notifiable_types, :string, array: true
     attribute :counters, :json, default: {}
     attribute :showtime, :integer, default: 0
     attribute :accept_email, :boolean, default: RailsNotice.config.default_send_email

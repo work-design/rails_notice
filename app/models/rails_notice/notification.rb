@@ -1,7 +1,6 @@
 module RailsNotice::Notification
   extend ActiveSupport::Concern
   included do
-    serialize :cc_emails, Array
     attribute :code, :string, default: 'default'
     belongs_to :receiver, polymorphic: true
     belongs_to :sender, polymorphic: true, optional: true
