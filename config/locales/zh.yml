@@ -1,12 +1,17 @@
 zh:
-  rails_notice:
-    all_notification: 全部通知
-    unread: 未读
-    readed: 已读
-    notification_setting: 通知设置
-    detail: 详情请点击
+
   notice:
     admin:
       annunciations:
         index:
           title: 通告
+    my:
+      notifications:
+        index:
+          title: 通知
+          unread: 未读
+          readed: 已读
+          detail: 详情请点击
+      notification_settings:
+        show:
+          title: 通知设置
