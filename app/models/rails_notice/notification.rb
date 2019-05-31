@@ -174,7 +174,7 @@ module RailsNotice::Notification
       next i unless i.respond_to?(:call)
       i.call(notifiable)
     end
-    r.flatten.concat super
+    r.flatten.concat Array(super)
   end
 
   def unread_count
