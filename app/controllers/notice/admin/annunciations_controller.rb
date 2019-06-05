@@ -2,7 +2,9 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
   before_action :set_annunciation, only: [:show, :edit, :update, :publish, :destroy]
 
   def index
-    @annunciations = Annunciation.page(params[:page])
+    q_params = {}
+    q_params.merge! default_params
+    @annunciations = Annunciation.default_where(q_params).page(params[:page])
   end
 
   def new
@@ -51,12 +53,13 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
   end
 
   def annunciation_params
-    params.fetch(:annunciation, {}).permit(
+    p = params.fetch(:annunciation, {}).permit(
       :title,
       :body,
       :link,
       :state
     )
+    p.merge! default_params
   end
 
 end
