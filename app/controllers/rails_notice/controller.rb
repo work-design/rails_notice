@@ -14,7 +14,7 @@ module RailsNotice::Controller
   end
 
   def current_receiver
-    current_user
+    defined?(current_user) && current_user
   end
 
 end

@@ -1,11 +1,10 @@
 class Notice::My::NotificationsController < Notice::My::BaseController
   before_action :set_notification, only: [:show, :url, :read, :edit, :update, :destroy]
-  before_action :set_receiver, only: [:index, :read_all]
   protect_from_forgery except: :read
 
   def index
-
-    @notifications = @receiver.received_notifications.order(read_at: :asc)
+    q_params = {}
+    @notifications = current_receiver.received_notifications.order(read_at: :asc)
     if params[:scope] == 'have_read'
       @notifications = @notifications.have_read
     elsif params[:scope] == 'unread'
@@ -21,9 +20,9 @@ class Notice::My::NotificationsController < Notice::My::BaseController
   end
 
   def read_all
-    @notifications = @receiver.received_notifications.default_where(q_params)
+    @notifications = current_receiver.received_notifications.default_where(q_params)
     @notifications.update_all(read_at: Time.now)
-    @count = Notification.reset_unread_count(@receiver)
+    @count = Notification.reset_unread_count(current_receiver)
 
     respond_to do |format|
       format.json { render json: { count: @count } }
@@ -70,10 +69,6 @@ class Notice::My::NotificationsController < Notice::My::BaseController
   def q_params
     q_params = {}.with_indifferent_access
     q_params.merge! params.permit(:notifiable_type, :official)
-  end
-
-  def set_receiver
-    @receiver = current_receiver
   end
 
   def set_notification
