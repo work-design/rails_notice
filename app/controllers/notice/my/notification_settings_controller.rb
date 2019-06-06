@@ -21,8 +21,7 @@ class Notice::My::NotificationSettingsController < Notice::My::BaseController
 
   private
   def set_notification_setting
-    @receiver = current_receiver
-    @notification_setting = @receiver.notification_setting || @receiver.build_notification_setting
+    @notification_setting = current_receiver.notification_setting || current_receiver.build_notification_setting
   end
 
   def notification_setting_params
