@@ -1,7 +1,7 @@
 <%= form_with model: [:admin, @annunciation] do |f| %>
   <%= render 'shared/error_messages', target: @annunciation %>
   <%= f.text_field :title %>
-  <%= f.text_field :body %>
+  <%= f.text_area :body %>
   <%= f.text_field :link %>
   <%= f.text_field :publisher_id %>
   <%= f.submit %>

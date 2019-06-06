@@ -1,0 +1,9 @@
+zh:
+  activerecord:
+    models:
+      annunciation: 通告
+    attributes:
+      annunciation:
+        body: 内容
+        link: 链接
+        state: 状态
