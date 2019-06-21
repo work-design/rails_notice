@@ -21,6 +21,7 @@ module RailsNotice::Annunciation
     self.update(state: 'published')
     Notification.bulk_insert_from_model(
       receiver_type.constantize,
+      filter: { organ_id: self.organ_id },
       select: { receiver_id: 'id' },
       value: {
         link: self.link,

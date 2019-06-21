@@ -8,6 +8,5 @@ module RailsNotice::Getui
 
     Getui.push_single(receiver.getui_token, message)
   end
-
-
+  
 end
