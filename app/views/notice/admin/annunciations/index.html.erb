@@ -27,7 +27,7 @@
       <td><%= annunciation.state_i18n %></td>
       <td>
         <% unless annunciation.published? %>
-          <%= link_to publish_admin_annunciation_path(annunciation), method: :patch, data: { tooltip: '发布' }, class: 'ui pink mini icon button' do %>
+          <%= link_to publish_admin_annunciation_path(annunciation), data: { tooltip: '发布' }, remote: true, class: 'ui pink mini icon button' do %>
             <i class="fas fa-bullhorn"></i>
           <% end %>
         <% end %>

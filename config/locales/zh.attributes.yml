@@ -7,3 +7,8 @@ zh:
         body: 内容
         link: 链接
         state: 状态
+    enum:
+      notification:
+        receiver_type:
+          User: 全体用户
+          Member: 全体职员

@@ -1,5 +1,5 @@
 class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
-  before_action :set_annunciation, only: [:show, :edit, :update, :publish, :destroy]
+  before_action :set_annunciation, only: [:show, :edit, :update, :edit_publish, :update_publish, :destroy]
 
   def index
     q_params = {}
@@ -35,9 +35,13 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
       render :edit
     end
   end
+  
+  def edit_publish
+  
+  end
 
-  def publish
-    @annunciation.to_notifications
+  def update_publish
+    @annunciation.to_notifications(receiver_type: params[:receiver_type])
     NotificationSettingResetJob.perform_later
     redirect_to admin_annunciations_url
   end

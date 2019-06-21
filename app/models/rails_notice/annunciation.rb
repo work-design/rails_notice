@@ -17,17 +17,17 @@ module RailsNotice::Annunciation
     }
   end
 
-  def to_notifications
+  def to_notifications(receiver_type: 'User')
     self.update(state: 'published')
     Notification.bulk_insert_from_model(
-      User,
+      receiver_type.constantize,
       select: { receiver_id: 'id' },
       value: {
         link: self.link,
-        receiver_type: 'User',
+        receiver_type: receiver_type,
         sender_type: self.publisher_type,
         sender_id: self.publisher_id,
-        notifiable_type: 'Annunciation',
+        notifiable_type: self.class.name,
         notifiable_id: self.id,
         official: true
       }

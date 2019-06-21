@@ -10,7 +10,10 @@ Rails.application.routes.draw do
     end
     resources :notification_settings
     resources :annunciations do
-      patch :publish, on: :member
+      member do
+        get 'publish' => :edit_publish
+        patch 'publish' => :update_publish
+      end
     end
   end
 

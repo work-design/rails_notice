@@ -1,0 +1,13 @@
+<div class="ui modal" id="modal">
+  <i class="fas fa-times close icon"></i>
+  <div class="ui header blue">
+    <%= t('.edit') %>
+  </div>
+
+  <div class="content">
+    <%= form_with url: publish_admin_annunciation_path, method: :patch do |f| %>
+      <%= f.select :receiver_type, options_for_select(Notification.options_i18n(:receiver_type)) %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>
