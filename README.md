@@ -12,7 +12,7 @@ development:
 
 ### Import the js and css in the page which you want show notifications
 ```erb
-<%= javascript_include_tag 'rails_notice/cable', 'data-turbolinks-eval': 'false' %>
+<%= javascript_include_tag 'rails_notice/notice_channel', 'data-turbolinks-eval': 'false' %>
 <%= stylesheet_link_tag 'rails_notice/cable' %>
 ```
 
