@@ -1,5 +1,5 @@
 class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
-  before_action :set_annunciation, only: [:show, :edit, :update, :edit_publish, :update_publish, :destroy]
+  before_action :set_annunciation, only: [:show, :edit, :update, :edit_publish, :update_publish, :wechat, :destroy]
 
   def index
     q_params = {}
@@ -44,6 +44,10 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
     @annunciation.to_notification(receiver_type: params[:receiver_type])
     NotificationSettingResetJob.perform_later
     redirect_to admin_annunciations_url
+  end
+  
+  def wechat
+  
   end
 
   def destroy
