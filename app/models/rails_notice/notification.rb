@@ -35,7 +35,7 @@ module RailsNotice::Notification
     send_to_socket
   end
 
-  def send_email
+  def send_to_email
     return unless email_enable?
 
     if notify_setting[:mailer_class]

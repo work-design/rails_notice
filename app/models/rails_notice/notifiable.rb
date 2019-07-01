@@ -38,5 +38,9 @@ module RailsNotice::Notifiable
 
     n.save!
   end
+  
+  def wechat_config
+    
+  end
 
 end

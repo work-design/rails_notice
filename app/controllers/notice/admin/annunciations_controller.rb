@@ -41,7 +41,7 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
   end
 
   def update_publish
-    @annunciation.to_notifications(receiver_type: params[:receiver_type])
+    @annunciation.to_notification(receiver_type: params[:receiver_type])
     NotificationSettingResetJob.perform_later
     redirect_to admin_annunciations_url
   end

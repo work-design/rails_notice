@@ -4,6 +4,9 @@ zh:
       annunciations:
         index:
           title: 通告
+      notifications:
+        index:
+          title: 通知
     my:
       notifications:
         index:

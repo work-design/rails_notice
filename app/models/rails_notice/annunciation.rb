@@ -17,7 +17,7 @@ module RailsNotice::Annunciation
     }
   end
 
-  def to_notifications(receiver_type: 'User')
+  def to_notification(receiver_type: 'User')
     self.update(state: 'published')
     Notification.bulk_insert_from_model(
       receiver_type.constantize,
@@ -33,6 +33,14 @@ module RailsNotice::Annunciation
         official: true
       }
     )
+  end
+  
+  def to_wechat
+    apps = WechatPublic.where(organ_id: self.organ_id)
+    apps.map do |app|
+      open_ids = WechatUser.where(app_id: app.appid).limit(10000).pluck(:uid)
+      app.api.message_mass_sendall(body)
+    end
   end
 
 

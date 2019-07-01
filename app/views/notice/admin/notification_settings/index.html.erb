@@ -1,18 +1,10 @@
-<div class="ui top attached menu borderless">
-  <div class="header item">Notification Settings</div>
-  <div class="right menu">
-    <div class="item"><%= link_to 'New Notification Setting', new_admin_notification_setting_path, class: 'ui teal button' %></div>
-  </div>
-</div>
-
-<div class="ui attached segment">
-  <%= render 'search_form' %>
+<div class="ui top attached segment">
+  <%= render 'filter' %>
 </div>
 
 <table class="ui bottom attached selectable table">
   <thead>
     <tr>
-      <th class="one wide"><%= NotificationSetting.human_attribute_name(:id) %></th>
       <th class="two wide">
         <p><%= NotificationSetting.human_attribute_name(:receiver_type) %></p>
         <p><%= NotificationSetting.human_attribute_name(:receiver_id) %></p>
@@ -21,14 +13,17 @@
       <th class="one wide"><%= NotificationSetting.human_attribute_name(:accept_email) %></th>
       <th class="four wide"><%= NotificationSetting.human_attribute_name(:notifiable_types) %></th>
       <th class="four wide"><%= NotificationSetting.human_attribute_name(:counters) %></th>
-      <th></th>
+      <th>
+        <%= link_to new_admin_notification_setting_path, class: 'ui mini button' do %>
+          <%= t('.new') %>
+        <% end %>
+      </th>
     </tr>
   </thead>
 
   <tbody>
   <% @notification_settings.each do |notification_setting| %>
     <tr>
-      <td><%= notification_setting.id %></td>
       <td>
         <p><%= notification_setting.receiver_type %></p>
         <p><%= notification_setting.receiver_id %></p>
@@ -47,7 +42,7 @@
       <td>
         <%= simple_format(notification_setting.counters) %>
       </td>
-      <td class="ui labels">
+      <td>
         <%= link_to 'Show', admin_notification_setting_path(notification_setting), class: 'ui blue label' %>
         <%= link_to 'Edit', edit_admin_notification_setting_path(notification_setting), class: 'ui pink label' %>
         <%= link_to 'Destroy', admin_notification_setting_path(notification_setting), method: :delete, data: { confirm: t('.confirm') }, class: 'ui red label' %>
