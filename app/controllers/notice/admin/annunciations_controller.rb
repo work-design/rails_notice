@@ -1,5 +1,5 @@
 class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
-  before_action :set_annunciation, only: [:show, :edit, :update, :edit_publish, :update_publish, :wechat, :destroy]
+  before_action :set_annunciation, only: [:show, :edit, :update, :edit_publish, :update_publish, :options, :wechat, :destroy]
 
   def index
     q_params = {}
