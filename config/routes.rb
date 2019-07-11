@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       member do
         get 'publish' => :edit_publish
         patch 'publish' => :update_publish
+        get :options
         patch :wechat
       end
     end

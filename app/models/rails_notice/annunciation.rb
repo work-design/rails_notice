@@ -7,6 +7,8 @@ module RailsNotice::Annunciation
 
     belongs_to :publisher, polymorphic: true
     has_many :notifications, as: :notifiable
+    has_many :annunciates, dependent: :nullify
+    has_many :tags, through: :annunciates
   
     acts_as_notify :default,
                    only: [:title, :body, :link]

@@ -29,7 +29,9 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
   end
 
   def update
-    if @annunciation.update(annunciation_params)
+    @annunciation.assign_attributes(annunciation_params)
+    
+    if @annunciation.save
       redirect_to admin_annunciations_url
     else
       render :edit
@@ -44,6 +46,10 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
     @annunciation.to_notification(receiver_type: params[:receiver_type])
     NotificationSettingResetJob.perform_later
     redirect_to admin_annunciations_url
+  end
+
+  def options
+    @tags = UserTag.all
   end
   
   def wechat
@@ -65,7 +71,8 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
       :title,
       :body,
       :link,
-      :state
+      :state,
+      tag_ids: []
     )
     p.merge! default_params
   end

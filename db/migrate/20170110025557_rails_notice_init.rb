@@ -51,6 +51,13 @@ class RailsNoticeInit < ActiveRecord::Migration[5.0]
       t.datetime :annunciated_at
       t.timestamps
     end
+    
+    create_table :annunciates do |t|
+      t.references :annunciation
+      t.references :tag
+      t.string :state
+      t.timestamps
+    end
 
   end
 end

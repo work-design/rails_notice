@@ -5,8 +5,9 @@
   </div>
 
   <div class="content">
-    <%= form_with url: publish_admin_annunciation_path, method: :patch do |f| %>
-      <%= f.select :receiver_type, options_for_select(Notification.options_i18n(:receiver_type)) %>
+    <%= form_with url: admin_annunciation_path(@annunciation), method: :patch do |f| %>
+      <%= f.select :receiver_type, options_for_select(Notification.options_i18n(:receiver_type)), include_blank: true %>
+      <%= f.select :tag_ids, options_for_select([]), { on: { wrapper_input_id: true } }, { multiple: true } %>
       <%= f.submit %>
     <% end %>
   </div>
