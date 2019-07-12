@@ -26,10 +26,8 @@
       <td><%= annunciation.link %></td>
       <td><%= annunciation.state_i18n %></td>
       <td>
-        <% unless annunciation.published? %>
-          <%= link_to publish_admin_annunciation_path(annunciation), data: { tooltip: '发布' }, remote: true, class: 'ui pink mini icon button' do %>
-            <i class="fas fa-bullhorn"></i>
-          <% end %>
+        <%= link_to publish_admin_annunciation_path(annunciation), data: { tooltip: '发布' }, remote: true, class: 'ui pink mini icon button' do %>
+          <i class="fas fa-bullhorn"></i>
         <% end %>
       </td>
       <td><time><%= annunciation.created_at.to_s(:rfc822) %></time></td>

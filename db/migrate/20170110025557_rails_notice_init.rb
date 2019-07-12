@@ -55,6 +55,7 @@ class RailsNoticeInit < ActiveRecord::Migration[5.0]
     create_table :annunciates do |t|
       t.references :annunciation
       t.references :tag
+      t.string :receiver_type
       t.string :state
       t.timestamps
     end

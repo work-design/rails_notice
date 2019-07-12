@@ -12,3 +12,7 @@ zh:
         receiver_type:
           User: 全体用户
           Member: 全体职员
+      annunciation:
+        state:
+          init: 草稿
+          published: 已发布
