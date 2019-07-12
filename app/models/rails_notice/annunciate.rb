@@ -6,13 +6,12 @@ module RailsNotice::Annunciate
     belongs_to :annunciation
     belongs_to :user_tag, optional: true
   end
-
-
+  
   def to_notification
     self.update(state: 'published')
     Notification.bulk_insert_from_model(
       receiver_type.constantize,
-      filter: { organ_id: self.organ_id },
+      filter: { organ_id: annunciation.organ_id, 'user_taggeds.user_tag_id': user_tag_id },
       select: { receiver_id: 'id' },
       value: {
         link: self.link,

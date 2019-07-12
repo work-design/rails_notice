@@ -43,13 +43,23 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
   end
 
   def update_publish
-    @annunciation.to_notification(receiver_type: params[:receiver_type])
+    if params[:user_tag_ids]
+      @annunciation.user_tag_ids = params[:user_tag_ids]
+    elsif params[:receiver_type]
+      @annunciation.annunciates.create(receiver_type: params[:receiver_type])
+    end
+    
     NotificationSettingResetJob.perform_later
+    
     redirect_to admin_annunciations_url
   end
 
   def options
-    @tags = UserTag.all
+    if params[:receiver_type] == 'User'
+      @tags = UserTag.all
+    else
+      @tags = UserTag.none
+    end
   end
   
   def wechat
@@ -72,7 +82,6 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
       :body,
       :link,
       :state,
-      user_tag_ids: []
     )
     p.merge! default_params
   end

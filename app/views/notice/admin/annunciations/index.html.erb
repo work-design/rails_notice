@@ -8,9 +8,8 @@
       <th><%= Annunciation.human_attribute_name(:title) %></th>
       <th><%= Annunciation.human_attribute_name(:body) %></th>
       <th><%= Annunciation.human_attribute_name(:link) %></th>
-      <th><%= Annunciation.human_attribute_name(:state) %></th>
-      <th>Publish</th>
       <th><%= Annunciation.human_attribute_name(:created_at) %></th>
+      <th>Publish</th>
       <th>
         <%= link_to new_admin_annunciation_path, class: 'ui mini primary button' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
@@ -24,13 +23,12 @@
       <td><%= annunciation.title %></td>
       <td><%= annunciation.body %></td>
       <td><%= annunciation.link %></td>
-      <td><%= annunciation.state_i18n %></td>
+      <td><time><%= annunciation.created_at.to_s(:rfc822) %></time></td>
       <td>
         <%= link_to publish_admin_annunciation_path(annunciation), data: { tooltip: '发布' }, remote: true, class: 'ui pink mini icon button' do %>
           <i class="fas fa-bullhorn"></i>
         <% end %>
       </td>
-      <td><time><%= annunciation.created_at.to_s(:rfc822) %></time></td>
       <td>
         <%= link_to admin_annunciation_path(annunciation), data: { tooltip: t('.show') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-eye"></i>

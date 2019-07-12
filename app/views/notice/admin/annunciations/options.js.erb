@@ -1,4 +1,4 @@
-<% form_object = default_form_object(@annunciation) %>
+<% form_object = default_form_object(as: '') %>
 
-$('#annunciation_user_tag_ids_input').replaceWith('<%= j(render partial: 'tag_options', locals: { f: form_object }) %>');
-$('#annunciation_user_tag_ids').dropdown();
+$('#_user_tag_ids_input').replaceWith('<%= j(render partial: 'tag_options', locals: { f: form_object }) %>');
+$('#user_tag_ids').dropdown();
