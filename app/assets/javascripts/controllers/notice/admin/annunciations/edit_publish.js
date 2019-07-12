@@ -1,5 +1,5 @@
 $('#annunciation_receiver_type').dropdown();
-$('#annunciation_tag_ids').dropdown();
+$('#annunciation_user_tag_ids').dropdown();
 document.getElementById('annunciation_receiver_type').addEventListener('change', function(){
   var search_url = new URL(this.form.action + '/options');
   if (this.value) {

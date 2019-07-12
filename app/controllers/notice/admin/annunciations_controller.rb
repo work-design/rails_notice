@@ -72,7 +72,7 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
       :body,
       :link,
       :state,
-      tag_ids: []
+      user_tag_ids: []
     )
     p.merge! default_params
   end
