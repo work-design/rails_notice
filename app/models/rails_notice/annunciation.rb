@@ -19,13 +19,4 @@ module RailsNotice::Annunciation
     }
   end
   
-  def to_wechat
-    apps = WechatPublic.valid.where(organ_id: self.organ_id)
-    apps.map do |app|
-      open_ids = WechatUser.where(app_id: app.appid).limit(10000).pluck(:uid)
-      app.api.message_mass_sendall(body)
-    end
-  end
-
-
 end
