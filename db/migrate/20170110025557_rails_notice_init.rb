@@ -42,7 +42,7 @@ class RailsNoticeInit < ActiveRecord::Migration[5.0]
     end
 
     create_table :annunciations do |t|
-      t.references :organ
+      t.references :organ  # For SaaS
       t.references :publisher, polymorphic: true
       t.string :title
       t.string :body
