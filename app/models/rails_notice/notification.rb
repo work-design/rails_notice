@@ -25,9 +25,9 @@ module RailsNotice::Notification
 
   def process_job
     if sending_at
-      NotificationJob.set(wait_until: sending_at).perform_later id
+      NotificationJob.set(wait_until: sending_at).perform_later(self)
     else
-      NotificationJob.perform_later(self.id)
+      NotificationJob.perform_later(self)
     end
   end
 
