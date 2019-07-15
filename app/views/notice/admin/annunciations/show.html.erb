@@ -1,8 +1,10 @@
-<div class="ui segment breadcrumb">
-  <%= link_to 'Back', admin_annunciations_path, class: 'section' %>
+<% content_for :breadcrumb do %>
+<div class="ui basic segment breadcrumb">
+  <%= link_to t('notice.admin.annunciations.index.title'), admin_annunciations_path, class: 'section' %>
   <i class="fas fa-angle-right divider"></i>
-  <div class="active section">Show</div>
+  <div class="active section"><%= t('.title') %></div>
 </div>
+<% end %>
 
 <table class="ui very basic large table">
   <tbody>
@@ -17,6 +19,19 @@
     <tr>
       <td class="right aligned"><%= Annunciation.human_attribute_name(:state) %></td>
       <td><%= @annunciation.state %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <div class="ui labels">
+          <% @annunciation.annunciates.each do |annunciate| %>
+            <div class="ui label"><%= annunciate.user_tag&.name %></div>
+          <% end %>
+        </div>
+        <%= link_to publish_admin_annunciation_path(@annunciation), data: { tooltip: '发布' }, remote: true, class: 'ui pink mini icon button' do %>
+          <i class="fas fa-bullhorn"></i>
+        <% end %>
+      </td>
     </tr>
   </tbody>
 </table>
