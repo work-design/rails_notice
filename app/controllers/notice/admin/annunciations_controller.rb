@@ -56,7 +56,7 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
 
   def options
     if params[:receiver_type] == 'User'
-      @tags = UserTag.all
+      @tags = UserTag.default_where(default_params)
     else
       @tags = UserTag.none
     end
