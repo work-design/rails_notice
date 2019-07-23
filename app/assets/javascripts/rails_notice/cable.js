@@ -1,32 +1,20 @@
-App.cable.subscriptions.create('NoticesChannel', {
+// Must require rails/cable first
+ApplicationCable.subscriptions.create('ReceiverChannel', {
   collection: function() {
-    return $("[data-channel='notices']");
+    return document.getElementById('notify_show');
   },
   received: function(data) {
-    this.collection().css('color', '#ff7f24');
-    this.collection().html(data.body);
-
-    var msg = Messenger().post({
+    // this.collection().style.color = '#ff7f24';
+    // this.collection().innerHTML = data.body;
+    $('body').toast({
       message: data.body,
       type: 'info',
-      showCloseButton: true,
-      hideAfter: data.showtime,
-      actions: {
-        confirm: {
-          label: 'Confirm',
-          action: function(e){
-            var url = '/notifications/' + data.id + '/read';
-            Rails.ajax({ url: url, type: 'GET', dataType: 'script' });
-            window.location.href = data.link;
-          }
-        }
-      }
+      showCloseButton: true
     });
-
-    $('#notify_show').css('color', '#ff7f24');
-    $('#notice_count').html(data.count);
+    document.getElementById('notify_show').style.color = '#ff7f24';
+    document.getElementById('notice_count').innerHTML = data.count;
   },
   connected: function() {
-    console.log('Notice channel connected success');
+    console.log('connected success');
   }
 });
