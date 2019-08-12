@@ -83,7 +83,7 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
       :link,
       :state,
     )
-    p.merge! default_params
+    p.merge! default_form_params
   end
 
 end
