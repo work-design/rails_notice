@@ -13,5 +13,3 @@ $('#q_receiver_id').dropdown({
   },
   minCharacters: 2
 });
-
-$('.ui.toggle.checkbox').checkbox();
