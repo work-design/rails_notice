@@ -49,7 +49,7 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
   def q_params
     q = {}
     q.merge! params.permit(:receiver_type, :receiver_id)
-    q.merge! params.fetch(:q, {}).permit(:id, :'body-like', :receiver_type, :receiver_id)
+    q.merge! params.permit(:id, :'body-like', :receiver_type, :receiver_id)
     q
   end
 
