@@ -11,30 +11,16 @@ class Notice::My::NotificationsController < Notice::My::BaseController
       @notifications = @notifications.unread
     end
     @notifications = @notifications.default_where(q_params).page(params[:page]).per(params[:per])
-
-    respond_to do |format|
-      format.html
-      format.js
-      format.json
-    end
   end
 
   def read_all
     @notifications = current_receiver.received_notifications.default_where(q_params)
-    @notifications.update_all(read_at: Time.now)
+    @notifications.update_all(read_at: Time.current)
     @count = Notification.reset_unread_count(current_receiver)
-
-    respond_to do |format|
-      format.json { render json: { count: @count } }
-      format.html
-    end
   end
 
   def show
-    respond_to do |format|
-      format.html
-      format.json { @notification.make_as_read }
-    end
+    @notification.make_as_read
   end
 
   def url
@@ -50,25 +36,25 @@ class Notice::My::NotificationsController < Notice::My::BaseController
   end
 
   def update
-    if @notification.update(params[:notification].permit!)
-      redirect_to(notifications_path)
-    else
-      render action: 'edit'
+    @notification.update(notification_params)
+    
+    unless @notification.save
+      render :edit, locals: { model: @notification }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @notification.destroy
-    respond_to do |format|
-      format.json
-      format.html { redirect_to(notifications_path) }
-    end
   end
 
   private
   def q_params
-    q_params = {}.with_indifferent_access
+    q_params = {}
     q_params.merge! params.permit(:notifiable_type, :official)
+  end
+  
+  def notification_params
+    params.fetch(:notification, {}).permit!
   end
 
   def set_notification

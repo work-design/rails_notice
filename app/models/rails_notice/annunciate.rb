@@ -14,10 +14,10 @@ module RailsNotice::Annunciate
       filter: { organ_id: annunciation.organ_id, 'user_taggeds.user_tag_id': user_tag_id },
       select: { receiver_id: 'id' },
       value: {
-        link: self.link,
+        link: annunciation.link,
         receiver_type: receiver_type,
-        sender_type: self.publisher_type,
-        sender_id: self.publisher_id,
+        sender_type: annunciation.publisher_type,
+        sender_id: annunciation.publisher_id,
         notifiable_type: self.class.name,
         notifiable_id: self.id,
         official: true

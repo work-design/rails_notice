@@ -10,8 +10,7 @@ module RailsNotice::Annunciation
     has_many :annunciates, dependent: :nullify
     has_many :user_tags, through: :annunciates
   
-    acts_as_notify :default,
-                   only: [:title, :body, :link]
+    acts_as_notify :default, only: [:title, :body, :link]
   
     enum state: {
       init: 'init',

@@ -183,7 +183,7 @@ module RailsNotice::Notification
 
   def make_as_read
     if self.read_at.blank?
-      self.update(read_at: Time.now)
+      self.update(read_at: Time.current)
     end
   end
 
