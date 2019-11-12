@@ -15,10 +15,8 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
     @annunciation = Annunciation.new(annunciation_params)
     @annunciation.publisher = current_user
 
-    if @annunciation.save
-      redirect_to admin_annunciations_url
-    else
-      render :new
+    unless @annunciation.save
+      render :new, locals: { model: @annunciation }, status: :unprocessable_entity
     end
   end
 
@@ -32,9 +30,7 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
     @annunciation.assign_attributes(annunciation_params)
     
     if @annunciation.save
-      redirect_to admin_annunciations_url
-    else
-      render :edit
+      render :edit, locals: { model: @annunciation }, status: :unprocessable_entity
     end
   end
   
@@ -68,7 +64,6 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
 
   def destroy
     @annunciation.destroy
-    redirect_to admin_annunciations_url
   end
 
   private

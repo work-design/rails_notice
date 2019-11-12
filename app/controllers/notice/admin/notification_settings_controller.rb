@@ -2,7 +2,8 @@ class Notice::Admin::NotificationSettingsController < Notice::Admin::BaseControl
   before_action :set_notification_setting, only: [:show, :edit, :update, :destroy]
 
   def index
-    q_params = params.fetch(:q, {}).permit(:id, :receiver_type, :receiver_id)
+    q_params = {}
+    q_params.merge! params.permit(:id, :receiver_type, :receiver_id)
     @notification_settings = NotificationSetting.default_where(q_params).page(params[:page])
   end
 
@@ -13,10 +14,8 @@ class Notice::Admin::NotificationSettingsController < Notice::Admin::BaseControl
   def create
     @notification_setting = NotificationSetting.new(notification_setting_params)
 
-    if @notification_setting.save
-      redirect_to admin_notification_settings_url
-    else
-      render :new
+    unless @notification_setting.save
+      render :new, locals: { model: @notification_setting }, status: :unprocessable_entity
     end
   end
 
@@ -27,20 +26,15 @@ class Notice::Admin::NotificationSettingsController < Notice::Admin::BaseControl
   end
 
   def update
-    respond_to do |format|
-      if @notification_setting.update(notification_setting_params)
-        format.html { redirect_to admin_notification_settings_url }
-        format.js
-      else
-        format.html { render :edit }
-        format.js
-      end
+    @notification_setting.assign_attributes(notification_setting_params)
+    
+    if @notification_setting.update(notification_setting_params)
+      render :edit, locals: { model: @notification_setting }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @notification_setting.destroy
-    redirect_to admin_notification_settings_url
   end
 
   private

@@ -28,29 +28,26 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
   def create
     @notification = Notification.new(notification_params)
 
-    if @notification.save
-      redirect_to admin_notifications_url(receiver_id: @notification.receiver_id, receiver_type: @notification.receiver_type)
-    else
-      render :new
+    unless @notification.save
+      render :new, locals: { model: @notification }, status: :unprocessable_entity
     end
   end
 
   def update
-    if @notification.update(notification_params)
-      redirect_to admin_notifications_url(receiver_id: @notification.receiver_id, receiver_type: @notification.receiver_type)
-    else
-      render :edit
+    @notification.assign_attributes(notification_params)
+    
+    if @notification.save
+      render :edit, locals: { model: @notification }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @notification.destroy
-    redirect_to admin_notifications_url(receiver_id: @notification.receiver_id, receiver_type: @notification.receiver_type)
   end
 
   private
   def q_params
-    q = {}.with_indifferent_access
+    q = {}
     q.merge! params.permit(:receiver_type, :receiver_id)
     q.merge! params.fetch(:q, {}).permit(:id, :'body-like', :receiver_type, :receiver_id)
     q
