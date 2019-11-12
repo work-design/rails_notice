@@ -10,7 +10,7 @@
       <th><%= Annunciation.human_attribute_name(:link) %></th>
       <th><%= Annunciation.human_attribute_name(:created_at) %></th>
       <th>
-        <%= link_to new_admin_annunciation_path, class: 'ui mini primary button' do %>
+        <%= link_to new_admin_annunciation_path, remote: true, class: 'ui mini primary button' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
         <% end %>
       </th>
