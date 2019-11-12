@@ -3,6 +3,8 @@ module RailsNotice::Receiver
   included do
     has_many :received_notifications, as: 'receiver', class_name: 'Notification', dependent: :destroy
     has_one :notification_setting, as: 'receiver', dependent: :delete
+    
+    has_many :annunciates, through: :user_taggeds
   end
 
   def unread_count

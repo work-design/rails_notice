@@ -1,5 +1,5 @@
 class Notice::My::NotificationsController < Notice::My::BaseController
-  before_action :set_notification, only: [:show, :url, :read, :edit, :update, :destroy]
+  before_action :set_notification, only: [:show, :url, :read, :update, :destroy]
   protect_from_forgery except: :read
 
   def index
@@ -30,9 +30,6 @@ class Notice::My::NotificationsController < Notice::My::BaseController
 
   def read
     @notification.make_as_read
-  end
-
-  def edit
   end
 
   def update
