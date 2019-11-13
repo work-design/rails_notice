@@ -6,8 +6,6 @@ module RailsNotice::Notifiable
     delegate :url_helpers, to: 'Rails.application.routes'
 
     has_many :notifications, as: 'notifiable', dependent: :delete_all
-
-    RailsNotice.notifiable_types << self.name unless RailsNotice.notifiable_types.include?(self.name)
   end
 
   def to_notification(receiver: , **other_params)

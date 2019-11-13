@@ -24,12 +24,13 @@ class RailsNoticeInit < ActiveRecord::Migration[5.0]
 
     create_table :notification_settings do |t|
       t.references :receiver, polymorphic: true
-      t.string :notifiable_types
       t.integer :showtime
       t.boolean :accept_email, default: true
       if connection.adapter_name == 'PostgreSQL'
+        t.string :notifiable_types, array: true
         t.jsonb :counters, default: {}
       else
+        t.string :notifiable_types
         t.json :counters, default: {}
       end
       t.timestamps
