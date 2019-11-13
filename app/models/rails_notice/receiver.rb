@@ -26,6 +26,8 @@ module RailsNotice::Receiver
   end
 
   def apply_pending_annunciations
+    return if pending_annunciation_ids.blank?
+    
     Annunciation.where(id: pending_annunciation_ids).find_in_batches(batch_size: 20) do |annunciations|
       annunciation_attributes = annunciations.map do |annunciation|
         r = {}
@@ -43,6 +45,7 @@ module RailsNotice::Receiver
         )
         r
       end
+      
       Notification.insert_all annunciation_attributes
     end
   end
