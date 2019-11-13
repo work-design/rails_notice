@@ -40,7 +40,7 @@ module RailsNotice::Notifiable
   end
   
   def wechat_config
-    
+  
   end
 
 end

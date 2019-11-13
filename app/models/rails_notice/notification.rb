@@ -2,6 +2,8 @@ module RailsNotice::Notification
   extend ActiveSupport::Concern
   included do
     attribute :code, :string, default: 'default'
+    attribute :organ_id, :integer
+    
     belongs_to :receiver, polymorphic: true
     belongs_to :sender, polymorphic: true, optional: true
     belongs_to :notifiable, polymorphic: true, optional: true

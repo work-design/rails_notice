@@ -13,8 +13,30 @@ module RailsNotice::Receiver
     r.to_i
   end
   
-  def init_notifications
-    notifications.where(notifiable_type: 'Annunciate', notifiable_id: self.annunciate_ids)
+  def pending_annunciation_ids
+    all_annunciation_ids - made_annunciation_ids
+  end
+  
+  def made_annunciation_ids
+    notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
+  end
+  
+  def all_annunciation_ids
+    annunciates.pluck(:annunciation_id)
+  end
+
+  def apply_pending_annunciations
+    Annunciation.where(id: pending_annunciation_ids).each do |annunciation|
+      n = self.notifications.build
+      n.assign_attributes annunciation.attributes.slice(:organ_id, :link)
+      n.assign_attributes(
+        sender_type: annunciation.publisher_type,
+        sender_id: annunciation.publisher_id,
+        notifiable_type: annunciation.class.name,
+        notifiable_id: annunciation.id,
+        official: true
+      )
+    end
   end
 
   def notification_setting
