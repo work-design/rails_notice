@@ -6,7 +6,7 @@ module RailsNotice::Annunciation
     attribute :body, :string
     attribute :link, :string
 
-    belongs_to :publisher, polymorphic: true
+    belongs_to :publisher, polymorphic: true, optional: true
     has_many :notifications, as: :notifiable
     has_many :annunciates, dependent: :nullify
     has_many :user_tags, through: :annunciates
