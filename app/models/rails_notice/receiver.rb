@@ -37,7 +37,9 @@ module RailsNotice::Receiver
           sender_id: annunciation.publisher_id,
           notifiable_type: annunciation.class.name,
           notifiable_id: annunciation.id,
-          official: true
+          official: true,
+          created_at: Time.current,
+          updated_at: Time.current
         )
         r
       end
