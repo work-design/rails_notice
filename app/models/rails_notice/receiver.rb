@@ -26,16 +26,22 @@ module RailsNotice::Receiver
   end
 
   def apply_pending_annunciations
-    Annunciation.where(id: pending_annunciation_ids).each do |annunciation|
-      n = self.notifications.build
-      n.assign_attributes annunciation.attributes.slice(:organ_id, :link)
-      n.assign_attributes(
-        sender_type: annunciation.publisher_type,
-        sender_id: annunciation.publisher_id,
-        notifiable_type: annunciation.class.name,
-        notifiable_id: annunciation.id,
-        official: true
-      )
+    Annunciation.where(id: pending_annunciation_ids).find_in_batches(batch_size: 20) do |annunciations|
+      annunciation_attributes = annunciations.map do |annunciation|
+        r = {}
+        r.merge! annunciation.attributes.slice(:organ_id, :link)
+        r.merge!(
+          receiver_type: self.class.name,
+          receiver_id: self.id,
+          sender_type: annunciation.publisher_type,
+          sender_id: annunciation.publisher_id,
+          notifiable_type: annunciation.class.name,
+          notifiable_id: annunciation.id,
+          official: true
+        )
+        r
+      end
+      Notification.insert_all annunciation_attributes
     end
   end
 
