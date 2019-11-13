@@ -16,6 +16,8 @@ module RailsNotice::Receiver
   def apply_pending_annunciations(per: 20)
     all_annunciation_ids = annunciates.order(annunciation_id: :desc).pluck(:annunciation_id)
     made_annunciation_ids = notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
+    
+    per = per.to_i > 0 ? per.to_i : 20
     pending_annunciation_ids = (all_annunciation_ids - made_annunciation_ids)[0, per.to_i]
     return if pending_annunciation_ids.blank?
 
