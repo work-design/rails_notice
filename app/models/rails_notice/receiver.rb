@@ -13,41 +13,31 @@ module RailsNotice::Receiver
     r.to_i
   end
   
-  def pending_annunciation_ids
-    all_annunciation_ids - made_annunciation_ids
-  end
-  
-  def made_annunciation_ids
-    notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
-  end
-  
-  def all_annunciation_ids
-    annunciates.pluck(:annunciation_id)
-  end
-
-  def apply_pending_annunciations
+  def apply_pending_annunciations(per: 20)
+    all_annunciation_ids = annunciates.order(annunciation_id: :desc).pluck(:annunciation_id)
+    made_annunciation_ids = notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
+    pending_annunciation_ids = (all_annunciation_ids - made_annunciation_ids)[0, per.to_i]
     return if pending_annunciation_ids.blank?
-    
-    Annunciation.where(id: pending_annunciation_ids).find_in_batches(batch_size: 20) do |annunciations|
-      annunciation_attributes = annunciations.map do |annunciation|
-        r = {}
-        r.merge! annunciation.attributes.slice(:organ_id, :link)
-        r.merge!(
-          receiver_type: self.class.name,
-          receiver_id: self.id,
-          sender_type: annunciation.publisher_type,
-          sender_id: annunciation.publisher_id,
-          notifiable_type: annunciation.class.name,
-          notifiable_id: annunciation.id,
-          official: true,
-          created_at: Time.current,
-          updated_at: Time.current
-        )
-        r
-      end
-      
-      Notification.insert_all annunciation_attributes
+
+    annunciations = Annunciation.where(id: pending_annunciation_ids)
+    annunciation_attributes = annunciations.map do |annunciation|
+      r = {}
+      r.merge! annunciation.attributes.slice(:organ_id, :link)
+      r.merge!(
+        receiver_type: self.class.name,
+        receiver_id: self.id,
+        sender_type: annunciation.publisher_type,
+        sender_id: annunciation.publisher_id,
+        notifiable_type: annunciation.class.name,
+        notifiable_id: annunciation.id,
+        official: true,
+        created_at: annunciation.created_at,
+        updated_at: annunciation.updated_at
+      )
+      r
     end
+    
+    Notification.insert_all annunciation_attributes
   end
 
   def notification_setting

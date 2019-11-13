@@ -2,6 +2,8 @@ module RailsNotice::Annunciation
   extend ActiveSupport::Concern
   included do
     class_attribute :notifies, default: {}
+    attribute :title, :string
+    attribute :body, :string
     attribute :link, :string
 
     belongs_to :publisher, polymorphic: true

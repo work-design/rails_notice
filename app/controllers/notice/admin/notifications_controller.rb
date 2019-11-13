@@ -58,7 +58,7 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
   end
 
   def notification_params
-    params[:notification].permit(
+    params.fetch(:notification, {}).permit(
       :title,
       :body,
       :link,
