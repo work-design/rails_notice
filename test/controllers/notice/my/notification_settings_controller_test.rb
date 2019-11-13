@@ -1,6 +1,12 @@
 require 'test_helper'
 class Notice::My::NotificationSettingsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    User.include RailsNotice::Receiver
+    account = create :account
+    user = account.user
+  
+    post '/login', params: { identity: account.identity, password: user.password }
+    follow_redirect!
   end
 
   test 'show ok' do

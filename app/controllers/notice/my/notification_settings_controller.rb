@@ -8,10 +8,10 @@ class Notice::My::NotificationSettingsController < Notice::My::BaseController
   end
 
   def update
-    if @notification_setting.update(notification_setting_params)
-      redirect_to notification_settings_url(receiver: params[:receiver])
-    else
-      render :edit
+    @notification_setting.assign_attributes(notification_setting_params)
+    
+    unless @notification_setting.save
+      render :edit, locals: { model: @notification_setting }, status: :unprocessable_entity
     end
   end
 
