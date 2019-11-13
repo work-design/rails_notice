@@ -13,7 +13,7 @@ module RailsNotice::Receiver
     r.to_i
   end
   
-  def apply_pending_annunciations(per: 20)
+  def apply_pending_annunciations(per = 20)
     all_annunciation_ids = annunciates.order(annunciation_id: :desc).pluck(:annunciation_id)
     made_annunciation_ids = notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
     
