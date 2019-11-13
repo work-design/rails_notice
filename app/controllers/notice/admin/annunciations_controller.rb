@@ -13,7 +13,7 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
 
   def create
     @annunciation = Annunciation.new(annunciation_params)
-    @annunciation.publisher = current_user
+    @annunciation.publisher = current_user if defined? current_user
 
     unless @annunciation.save
       render :new, locals: { model: @annunciation }, status: :unprocessable_entity
@@ -29,7 +29,7 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
   def update
     @annunciation.assign_attributes(annunciation_params)
     
-    if @annunciation.save
+    unless @annunciation.save
       render :edit, locals: { model: @annunciation }, status: :unprocessable_entity
     end
   end

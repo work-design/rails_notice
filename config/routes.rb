@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       get :url, on: :member
       get :read, on: :member
     end
-    resource :notification_settings, only: [:show, :edit, :update]
+    resource :notification_setting, only: [:show, :edit, :update]
   end
 
   resources :receivers do

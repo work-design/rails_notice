@@ -17,7 +17,7 @@ class Notice::Admin::AnnunciationsControllerTest < ActionDispatch::IntegrationTe
 
   test 'create ok' do
     assert_difference('Annunciation.count') do
-      post admin_annunciations_url, params: { annunciation: { body: @annunciation.body, state: @annunciation.state, title: @annunciation.title } }, xhr: true
+      post admin_annunciations_url, params: { annunciation: { body: @annunciation.body, title: @annunciation.title } }, xhr: true
     end
 
     assert_response :success
@@ -34,10 +34,10 @@ class Notice::Admin::AnnunciationsControllerTest < ActionDispatch::IntegrationTe
   end
 
   test 'update ok' do
-    patch admin_annunciation_url(@annunciation), params: { annunciation: { body: @annunciation.body, state: @annunciation.state, title: 'test1' } }, xhr: true
+    patch admin_annunciation_url(@annunciation), params: { annunciation: { body: @annunciation.body, title: 'test1' } }, xhr: true
     
     @annunciation.reload
-    assert_response 'test1', @annunciation.title
+    assert_equal 'test1', @annunciation.title
     assert_response :success
   end
 
