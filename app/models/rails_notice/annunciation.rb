@@ -10,8 +10,13 @@ module RailsNotice::Annunciation
     has_many :notifications, as: :notifiable
     has_many :annunciates, dependent: :nullify
     has_many :user_tags, through: :annunciates
+    
+    has_one_attached :cover
+    acts_as_notify :default, only: [:title, :body, :link], methods: [:cover_url]
+  end
   
-    acts_as_notify :default, only: [:title, :body, :link]
+  def cover_url
+    cover.service_url if cover.present?
   end
   
 end

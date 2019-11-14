@@ -7,6 +7,7 @@
     <tr>
       <th><%= Annunciation.human_attribute_name(:title) %></th>
       <th><%= Annunciation.human_attribute_name(:body) %></th>
+      <th><%= Annunciation.human_attribute_name(:cover) %></th>
       <th><%= Annunciation.human_attribute_name(:link) %></th>
       <th><%= Annunciation.human_attribute_name(:created_at) %></th>
       <th>
@@ -21,6 +22,7 @@
     <tr>
       <td><%= annunciation.title %></td>
       <td><%= annunciation.body %></td>
+      <td><%= image_tag annunciation.cover.variant(resize_to_limit: [100, 100]) if annunciation.cover.present? %></td>
       <td><%= annunciation.link %></td>
       <td><time><%= annunciation.created_at.to_s(:rfc822) %></time></td>
       <td>
