@@ -10,7 +10,7 @@ module RailsNotice::Notification
     belongs_to :linked, polymorphic: true, optional: true
     has_one :notification_setting, ->(o) { where(receiver_type: o.receiver_type) }, primary_key: :receiver_id, foreign_key: :receiver_id
   
-    default_scope -> { order(id: :desc) }
+    default_scope -> { order(created_at: :desc) }
     scope :unread, -> { where(read_at: nil) }
     scope :have_read, -> { where.not(read_at: nil) }
   
