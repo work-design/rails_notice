@@ -34,7 +34,5 @@ Rails.application.routes.draw do
   resources :receivers do
     get :search, on: :collection
   end
-
-  mount ActionCable.server => '/cable'
-
+  
 end

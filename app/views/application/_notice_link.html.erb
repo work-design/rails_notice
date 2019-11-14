@@ -1,6 +1,6 @@
 <% if current_receiver %>
-<%= link_to notifications_path, class: 'item', remote: true, id: 'notify_show' do %>
-  <i class="fas fa-bell"></i>
-  <span id="notice_count" style="padding-left: 5px"><%= current_receiver.unread_count %></span>
-<% end %>
+  <%= link_to my_notifications_path, class: 'item', remote: true, id: 'notify_show' do %>
+    <i class="fas fa-bell"></i>
+    <span id="notice_count" style="padding-left: 5px"><%= current_receiver.unread_count %></span>
+  <% end %>
 <% end %>

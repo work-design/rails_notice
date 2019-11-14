@@ -1,7 +1,11 @@
 class ReceiverChannel < ApplicationCable::Channel
   
   def subscribed
-    stream_from "#{current_receiver.class.base_class.name}:#{current_receiver.id}" if current_receiver
+    if current_receiver.is_a?(AuthorizedToken)
+      stream_from "#{current_receiver.token}"
+    else
+      stream_from "#{current_receiver}"
+    end
   end
 
   def unsubscribed
