@@ -16,6 +16,7 @@ class RailsNoticeInit < ActiveRecord::Migration[5.0]
       t.datetime :read_at, index: true
       t.boolean :verbose, default: false
       t.boolean :official, default: false
+      t.boolean :archived, default: false
       t.datetime :created_at, null: false, index: true
       t.datetime :updated_at, null: false
     end

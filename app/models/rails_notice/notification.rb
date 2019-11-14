@@ -3,6 +3,8 @@ module RailsNotice::Notification
   included do
     attribute :code, :string, default: 'default'
     attribute :organ_id, :integer
+    attribute :official, :boolean, default: false
+    attribute :archived, :boolean, default: false
     
     belongs_to :receiver, polymorphic: true
     belongs_to :sender, polymorphic: true, optional: true
@@ -11,7 +13,7 @@ module RailsNotice::Notification
     has_one :notification_setting, ->(o) { where(receiver_type: o.receiver_type) }, primary_key: :receiver_id, foreign_key: :receiver_id
     has_many :notification_sendings, dependent: :delete_all
     
-    default_scope -> { order(created_at: :desc) }
+    default_scope -> { where(archived: false).order(created_at: :desc) }
     scope :unread, -> { where(read_at: nil) }
     scope :have_read, -> { where.not(read_at: nil) }
   
@@ -223,7 +225,7 @@ module RailsNotice::Notification
   end
   
   def archive
-    destroy
+    update(archived: true)
   end
   
   class_methods do
