@@ -13,14 +13,19 @@ class RailsNoticeInit < ActiveRecord::Migration[5.0]
       t.string :body, limit: 5000
       t.string :link
       t.datetime :sending_at
-      t.datetime :sent_at
-      t.string :sent_result
       t.datetime :read_at, index: true
       t.boolean :verbose, default: false
       t.boolean :official, default: false
-      t.string :cc_emails
       t.datetime :created_at, null: false, index: true
       t.datetime :updated_at, null: false
+    end
+    
+    create_table :notification_sendings do |t|
+      t.string :way
+      t.string :sent_to
+      t.datetime :sent_at
+      t.string :sent_result
+      t.timestamps
     end
 
     create_table :notification_settings do |t|

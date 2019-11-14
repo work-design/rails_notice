@@ -10,10 +10,14 @@ class RailsNoticeMailer < ApplicationMailer
       I18n.locale = @notification.receiver.locale
     end
 
-    mail_params = {to: @notification.receiver.email,
-         cc: @notification.cc_emails,
-         subject: @notification.title || 'Notification'}
-    mail_params[:from] = @notification.sender.email if @notification.sender && @notification.sender.respond_to?(:email) && @notification.sender.email
+    mail_params = {
+      to: @notification.receiver.email,
+      cc: @notification.cc_emails,
+      subject: @notification.title || 'Notification'
+    }
+    if @notification.sender && @notification.sender.respond_to?(:email) && @notification.sender.email
+      mail_params[:from] = @notification.sender.email
+    end
 
     mail mail_params
   end

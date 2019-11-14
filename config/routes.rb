@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  scope :admin, module: 'notice/admin', as: 'admin' do
+  scope :admin, module: 'notice/admin', as: :admin do
     resources :notifications do
       patch :push, on: :member
       patch :email, on: :member

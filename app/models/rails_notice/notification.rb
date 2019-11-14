@@ -9,7 +9,8 @@ module RailsNotice::Notification
     belongs_to :notifiable, polymorphic: true, optional: true
     belongs_to :linked, polymorphic: true, optional: true
     has_one :notification_setting, ->(o) { where(receiver_type: o.receiver_type) }, primary_key: :receiver_id, foreign_key: :receiver_id
-  
+    has_many :notification_sendings, dependent: :delete_all
+    
     default_scope -> { order(created_at: :desc) }
     scope :unread, -> { where(read_at: nil) }
     scope :have_read, -> { where.not(read_at: nil) }
@@ -66,7 +67,7 @@ module RailsNotice::Notification
       link: link,
       showtime: notification_setting.showtime
     )
-    self.update sent_at: Time.now
+    self.notification_sendings.build
   end
 
   def email_enable?
@@ -176,7 +177,7 @@ module RailsNotice::Notification
       next i unless i.respond_to?(:call)
       i.call(notifiable)
     end
-    r.flatten.concat Array(super)
+    r.flatten
   end
 
   def unread_count
