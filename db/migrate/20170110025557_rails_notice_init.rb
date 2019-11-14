@@ -19,7 +19,8 @@ class RailsNoticeInit < ActiveRecord::Migration[5.0]
       t.boolean :verbose, default: false
       t.boolean :official, default: false
       t.string :cc_emails
-      t.timestamps
+      t.datetime :created_at, null: false, index: true
+      t.datetime :updated_at, null: false
     end
 
     create_table :notification_settings do |t|
