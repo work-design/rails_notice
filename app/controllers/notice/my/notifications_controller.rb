@@ -1,5 +1,5 @@
 class Notice::My::NotificationsController < Notice::My::BaseController
-  before_action :set_notification, only: [:show, :url, :read, :update, :destroy]
+  before_action :set_notification, only: [:show, :url, :read, :update, :archive, :destroy]
   protect_from_forgery except: :read
 
   def index
@@ -39,6 +39,10 @@ class Notice::My::NotificationsController < Notice::My::BaseController
     unless @notification.save
       render :edit, locals: { model: @notification }, status: :unprocessable_entity
     end
+  end
+  
+  def archive
+    @notification.archive
   end
 
   def destroy

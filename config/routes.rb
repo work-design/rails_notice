@@ -22,8 +22,11 @@ Rails.application.routes.draw do
   scope :my, module: 'notice/my', as: :my do
     resources :notifications, only: [:index, :show, :destroy] do
       get :read_all, on: :collection
-      get :url, on: :member
-      get :read, on: :member
+      member do
+        get :url
+        get :read
+        patch :archive
+      end
     end
     resource :notification_setting, only: [:show, :edit, :update]
   end

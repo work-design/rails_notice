@@ -222,6 +222,10 @@ module RailsNotice::Notification
     end
   end
   
+  def archive
+    destroy
+  end
+  
   class_methods do
     def reset_unread_count(receiver)
       no = self.where(receiver_id: receiver.id, receiver_type: receiver.class.name, read_at: nil)
