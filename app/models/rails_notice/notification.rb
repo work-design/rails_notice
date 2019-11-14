@@ -60,9 +60,9 @@ module RailsNotice::Notification
   end
 
   def send_to_socket
-    return unless self.receiver
+    return unless receiver
     ActionCable.server.broadcast(
-      "#{self.receiver_type}:#{self.receiver_id}",
+      "#{receiver.authorized_token}",
       id: id,
       body: body,
       count: unread_count,
