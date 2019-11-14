@@ -61,15 +61,17 @@ module RailsNotice::Notification
 
   def send_to_socket
     return unless receiver
-    ActionCable.server.broadcast(
-      "#{receiver.authorized_token}",
-      id: id,
-      body: body,
-      count: unread_count,
-      link: link,
-      showtime: notification_setting.showtime
-    )
-    self.notification_sendings.build
+    receiver.authorized_tokens.each do |authorized_token|
+      ActionCable.server.broadcast(
+        authorized_token.token,
+        id: id,
+        body: body,
+        count: unread_count,
+        link: link,
+        showtime: notification_setting.showtime
+      )
+      self.notification_sendings.find_or_create_by(way: 'websocket', sent_to: authorized_token.token)
+    end
   end
 
   def email_enable?
