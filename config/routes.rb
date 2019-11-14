@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     end
   end
 
-  scope module: 'notice/my' do
+  scope :my, module: 'notice/my', as: :my do
     resources :notifications, only: [:index, :show, :destroy] do
       get :read_all, on: :collection
       get :url, on: :member

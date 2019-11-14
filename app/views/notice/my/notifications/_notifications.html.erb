@@ -4,7 +4,7 @@
       <div class="item">
         <div class="content">
           <i class="bell icon"></i>
-          <%= link_to notification.title, url_notification_path(notification) %>
+          <%= link_to notification.title, url_my_notification_path(notification) %>
           <p><%= notification.body %></p>
           <div class="extra content">
             <span><time><%= notification.created_at.to_s(:rfc822) %></time></span>
@@ -13,5 +13,5 @@
       </div>
     <% end %>
   </div>
-  <%= link_to t('rails_notice.all_notification'), notifications_path(receiver: params[:receiver]), target: '_blank', class: 'ui right floated tiny button' %>
+  <%= link_to t('rails_notice.all_notification'), my_notifications_path, target: '_blank', class: 'ui right floated tiny button' %>
 </div>
