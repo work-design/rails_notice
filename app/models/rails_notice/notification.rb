@@ -18,8 +18,8 @@ module RailsNotice::Notification
     scope :have_read, -> { where.not(read_at: nil, archived: false) }
   
     after_create_commit :process_job
-    after_create_commit :create_increment_unread, if: -> { read_at.blank? }
-    after_destroy_commit :destroy_decrement_unread, if: -> { read_at.blank? }
+    after_create_commit :increment_unread, if: -> { read_at.blank? }
+    after_destroy_commit :decrement_unread, if: -> { read_at.blank? }
   end
   
   def notification_setting
@@ -212,14 +212,12 @@ module RailsNotice::Notification
     notification_setting.increment_counter('total')
     notification_setting.increment_counter('official') if self.official
   end
-  alias_method :create_increment_unread, :increment_unread
 
   def decrement_unread
     notification_setting.decrement_counter(notifiable_type)
     notification_setting.decrement_counter('total')
     notification_setting.decrement_counter('official') if self.official
   end
-  alias_method :destroy_decrement_unread, :decrement_unread
 
   def reset_unread_count
     self.receiver.reset_unread_count
