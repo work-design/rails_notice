@@ -40,10 +40,10 @@ module RailsNotice::Receiver
     end
     
     added_count = pending_annunciation_ids.size
-    # todo combine to 1
-    notification_setting.increment_counter('total', added_count)
-    notification_setting.increment_counter('official', added_count)
-    notification_setting.increment_counter('Annunciation', added_count)
+    ['total', 'official', 'Annunciation'].each do |counter|
+      notification_setting.counters[counter] += added_count
+    end
+    notification_setting.save
     Annunciation.increment_counter(:notifications_count, pending_annunciation_ids)
     Notification.insert_all annunciation_attributes
   end
@@ -52,8 +52,8 @@ module RailsNotice::Receiver
     r = super || build_notification_setting
     if r.new_record?
       r.counters = compute_unread_count
+      r.save
     end
-    r.save
     r
   end
   

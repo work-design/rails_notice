@@ -26,8 +26,8 @@ module RailsNotice::Notification
     r = super || build_notification_setting
     if r.new_record?
       r.counters = receiver.compute_unread_count
+      r.save
     end
-    r.save
     r
   end
 
@@ -207,18 +207,24 @@ module RailsNotice::Notification
     end
   end
   
-  # todo combine to 1
   def increment_unread
-    notification_setting.increment_counter(notifiable_type)
-    notification_setting.increment_counter('total')
-    notification_setting.increment_counter('official') if self.official
+    counters = ['total', notifiable_type]
+    counters << 'official' if self.official
+    counters.each do |counter|
+      notification_setting.counters[counter] += 1
+    end
+
+    notification_setting.save
   end
   
-  # todo combine to 1
   def decrement_unread
-    notification_setting.decrement_counter(notifiable_type)
-    notification_setting.decrement_counter('total')
-    notification_setting.decrement_counter('official') if self.official
+    counters = ['total', notifiable_type]
+    counters << 'official' if self.official
+    counters.each do |counter|
+      notification_setting.counters[counter] -= 1
+    end
+  
+    notification_setting.save
   end
 
   def reset_unread_count
