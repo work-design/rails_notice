@@ -23,7 +23,12 @@ module RailsNotice::Notification
   end
   
   def notification_setting
-    super || create_notification_setting
+    r = super || build_notification_setting
+    if r.new_record?
+      r.counters = receiver.compute_unread_count
+    end
+    r.save
+    r
   end
 
   def process_job
@@ -217,7 +222,7 @@ module RailsNotice::Notification
   alias_method :destroy_decrement_unread, :decrement_unread
 
   def reset_unread_count
-    self.class.reset_unread_count(self.receiver)
+    self.receiver.reset_unread_count
   end
 
   def link
@@ -252,22 +257,8 @@ module RailsNotice::Notification
   end
   
   class_methods do
-    def reset_unread_count(receiver)
-      no = self.where(receiver_id: receiver.id, receiver_type: receiver.class_name, archived: false, read_at: nil)
-      counters = {
-        total: no.count
-      }
-
-      counters.merge! official: no.where(official: true).count
-      notifiable_types.map do |nt|
-        counters.merge! nt => no.where(notifiable_type: nt).count
-      end
-  
-      receiver.notification_setting.update counters: counters
-    end
-    
     def notifiable_types
-      self.pluck(:notifiable_type)
+      self.unscoped.select(:notifiable_type).distinct.pluck(:notifiable_type).sort
     end
   end
 end

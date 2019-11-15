@@ -47,7 +47,30 @@ module RailsNotice::Receiver
   end
 
   def notification_setting
-    super || create_notification_setting
+    r = super || build_notification_setting
+    if r.new_record?
+      r.counters = compute_unread_count
+    end
+    r.save
+    r
+  end
+  
+  def compute_unread_count
+    no = notifications.where(archived: false, read_at: nil)
+    counters = {
+      total: no.count
+    }
+  
+    counters.merge! official: no.where(official: true).count
+    Notification.notifiable_types.map do |nt|
+      counters.merge! nt => no.where(notifiable_type: nt).count
+    end
+  
+    counters
+  end
+  
+  def reset_unread_count
+    notification_setting.update counters: compute_unread_count
   end
 
   def endearing_name

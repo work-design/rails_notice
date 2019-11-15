@@ -29,7 +29,7 @@ module RailsNotice::NotificationSetting
   class_methods do
     def reset_counters
       self.find_each do |ns|
-        Notification.reset_unread_count(ns.receiver) if ns.receiver
+        ns.receiver.reset_unread_count if ns.receiver
       end
     end
   end
