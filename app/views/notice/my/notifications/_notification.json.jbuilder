@@ -8,7 +8,6 @@ json.extract! notification,
               :body,
               :link,
               :created_at,
-              :sent_at,
               :official,
               :read_at
 json.state notification.state_i18n

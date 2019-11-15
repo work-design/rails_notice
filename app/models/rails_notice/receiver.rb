@@ -33,6 +33,7 @@ module RailsNotice::Receiver
         notifiable_type: annunciation.class.name,
         notifiable_id: annunciation.id,
         official: true,
+        archived: false,
         created_at: annunciation.created_at,
         updated_at: annunciation.updated_at
       )
