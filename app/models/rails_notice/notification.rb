@@ -19,7 +19,7 @@ module RailsNotice::Notification
   
     after_create_commit :process_job
     after_create_commit :create_increment_unread, if: -> { read_at.blank? }
-    after_update_commit :increment_unread, if: -> { read_at.blank? && saved_change_to_read_at? }, on: [:update]
+    after_update_commit :increment_unread, if: -> { read_at.blank? && saved_change_to_read_at? }
     after_commit :decrement_unread, if: -> { saved_change_to_read_at && saved_change_to_read_at[0].blank? && saved_change_to_read_at[1].acts_like?(:time) }, on: [:update]
     after_destroy_commit :destroy_decrement_unread, if: -> { read_at.blank? }
   end
@@ -227,19 +227,25 @@ module RailsNotice::Notification
   end
   
   def archive
-    update(archived: true)
+    self.read_at ||= Time.current
+    self.archived = true
+    self.class.transaction do
+      save!
+      decrement_unread
+    end
   end
   
   class_methods do
     def reset_unread_count(receiver)
-      no = self.where(receiver_id: receiver.id, receiver_type: receiver.class.name, read_at: nil)
-      counters = {}
-  
-      counters.merge! total: no.count
+      no = self.where(receiver_id: receiver.id, receiver_type: receiver.class_name, archived: false, read_at: nil)
+      counters = {
+        total: no.count
+      }
+
+      counters.merge! official: no.where(official: true).count
       notifiable_types.map do |nt|
         counters.merge! nt => no.where(notifiable_type: nt).count
       end
-      counters.merge! official: no.where(official: true).count
   
       receiver.notification_setting.update counters: counters
     end
@@ -248,5 +254,4 @@ module RailsNotice::Notification
       self.pluck(:notifiable_type)
     end
   end
-
 end
