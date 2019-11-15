@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       member do
         get :url
         get :read
-        patch :archive
+        match :archive, via: [:put, :patch]
       end
     end
     resource :notification_setting, only: [:show, :edit, :update]
