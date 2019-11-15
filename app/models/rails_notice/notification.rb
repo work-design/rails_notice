@@ -19,8 +19,6 @@ module RailsNotice::Notification
   
     after_create_commit :process_job
     after_create_commit :create_increment_unread, if: -> { read_at.blank? }
-    after_update_commit :increment_unread, if: -> { read_at.blank? && saved_change_to_read_at? }
-    after_commit :decrement_unread, if: -> { saved_change_to_read_at && saved_change_to_read_at[0].blank? && saved_change_to_read_at[1].acts_like?(:time) }, on: [:update]
     after_destroy_commit :destroy_decrement_unread, if: -> { read_at.blank? }
   end
   
@@ -189,8 +187,18 @@ module RailsNotice::Notification
   end
 
   def make_as_read
-    if self.read_at.blank?
-      self.update(read_at: Time.current)
+    self.read_at = Time.current
+    self.class.transaction do
+      decrement_unread if just_readed?
+      save!
+    end
+  end
+  
+  def make_as_unread
+    self.read_at = nil
+    self.class.transaction do
+      increment_unread if read_at_changed?
+      save!
     end
   end
 
@@ -224,6 +232,14 @@ module RailsNotice::Notification
       url.path = "/#{self.class.name.underscore}/#{self.id}"
       url.to_s
     end
+  end
+  
+  def just_readed?
+    read_at_changed? && read_at_changes[0].nil? && read_at_changes[1].acts_like?(:time)
+  end
+  
+  def saved_readed?
+    saved_change_to_read_at && saved_change_to_read_at[0].nil? && saved_change_to_read_at[1].acts_like?(:time)
   end
   
   def archive
