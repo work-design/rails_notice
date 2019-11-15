@@ -13,12 +13,15 @@ module RailsNotice::Receiver
     r.to_i
   end
   
-  def apply_pending_annunciations(per = 20)
-    all_annunciation_ids = annunciates.order(annunciation_id: :desc).pluck(:annunciation_id)
+  def apply_pending_annunciations(page: 1, per: 20)
+    per = per.to_i > 0 ? per.to_i : 20
+    page = page.to_i > 0 ? page.to_i : 1
+    start = page.to_i * per
+
+    all_annunciation_ids = annunciates.order(annunciation_id: :desc).offset(start).limit(per).pluck(:annunciation_id)
     made_annunciation_ids = notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
     
-    per = per.to_i > 0 ? per.to_i : 20
-    pending_annunciation_ids = (all_annunciation_ids - made_annunciation_ids)[0, per.to_i]
+    pending_annunciation_ids = all_annunciation_ids - made_annunciation_ids
     return if pending_annunciation_ids.blank?
 
     annunciations = Annunciation.where(id: pending_annunciation_ids)

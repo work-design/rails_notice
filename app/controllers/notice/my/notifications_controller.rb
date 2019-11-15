@@ -4,7 +4,7 @@ class Notice::My::NotificationsController < Notice::My::BaseController
 
   def index
     q_params = {}
-    current_receiver.apply_pending_annunciations(params[:per])
+    current_receiver.apply_pending_annunciations(page: params[:page], per: params[:per])
     @notifications = current_receiver.received_notifications.order(read_at: :asc)
     if params[:scope] == 'have_read'
       @notifications = @notifications.have_read
