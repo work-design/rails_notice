@@ -206,13 +206,15 @@ module RailsNotice::Notification
       save!
     end
   end
-
+  
+  # todo combine to 1
   def increment_unread
     notification_setting.increment_counter(notifiable_type)
     notification_setting.increment_counter('total')
     notification_setting.increment_counter('official') if self.official
   end
-
+  
+  # todo combine to 1
   def decrement_unread
     notification_setting.decrement_counter(notifiable_type)
     notification_setting.decrement_counter('total')
