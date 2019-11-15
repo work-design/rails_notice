@@ -1,1 +1,1 @@
-json.count @count
+json.unread_count current_user.notification_setting.counters

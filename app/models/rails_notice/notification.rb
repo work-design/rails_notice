@@ -235,7 +235,7 @@ module RailsNotice::Notification
   end
   
   def just_readed?
-    read_at_changed? && read_at_changes[0].nil? && read_at_changes[1].acts_like?(:time)
+    read_at_changed? && read_at_change[0].nil? && read_at_change[1].acts_like?(:time)
   end
   
   def saved_readed?
@@ -246,8 +246,8 @@ module RailsNotice::Notification
     self.read_at ||= Time.current
     self.archived = true
     self.class.transaction do
+      decrement_unread if just_readed?
       save!
-      decrement_unread
     end
   end
   
