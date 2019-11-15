@@ -3,7 +3,9 @@ class Notice::My::NotificationsController < Notice::My::BaseController
   protect_from_forgery except: :read
 
   def index
-    q_params = {}
+    q_params = {
+      archived: false
+    }
     current_receiver.apply_pending_annunciations(page: params[:page], per: params[:per])
     @notifications = current_receiver.received_notifications.order(read_at: :asc)
     if params[:scope] == 'have_read'
