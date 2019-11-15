@@ -12,20 +12,6 @@ module RailsNotice::NotificationSetting
     attribute :accept_email, :boolean, default: RailsNotice.config.default_send_email
   end
 
-  def increment_counter(col, num = 1)
-    s = "jsonb_set(counters, '{#{col}}', (COALESCE(counters->>'#{col}', '0')::int + #{num})::text::jsonb)"
-
-    sql = "UPDATE #{self.class.table_name} SET counters = #{s} WHERE id = #{self.id}"
-    self.class.connection.execute sql
-  end
-
-  def decrement_counter(col, num = 1)
-    s = "jsonb_set(counters, '{#{col}}', (COALESCE(counters->>'#{col}', '0')::int - #{num})::text::jsonb)"
-
-    sql = "UPDATE #{self.class.table_name} SET counters = #{s} WHERE id = #{self.id}"
-    self.class.connection.execute sql
-  end
-
   class_methods do
     def reset_counters
       self.find_each do |ns|
