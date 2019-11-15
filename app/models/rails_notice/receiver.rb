@@ -43,6 +43,7 @@ module RailsNotice::Receiver
       r
     end
     
+    Annunciation.increment_counter(:notifications_count, pending_annunciation_ids)
     Notification.insert_all annunciation_attributes
   end
 
