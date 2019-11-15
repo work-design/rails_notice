@@ -2,6 +2,9 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
   before_action :set_notification, only: [:show, :push, :email, :edit, :update, :destroy]
 
   def index
+    q_params = {
+      archived: false
+    }
     @notifications = Notification.default_where(q_params).page(params[:page])
   end
 
