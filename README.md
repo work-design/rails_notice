@@ -18,14 +18,14 @@ development:
 
 ### View: add link
 ```erb
-<%= render 'rails_notice/link' %>
+<%= render 'notice_link' %>
 ```
 
 ### Model Setting
 ```ruby
 # which model can receive notifications
 class User < ApplicationRecord
-  include RailsNoticeReceivable
+  include RailsNotice::Receiver
 end
 
 ```
@@ -33,7 +33,7 @@ end
 ### Controller Setting
 ```ruby
 class ApplicationController < ActionController::Base
-  include RailsNoticeController
+  include RailsNotice::Application
   
 end
 ```
@@ -49,4 +49,4 @@ end
 ```
 
 ## License
-The gem is available as open source under the terms of the [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0).
+License 采用 [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0).
