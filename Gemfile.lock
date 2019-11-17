@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 87b7470403ce3f31bd28b4e5ac3bc0c175b0baaa
+  revision: 81de8353a76e74ecead293a1ab9ad9e803fae60c
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 28338eb1df87f0df99dc66db3e85f6677dfbef73
+  revision: f44dbc0202b99bf2ab5f7b501ad2954fee0b7b4e
   specs:
     rails_com (1.2.9)
       default_form (~> 1.5)
@@ -98,9 +98,9 @@ GEM
       railties (>= 4.2.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    http-2 (0.10.1)
-    httpx (0.5.1)
-      http-2 (>= 0.9.0)
+    http-2-next (0.1.1)
+    httpx (0.6.0)
+      http-2-next (>= 0.1.1)
       timers
     i18n (1.7.0)
       concurrent-ruby (~> 1.0)
