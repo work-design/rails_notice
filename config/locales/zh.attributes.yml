@@ -9,3 +9,5 @@ zh:
         state: 状态
         notifications_count: 已发消息
         readed_count: 已读消息
+      annunciate:
+        user_tags: 用户组
