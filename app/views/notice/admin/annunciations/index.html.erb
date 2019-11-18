@@ -5,9 +5,11 @@
 <table class="ui bottom attached selectable table">
   <thead>
     <tr>
-      <th><%= Annunciation.human_attribute_name(:title) %></th>
-      <th><%= Annunciation.human_attribute_name(:body) %></th>
       <th><%= Annunciation.human_attribute_name(:cover) %></th>
+      <th>
+        <p><%= Annunciation.human_attribute_name(:title) %></p>
+        <p><%= Annunciation.human_attribute_name(:body) %></p>
+      </th>
       <th><%= Annunciation.human_attribute_name(:link) %></th>
       <th>
         <p><%= Annunciation.human_attribute_name(:notifications_count) %></p>
@@ -25,9 +27,11 @@
   <tbody>
   <% @annunciations.each do |annunciation| %>
     <tr>
-      <td><%= annunciation.title %></td>
-      <td><%= annunciation.body %></td>
       <td><%= image_tag annunciation.cover.variant(resize_to_limit: [100, 100]) if annunciation.cover.present? %></td>
+      <td>
+        <h6><%= annunciation.title %></h6>
+        <p><%= annunciation.body %></p>
+      </td>
       <td><%= annunciation.link %></td>
       <td>
         <p><%= annunciation.notifications_count %></p>
