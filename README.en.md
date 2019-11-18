@@ -1,8 +1,5 @@
 # RailsNotice
-`RailsNotice` 用于处理通告(Annunciation)，消息(Notification);
-
-## 特性
-* 只在用户请求数据时快速生成通知记录，避免僵尸用户产生的死数据；
+Short description and motivation.
 
 ## Usage
 ### Set the cable.yml
@@ -51,5 +48,5 @@ module ApplicationCable
 end
 ```
 
-## 许可证
-许可证采用 [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0).
+## License
+License 采用 [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0).

@@ -13,18 +13,18 @@ module RailsNotice::NotificationSetting
   end
 
   class_methods do
-    def increment_unread_counter(col, user_ids, num = 1)
+    def increment_unread_counter(col, num = 1)
       s = "jsonb_set(counters, '{#{col}}', (COALESCE(counters->>'#{col}', '0')::int + #{num})::text::jsonb)"
-    
-      sql = "UPDATE #{table_name} SET counters = #{s} WHERE user_id IN #{user_ids}"
-      connection.execute sql
+
+      sql = "counters = #{s}"
+      update_all sql
     end
   
-    def decrement_unread_counter(col, user_ids, num = 1)
+    def decrement_unread_counter(col, num = 1)
       s = "jsonb_set(counters, '{#{col}}', (COALESCE(counters->>'#{col}', '0')::int - #{num})::text::jsonb)"
     
-      sql = "UPDATE #{table_name} SET counters = #{s} WHERE user_id IN #{user_ids}"
-      connection.execute sql
+      sql = "counters = #{s}"
+      update_all sql
     end
     
     def reset_counters
