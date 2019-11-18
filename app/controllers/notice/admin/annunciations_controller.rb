@@ -35,7 +35,9 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
   end
   
   def edit_publish
-  
+    if params[:receiver_type]
+      @user_tags = UserTag.all
+    end
   end
 
   def update_publish

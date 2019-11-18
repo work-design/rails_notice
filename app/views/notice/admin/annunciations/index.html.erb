@@ -42,7 +42,7 @@
         <% annunciation.annunciates.each do |annunciate| %>
           <div class="ui label"><%= annunciate.user_tag&.name %></div>
         <% end %>
-        <%= link_to publish_admin_annunciation_path(annunciation), data: { tooltip: t('.publish') }, remote: true, class: 'ui blue mini circular icon button' do %>
+        <%= link_to publish_admin_annunciation_path(annunciation, receiver_type: params[:receiver_type]), data: { tooltip: t('.publish') }, remote: true, class: 'ui blue mini circular icon button' do %>
           <i class="fas fa-paper-plane"></i>
         <% end %>
       </td>
