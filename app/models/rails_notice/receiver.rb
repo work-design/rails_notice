@@ -13,6 +13,10 @@ module RailsNotice::Receiver
     r.to_i
   end
   
+  def pending_annunciations_count
+  
+  end
+  
   def apply_pending_annunciations(page: nil, per: nil)
     all_annunciation_ids = annunciates.order(annunciation_id: :desc).page(page).per(per).pluck(:annunciation_id)
     made_annunciation_ids = notifications.unscoped.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
@@ -39,11 +43,6 @@ module RailsNotice::Receiver
       r
     end
     
-    added_count = pending_annunciation_ids.size
-    ['total', 'official', 'Annunciation'].each do |counter|
-      notification_setting.counters[counter] += added_count
-    end
-    notification_setting.save
     Annunciation.increment_counter(:notifications_count, pending_annunciation_ids)
     Notification.insert_all annunciation_attributes
   end
@@ -62,6 +61,17 @@ module RailsNotice::Receiver
     counters = {
       total: no.count
     }
+
+    all_annunciation_ids = annunciates.order(annunciation_id: :desc).pluck(:annunciation_id)
+    made_annunciation_ids = notifications.unscoped.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
+
+    all_annunciation_ids - made_annunciation_ids
+
+    added_count = pending_annunciation_ids.size
+    ['total', 'official', 'Annunciation'].each do |counter|
+      notification_setting.counters[counter] += added_count
+    end
+    notification_setting.save
   
     counters.merge! official: no.where(official: true).count
     Notification.notifiable_types.map do |nt|
