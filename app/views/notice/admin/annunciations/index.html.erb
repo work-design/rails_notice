@@ -34,6 +34,9 @@
       </td>
       <td><time><%= annunciation.created_at.to_s(:rfc822) %></time></td>
       <td>
+        <%= link_to publish_admin_annunciation_path(annunciation), data: { tooltip: t('.publish') }, remote: true, class: 'ui pink mini circular icon button' do %>
+          <i class="fas fa-bullhorn"></i>
+        <% end %>
         <%= link_to admin_annunciation_path(annunciation), data: { tooltip: t('.show') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-eye"></i>
         <% end %>
