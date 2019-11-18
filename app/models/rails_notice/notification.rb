@@ -188,7 +188,7 @@ module RailsNotice::Notification
   end
 
   def unread_count
-    Rails.cache.read("#{self.receiver_type}_#{self.receiver_id}_unread") || 0
+    notification_setting.fetch(:counters, {}).dig('total')
   end
 
   def make_as_read

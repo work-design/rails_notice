@@ -9,12 +9,8 @@ module RailsNotice::Receiver
   end
 
   def unread_count
-    r = Rails.cache.read("#{self.class.name}_#{self.id}_unread") || 0
+    r = notification_setting.fetch(:counters, {}).dig('total')
     r.to_i
-  end
-  
-  def pending_annunciations_count
-  
   end
   
   def apply_pending_annunciations(page: nil, per: nil)

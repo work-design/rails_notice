@@ -9,14 +9,3 @@ zh:
         state: 状态
         notifications_count: 已发消息
         readed_count: 已读消息
-    enum:
-      notification:
-        receiver_type:
-          User: 全体用户
-          Member: 全体职员
-        notifiable_type:
-          Annunciation: 通告
-      annunciation:
-        state:
-          init: 草稿
-          published: 已发布

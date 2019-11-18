@@ -1,0 +1,13 @@
+zh:
+  activerecord:
+    enum:
+      notification:
+        receiver_type:
+          User: 全体用户
+          Member: 全体职员
+        notifiable_type:
+          Annunciation: 通告
+      annunciation:
+        state:
+          init: 草稿
+          published: 已发布
