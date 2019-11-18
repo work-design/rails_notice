@@ -9,7 +9,10 @@
       <th><%= Annunciation.human_attribute_name(:body) %></th>
       <th><%= Annunciation.human_attribute_name(:cover) %></th>
       <th><%= Annunciation.human_attribute_name(:link) %></th>
-      <th><%= Annunciation.human_attribute_name(:notifications_count) %></th>
+      <th>
+        <p><%= Annunciation.human_attribute_name(:notifications_count) %></p>
+        <p class="green text"><%= Annunciation.human_attribute_name(:readed_count) %></p>
+      </th>
       <th><%= Annunciation.human_attribute_name(:created_at) %></th>
       <th>
         <%= link_to new_admin_annunciation_path, remote: true, class: 'ui mini primary button' do %>
@@ -25,7 +28,10 @@
       <td><%= annunciation.body %></td>
       <td><%= image_tag annunciation.cover.variant(resize_to_limit: [100, 100]) if annunciation.cover.present? %></td>
       <td><%= annunciation.link %></td>
-      <td><%= annunciation.notifications_count %></td>
+      <td>
+        <p><%= annunciation.notifications_count %></p>
+        <p class="green text"><%= annunciation.readed_count %></p>
+      </td>
       <td><time><%= annunciation.created_at.to_s(:rfc822) %></time></td>
       <td>
         <%= link_to admin_annunciation_path(annunciation), data: { tooltip: t('.show') }, class: 'ui mini circular icon button' do %>
