@@ -4,6 +4,7 @@ module RailsNotice
 
     config.generators do |g|
       g.rails = {
+        system_tests: false,
         assets: false,
         stylesheets: false,
         helper: false

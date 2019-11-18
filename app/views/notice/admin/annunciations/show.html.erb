@@ -21,7 +21,12 @@
       <td>
         <div class="ui labels">
           <% @annunciation.annunciates.each do |annunciate| %>
-            <div class="ui label"><%= annunciate.user_tag&.name %></div>
+            <div class="ui label">
+              <%= annunciate.user_tag&.name %>
+              <%= link_to admin_annunciate_path(annunciate), method: :delete, remote: true do %>
+                <i class="delete icon"></i>
+              <% end %>
+            </div>
           <% end %>
         </div>
         <%= link_to publish_admin_annunciation_path(@annunciation), data: { tooltip: '发布' }, remote: true, class: 'ui pink mini icon button' do %>

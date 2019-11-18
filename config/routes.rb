@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         patch :wechat
       end
     end
+    resources :annunciates
   end
 
   scope :my, module: 'notice/my', as: :my do
