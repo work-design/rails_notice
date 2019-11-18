@@ -13,7 +13,9 @@ module RailsNotice::Annunciate
   end
   
   def increment_unread_count
-    users
+    ['total', 'official', 'Annunciation'].each do |col|
+      notification_settings.increment_unread_counter(col)
+    end
   end
   
 end
