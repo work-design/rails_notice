@@ -44,10 +44,6 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
     elsif params[:receiver_type]
       @annunciation.annunciates.create(receiver_type: params[:receiver_type])
     end
-    
-    #NotificationSettingResetJob.perform_later
-    
-    redirect_to admin_annunciations_url
   end
 
   def options
