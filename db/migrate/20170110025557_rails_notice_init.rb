@@ -22,6 +22,7 @@ class RailsNoticeInit < ActiveRecord::Migration[5.0]
     end
     
     create_table :notification_sendings do |t|
+      t.references :notification
       t.string :way
       t.string :sent_to
       t.datetime :sent_at

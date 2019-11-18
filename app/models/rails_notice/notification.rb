@@ -213,7 +213,7 @@ module RailsNotice::Notification
     counters = ['total', notifiable_type]
     counters << 'official' if self.official
     counters.each do |counter|
-      notification_setting.counters[counter] += 1
+      notification_setting.counters[counter] = notification_setting.counters[counter].to_i + 1
     end
 
     notification_setting.save
@@ -223,7 +223,7 @@ module RailsNotice::Notification
     counters = ['total', notifiable_type]
     counters << 'official' if self.official
     counters.each do |counter|
-      notification_setting.counters[counter] -= 1
+      notification_setting.counters[counter] = notification_setting.counters[counter].to_i - 1
     end
   
     notification_setting.save
