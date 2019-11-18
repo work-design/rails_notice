@@ -15,7 +15,7 @@ module RailsNotice::Receiver
   
   def apply_pending_annunciations(page: nil, per: nil)
     all_annunciation_ids = annunciates.order(annunciation_id: :desc).page(page).per(per).pluck(:annunciation_id)
-    made_annunciation_ids = notifications.unscoped.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
+    made_annunciation_ids = notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
 
     pending_annunciation_ids = all_annunciation_ids - made_annunciation_ids
     return if pending_annunciation_ids.blank?
