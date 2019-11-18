@@ -59,23 +59,20 @@ module RailsNotice::Receiver
   def compute_unread_count
     no = notifications.where(archived: false, read_at: nil)
     counters = {
-      total: no.count
+      total: no.count,
+      official: no.where(official: true).count
     }
+
+    Notification.notifiable_types.map do |nt|
+      counters.merge! nt.to_sym => no.where(notifiable_type: nt).count
+    end
 
     all_annunciation_ids = annunciates.order(annunciation_id: :desc).pluck(:annunciation_id)
     made_annunciation_ids = notifications.unscoped.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
 
-    all_annunciation_ids - made_annunciation_ids
-
-    added_count = pending_annunciation_ids.size
-    ['total', 'official', 'Annunciation'].each do |counter|
-      notification_setting.counters[counter] += added_count
-    end
-    notification_setting.save
-  
-    counters.merge! official: no.where(official: true).count
-    Notification.notifiable_types.map do |nt|
-      counters.merge! nt => no.where(notifiable_type: nt).count
+    added_count = (all_annunciation_ids - made_annunciation_ids).size
+    [:total, :official, :'Annunciation'].each do |counter|
+      counters[counter] += added_count
     end
   
     counters
