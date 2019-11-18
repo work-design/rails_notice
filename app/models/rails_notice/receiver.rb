@@ -13,34 +13,36 @@ module RailsNotice::Receiver
     r.to_i
   end
   
-  def apply_pending_annunciations(page: nil, per: nil)
-    all_annunciation_ids = annunciates.order(annunciation_id: :desc).page(page).per(per).pluck(:annunciation_id)
+  def apply_pending_annunciations
+    all_annunciation_ids = annunciates.order(annunciation_id: :desc).pluck(:annunciation_id)
     made_annunciation_ids = notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
 
     pending_annunciation_ids = all_annunciation_ids - made_annunciation_ids
     return if pending_annunciation_ids.blank?
 
-    annunciations = Annunciation.where(id: pending_annunciation_ids)
-    annunciation_attributes = annunciations.map do |annunciation|
-      r = {}
-      r.merge! annunciation.attributes.slice(:organ_id, :link)
-      r.merge!(
-        receiver_type: self.class.name,
-        receiver_id: self.id,
-        sender_type: annunciation.publisher_type,
-        sender_id: annunciation.publisher_id,
-        notifiable_type: annunciation.class.name,
-        notifiable_id: annunciation.id,
-        official: true,
-        archived: false,
-        created_at: annunciation.created_at,
-        updated_at: annunciation.updated_at
-      )
-      r
+    pending_annunciation_ids.each_slice(50).each do |ids|
+      annunciations = Annunciation.where(id: ids)
+      annunciation_attributes = annunciations.map do |annunciation|
+        r = {}
+        r.merge! annunciation.attributes.slice(:organ_id, :link)
+        r.merge!(
+          receiver_type: self.class.name,
+          receiver_id: self.id,
+          sender_type: annunciation.publisher_type,
+          sender_id: annunciation.publisher_id,
+          notifiable_type: annunciation.class.name,
+          notifiable_id: annunciation.id,
+          official: true,
+          archived: false,
+          created_at: annunciation.created_at,
+          updated_at: annunciation.updated_at
+        )
+        r
+      end
+      
+      Annunciation.increment_counter(:notifications_count, ids)
+      Notification.insert_all annunciation_attributes
     end
-    
-    Annunciation.increment_counter(:notifications_count, pending_annunciation_ids)
-    Notification.insert_all annunciation_attributes
   end
 
   def notification_setting
@@ -63,19 +65,14 @@ module RailsNotice::Receiver
       counters.merge! nt.to_sym => no.where(notifiable_type: nt).count
     end
     
-    _added_count = added_count
+    all_annunciation_ids = annunciates.order(annunciation_id: :desc).pluck(:annunciation_id)
+    made_annunciation_ids = notifications.unscoped.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
+    added_count = (all_annunciation_ids - made_annunciation_ids).size
     [:total, :official, :'Annunciation'].each do |counter|
-      counters[counter] += _added_count
+      counters[counter] += added_count
     end
 
     counters
-  end
-  
-  def added_count
-    all_annunciation_ids = annunciates.order(annunciation_id: :desc).pluck(:annunciation_id)
-    made_annunciation_ids = notifications.unscoped.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
-  
-    (all_annunciation_ids - made_annunciation_ids).size
   end
   
   def reset_unread_count
