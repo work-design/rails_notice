@@ -4,7 +4,8 @@ class Notice::My::NotificationsController < Notice::My::BaseController
 
   def index
     q_params = {
-      archived: false
+      archived: false,
+      per: 25
     }
     current_receiver.apply_pending_annunciations(page: params[:page], per: params[:per])
     @notifications = current_receiver.received_notifications.order(read_at: :asc)
@@ -14,6 +15,15 @@ class Notice::My::NotificationsController < Notice::My::BaseController
       @notifications = @notifications.unread
     end
     @notifications = @notifications.default_where(q_params).page(params[:page]).per(params[:per])
+    
+    total_count = current_receiver.added_count + @notifications.total_count
+    @items = {
+      current_page: @notifications.current_page,
+      next_page: @notifications.next_page,
+      prev_page: @notifications.prev_page,
+      total_count: total_count,
+      total_pages: (total_count / params[:per].to_f).ceil
+    }
   end
 
   def read_all

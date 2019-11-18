@@ -62,16 +62,20 @@ module RailsNotice::Receiver
     Notification.notifiable_types.map do |nt|
       counters.merge! nt.to_sym => no.where(notifiable_type: nt).count
     end
-
-    all_annunciation_ids = annunciates.order(annunciation_id: :desc).pluck(:annunciation_id)
-    made_annunciation_ids = notifications.unscoped.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
-
-    added_count = (all_annunciation_ids - made_annunciation_ids).size
+    
+    _added_count = added_count
     [:total, :official, :'Annunciation'].each do |counter|
-      counters[counter] += added_count
+      counters[counter] += _added_count
     end
 
     counters
+  end
+  
+  def added_count
+    all_annunciation_ids = annunciates.order(annunciation_id: :desc).pluck(:annunciation_id)
+    made_annunciation_ids = notifications.unscoped.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
+  
+    (all_annunciation_ids - made_annunciation_ids).size
   end
   
   def reset_unread_count
