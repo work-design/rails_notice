@@ -61,6 +61,7 @@ class RailsNoticeInit < ActiveRecord::Migration[5.0]
       t.string :body
       t.string :link
       t.integer :notifications_count
+      t.integer :readed_count
       t.timestamps
     end
     

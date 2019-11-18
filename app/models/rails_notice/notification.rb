@@ -15,7 +15,7 @@ module RailsNotice::Notification
     
     default_scope -> { order(created_at: :desc) }
     scope :unread, -> { where(read_at: nil, archived: false) }
-    scope :have_read, -> { where.not(read_at: nil, archived: false) }
+    scope :readed, -> { where.not(read_at: nil, archived: false) }
   
     after_create_commit :process_job
     after_create_commit :increment_unread, if: -> { read_at.blank? }
@@ -201,8 +201,10 @@ module RailsNotice::Notification
   
   def make_as_unread
     self.read_at = nil
+    notifiable.readed_count += 1 if notifiable.class.attribute_method?(:readed_count)
     self.class.transaction do
       increment_unread if read_at_changed?
+      notifiable.save!
       save!
     end
   end

@@ -74,7 +74,7 @@ module RailsNotice::Receiver
     [:total, :official, :'Annunciation'].each do |counter|
       counters[counter] += added_count
     end
-  
+
     counters
   end
   

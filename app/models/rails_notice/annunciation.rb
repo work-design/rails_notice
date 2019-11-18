@@ -5,7 +5,9 @@ module RailsNotice::Annunciation
     attribute :title, :string
     attribute :body, :string
     attribute :link, :string
-
+    attribute :notifications_count, :integer, default: 0
+    attribute :readed_count, :integer, default: 0
+    
     belongs_to :publisher, polymorphic: true, optional: true
     has_many :notifications, as: :notifiable
     has_many :annunciates, dependent: :nullify
@@ -17,6 +19,12 @@ module RailsNotice::Annunciation
   
   def cover_url
     cover.service_url if cover.present?
+  end
+  
+  def reset_counter
+    self.notifications_count = self.notifications.count
+    self.readed_count = self.notifications.readed.count
+    self.save
   end
   
 end
