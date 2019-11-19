@@ -70,7 +70,7 @@ module RailsNotice::Receiver
     
     added_count = pending_annunciation_ids.size
     [:total, :official, :'Annunciation'].each do |counter|
-      counters[counter] += added_count
+      counters[counter] = counters[counter].to_i + added_count
     end
 
     counters
