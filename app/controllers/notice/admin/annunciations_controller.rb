@@ -42,7 +42,9 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
 
   def update_publish
     if params[:user_tag_ids]
-      @annunciation.user_tag_ids = params[:user_tag_ids]
+      params[:user_tag_ids].reject(&:blank?).each do |user_tag_id|
+        @annunciation.annunciates.find_or_create_by(user_tag_id: user_tag_id)
+      end
     elsif params[:receiver_type]
       @annunciation.annunciates.create(receiver_type: params[:receiver_type])
     end
