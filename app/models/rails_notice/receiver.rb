@@ -13,13 +13,10 @@ module RailsNotice::Receiver
   end
   
   def apply_pending_annunciations
-    all_annunciation_ids = annunciates.default_where('created_at-gte': self.created_at).order(annunciation_id: :desc).pluck(:annunciation_id).compact
-    made_annunciation_ids = notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
+    annunciation_ids = pending_annunciation_ids
+    return if annunciation_ids.blank?
 
-    pending_annunciation_ids = all_annunciation_ids - made_annunciation_ids
-    return if pending_annunciation_ids.blank?
-
-    pending_annunciation_ids.each_slice(50) do |ids|
+    annunciation_ids.each_slice(50) do |ids|
       annunciations = Annunciation.where(id: ids)
       annunciation_attributes = annunciations.map do |annunciation|
         r = {}
@@ -53,6 +50,13 @@ module RailsNotice::Receiver
     r
   end
   
+  def pending_annunciation_ids
+    all_annunciation_ids = annunciates.default_where('created_at-gte': self.created_at).order(annunciation_id: :desc).pluck(:annunciation_id).compact
+    made_annunciation_ids = notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
+  
+    all_annunciation_ids - made_annunciation_ids
+  end
+  
   def compute_unread_count
     no = notifications.where(archived: false, read_at: nil)
     counters = {
@@ -64,9 +68,7 @@ module RailsNotice::Receiver
       counters.merge! nt.to_sym => no.where(notifiable_type: nt).count
     end
     
-    all_annunciation_ids = annunciates.order(annunciation_id: :desc).pluck(:annunciation_id).compact
-    made_annunciation_ids = notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
-    added_count = (all_annunciation_ids - made_annunciation_ids).size
+    added_count = pending_annunciation_ids.size
     [:total, :official, :'Annunciation'].each do |counter|
       counters[counter] += added_count
     end
