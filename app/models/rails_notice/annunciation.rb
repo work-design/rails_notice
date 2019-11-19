@@ -10,7 +10,7 @@ module RailsNotice::Annunciation
     
     belongs_to :publisher, polymorphic: true, optional: true
     has_many :notifications, as: :notifiable
-    has_many :annunciates, dependent: :nullify
+    has_many :annunciates, dependent: :destroy
     has_many :user_tags, through: :annunciates
     
     has_one_attached :cover
