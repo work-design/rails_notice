@@ -40,8 +40,8 @@ module RailsNotice::Receiver
         r
       end
       
-      Annunciation.increment_counter(:notifications_count, ids)
-      Notification.insert_all annunciation_attributes
+      Annunciation.increment_counter(:notifications_count, ids) unless ids.blank?
+      Notification.insert_all(annunciation_attributes) unless annunciation_attributes.blank?
     end
   end
 
