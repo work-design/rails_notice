@@ -192,6 +192,7 @@ module RailsNotice::Notification
   end
 
   def make_as_read
+    return unless self.read_at.blank?
     self.read_at = Time.current
     notifiable.readed_count += 1 if notifiable.class.attribute_method?(:readed_count)
     self.class.transaction do
@@ -202,6 +203,7 @@ module RailsNotice::Notification
   end
   
   def make_as_unread
+    return if self.read_at.blank?
     self.read_at = nil
     self.class.transaction do
       increment_unread if read_at_changed?
