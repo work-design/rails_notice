@@ -19,7 +19,7 @@ module RailsNotice::Receiver
     pending_annunciation_ids = all_annunciation_ids - made_annunciation_ids
     return if pending_annunciation_ids.blank?
 
-    pending_annunciation_ids.each_slice(50).each do |ids|
+    pending_annunciation_ids.each_slice(50) do |ids|
       annunciations = Annunciation.where(id: ids)
       annunciation_attributes = annunciations.map do |annunciation|
         r = {}
@@ -39,8 +39,8 @@ module RailsNotice::Receiver
         r
       end
       
-      Annunciation.increment_counter(:notifications_count, ids) unless ids.blank?
-      Notification.insert_all(annunciation_attributes) unless annunciation_attributes.blank?
+      Annunciation.increment_counter(:notifications_count, ids)
+      Notification.insert_all(annunciation_attributes)
     end
   end
 
