@@ -27,6 +27,7 @@ module RailsNotice::Annunciate
   end
   
   # todo better sql
+  # 如果一个user 属于多个标签，则进行去重处理
   def same_user_ids
     user_tag_ids = self.annunciates.pluck(:user_tag_id)
     UserTagged.where(user_tag_id: user_tag_ids).having('COUNT(user_id) > 1').group(:user_id).count(:user_id).keys
