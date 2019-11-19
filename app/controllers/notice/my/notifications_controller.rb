@@ -7,7 +7,7 @@ class Notice::My::NotificationsController < Notice::My::BaseController
       archived: false
     }
     current_receiver.apply_pending_annunciations
-    @notifications = current_receiver.received_notifications.order(read_at: :asc)
+    @notifications = current_receiver.notifications.order(read_at: :asc)
     if params[:scope] == 'readed'
       @notifications = @notifications.readed
     elsif params[:scope] == 'unread'
@@ -18,9 +18,9 @@ class Notice::My::NotificationsController < Notice::My::BaseController
 
   def read_all
     if params[:page]
-      @notifications = current_receiver.received_notifications.default_where(q_params).page(params[:page]).per(params[:per])
+      @notifications = current_receiver.notifications.default_where(q_params).page(params[:page]).per(params[:per])
     else
-      @notifications = current_receiver.received_notifications.default_where(q_params)
+      @notifications = current_receiver.notifications.default_where(q_params)
     end
     @notifications.update_all(read_at: Time.current)
     current_receiver.reset_unread_count

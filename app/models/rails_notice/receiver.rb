@@ -2,7 +2,6 @@ module RailsNotice::Receiver
   extend ActiveSupport::Concern
   included do
     has_many :notifications, as: :receiver, dependent: :delete_all
-    has_many :received_notifications, as: :receiver, class_name: 'Notification'
     has_one :notification_setting, as: :receiver, dependent: :delete
     
     has_many :annunciates, through: :user_taggeds
