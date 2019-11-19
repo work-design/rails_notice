@@ -15,14 +15,18 @@ module RailsNotice::Annunciate
   end
   
   def increment_unread_count
+    user_ids = same_user_ids
+    logger.debug(same_user_ids)
     ['total', 'official', 'Annunciation'].each do |col|
-      notification_settings.where(receiver_type: self.receiver_type).where.not(receiver_id: same_user_ids).increment_unread_counter(col)
+      notification_settings.where(receiver_type: self.receiver_type).where.not(receiver_id: user_ids).increment_unread_counter(col)
     end
   end
   
   def decrement_unread_count
+    user_ids = same_user_ids
+    logger.debug(same_user_ids)
     ['total', 'official', 'Annunciation'].each do |col|
-      notification_settings.where(receiver_type: self.receiver_type).where.not(receiver_id: same_user_ids).decrement_unread_counter(col)
+      notification_settings.where(receiver_type: self.receiver_type).where.not(receiver_id: user_ids).decrement_unread_counter(col)
     end
   end
   
