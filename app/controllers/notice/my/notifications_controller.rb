@@ -19,7 +19,7 @@ class Notice::My::NotificationsController < Notice::My::BaseController
   def read_all
     @notifications = current_receiver.received_notifications.default_where(q_params)
     @notifications.update_all(read_at: Time.current)
-    Notification.reset_unread_count(current_receiver)
+    current_receiver.reset_unread_count
   end
 
   def show
