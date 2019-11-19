@@ -32,7 +32,6 @@
       </th>
       <th class="one wide">
         <p><%= Notification.human_attribute_name(:official) %></p>
-        <p><%= Notification.human_attribute_name(:send_result) %></p>
       </th>
       <th class="two wide"></th>
     </tr>
@@ -68,7 +67,6 @@
       </td>
       <td>
         <p><%= notification.official %></p>
-        <p><code><%= notification.sent_result %></code></p>
       </td>
       <td>
         <%= link_to edit_admin_notification_path(notification), data: { tooltip: t('.edit') }, class: 'ui mini circular icon button' do %>

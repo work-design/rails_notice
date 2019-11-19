@@ -5,7 +5,7 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
     q_params = {
       archived: false
     }
-    q_params.merge! params.permit(:archived, :receiver_type, :receiver_id)
+    q_params.merge! params.permit(:archived, :receiver_type, :receiver_id, :notifiable_type, :notifiable_id)
     @notifications = Notification.default_where(q_params).page(params[:page])
   end
 

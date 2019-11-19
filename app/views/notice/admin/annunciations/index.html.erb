@@ -34,7 +34,7 @@
       </td>
       <td><%= annunciation.link %></td>
       <td>
-        <p><%= annunciation.notifications_count %></p>
+        <p><%= link_to annunciation.notifications_count, admin_notifications_path(notifiable_type: annunciation.class_name, notifiable_id: annunciation.id) %></p>
         <p class="green text"><%= annunciation.readed_count %></p>
       </td>
       <td><time><%= annunciation.created_at.to_s(:rfc822) %></time></td>
