@@ -8,7 +8,7 @@
     <%= form_with url: publish_admin_annunciation_path(@annunciation), method: :patch do |f| %>
       <% if params[:receiver_type] %>
         <%= f.hidden_field :receiver_type, value: params[:receiver_type] %>
-        <%= f.collection_select :user_tag_ids, @user_tags, :id, :name, { selected: @annunciation.user_tag_ids, on: { wrapper_input_id: true }, label: Annunciate.human_attribute_name(:user_tags) }, { multiple: true } %>
+        <%= f.collection_select :user_tag_ids, @user_tags, :id, :name, { on: { wrapper_input_id: true }, label: Annunciate.human_attribute_name(:user_tags) }, { multiple: true } %>
       <% else %>
         <%= f.select :receiver_type, options_for_select(Notification.options_i18n(:receiver_type)), include_blank: true %>
         <%= f.select :user_tag_ids, options_for_select([]), { on: { wrapper_input_id: true } }, { multiple: true } %>

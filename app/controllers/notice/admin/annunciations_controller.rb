@@ -36,7 +36,7 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
   
   def edit_publish
     if params[:receiver_type]
-      @user_tags = UserTag.all
+      @user_tags = UserTag.where.not(id: @annunciation.user_tag_ids)
     end
   end
 

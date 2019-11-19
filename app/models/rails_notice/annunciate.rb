@@ -9,8 +9,8 @@ module RailsNotice::Annunciate
     has_many :user_taggeds, foreign_key: :user_tag_id, primary_key: :user_tag_id
     has_many :notification_settings, through: :user_taggeds
     
-    after_create_commit :increment_unread_count
-    after_destroy_commit :decrement_unread_count
+    after_create :increment_unread_count
+    after_destroy :decrement_unread_count
   end
   
   def increment_unread_count
