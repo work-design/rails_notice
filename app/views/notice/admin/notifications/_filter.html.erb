@@ -1,4 +1,4 @@
-<%= search_form_with model: Notification.new do |f| %>
+<%= form_with theme: 'search', model: Notification.new do |f| %>
   <div class="fields">
     <div class="ui left action input">
       <%= f.select :receiver_type, options_for_select(Notification.options_i18n(:receiver_type), params[:receiver_type]), { on: { wrapper_input: false } }, { class: 'ui selection dropdown', id: 'q_receiver_type' } %>
