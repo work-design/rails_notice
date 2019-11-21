@@ -8,7 +8,7 @@ module RailsNotice::Receiver
   end
 
   def unread_count
-    r = notification_setting.fetch(:counters, {}).dig('total')
+    r = notification_setting.counters.fetch(:counters, {}).dig('total')
     r.to_i
   end
   
