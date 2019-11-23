@@ -31,7 +31,7 @@
       <td><%= notification_setting.showtime %></td>
       <td>
         <%= form_with model: notification_setting, url: admin_notification_setting_path(notification_setting.id), method: :patch, remote: true do |f| %>
-          <%= f.check_box :accept_email, onChange: "Rails.fire(this.form, 'submit')", label: false, on: {wrapper_all: false, offset: false} %>
+          <%= f.check_box :accept_email, onChange: "Rails.fire(this.form, 'submit')", label: false, on: {wrap_all: false, offset: false} %>
         <% end %>
       </td>
       <td class="ui labels">
