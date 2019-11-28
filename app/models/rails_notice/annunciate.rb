@@ -3,6 +3,8 @@ module RailsNotice::Annunciate
   included do
     attribute :receiver_type, :string, default: 'User'
     attribute :notifications_count, :integer, default: 0
+    attribute :state, :string
+    attribute :annunciated_at, :datetime
     
     belongs_to :annunciation
     belongs_to :user_tag, optional: true

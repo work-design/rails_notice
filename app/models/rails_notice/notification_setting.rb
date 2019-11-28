@@ -1,7 +1,7 @@
 module RailsNotice::NotificationSetting
   extend ActiveSupport::Concern
   included do
-    belongs_to :receiver, polymorphic: true
+    
     if connection.adapter_name == 'PostgreSQL'
       attribute :notifiable_types, :string, array: true, default: -> { RailsNotice.config.default_notifiable_types }
     else
@@ -10,6 +10,8 @@ module RailsNotice::NotificationSetting
     attribute :counters, :json, default: {}
     attribute :showtime, :integer, default: 0
     attribute :accept_email, :boolean, default: RailsNotice.config.default_send_email
+
+    belongs_to :receiver, polymorphic: true
   end
 
   class_methods do

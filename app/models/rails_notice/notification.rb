@@ -1,11 +1,19 @@
 module RailsNotice::Notification
   extend ActiveSupport::Concern
   included do
+    attribute :state, :string
+    attribute :title, :string
+    attribute :body, :string, limit: 5000
+    attribute :link, :string
+    attribute :sending_at, :datetime
+    attribute :read_at, :datetime, index: true
     attribute :code, :string, default: 'default'
-    attribute :organ_id, :integer
     attribute :official, :boolean, default: false
     attribute :archived, :boolean, default: false
+    attribute :verbose, :boolean, default: false
+    attribute :created_at, :datetime, null: false, index: true
     
+    belongs_to :organ, optional: true
     belongs_to :receiver, polymorphic: true
     belongs_to :sender, polymorphic: true, optional: true
     belongs_to :notifiable, polymorphic: true, optional: true
