@@ -276,7 +276,7 @@ module RailsNotice::Notification
   
   class_methods do
     def notifiable_types
-      self.unscoped.select(:notifiable_type).distinct.pluck(:notifiable_type).sort!
+      self.unscoped.select(:notifiable_type).distinct.pluck(:notifiable_type).compact.sort!
     end
   end
 end
