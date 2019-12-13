@@ -48,53 +48,7 @@ module RailsNotice::Notification
   end
 
   def send_out
-    send_to_socket
-  end
-
-  def send_to_email
-    return unless email_enable?
-
-    if notify_setting[:mailer_class]
-      notify_method = notify_setting[:mailer_method] || 'notify'
-      if sending_at
-        notify_setting[:mailer_class].public_send(notify_method, self.notifiable_id).deliver_later(wait_until: sending_at)
-      else
-        notify_setting[:mailer_class].public_send(notify_method, self.notifiable_id).deliver_later
-      end
-    else
-      if sending_at
-        RailsNoticeMailer.notify(self.id).deliver_later(wait_until: sending_at)
-      else
-        RailsNoticeMailer.notify(self.id).deliver_later
-      end
-    end
-  end
-
-  def send_to_socket
-    return unless receiver
-    receiver.authorized_tokens.each do |authorized_token|
-      ActionCable.server.broadcast(
-        authorized_token.token,
-        id: id,
-        body: body,
-        count: unread_count,
-        link: link,
-        showtime: notification_setting.showtime
-      )
-      self.notification_sendings.find_or_create_by(way: 'websocket', sent_to: authorized_token.token)
-    end
-  end
-
-  def email_enable?
-    if receiver.notification_setting.accept_email
-      return true
-    end
-
-    if receiver.notification_setting.accept_email.is_a?(FalseClass)
-      return false
-    end
-
-    RailsNotice.config.default_send_email
+    
   end
 
   def notifiable_detail
