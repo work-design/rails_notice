@@ -49,14 +49,14 @@ module RailsNotice::Receiver
     end
     r
   end
-  
+
   def pending_annunciation_ids
     all_annunciation_ids = annunciates.default_where('created_at-gte': self.created_at).order(annunciation_id: :desc).pluck(:annunciation_id).compact
     made_annunciation_ids = notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
   
     all_annunciation_ids - made_annunciation_ids
   end
-  
+
   def compute_unread_count
     no = notifications.where(archived: false, read_at: nil)
     counters = {
@@ -67,7 +67,7 @@ module RailsNotice::Receiver
     Notification.notifiable_types.map do |nt|
       counters.merge! nt.to_sym => no.where(notifiable_type: nt).count
     end
-    
+
     added_count = pending_annunciation_ids.size
     [:total, :official, :'Annunciation'].each do |counter|
       counters[counter] = counters[counter].to_i + added_count
@@ -75,13 +75,9 @@ module RailsNotice::Receiver
 
     counters
   end
-  
+
   def reset_unread_count
     notification_setting.update counters: compute_unread_count
-  end
-
-  def endearing_name
-    name
   end
 
 end
