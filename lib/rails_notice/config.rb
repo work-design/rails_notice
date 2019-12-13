@@ -9,8 +9,6 @@ module RailsNotice
 
     config.default_notifiable_types = []
     config.default_send_email = true
-    config.default_sender_type = 'User'
-    config.default_sender_id = 1
     config.link_host = ''
   end
 

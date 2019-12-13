@@ -9,4 +9,8 @@ module RailsNotice::Wechat
     Getui.push_single(receiver.getui_token, message)
   end
   
+  def wechat_app
+
+  end
+  
 end

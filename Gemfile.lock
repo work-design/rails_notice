@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: ae8ae25e8c5ef881ff124fe2b324b7d98a8c3345
+  revision: 789bba6650c21521c3bf3ff525c30b67b1fc3dfc
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -9,10 +9,9 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 2a0e3c30dc9080fff0630a66639074408554aaf7
+  revision: 7701a4ca4aa5ca93f583fbba653ecb6c666f4fa6
   specs:
     rails_com (1.2.9)
-      default_form (~> 1.5)
       default_where (~> 2.2)
       httpx (~> 0.5)
       rails (~> 6.0)
@@ -86,8 +85,6 @@ GEM
     builder (3.2.3)
     concurrent-ruby (1.1.5)
     crass (1.0.5)
-    default_form (1.5.0)
-      rails (>= 5.2, <= 6.1)
     default_where (2.2.0)
       activerecord (>= 4.0.0)
     erubi (1.9.0)

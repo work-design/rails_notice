@@ -17,9 +17,6 @@ module RailsNotice::Notifiable
       return if other_params[:sender] == receiver  # do not send notification to himself
       n.sender_id = other_params[:sender].id
       n.sender_type = other_params[:sender].class
-    else
-      n.sender_id = RailsNotice.config.default_sender_id
-      n.sender_type = RailsNotice.config.default_sender_type
     end
 
     if other_params[:linked]
@@ -35,10 +32,6 @@ module RailsNotice::Notifiable
     )
 
     n.save!
-  end
-  
-  def wechat_config
-  
   end
 
 end
