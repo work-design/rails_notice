@@ -1,6 +1,7 @@
 module RailsNoticeSend::Mailer
   
   def send_out
+    super
     return unless email_enable?
     
     if notify_setting[:mailer_class]

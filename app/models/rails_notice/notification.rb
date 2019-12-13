@@ -1,5 +1,6 @@
 module RailsNotice::Notification
   extend ActiveSupport::Concern
+
   included do
     attribute :state, :string
     attribute :title, :string
@@ -48,7 +49,7 @@ module RailsNotice::Notification
   end
 
   def send_out
-    
+  
   end
 
   def notifiable_detail

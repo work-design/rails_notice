@@ -1,6 +1,8 @@
 module RailsNoticeSend::Socket
   
   def send_out
+    super
+    
     return unless receiver
     receiver.authorized_tokens.each do |authorized_token|
       ActionCable.server.broadcast(
