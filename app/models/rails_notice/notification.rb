@@ -155,10 +155,6 @@ module RailsNotice::Notification
     notifiable_detail.slice *keys
   end
 
-  def code
-    super ? super.to_sym : :default
-  end
-
   def title
     return super if super.present?
 
