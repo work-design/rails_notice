@@ -13,7 +13,7 @@ module RailsNotice::Notification
     attribute :archived, :boolean, default: false
     attribute :verbose, :boolean, default: false
     attribute :created_at, :datetime, null: false, index: true
-    
+
     belongs_to :organ, optional: true
     belongs_to :receiver, polymorphic: true
     belongs_to :sender, polymorphic: true, optional: true
@@ -21,16 +21,16 @@ module RailsNotice::Notification
     belongs_to :linked, polymorphic: true, optional: true
     has_one :notification_setting, ->(o) { where(receiver_type: o.receiver_type) }, primary_key: :receiver_id, foreign_key: :receiver_id
     has_many :notification_sendings, dependent: :delete_all
-    
+
     default_scope -> { order(created_at: :desc) }
     scope :unread, -> { where(read_at: nil, archived: false) }
     scope :readed, -> { where.not(read_at: nil, archived: false) }
-  
+
     after_create_commit :process_job
     after_create_commit :increment_unread, if: -> { read_at.blank? }
     after_destroy_commit :decrement_unread, if: -> { read_at.blank? }
   end
-  
+
   def notification_setting
     r = super || build_notification_setting
     if r.new_record?
@@ -49,7 +49,7 @@ module RailsNotice::Notification
   end
 
   def send_out
-  
+
   end
 
   def notifiable_detail
