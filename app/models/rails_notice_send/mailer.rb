@@ -31,5 +31,13 @@ module RailsNoticeSend::Mailer
   
     RailsNotice.config.default_send_email
   end
+
+  def cc_emails
+    r = notify_setting.fetch(:cc_emails, []).map do |i|
+      next i unless i.respond_to?(:call)
+      i.call(notifiable)
+    end
+    r.flatten
+  end
   
 end

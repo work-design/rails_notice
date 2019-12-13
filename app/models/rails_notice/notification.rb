@@ -94,7 +94,7 @@ module RailsNotice::Notification
     nt = notifiable_type.constantize
     if nt.respond_to?(:notifies)
       r = nt.notifies
-      Hash(r[self.code])
+      Hash(r[self.code.to_sym])
     else
       {}
     end
@@ -136,14 +136,6 @@ module RailsNotice::Notification
     if notifiable.respond_to?(:body)
       notifiable.body
     end
-  end
-
-  def cc_emails
-    r = notify_setting.fetch(:cc_emails, []).map do |i|
-      next i unless i.respond_to?(:call)
-      i.call(notifiable)
-    end
-    r.flatten
   end
 
   def unread_count
