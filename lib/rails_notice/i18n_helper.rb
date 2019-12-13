@@ -1,4 +1,4 @@
-module I18nHelper
+module RailsNotice::I18nHelper
   extend self
 
   def interpolate_key(string)

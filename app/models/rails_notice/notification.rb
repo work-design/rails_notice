@@ -151,7 +151,7 @@ module RailsNotice::Notification
   end
 
   def tr_value(column)
-    keys = I18nHelper.interpolate_key(I18n.t(tr_key(column)))
+    keys = RailsNotice::I18nHelper.interpolate_key(I18n.t(tr_key(column)))
     notifiable_detail.slice *keys
   end
 
