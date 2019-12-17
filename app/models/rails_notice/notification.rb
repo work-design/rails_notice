@@ -66,7 +66,7 @@ module RailsNotice::Notification
     nt = linked_type&.constantize
     if nt.respond_to?(:notifies)
       r = nt.notifies
-      Hash(r[self.code])
+      Hash(r[self.code.to_s.to_sym])
     else
       {}
     end
@@ -94,7 +94,7 @@ module RailsNotice::Notification
     nt = notifiable_type.constantize
     if nt.respond_to?(:notifies)
       r = nt.notifies
-      Hash(r[self.code.to_sym])
+      Hash(r[self.code.to_s.to_sym])
     else
       {}
     end
