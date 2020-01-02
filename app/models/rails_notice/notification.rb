@@ -54,12 +54,12 @@ module RailsNotice::Notification
 
   def notifiable_detail
     r = self.notifiable.as_json(**notify_setting.slice(:only, :except, :include, :methods))
-    Hash(r).with_indifferent_access
+    Hash(r)
   end
 
   def linked_detail
     r = self.linked.as_json(**linked_setting.slice(:only, :except, :include, :methods))
-    Hash(r).with_indifferent_access
+    Hash(r)
   end
 
   def linked_setting
@@ -80,7 +80,7 @@ module RailsNotice::Notification
       end
       r
     else
-      {}.with_indifferent_access
+      {}
     end
   end
 
