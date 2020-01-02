@@ -2,7 +2,6 @@ module RailsNotice::Notifiable
   extend ActiveSupport::Concern
 
   included do
-    class_attribute :notifies, default: {}
     delegate :url_helpers, to: 'Rails.application.routes'
 
     has_many :notifications, as: :notifiable, dependent: :delete_all

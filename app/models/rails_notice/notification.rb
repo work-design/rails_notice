@@ -63,13 +63,7 @@ module RailsNotice::Notification
   end
 
   def linked_setting
-    nt = linked_type&.constantize
-    if nt.respond_to?(:notifies)
-      r = nt.notifies
-      Hash(r[self.code.to_s.to_sym])
-    else
-      {}
-    end
+    RailsNotice.notifiable_types.dig(linked_type, self.code.to_s) || {}
   end
 
   def notifiable_attributes
@@ -91,13 +85,7 @@ module RailsNotice::Notification
   end
 
   def notify_setting
-    nt = notifiable_type.constantize
-    if nt.respond_to?(:notifies)
-      r = nt.notifies
-      Hash(r[self.code.to_s.to_sym])
-    else
-      {}
-    end
+    RailsNotice.notifiable_types.dig(notifiable_type, self.code.to_s) || {}
   end
 
   def tr_key(column)
