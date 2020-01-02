@@ -8,6 +8,7 @@ module RailsNotice::ActiveRecord
   # tr_values
   def acts_as_notify(code = 'default', **options)
     include RailsNotice::Notifiable
+    RailsNotice.notifiable_types[self.name] ||= {}
     RailsNotice.notifiable_types[self.name].merge! code.to_sym => options
   end
 

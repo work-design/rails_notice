@@ -63,7 +63,7 @@ module RailsNotice::Notification
   end
 
   def linked_setting
-    RailsNotice.notifiable_types.dig(linked_type, self.code.to_s) || {}
+    RailsNotice.notifiable_types.dig(linked_type, self.code.to_sym) || {}
   end
 
   def notifiable_attributes
@@ -85,7 +85,7 @@ module RailsNotice::Notification
   end
 
   def notify_setting
-    RailsNotice.notifiable_types.dig(notifiable_type, self.code.to_s) || {}
+    RailsNotice.notifiable_types.dig(notifiable_type, self.code.to_sym) || {}
   end
 
   def tr_key(column)
