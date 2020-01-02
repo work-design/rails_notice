@@ -15,6 +15,8 @@ module RailsNotice::Annunciation
     has_many :annunciates, dependent: :destroy
     has_many :user_tags, through: :annunciates
     
+    validates :body, presence: true
+    
     has_one_attached :cover
     acts_as_notify :default, only: [:title, :body, :link], methods: [:cover_url]
   end

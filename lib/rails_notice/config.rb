@@ -6,8 +6,6 @@ module RailsNotice
   configure do |config|
     config.admin_controller = 'AdminController'
     config.my_controller = 'MyController'
-
-    config.default_notifiable_types = []
     config.default_send_email = true
     config.link_host = ''
   end

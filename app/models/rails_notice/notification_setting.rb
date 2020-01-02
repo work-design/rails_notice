@@ -3,7 +3,7 @@ module RailsNotice::NotificationSetting
   included do
     
     if connection.adapter_name == 'PostgreSQL'
-      attribute :notifiable_types, :string, array: true, default: -> { RailsNotice.config.default_notifiable_types }
+      attribute :notifiable_types, :string, array: true, default: []
     else
       serialize :notifiable_types, Array
     end
