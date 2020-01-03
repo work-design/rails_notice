@@ -6,12 +6,10 @@ module RailsNoticeSend::Wechat
   end
 
   def send_out
-    return unless receiver.getui_token
-    payload = { id: self.id, link: self.link }
-    apns = Getui::Apns.new(self.body, title: self.title, payload: payload)
-    message = Getui::Message::Transmission.new(apns: apns)
-
-    Getui.push_single(receiver.getui_token, message)
+    return unless wechat_template
+    wechat_notice = wechat_template.wechat_notices.build
+    wechat_notice.wechat_user = receiver.wechat_users
+    wechat_notice.save
   end
 
   def wechat_app
