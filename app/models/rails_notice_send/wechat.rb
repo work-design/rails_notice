@@ -17,6 +17,10 @@ module RailsNoticeSend::Wechat
     WechatApp.where(organ_id: self.organ_id).valid.take
   end
 
+  def wechat_template
+
+  end
+
   def public_template
     PublicTemplate.find_by(notifiable_type: self.notifiable_type, code: self.code)
   end
