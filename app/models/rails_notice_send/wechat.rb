@@ -8,8 +8,8 @@ module RailsNoticeSend::Wechat
   def send_out
     return unless wechat_template
     wechat_notice = wechat_template.wechat_notices.build
-    wechat_notice.wechat_subscribed = receiver.wechat_subscribeds
-    wechat_notice.notifiaction = self
+    wechat_notice.wechat_subscribed = receiver.wechat_subscribeds.first
+    wechat_notice.notification = self
     wechat_notice.save
   end
 
