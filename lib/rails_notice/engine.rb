@@ -16,9 +16,5 @@ module RailsNotice
       g.templates.unshift File.expand_path('lib/templates', RailsCom::Engine.root)
     end
 
-    initializer 'rails_notice.assets.precompile' do |app|
-      app.config.assets.precompile += ['rails_notice_manifest.js']
-    end
-
   end
 end
