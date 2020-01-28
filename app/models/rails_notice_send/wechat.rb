@@ -14,7 +14,7 @@ module RailsNoticeSend::Wechat
   end
 
   def wechat_app
-    WechatProgram.where(organ_id: self.organ_id).default
+    WechatApp.where(organ_id: self.organ_id).default
   end
 
   def wechat_template
