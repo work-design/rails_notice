@@ -4,7 +4,7 @@ module RailsNotice::Notifiable
   included do
     delegate :url_helpers, to: 'Rails.application.routes'
 
-    has_many :notifications, as: :notifiable, dependent: :delete_all
+    has_many :notifications, as: :notifiable
   end
 
   def to_notification(receiver: , **other_params)
