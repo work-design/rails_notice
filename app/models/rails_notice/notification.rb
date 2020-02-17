@@ -95,7 +95,7 @@ module RailsNotice::Notification
 
   def tr_value(column)
     keys = RailsNotice::I18nHelper.interpolate_key(I18n.t(tr_key(column)))
-    notifiable_detail.slice *keys
+    notifiable_detail.with_indifferent_access.slice *keys
   end
 
   def title
@@ -140,7 +140,7 @@ module RailsNotice::Notification
       save!
     end
   end
-  
+
   def make_as_unread
     return if self.read_at.blank?
     self.read_at = nil
@@ -149,7 +149,7 @@ module RailsNotice::Notification
       save!
     end
   end
-  
+
   def increment_unread
     counters = ['total', notifiable_type]
     counters << 'official' if self.official
@@ -159,14 +159,14 @@ module RailsNotice::Notification
 
     notification_setting.save
   end
-  
+
   def decrement_unread
     counters = ['total', notifiable_type]
     counters << 'official' if self.official
     counters.each do |counter|
       notification_setting.counters[counter] = notification_setting.counters[counter].to_i - 1
     end
-  
+
     notification_setting.save
   end
 
@@ -187,15 +187,15 @@ module RailsNotice::Notification
       url.to_s
     end
   end
-  
+
   def just_readed?
     read_at_changed? && read_at_change[0].nil? && read_at_change[1].acts_like?(:time)
   end
-  
+
   def saved_readed?
     saved_change_to_read_at && saved_change_to_read_at[0].nil? && saved_change_to_read_at[1].acts_like?(:time)
   end
-  
+
   def archive
     self.read_at ||= Time.current
     self.archived = true
@@ -204,7 +204,7 @@ module RailsNotice::Notification
       save!
     end
   end
-  
+
   class_methods do
     def notifiable_types
       self.unscoped.select(:notifiable_type).distinct.pluck(:notifiable_type).compact.sort!
