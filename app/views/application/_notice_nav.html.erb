@@ -7,8 +7,8 @@
   </a>
   <div class="<%= active_helper(controllers: ['annunciations', 'notifications', 'notification_settings', 'notify_settings'], active_class: 'menu content active', item_class: 'menu content') %>">
     <%= link_to t('notice.admin.annunciations.index.title'), admin_annunciations_path, class: active_helper(controllers: 'annunciations') %>
-    <%= link_to 'Notification', admin_notifications_path, class: active_helper(controllers: 'notifications') %>
-    <%= link_to 'Receiver Settings', admin_notification_settings_path, class: active_helper(controllers: ['notification_settings']) %>
+    <%= link_to t('notice.admin.notifications.index.title'), admin_notifications_path, class: active_helper(controllers: 'notifications') %>
+    <%= link_to t('notice.admin.notification_settings.index.title'), admin_notification_settings_path, class: active_helper(controllers: ['notification_settings']) %>
   </div>
 </div>
 <% end %>

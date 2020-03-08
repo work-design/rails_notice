@@ -14,7 +14,7 @@
       <th class="four wide"><%= NotificationSetting.human_attribute_name(:notifiable_types) %></th>
       <th class="four wide"><%= NotificationSetting.human_attribute_name(:counters) %></th>
       <th>
-        <%= link_to new_admin_notification_setting_path, class: 'ui mini button' do %>
+        <%= link_to new_admin_notification_setting_path, remote: true, class: 'ui mini button' do %>
           <%= t('.new') %>
         <% end %>
       </th>
@@ -30,9 +30,9 @@
       </td>
       <td><%= notification_setting.showtime %></td>
       <td>
-        <%= form_with model: notification_setting, url: admin_notification_setting_path(notification_setting.id), method: :patch, remote: true do |f| %>
-          <%= f.check_box :accept_email, onChange: "Rails.fire(this.form, 'submit')", label: false, on: {wrap_all: false, offset: false} %>
-        <% end %>
+        <div class="ui toggle checkbox">
+          <%= check_box_tag '[notification_setting]accept_email', nil, notification_setting.accept_email, data: { method: :patch, remote: true, url: admin_notification_setting_path(notification_setting), submit: true }, id: nil %>
+        </div>
       </td>
       <td class="ui labels">
         <% notification_setting.notifiable_types.each do |notifiable_type| %>
@@ -43,9 +43,15 @@
         <%= simple_format(notification_setting.counters) %>
       </td>
       <td>
-        <%= link_to 'Show', admin_notification_setting_path(notification_setting), class: 'ui blue label' %>
-        <%= link_to 'Edit', edit_admin_notification_setting_path(notification_setting), class: 'ui pink label' %>
-        <%= link_to 'Destroy', admin_notification_setting_path(notification_setting), method: :delete, data: { confirm: t('.confirm') }, class: 'ui red label' %>
+        <%= link_to admin_notification_setting_path(notification_setting), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-eye"></i>
+        <% end %>
+        <%= link_to edit_admin_notification_setting_path(notification_setting), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-pencil-alt"></i>
+        <% end %>
+        <%= link_to admin_notification_setting_path(notification_setting), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-trash"></i>
+        <% end %>
       </td>
     </tr>
   <% end %>

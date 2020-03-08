@@ -8,6 +8,9 @@ zh:
       notifications:
         index:
           title: 通知
+      notification_settings:
+        index:
+          title: 通知设置
     my:
       notifications:
         index:
