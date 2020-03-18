@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: bd11de895f9620807ffef23638b21434ed49fc12
+  revision: f2de1c0ee5411fe421dcce5a9e1f968bf686109e
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 2cceb52a6d47ec2bfa87475fc81244f3dd1cba92
+  revision: 24b0b583771ed87bcd9bcce616d1f54bb3e3aa54
   specs:
     rails_com (1.2.9)
       default_where (~> 2.2)
@@ -96,7 +96,7 @@ GEM
       railties (>= 4.2.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    http-2-next (0.2.4)
+    http-2-next (0.2.3)
     http-form_data (2.2.0)
     httpx (0.6.7)
       http-2-next (>= 0.1.2)

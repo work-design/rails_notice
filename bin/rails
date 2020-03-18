@@ -6,5 +6,5 @@ ENGINE_PATH = File.expand_path('../lib/rails_notice/engine', __dir__)
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../Gemfile', __dir__)
 require 'bundler/setup' if File.exist?(ENV['BUNDLE_GEMFILE'])
 
-require 'rails/all'
+require 'rails_com/all'
 require 'rails/engine/commands'
