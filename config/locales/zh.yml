@@ -1,6 +1,7 @@
 zh:
   notice:
     admin:
+      title: 通知管理
       annunciations:
         index:
           title: 通告
