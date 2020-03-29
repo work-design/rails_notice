@@ -16,13 +16,13 @@
   <% @annunciates.each do |annunciate| %>
     <tr>
       <td>
-        <%= link_to admin_annunciate_path(annunciate), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_annunciate_path(annunciate), aria: { label: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-eye"></i>
         <% end %>
-        <%= link_to edit_admin_annunciate_path(annunciate), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+        <%= link_to edit_admin_annunciate_path(annunciate), aria: { label: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
-        <%= link_to admin_annunciate_path(annunciate), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, remote: true, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_annunciate_path(annunciate), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
       </td>

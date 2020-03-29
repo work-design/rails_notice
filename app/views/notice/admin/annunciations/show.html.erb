@@ -29,7 +29,7 @@
             </div>
           <% end %>
         </div>
-        <%= link_to publish_admin_annunciation_path(@annunciation), data: { tooltip: '发布' }, remote: true, class: 'ui pink mini icon button' do %>
+        <%= link_to publish_admin_annunciation_path(@annunciation), aria: { label: '发布' }, remote: true, class: 'ui pink mini icon button' do %>
           <i class="fas fa-bullhorn"></i>
         <% end %>
       </td>
