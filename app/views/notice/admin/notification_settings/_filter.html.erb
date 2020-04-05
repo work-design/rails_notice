@@ -1,5 +1,5 @@
 <%= form_with theme: 'search' do |f| %>
-  <div class="fields">
+  <div class="field-body">
     <div class="ui left action input">
       <%= f.select :receiver_type, options_for_select(Notification.options_i18n(:receiver_type)), { can: { wrap_input: false } }, { class: 'ui selection dropdown', id: 'q_receiver_type' } %>
       <%= f.select :receiver_id, options_for_select([]), { on: { wrap_input: false } }, { id: 'q_receiver_id', class: 'ui search dropdown' } %>

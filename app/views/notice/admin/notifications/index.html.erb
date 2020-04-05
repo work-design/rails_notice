@@ -69,7 +69,7 @@
         <p><%= notification.official %></p>
       </td>
       <td>
-        <%= link_to edit_admin_notification_path(notification), aria: { label: t('.edit') }, class: 'ui mini circular icon button' do %>
+        <%= link_to edit_admin_notification_path(notification), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
         <%= link_to 'Push', push_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: t('.confirm') }, class: 'ui mini green label' %>
