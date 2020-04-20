@@ -1,4 +1,4 @@
 <div class="ui menu vertical fluid">
-  <%= link_to t('rails_notice.unread'), notifications_path(receiver: params[:receiver]), class: active_params(scope: '', active_class: 'item active', item_class: 'item') %>
-  <%= link_to t('rails_notice.readed'), notifications_path(receiver: params[:receiver], scope: 'readed'), class: active_params(scope: 'readed', active_class: 'item active', item_class: 'item') %>
+  <%= link_to t('rails_notice.unread'), notifications_path(receiver: params[:receiver]), class: active_params(scope: '', active: 'item active', item: 'item') %>
+  <%= link_to t('rails_notice.readed'), notifications_path(receiver: params[:receiver], scope: 'readed'), class: active_params(scope: 'readed', active: 'item active', item: 'item') %>
 </div>

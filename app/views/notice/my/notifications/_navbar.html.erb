@@ -1,5 +1,5 @@
 <div class="ui tabular top attached menu">
-  <%= link_to t('notice.my.notifications.index.title'), my_notifications_path, class: active_helper(notifications: 'index', active_class: 'item active', item_class: 'item') %>
+  <%= link_to t('notice.my.notifications.index.title'), my_notifications_path, class: active_helper(notifications: 'index', active: 'item active', item: 'item') %>
   <%= link_to t('notice.my.notification_settings.show.title'), my_notification_setting_path, class: active_helper(controllers: ['notification_settings']) %>
   <div class="right menu">
     <% unless params[:scope] == 'readed' %>
