@@ -1,8 +1,8 @@
 <div class="<%= active_helper(modules: 'notice/admin', active: 'menu ex-accordion is-active', item: 'menu ex-accordion') %>" data-controller="menu">
   <%= content_tag :div, class: 'menu-list' do %>
-    <%= link_to t('notice.admin.annunciations.index.title'), admin_annunciations_path, class: active_helper(controllers: 'annunciations') %>
-    <%= link_to t('notice.admin.notifications.index.title'), admin_notifications_path, class: active_helper(controllers: 'notifications') %>
-    <%= link_to t('notice.admin.notification_settings.index.title'), admin_notification_settings_path, class: active_helper(controllers: ['notification_settings']) -%>
+    <%= link_to t('notice.admin.annunciations.index.title'), admin_annunciations_path, class: active_helper(controllers: 'annunciations', active: 'is-active') %>
+    <%= link_to t('notice.admin.notifications.index.title'), admin_notifications_path, class: active_helper(controllers: 'notifications', active: 'is-active') %>
+    <%= link_to t('notice.admin.notification_settings.index.title'), admin_notification_settings_path, class: active_helper(controllers: ['notification_settings'], active: 'is-active') -%>
   <% end %>
   <a class="menu-label" data-action="menu#toggle">
     <i class="fas fa-inbox fa-fw"></i>
