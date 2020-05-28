@@ -3,7 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gemspec
 
 gem 'rails'
-gem 'puma'
 gem 'jbuilder'
 gem 'turbolinks'
 gem 'sqlite3'
