@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 08195d4ecad11b2fa7da0964ae50d1b53459b1f5
+  revision: e684847634b71a9f3f6f7d48f2818a45e07449a4
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 48adc26b3f733e38d671c082dbc8c3a6275c9f72
+  revision: 6caef1c18a8cdaf348281f4a496d50f1c558658f
   specs:
     rails_com (1.2.9)
       default_where (~> 2.2)
@@ -101,7 +101,7 @@ GEM
     httpx (0.8.2)
       http-2-next (>= 0.1.2)
       timers
-    i18n (1.8.2)
+    i18n (1.8.3)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
@@ -166,7 +166,7 @@ GEM
       thor (>= 0.20.3, < 2.0)
     rake (13.0.1)
     semantic_range (2.3.0)
-    sprockets (4.0.0)
+    sprockets (4.0.1)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
@@ -189,7 +189,7 @@ GEM
       semantic_range (>= 2.3.0)
     websocket-driver (0.7.2)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.4)
+    websocket-extensions (0.1.5)
     zeitwerk (2.3.0)
 
 PLATFORMS

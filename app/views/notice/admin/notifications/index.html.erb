@@ -1,11 +1,9 @@
-<div class="ui top attached segment">
-  <%= render 'filter' %>
-</div>
+<%= render 'filter_form' %>
 
 <table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
-      <th class="one wide">
+      <th>
         <p><%= Notification.human_attribute_name(:receiver_type) %></p>
         <p><%= Notification.human_attribute_name(:receiver_id) %></p>
       </th>
