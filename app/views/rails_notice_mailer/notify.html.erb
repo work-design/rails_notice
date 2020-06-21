@@ -8,7 +8,7 @@
   <tbody>
     <% @notification.notifiable_attributes.each do |key, value| %>
     <tr>
-      <td class="right aligned">
+      <td class="has-text-right">
         <%= @notification.notifiable.class.human_attribute_name(key) %>
       </td>
       <td>
