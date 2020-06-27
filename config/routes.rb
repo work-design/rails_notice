@@ -2,11 +2,15 @@ Rails.application.routes.draw do
 
   scope :admin, module: 'notice/admin', as: :admin do
     resources :notifications do
-      patch :push, on: :member
-      patch :email, on: :member
+      member do
+        patch :push
+        patch :email
+      end
     end
     resources :notify_settings do
-      get :columns, on: :collection
+      collection do
+        get :columns
+      end
     end
     resources :notification_settings
     resources :annunciations do
@@ -22,7 +26,9 @@ Rails.application.routes.draw do
 
   scope :my, module: 'notice/my', as: :my do
     resources :notifications, only: [:index, :show, :destroy] do
-      get :read_all, on: :collection
+      collection do
+        get :read_all
+      end
       member do
         get :url
         get :read
@@ -32,8 +38,12 @@ Rails.application.routes.draw do
     resource :notification_setting, only: [:show, :edit, :update]
   end
 
-  resources :receivers do
-    get :search, on: :collection
+  scope module: 'notice' do
+    resources :receivers do
+      collection do
+        get :search
+      end
+    end
   end
-  
+
 end
