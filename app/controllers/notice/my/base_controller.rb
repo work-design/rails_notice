@@ -1,3 +1,3 @@
-class Notice::My::BaseController < RailsNotice.config.my_controller.constantize
+class Notice::My::BaseController < MyController
 
-end
+end unless defined? Notice::My::BaseController
