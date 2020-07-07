@@ -1,4 +1,3 @@
-class Notice::Admin::BaseController < RailsNotice.config.admin_controller.constantize
+class Notice::Admin::BaseController < AdminController
 
-
-end
+end unless defined? Notice::Admin::BaseController
