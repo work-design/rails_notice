@@ -12,7 +12,13 @@ module RailsNoticeSend::Wechat
     wechat_notice = wechat_template.wechat_notices.build
     wechat_notice.wechat_subscribed = receiver.wechat_subscribeds.first
     wechat_notice.notification = self
+    if wechat_app.is_a?(WechatPublic)
+      wechat_notice.type = 'PublicNotice'
+    else
+      wechat_notice.type = 'ProgramNotice'
+    end
     wechat_notice.save
+    wechat_notice
     #self.notification_sendings.find_or_create_by(way: 'wechat', sent_to: authorized_token.token)
   end
 
