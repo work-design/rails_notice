@@ -3,14 +3,11 @@
 <table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
-      <th class="two wide">
-        <p><%= NotificationSetting.human_attribute_name(:receiver_type) %></p>
-        <p><%= NotificationSetting.human_attribute_name(:receiver_id) %></p>
-      </th>
-      <th class="one wide"><%= NotificationSetting.human_attribute_name(:showtime) %></th>
-      <th class="one wide"><%= NotificationSetting.human_attribute_name(:accept_email) %></th>
-      <th class="four wide"><%= NotificationSetting.human_attribute_name(:notifiable_types) %></th>
-      <th class="four wide"><%= NotificationSetting.human_attribute_name(:counters) %></th>
+      <th><%= NotificationSetting.human_attribute_name(:user_id) %></th>
+      <th><%= NotificationSetting.human_attribute_name(:showtime) %></th>
+      <th><%= NotificationSetting.human_attribute_name(:accept_email) %></th>
+      <th><%= NotificationSetting.human_attribute_name(:notifiable_types) %></th>
+      <th><%= NotificationSetting.human_attribute_name(:counters) %></th>
       <th>
         <%= link_to new_admin_notification_setting_path, remote: true, class: 'ui mini button' do %>
           <%= t('.new') %>
@@ -22,10 +19,7 @@
   <tbody>
   <% @notification_settings.each do |notification_setting| %>
     <tr>
-      <td>
-        <p><%= notification_setting.receiver_type %></p>
-        <p><%= notification_setting.receiver_id %></p>
-      </td>
+      <td><%= notification_setting.receiver_id %></td>
       <td><%= notification_setting.showtime %></td>
       <td>
         <div class="ui toggle checkbox">

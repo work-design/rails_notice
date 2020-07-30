@@ -171,7 +171,7 @@ module RailsNotice::Notification
   end
 
   def reset_unread_count
-    self.receiver.reset_unread_count
+    self.user.reset_unread_count
   end
 
   def link

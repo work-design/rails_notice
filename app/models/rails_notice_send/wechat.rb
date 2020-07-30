@@ -10,7 +10,7 @@ module RailsNoticeSend::Wechat
 
     return unless wechat_template
     wechat_notice = wechat_template.wechat_notices.build
-    wechat_notice.wechat_subscribed = receiver.wechat_subscribeds.first
+    wechat_notice.wechat_subscribed = user.wechat_subscribeds.first
     wechat_notice.notification = self
     if wechat_app.is_a?(WechatPublic)
       wechat_notice.type = 'PublicNotice'

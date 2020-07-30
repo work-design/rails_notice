@@ -38,12 +38,4 @@ Rails.application.routes.draw do
     resource :notification_setting, only: [:show, :edit, :update]
   end
 
-  scope module: 'notice' do
-    resources :receivers do
-      collection do
-        get :search
-      end
-    end
-  end
-
 end

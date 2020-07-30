@@ -3,8 +3,8 @@ module RailsNoticeSend::Socket
   def send_out
     super if defined? super
 
-    return unless receiver
-    receiver.authorized_tokens.each do |authorized_token|
+    return unless user
+    user.authorized_tokens.each do |authorized_token|
       ActionCable.server.broadcast(
         authorized_token.token,
         id: id,
