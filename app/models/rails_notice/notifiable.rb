@@ -7,11 +7,14 @@ module RailsNotice::Notifiable
     has_many :notifications, as: :notifiable
   end
 
-  def to_notification(receiver: , **other_params)
+  def to_notification(receiver: nil, **other_params)
     n = self.notifications.build
     n.organ_id = self.organ_id if respond_to?(:organ_id)
-    n.receiver_id = receiver.id
-    n.receiver_type = receiver.class
+    if receiver
+      n.user_id = receiver.id
+    elsif respond_to?(:user_id)
+      n.user_id = self.user_id
+    end
 
     if other_params[:sender]
       return if other_params[:sender] == receiver  # do not send notification to himself

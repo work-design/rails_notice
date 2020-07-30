@@ -2,7 +2,6 @@ module RailsNotice::NotificationSetting
   extend ActiveSupport::Concern
 
   included do
-
     if connection.adapter_name == 'PostgreSQL'
       attribute :notifiable_types, :string, array: true, default: []
     else
@@ -12,7 +11,7 @@ module RailsNotice::NotificationSetting
     attribute :showtime, :integer, default: 0
     attribute :accept_email, :boolean, default: RailsNotice.config.default_send_email
 
-    belongs_to :receiver, polymorphic: true
+    belongs_to :user
   end
 
   class_methods do
@@ -32,7 +31,7 @@ module RailsNotice::NotificationSetting
 
     def reset_counters
       self.find_each do |ns|
-        ns.receiver.reset_unread_count if ns.receiver
+        ns.user.reset_unread_count if ns.user
       end
     end
   end

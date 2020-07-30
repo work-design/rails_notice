@@ -14,12 +14,12 @@ module RailsNotice::Notification
     attribute :verbose, :boolean, default: false
     attribute :created_at, :datetime, null: false, index: true
 
+    belongs_to :user
     belongs_to :organ, optional: true
-    belongs_to :receiver, polymorphic: true
     belongs_to :sender, polymorphic: true, optional: true
     belongs_to :notifiable, polymorphic: true, optional: true
     belongs_to :linked, polymorphic: true, optional: true
-    has_one :notification_setting, ->(o) { where(receiver_type: o.receiver_type) }, primary_key: :receiver_id, foreign_key: :receiver_id
+    has_one :notification_setting, primary_key: :user_id, foreign_key: :user_id
     has_many :notification_sendings, dependent: :delete_all
 
     default_scope -> { order(created_at: :desc) }
@@ -34,7 +34,7 @@ module RailsNotice::Notification
   def notification_setting
     r = super || build_notification_setting
     if r.new_record?
-      r.counters = receiver.compute_unread_count
+      r.counters = user.compute_unread_count
       r.save
     end
     r
@@ -71,8 +71,8 @@ module RailsNotice::Notification
       r = notifiable_detail
       r.transform_values! do |i|
         next i unless i.acts_like?(:time)
-        if self.receiver.respond_to?(:timezone)
-          time_zone = self.receiver.timezone
+        if self.user.respond_to?(:timezone)
+          time_zone = self.user.timezone
         else
           time_zone = Time.zone.name
         end

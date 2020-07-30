@@ -1,9 +1,9 @@
-module RailsNotice::Receiver
+module RailsNotice::User
   extend ActiveSupport::Concern
 
   included do
-    has_many :notifications, as: :receiver, dependent: :delete_all
-    has_one :notification_setting, as: :receiver, dependent: :delete
+    has_many :notifications, dependent: :delete_all
+    has_one :notification_setting, dependent: :delete
 
     has_many :annunciates, through: :user_taggeds
   end
@@ -23,8 +23,7 @@ module RailsNotice::Receiver
         r = {}
         r.merge! annunciation.attributes.slice(:organ_id, :link)
         r.merge!(
-          receiver_type: self.class.name,
-          receiver_id: self.id,
+          user_id: self.id,
           sender_type: annunciation.publisher_type,
           sender_id: annunciation.publisher_id,
           notifiable_type: annunciation.class.name,
