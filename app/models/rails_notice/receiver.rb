@@ -1,9 +1,10 @@
 module RailsNotice::Receiver
   extend ActiveSupport::Concern
+
   included do
     has_many :notifications, as: :receiver, dependent: :delete_all
     has_one :notification_setting, as: :receiver, dependent: :delete
-    
+
     has_many :annunciates, through: :user_taggeds
   end
 
@@ -11,7 +12,7 @@ module RailsNotice::Receiver
     r = notification_setting.counters.fetch(:counters, {}).dig('total')
     r.to_i
   end
-  
+
   def apply_pending_annunciations
     annunciation_ids = pending_annunciation_ids
     return if annunciation_ids.blank?
@@ -35,7 +36,7 @@ module RailsNotice::Receiver
         )
         r
       end
-      
+
       Annunciation.increment_counter(:notifications_count, ids)
       Notification.insert_all(annunciation_attributes)
     end
@@ -53,7 +54,7 @@ module RailsNotice::Receiver
   def pending_annunciation_ids
     all_annunciation_ids = annunciates.default_where('created_at-gte': self.created_at).order(annunciation_id: :desc).pluck(:annunciation_id).compact
     made_annunciation_ids = notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
-  
+
     all_annunciation_ids - made_annunciation_ids
   end
 

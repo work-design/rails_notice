@@ -13,6 +13,7 @@ module RailsNoticeSend::Wechat
     wechat_notice.wechat_subscribed = receiver.wechat_subscribeds.first
     wechat_notice.notification = self
     wechat_notice.save
+    #self.notification_sendings.find_or_create_by(way: 'wechat', sent_to: authorized_token.token)
   end
 
   def wechat_app

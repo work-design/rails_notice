@@ -9,6 +9,7 @@ module RailsNotice::Notifiable
 
   def to_notification(receiver: , **other_params)
     n = self.notifications.build
+    n.organ_id = self.organ_id if respond_to?(:organ_id)
     n.receiver_id = receiver.id
     n.receiver_type = receiver.class
 
