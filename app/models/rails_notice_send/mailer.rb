@@ -1,9 +1,9 @@
 module RailsNoticeSend::Mailer
-  
+
   def send_out
-    super
+    super if defined? super
     return unless email_enable?
-    
+
     if notify_setting[:mailer_class]
       notify_method = notify_setting[:mailer_method] || 'notify'
       if sending_at
@@ -24,11 +24,11 @@ module RailsNoticeSend::Mailer
     if receiver.notification_setting.accept_email
       return true
     end
-  
+
     if receiver.notification_setting.accept_email.is_a?(FalseClass)
       return false
     end
-  
+
     RailsNotice.config.default_send_email
   end
 
@@ -39,5 +39,5 @@ module RailsNoticeSend::Mailer
     end
     r.flatten
   end
-  
+
 end

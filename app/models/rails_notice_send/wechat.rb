@@ -6,6 +6,8 @@ module RailsNoticeSend::Wechat
   end
 
   def send_out
+    super if defined? super
+
     return unless wechat_template
     wechat_notice = wechat_template.wechat_notices.build
     wechat_notice.wechat_subscribed = receiver.wechat_subscribeds.first

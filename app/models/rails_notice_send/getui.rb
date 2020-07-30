@@ -1,8 +1,8 @@
 module RailsNoticeSend::Getui
 
   def send_out
-    super
-    
+    super if defined? super
+
     return unless receiver.getui_token
     payload = { id: self.id, link: self.link }
     apns = Getui::Apns.new(self.body, title: self.title, payload: payload)
@@ -10,5 +10,5 @@ module RailsNoticeSend::Getui
 
     Getui.push_single(receiver.getui_token, message)
   end
-  
+
 end
