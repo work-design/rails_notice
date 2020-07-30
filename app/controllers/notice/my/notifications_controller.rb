@@ -6,8 +6,8 @@ class Notice::My::NotificationsController < Notice::My::BaseController
     q_params = {
       archived: false
     }
-    current_receiver.apply_pending_annunciations
-    @notifications = current_receiver.notifications.order(read_at: :asc)
+    current_user.apply_pending_annunciations
+    @notifications = current_user.notifications.order(read_at: :asc)
     if params[:scope] == 'readed'
       @notifications = @notifications.readed
     elsif params[:scope] == 'unread'
@@ -18,12 +18,12 @@ class Notice::My::NotificationsController < Notice::My::BaseController
 
   def read_all
     if params[:page]
-      @notifications = current_receiver.notifications.default_where(q_params).page(params[:page]).per(params[:per])
+      @notifications = current_user.notifications.default_where(q_params).page(params[:page]).per(params[:per])
     else
-      @notifications = current_receiver.notifications.default_where(q_params)
+      @notifications = current_user.notifications.default_where(q_params)
     end
     @notifications.update_all(read_at: Time.current)
-    current_receiver.reset_unread_count
+    current_user.reset_unread_count
   end
 
   def show
@@ -41,12 +41,12 @@ class Notice::My::NotificationsController < Notice::My::BaseController
 
   def update
     @notification.update(notification_params)
-    
+
     unless @notification.save
       render :edit, locals: { model: @notification }, status: :unprocessable_entity
     end
   end
-  
+
   def archive
     @notification.archive
   end
@@ -60,7 +60,7 @@ class Notice::My::NotificationsController < Notice::My::BaseController
     q_params = {}
     q_params.merge! params.permit(:notifiable_type, :official)
   end
-  
+
   def notification_params
     params.fetch(:notification, {}).permit!
   end
