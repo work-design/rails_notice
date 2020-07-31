@@ -9,7 +9,6 @@ module RailsNotice::Notifiable
 
   def to_notification(receiver: nil, **other_params)
     n = self.notifications.build
-    n.organ_id = self.organ_id if respond_to?(:organ_id)
     if receiver
       n.user_id = receiver.id
     elsif respond_to?(:user_id)
@@ -28,11 +27,12 @@ module RailsNotice::Notifiable
     end
 
     n.assign_attributes other_params.slice(
-      :title, :body, :link,
+      :title, :body, :link, :organ_id,
       :verbose, :code,
       :cc_emails,
       :linked_type, :linked_id
     )
+    n.organ_id ||= self.organ_id if respond_to?(:organ_id)
 
     n.save!
   end
