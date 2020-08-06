@@ -9,17 +9,18 @@ module RailsNoticeSend::Wechat
     super if defined? super
 
     return unless wechat_template
-    wechat_notice = wechat_template.wechat_notices.build
-    wechat_notice.wechat_subscribed = user.wechat_subscribeds.first
-    wechat_notice.notification = self
-    if wechat_app.is_a?(WechatPublic)
-      wechat_notice.type = 'PublicNotice'
-    else
-      wechat_notice.type = 'ProgramNotice'
+    user.wechat_users.where(app_id: wechat_app.appid).map do |wechat_user|
+      wechat_notice = wechat_template.wechat_notices.build
+      wechat_notice.wechat_subscribed = user.wechat_subscribeds.first
+      wechat_notice.notification = self
+      if wechat_app.is_a?(WechatPublic)
+        wechat_notice.type = 'PublicNotice'
+      else
+        wechat_notice.type = 'ProgramNotice'
+      end
+      wechat_notice.save
+      wechat_notice
     end
-    wechat_notice.save
-    wechat_notice
-    #self.notification_sendings.find_or_create_by(way: 'wechat', sent_to: authorized_token.token)
   end
 
   def wechat_app
