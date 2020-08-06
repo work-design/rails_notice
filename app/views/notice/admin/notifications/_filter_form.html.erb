@@ -1,10 +1,7 @@
 <%= form_with theme: 'search', model: Notification.new do |f| %>
   <div class="field-body">
-    <div class="">
-      <%= f.select :receiver_type, options_for_select(Notification.options_i18n(:receiver_type), params[:receiver_type]), { on: { wrap_input: false } }, { class: 'ui selection dropdown', id: 'q_receiver_type' } %>
-      <%= f.select :receiver_id, options_for_select([]), { on: { wrap_input: false } }, { id: 'q_receiver_id', class: 'ui search dropdown' } %>
-    </div>
-    <%= f.text_field :'body-like' %>
+    <%= f.text_field 'user.name-like' %>
+    <%= f.text_field 'body-like' %>
     <%= f.submit %>
   </div>
 <% end %>

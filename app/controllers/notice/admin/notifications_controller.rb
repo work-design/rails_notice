@@ -6,7 +6,7 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
       archived: false
     }
     q_params.merge! default_params
-    q_params.merge! params.permit(:archived, :receiver_type, :receiver_id, :notifiable_type, :notifiable_id)
+    q_params.merge! params.permit(:archived, :user_id, :notifiable_type, :notifiable_id, 'user.name-like')
     @notifications = Notification.default_where(q_params).page(params[:page])
   end
 
@@ -41,7 +41,7 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
   def update
     @notification.assign_attributes(notification_params)
 
-    if @notification.save
+    unless @notification.save
       render :edit, locals: { model: @notification }, status: :unprocessable_entity
     end
   end
@@ -53,8 +53,7 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
   private
   def q_params
     q = {}
-    q.merge! params.permit(:receiver_type, :receiver_id)
-    q.merge! params.permit(:id, 'body-like', :receiver_type, :receiver_id)
+    q.merge! params.permit(:id, 'body-like', :user_id)
     q
   end
 

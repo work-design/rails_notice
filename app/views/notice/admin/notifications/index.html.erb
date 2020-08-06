@@ -3,10 +3,7 @@
 <table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
-      <th>
-        <p><%= Notification.human_attribute_name(:receiver_type) %></p>
-        <p><%= Notification.human_attribute_name(:receiver_id) %></p>
-      </th>
+      <th><%= Notification.human_attribute_name(:user_id) %></th>
       <th class="four wide">
         <p><%= Notification.human_attribute_name(:title) %></p>
         <p><%= Notification.human_attribute_name(:body) %></p>
@@ -38,10 +35,7 @@
   <tbody>
   <% @notifications.each do |notification| %>
     <tr>
-      <td>
-        <p><%= notification.receiver_type %></p>
-        <p><%= notification.receiver_id %></p>
-      </td>
+      <td><%= notification.user.name %></td>
       <td>
         <p><%= notification.title %></p>
         <p><%= notification.body %></p>
