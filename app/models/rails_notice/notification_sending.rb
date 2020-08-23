@@ -4,7 +4,7 @@ module RailsNotice::NotificationSending
   included do
     attribute :way, :string
     attribute :sent_to, :string
-    attribute :sent_at, :datetime, default: -> { Time.now }
+    attribute :sent_at, :datetime, default: -> { Time.current }
     attribute :sent_result, :string
 
     belongs_to :notification
