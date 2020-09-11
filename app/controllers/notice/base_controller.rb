@@ -1,3 +1,3 @@
-class Notice::BaseController < BaseController
+class Notice::BaseController < ApplicationController
 
 end unless defined? Notice::BaseController

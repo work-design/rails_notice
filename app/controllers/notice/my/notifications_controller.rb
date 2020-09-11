@@ -6,6 +6,8 @@ class Notice::My::NotificationsController < Notice::My::BaseController
     q_params = {
       archived: false
     }
+    q_params.merge! default_params
+
     current_user.apply_pending_annunciations
     @notifications = current_user.notifications.order(read_at: :asc)
     if params[:scope] == 'readed'
