@@ -12,6 +12,7 @@ module RailsNotice::NotificationSetting
     attribute :accept_email, :boolean, default: RailsNotice.config.default_send_email
 
     belongs_to :user
+    belongs_to :member, optional: true
     belongs_to :organ, optional: true
   end
 
