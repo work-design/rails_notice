@@ -3,7 +3,7 @@ class Notice::Admin::NotificationSettingsController < Notice::Admin::BaseControl
 
   def index
     q_params = {}
-    q_params.merge! params.permit(:id, :receiver_type, :receiver_id)
+    q_params.merge! params.permit(:id)
     @notification_settings = NotificationSetting.default_where(q_params).order(id: :desc).page(params[:page])
   end
 

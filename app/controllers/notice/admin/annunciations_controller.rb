@@ -28,16 +28,14 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
 
   def update
     @annunciation.assign_attributes(annunciation_params)
-    
+
     unless @annunciation.save
       render :edit, locals: { model: @annunciation }, status: :unprocessable_entity
     end
   end
-  
+
   def edit_publish
-    if params[:receiver_type]
-      @user_tags = UserTag.where.not(id: @annunciation.user_tag_ids)
-    end
+    @user_tags = UserTag.where.not(id: @annunciation.user_tag_ids)
   end
 
   def update_publish
@@ -51,15 +49,10 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
   end
 
   def options
-    if params[:receiver_type] == 'User'
-      @tags = UserTag.default_where(default_params)
-    else
-      @tags = UserTag.none
-    end
+    @tags = UserTag.default_where(default_params)
   end
-  
+
   def wechat
-  
   end
 
   def destroy

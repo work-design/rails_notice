@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: a77f86b6f159cf64225c6221d2408505ffd4249c
+  revision: 7ff3635f2e78e4ebc0db7309476c6c33d4d05a86
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 6cc1906a3288dee24670aa84db82f37bfc34ed7f
+  revision: 7012d2bc90e8335d43e8422e16b0dce0c75b0243
   specs:
     rails_com (1.2.9)
       acme-client
@@ -30,7 +30,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    acme-client (2.0.6)
+    acme-client (2.0.7)
       faraday (>= 0.17, < 2.0.0)
     actioncable (6.0.3.2)
       actionpack (= 6.0.3.2)
