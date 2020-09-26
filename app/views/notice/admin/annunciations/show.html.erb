@@ -1,8 +1,10 @@
 <% content_for :breadcrumb do %>
-<ul>
-  <li><%= link_to t('notice.admin.annunciations.index.title'), admin_annunciations_path %></li>
-  <li class="is-active"><%= t('.title') %></li>
-</ul>
+<div class="breadcrumb has-succeeds-separator">
+  <ul>
+    <li><%= link_to t('notice.admin.annunciations.index.title'), admin_annunciations_path %></li>
+    <li class="is-active"><%= t('.title') %></li>
+  </ul>
+</div>
 <% end %>
 
 <table class="table is-hoverable is-fullwidth">
