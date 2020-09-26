@@ -4,6 +4,7 @@ zh:
       annunciation: 通告
     attributes:
       annunciation:
+        cover: 封面
         body: 内容
         link: 链接
         state: 状态
