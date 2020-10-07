@@ -1,6 +1,6 @@
 <%= form_with model: [:admin, @notification_setting] do |f| %>
   <%= render 'shared/error_messages', target: @notification_setting %>
-  <%= f.number_field :showtime %>
+  <%= f.number_field :showtime, step: 1 %>
   <%= f.check_box :accept_email %>
   <%= f.collection_check_boxes :notifiable_types, Notification.notifiable_types, :to_s, :to_s %>
   <%= f.submit %>

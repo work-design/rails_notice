@@ -1,5 +1,5 @@
 <%= form_with model: @notification_setting, url: my_notification_setting_path, method: :patch do |f| %>
-  <%= f.number_field :showtime %>
+  <%= f.number_field :showtime, step: 1 %>
   <%= f.check_box :accept_email %>
   <%= f.submit %>
 <% end %>
