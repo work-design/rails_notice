@@ -40,9 +40,9 @@
       </td>
       <td><time><%= annunciation.created_at.to_s(:rfc822) %></time></td>
       <td class="ui labels">
-        <%# annunciation.annunciates.each do |annunciate| %>
-<!--          <div class="ui label"><%#= annunciate.department&.name %></div>-->
-        <%# end %>
+        <% annunciation.annunciates.each do |annunciate| %>
+          <div class="ui label"><%= annunciate.department&.name %></div>
+        <% end %>
         <%= link_to user_admin_annunciation_path(annunciation), aria: { label: t('.publish') }, remote: true, class: 'button is-small is-rounded is-link' do %>
           <i class="fas fa-bullhorn"></i>
         <% end if annunciation.is_a?(UserAnnunciation) %>
