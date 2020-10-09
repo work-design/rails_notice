@@ -2,29 +2,29 @@
   <%= render 'navbar' %>
 <% end %>
 
-<div class="ui divided items bottom attached segment">
-  <% @notifications.each do |notification| %>
-    <div class="ui info item">
-      <div class="content">
-        <% if notification.title %>
-          <div class="header">
-            <%= link_to notification.title, notification.link %>
-          </div>
-        <% end %>
-        <div class="description">
-          <%= link_to notification.body, notification.link %>
+<div class="box">
+<% @notifications.each do |notification| %>
+  <div class="media">
+    <div class="media-content">
+      <% if notification.title %>
+        <div class="header">
+          <%= link_to notification.title, notification.link %>
         </div>
-        <div class="extra">
-          <time><%= notification.created_at.to_s(:rfc822) %></time>
-          <% unless params[:scope] == 'readed' %>
-            <%= link_to read_my_notification_path(notification), class: 'right floated notification', id: "check_#{notification.id}", remote: true do %>
-              <i class="checkmark red icon"></i>Mark
-            <% end %>
-          <% end %>
-        </div>
+      <% end %>
+      <div class="description">
+        <%= link_to notification.body, notification.link %>
+      </div>
+      <div class="extra">
+        <time><%= notification.created_at.to_s(:rfc822) %></time>
       </div>
     </div>
-  <% end %>
+    <div class="media-right">
+      <%= link_to({ action: 'show', id: notification.id }, { class: 'button is-small is-rounded', id: "check_#{notification.id}", remote: true }) do %>
+        <i class="fas fa-check has-text-danger"></i>Mark
+      <% end unless params[:scope] == 'readed' %>
+    </div>
+  </div>
+<% end %>
 </div>
 
 <%= paginate @notifications %>

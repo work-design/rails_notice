@@ -23,3 +23,14 @@ zh:
       notification_settings:
         show:
           title: 通知设置
+    me:
+      title: 通知
+      notifications:
+        index:
+          title: 通知
+          unread: 未读
+          readed: 已读
+          detail: 详情请点击
+      notification_settings:
+        show:
+          title: 通知设置
