@@ -43,9 +43,12 @@
         <% annunciation.annunciates.each do |annunciate| %>
           <div class="ui label"><%= annunciate.user_tag&.name %></div>
         <% end %>
-        <%= link_to publish_admin_annunciation_path(annunciation, receiver_type: params[:receiver_type]), aria: { label: t('.publish') }, remote: true, class: 'ui blue mini circular icon button' do %>
+        <%= link_to user_admin_annunciation_path(annunciation), aria: { label: t('.publish') }, remote: true, class: 'button is-small is-rounded is-link' do %>
           <i class="fas fa-bullhorn"></i>
-        <% end %>
+        <% end if annunciation.is_a?(UserAnnunciation) %>
+        <%= link_to member_admin_annunciation_path(annunciation), aria: { label: t('.publish') }, remote: true, class: 'button is-small is-rounded is-link' do %>
+          <i class="fas fa-bullhorn"></i>
+        <% end if annunciation.is_a?(MemberAnnunciation) %>
       </td>
       <td>
         <%= link_to admin_annunciation_path(annunciation), aria: { label: t('.show') }, class: 'button is-small is-rounded is-light' do %>

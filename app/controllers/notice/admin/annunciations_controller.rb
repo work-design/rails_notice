@@ -56,9 +56,16 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
   end
 
   def edit_member
+    q_params = {}
+    q_params.merge! default_params
+
+    @departments = Department.default_where(q_params)
   end
 
   def update_member
+    params[:department_ids].reject(&:blank?).each do |department_id|
+      @annunciation.annunciates.find_or_create_by(department_id: department_id)
+    end
   end
 
   def destroy
