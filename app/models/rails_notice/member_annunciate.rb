@@ -12,13 +12,13 @@ module RailsNotice::MemberAnnunciate
     has_many :notification_settings, through: :user_taggeds
     has_many :same_annunciates, class_name: self.name, foreign_key: :annunciation_id, primary_key: :annunciation_id
 
-    after_create :increment_unread_count
-    after_destroy :decrement_unread_count
+    #after_create :increment_unread_count
+    #after_destroy :decrement_unread_count
   end
 
   def increment_unread_count
     user_ids = same_user_ids
-    logger.debug(same_user_ids)
+
     ['total', 'official', 'Annunciation'].each do |col|
       notification_settings.where.not(user_id: user_ids).increment_unread_counter(col)
     end
@@ -26,7 +26,7 @@ module RailsNotice::MemberAnnunciate
 
   def decrement_unread_count
     user_ids = same_user_ids
-    logger.debug(same_user_ids)
+
     ['total', 'official', 'Annunciation'].each do |col|
       notification_settings.where.not(user_id: user_ids).decrement_unread_counter(col)
     end
