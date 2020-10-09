@@ -1,4 +1,6 @@
-<%= render 'navbar' %>
+<% content_for :breadcrumb do %>
+  <%= render 'navbar' %>
+<% end %>
 
 <div class="ui divided items bottom attached segment">
   <% @notifications.each do |notification| %>

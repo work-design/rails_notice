@@ -1,4 +1,6 @@
-<%= render 'notice/my/notifications/navbar' %>
+<% content_for :breadcrumb do %>
+  <%= render 'navbar' %>
+<% end %>
 
 <div class="ui bottom attached segment">
   <%= render 'form' %>

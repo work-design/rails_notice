@@ -1,0 +1,6 @@
+<div class="tabs">
+  <ul>
+    <li class="<%= active_helper(notifications: 'index', active: 'is-active') %>"><%= link_to t('notice.my.notifications.index.title'), me_notifications_path %></li>
+    <li class="<%= active_helper(controllers: ['notification_settings'], active: 'is-active') %>"><%= link_to t('notice.my.notification_settings.show.title'), me_notification_setting_path %></li>
+  </ul>
+</div>
