@@ -7,7 +7,7 @@ class Notice::Me::NotificationsController < Notice::Me::BaseController
       archived: false
     }
 
-    #current_member.apply_pending_annunciations
+    current_member.apply_pending_annunciations
     @notifications = current_member.notifications.order(read_at: :asc)
     if params[:scope] == 'readed'
       @notifications = @notifications.readed

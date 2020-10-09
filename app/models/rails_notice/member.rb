@@ -53,7 +53,7 @@ module RailsNotice::Member
 
   def pending_annunciation_ids
     all_annunciation_ids = member_annunciates.default_where('created_at-gte': self.created_at).order(annunciation_id: :desc).pluck(:annunciation_id).compact
-    made_annunciation_ids = notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
+    made_annunciation_ids = notifications.where(notifiable_type: 'MemberAnnunciation').pluck(:notifiable_id)
 
     all_annunciation_ids - made_annunciation_ids
   end
