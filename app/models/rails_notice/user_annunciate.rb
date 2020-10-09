@@ -1,4 +1,4 @@
-module RailsNotice::Annunciate
+module RailsNotice::UserAnnunciate
   extend ActiveSupport::Concern
 
   included do
@@ -7,8 +7,6 @@ module RailsNotice::Annunciate
     attribute :annunciated_at, :datetime
 
     belongs_to :annunciation
-    belongs_to :job_title, optional: true
-    belongs_to :department, optional: true
     belongs_to :user_tag, optional: true
     has_many :user_taggeds, foreign_key: :user_tag_id, primary_key: :user_tag_id
     has_many :notification_settings, through: :user_taggeds

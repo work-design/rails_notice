@@ -12,8 +12,6 @@ module RailsNotice::Annunciation
     belongs_to :organ, optional: true
     belongs_to :publisher, polymorphic: true, optional: true
     has_many :notifications, as: :notifiable
-    has_many :annunciates, dependent: :destroy
-    has_many :user_tags, through: :annunciates
 
     validates :body, presence: true
 
