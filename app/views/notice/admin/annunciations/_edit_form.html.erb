@@ -1,0 +1,3 @@
+<%= form_with model: @annunciation, scope: :annunciation, url: admin_annunciation_path(@annunciation) do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+<% end %>

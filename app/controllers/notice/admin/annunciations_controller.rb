@@ -4,6 +4,8 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
   def index
     q_params = {}
     q_params.merge! default_params
+    q_params.merge! params.permit(:type)
+
     @annunciations = Annunciation.includes(annunciates: :user_tag).with_attached_cover.default_where(q_params).order(id: :desc).page(params[:page])
   end
 

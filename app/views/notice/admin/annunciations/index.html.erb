@@ -1,9 +1,11 @@
 <%= render 'filter_form' %>
+<%= render 'filter_table' %>
 
 <table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
       <th><%= Annunciation.human_attribute_name(:cover) %></th>
+      <th><%= Annunciation.human_attribute_name(:type) %></th>
       <th class="six wide">
         <p><%= Annunciation.human_attribute_name(:title) %></p>
         <p><%= Annunciation.human_attribute_name(:body) %></p>
@@ -26,6 +28,7 @@
   <% @annunciations.each do |annunciation| %>
     <tr>
       <td><%= image_tag annunciation.cover.variant(resize_to_limit: [100, 100]) if annunciation.cover.present? %></td>
+      <td><%= annunciation.type_i18n %></td>
       <td>
         <h6><%= annunciation.title %></h6>
         <p><%= annunciation.body %></p>

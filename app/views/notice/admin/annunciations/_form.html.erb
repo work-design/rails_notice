@@ -1,8 +1,7 @@
-<%= form_with model: [:admin, @annunciation] do |f| %>
-  <%= render 'shared/error_messages', target: @annunciation %>
-  <%= f.text_field :title %>
-  <%= f.text_area :body %>
-  <%= f.file_field :cover %>
-  <%= f.text_field :link %>
-  <%= f.submit %>
-<% end %>
+<%= render 'shared/error_messages', target: @annunciation %>
+<%= f.select :type, options_for_select(Annunciation.options_i18n(:type), @annunciation.type) %>
+<%= f.text_field :title %>
+<%= f.text_area :body %>
+<%= f.file_field :cover %>
+<%= f.text_field :link %>
+<%= f.submit %>

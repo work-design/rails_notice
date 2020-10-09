@@ -8,3 +8,6 @@ zh:
         state:
           init: 草稿
           published: 已发布
+        type:
+          MemberAnnunciation: 内部通告
+          UserAnnunciation: 公开信息
