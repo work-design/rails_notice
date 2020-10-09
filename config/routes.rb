@@ -15,10 +15,11 @@ Rails.application.routes.draw do
     resources :notification_settings
     resources :annunciations do
       member do
-        get 'publish' => :edit_publish
-        patch 'publish' => :update_publish
+        get 'user' => :edit_user
+        patch 'user' => :update_user
+        get 'member' => :edit_member
+        patch 'member' => :update_member
         get 'publish/options' => :options
-        patch :wechat
       end
     end
     resources :annunciates

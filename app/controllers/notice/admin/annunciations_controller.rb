@@ -1,5 +1,10 @@
 class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
-  before_action :set_annunciation, only: [:show, :edit, :update, :edit_publish, :update_publish, :options, :wechat, :destroy]
+  before_action :set_annunciation, only: [
+    :show, :edit, :update,
+    :edit_user, :update_user,
+    :edit_member, :update_member,
+    :options, :destroy
+  ]
 
   def index
     q_params = {}
@@ -36,17 +41,13 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
     end
   end
 
-  def edit_publish
+  def edit_user
     @user_tags = UserTag.where.not(id: @annunciation.user_tag_ids)
   end
 
-  def update_publish
-    if params[:user_tag_ids]
-      params[:user_tag_ids].reject(&:blank?).each do |user_tag_id|
-        @annunciation.annunciates.find_or_create_by(user_tag_id: user_tag_id)
-      end
-    elsif params[:receiver_type]
-      @annunciation.annunciates.create(receiver_type: params[:receiver_type])
+  def update_user
+    params[:user_tag_ids].reject(&:blank?).each do |user_tag_id|
+      @annunciation.annunciates.find_or_create_by(user_tag_id: user_tag_id)
     end
   end
 
@@ -54,7 +55,10 @@ class Notice::Admin::AnnunciationsController < Notice::Admin::BaseController
     @tags = UserTag.default_where(default_params)
   end
 
-  def wechat
+  def edit_member
+  end
+
+  def update_member
   end
 
   def destroy

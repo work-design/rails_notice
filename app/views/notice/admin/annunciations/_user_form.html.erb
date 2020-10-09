@@ -1,0 +1,4 @@
+<%= form_with url: publish_admin_annunciation_path(@annunciation), method: :patch do |f| %>
+  <%= f.collection_select :user_tag_ids, @user_tags, :id, :name, { label: Annunciate.human_attribute_name(:user_tags) }, { multiple: true, data: { controller: 'choice' } } %>
+  <%= f.submit %>
+<% end %>
