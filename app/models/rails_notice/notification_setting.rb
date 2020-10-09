@@ -17,6 +17,7 @@ module RailsNotice::NotificationSetting
   end
 
   class_methods do
+
     def increment_unread_counter(col, num = 1)
       s = "jsonb_set(counters, '{#{col}}', (COALESCE(counters->>'#{col}', '0')::int + #{num})::text::jsonb)"
 
@@ -36,6 +37,7 @@ module RailsNotice::NotificationSetting
         ns.user.reset_unread_count if ns.user
       end
     end
+
   end
 
 end

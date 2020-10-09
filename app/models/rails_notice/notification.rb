@@ -211,4 +211,5 @@ module RailsNotice::Notification
       self.unscoped.select(:notifiable_type).distinct.pluck(:notifiable_type).compact.sort!
     end
   end
+
 end

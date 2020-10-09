@@ -41,7 +41,7 @@
           <div class="ui label"><%= annunciate.user_tag&.name %></div>
         <% end %>
         <%= link_to publish_admin_annunciation_path(annunciation, receiver_type: params[:receiver_type]), aria: { label: t('.publish') }, remote: true, class: 'ui blue mini circular icon button' do %>
-          <i class="fas fa-paper-plane"></i>
+          <i class="fas fa-bullhorn"></i>
         <% end %>
       </td>
       <td>
