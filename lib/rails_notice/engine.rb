@@ -2,6 +2,10 @@ require 'rails_com'
 module RailsNotice
   class Engine < ::Rails::Engine
 
+    config.autoload_paths += Dir[
+      "#{config.root}/app/models/annunciation"
+    ]
+
     config.generators do |g|
       g.rails = {
         system_tests: false,

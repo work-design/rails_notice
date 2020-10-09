@@ -2,6 +2,7 @@ module RailsNotice::Annunciation
   extend ActiveSupport::Concern
 
   included do
+    attribute :type, :string
     attribute :title, :string
     attribute :body, :string
     attribute :link, :string
