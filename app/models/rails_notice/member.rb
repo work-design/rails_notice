@@ -23,7 +23,9 @@ module RailsNotice::Member
         r = {}
         r.merge! annunciation.attributes.slice(:organ_id, :link)
         r.merge!(
-          user_id: self.id,
+          member_id: self.id,
+          user_id: self.user_id,
+          organ_id: self.organ_id,
           sender_type: annunciation.publisher_type,
           sender_id: annunciation.publisher_id,
           notifiable_type: annunciation.class.name,

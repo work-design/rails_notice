@@ -25,6 +25,20 @@ Rails.application.routes.draw do
     resources :annunciates
   end
 
+  scope :me, module: 'notice/me', as: :me do
+    resources :notifications, only: [:index, :show, :destroy] do
+      collection do
+        get :read_all
+      end
+      member do
+        get :url
+        get :read
+        match :archive, via: [:put, :patch]
+      end
+    end
+    resource :notification_setting, only: [:show, :edit, :update]
+  end
+
   scope :my, module: 'notice/my', as: :my do
     resources :notifications, only: [:index, :show, :destroy] do
       collection do

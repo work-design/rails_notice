@@ -1,0 +1,13 @@
+if ($('#notify_container').length === 0) {
+  $('body').append('<%= j(render 'notifications') %>');
+} else {
+  $('#notify_container').replaceWith('<%= j(render 'notifications') %>');
+}
+
+$('#notify_show').popup({
+  popup: '#notify_container',
+  position: 'bottom right',
+  on: 'click'
+}).popup('toggle');
+
+timeForLocalized()
