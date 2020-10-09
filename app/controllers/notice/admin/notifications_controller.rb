@@ -15,12 +15,10 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
 
   def push
     @notification.process_job
-    head :ok
   end
 
   def email
     @notification.send_email
-    head :ok
   end
 
   def new
@@ -54,7 +52,6 @@ class Notice::Admin::NotificationsController < Notice::Admin::BaseController
   def q_params
     q = {}
     q.merge! params.permit(:id, 'body-like', :user_id)
-    q
   end
 
   def set_notification

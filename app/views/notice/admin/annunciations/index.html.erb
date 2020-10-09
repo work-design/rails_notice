@@ -14,7 +14,7 @@
         <p class="green text"><%= Annunciation.human_attribute_name(:readed_count) %></p>
       </th>
       <th><%= Annunciation.human_attribute_name(:created_at) %></th>
-      <th><%= Annunciate.human_attribute_name(:user_tags) %></th>
+      <th><%= Annunciation.human_attribute_name(:user_tags) %></th>
       <th>
         <%= link_to new_admin_annunciation_path, remote: true, class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
