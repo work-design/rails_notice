@@ -5,7 +5,7 @@ module RailsNotice::User
     has_many :notifications, dependent: :delete_all
     has_one :notification_setting, dependent: :delete
 
-    has_many :annunciates, through: :user_taggeds
+    has_many :user_annunciates, through: :user_taggeds
   end
 
   def unread_count
@@ -51,7 +51,7 @@ module RailsNotice::User
   end
 
   def pending_annunciation_ids
-    all_annunciation_ids = annunciates.default_where('created_at-gte': self.created_at).order(annunciation_id: :desc).pluck(:annunciation_id).compact
+    all_annunciation_ids = user_annunciates.default_where('created_at-gte': self.created_at).order(annunciation_id: :desc).pluck(:annunciation_id).compact
     made_annunciation_ids = notifications.where(notifiable_type: 'Annunciation').pluck(:notifiable_id)
 
     all_annunciation_ids - made_annunciation_ids
