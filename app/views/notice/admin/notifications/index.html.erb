@@ -67,14 +67,14 @@
         <p><%= notification.official %></p>
       </td>
       <td>
-        <%= link_to edit_admin_notification_path(notification), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to edit_admin_notification_path(notification), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
         <%= link_to push_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-plane"></i><span>推送</span>
         <% end %>
         <%= link_to email_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-email"></i><span>Email</span>
+          <i class="fas fa-mail"></i><span>Email</span>
         <% end %>
       </td>
     </tr>
