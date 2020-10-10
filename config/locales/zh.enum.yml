@@ -3,7 +3,8 @@ zh:
     enum:
       notification:
         notifiable_type:
-          Annunciation: 通告
+          MemberAnnunciation: 内部通告
+          UserAnnunciation: 公开信息
       annunciation:
         state:
           init: 草稿
