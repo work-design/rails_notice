@@ -17,7 +17,7 @@ class Notice::My::NotificationSettingsController < Notice::My::BaseController
 
   private
   def set_notification_setting
-    @notification_setting = current_user.notification_setting || current_user.build_notification_setting
+    @notification_setting = current_user
   end
 
   def notification_setting_params

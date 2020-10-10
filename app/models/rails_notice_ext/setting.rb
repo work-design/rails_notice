@@ -1,4 +1,4 @@
-module RailsNotice::NotificationSetting
+module RailsNoticeExt::Setting
   extend ActiveSupport::Concern
 
   included do
@@ -9,11 +9,16 @@ module RailsNotice::NotificationSetting
     end
     attribute :counters, :json, default: {}
     attribute :showtime, :integer, default: 0
-    attribute :accept_email, :boolean, default: RailsNotice.config.default_send_email
+    attribute :accept_email, :boolean, default: true
+  end
 
-    belongs_to :user
-    belongs_to :member, optional: true
-    belongs_to :organ, optional: true
+  def unread_count
+    r = counters.fetch(:counters, {}).dig('total')
+    r.to_i
+  end
+
+  def reset_unread_count
+    update counters: compute_unread_count
   end
 
   class_methods do

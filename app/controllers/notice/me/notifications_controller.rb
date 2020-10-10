@@ -4,15 +4,18 @@ class Notice::Me::NotificationsController < Notice::Me::BaseController
 
   def index
     q_params = {
-      archived: false
+      archived: false,
+      read_at: nil,
+      allow: { read_at: nil }
     }
+    q_params.merge! params.permit(:read_at, 'read_at-not')
 
     current_member.apply_pending_annunciations
     @notifications = current_member.notifications.order(read_at: :asc)
     if params[:scope] == 'readed'
-      @notifications = @notifications.readed
+      q_params.merge! 'read_at-not': nil
     elsif params[:scope] == 'unread'
-      @notifications = @notifications.unread
+      q_params.merge! read_at: nil
     end
     @notifications = @notifications.default_where(q_params).page(params[:page]).per(params[:per])
   end

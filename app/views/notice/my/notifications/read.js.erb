@@ -1,2 +1,2 @@
-$('#check_<%= @notification.id %>').html('<i class="checkmark light grey icon"></i>');
-$('#notice_count').html('<%= @notification.unread_count %>')
+document.getElementById('check_<%= @notification.id %>').innerHTML = '<i class="fas fa-check"></i>'
+document.getElementById('notice_count').innerText = '<%= current_user.unread_count %>'

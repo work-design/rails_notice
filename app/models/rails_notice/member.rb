@@ -3,14 +3,7 @@ module RailsNotice::Member
 
   included do
     has_many :notifications, dependent: :delete_all
-    has_one :notification_setting, dependent: :delete
-
     has_many :member_annunciates, through: :member_departments
-  end
-
-  def unread_count
-    r = notification_setting.counters.fetch(:counters, {}).dig('total')
-    r.to_i
   end
 
   def apply_pending_annunciations
@@ -42,15 +35,6 @@ module RailsNotice::Member
     end
   end
 
-  def notification_setting
-    r = super || build_notification_setting
-    if r.new_record?
-      r.counters = compute_unread_count
-      r.save
-    end
-    r
-  end
-
   def pending_annunciation_ids
     all_annunciation_ids = member_annunciates.default_where('created_at-gte': self.created_at).order(annunciation_id: :desc).pluck(:annunciation_id).compact
     made_annunciation_ids = notifications.where(notifiable_type: 'MemberAnnunciation').pluck(:notifiable_id)
@@ -70,15 +54,11 @@ module RailsNotice::Member
     end
 
     added_count = pending_annunciation_ids.size
-    [:total, :official, :'Annunciation'].each do |counter|
+    [:total, :official, :'MemberAnnunciation'].each do |counter|
       counters[counter] = counters[counter].to_i + added_count
     end
 
     counters
-  end
-
-  def reset_unread_count
-    notification_setting.update counters: compute_unread_count
   end
 
 end

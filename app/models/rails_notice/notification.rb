@@ -20,7 +20,6 @@ module RailsNotice::Notification
     belongs_to :sender, polymorphic: true, optional: true
     belongs_to :notifiable, polymorphic: true, optional: true
     belongs_to :linked, polymorphic: true, optional: true
-    has_one :notification_setting, primary_key: :user_id, foreign_key: :user_id
     has_many :notification_sendings, dependent: :delete_all
 
     default_scope -> { order(created_at: :desc) }
@@ -30,15 +29,6 @@ module RailsNotice::Notification
     after_create_commit :process_job
     after_create_commit :increment_unread, if: -> { read_at.blank? }
     after_destroy_commit :decrement_unread, if: -> { read_at.blank? }
-  end
-
-  def notification_setting
-    r = super || build_notification_setting
-    if r.new_record?
-      r.counters = user.compute_unread_count
-      r.save
-    end
-    r
   end
 
   def process_job
@@ -127,10 +117,6 @@ module RailsNotice::Notification
     end
   end
 
-  def unread_count
-    notification_setting.counters.fetch(:counters, {}).dig('total')
-  end
-
   def make_as_read
     return unless self.read_at.blank?
     self.read_at = Time.current
@@ -155,24 +141,29 @@ module RailsNotice::Notification
     counters = ['total', notifiable_type]
     counters << 'official' if self.official
     counters.each do |counter|
-      notification_setting.counters[counter] = notification_setting.counters[counter].to_i + 1
+      user.counters[counter] = user.counters[counter].to_i + 1
+      member.counters[counter] = member.counters[counter].to_i + 1 if member
     end
 
-    notification_setting.save
+    user.save
+    member.save if member
   end
 
   def decrement_unread
     counters = ['total', notifiable_type]
     counters << 'official' if self.official
     counters.each do |counter|
-      notification_setting.counters[counter] = notification_setting.counters[counter].to_i - 1
+      user.counters[counter] = user.counters[counter].to_i - 1
+      member.counters[counter] = member.counters[counter].to_i - 1 if member
     end
 
-    notification_setting.save
+    user.save
+    member.save if member
   end
 
   def reset_unread_count
     self.user.reset_unread_count
+    self.member&.reset_unread_count
   end
 
   def link

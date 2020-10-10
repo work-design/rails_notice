@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="media-right">
-      <%= link_to({ action: 'show', id: notification.id }, { class: 'button is-small is-rounded', id: "check_#{notification.id}", remote: true }) do %>
+      <%= link_to({ action: 'read', id: notification.id }, { class: 'button is-small is-rounded', id: "check_#{notification.id}", remote: true }) do %>
         <i class="fas fa-check has-text-danger"></i>Mark
       <% end unless params[:scope] == 'readed' %>
     </div>
