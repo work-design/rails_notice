@@ -12,7 +12,10 @@ zh:
         readed_count: 已读消息
       annunciate:
         user_tags: 用户组
-      notification_setting:
+      member:
+        showtime: 消息弹出持续时间
+        accept_email: 接受邮件通知
+      user:
         showtime: 消息弹出持续时间
         accept_email: 接受邮件通知
       notification:
