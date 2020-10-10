@@ -4,19 +4,7 @@ class Notice::Admin::NotificationSettingsController < Notice::Admin::BaseControl
   def index
     q_params = {}
     q_params.merge! params.permit(:id)
-    @notification_settings = NotificationSetting.default_where(q_params).order(id: :desc).page(params[:page])
-  end
-
-  def new
-    @notification_setting = NotificationSetting.new
-  end
-
-  def create
-    @notification_setting = NotificationSetting.new(notification_setting_params)
-
-    unless @notification_setting.save
-      render :new, locals: { model: @notification_setting }, status: :unprocessable_entity
-    end
+    @notification_settings = Member.default_where(q_params).order(id: :desc).page(params[:page])
   end
 
   def show
@@ -33,13 +21,9 @@ class Notice::Admin::NotificationSettingsController < Notice::Admin::BaseControl
     end
   end
 
-  def destroy
-    @notification_setting.destroy
-  end
-
   private
   def set_notification_setting
-    @notification_setting = NotificationSetting.find(params[:id])
+    @notification_setting = Member.find(params[:id])
   end
 
   def notification_setting_params
