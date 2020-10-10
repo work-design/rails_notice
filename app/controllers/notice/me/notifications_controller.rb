@@ -4,28 +4,20 @@ class Notice::Me::NotificationsController < Notice::Me::BaseController
 
   def index
     q_params = {
-      archived: false,
-      read_at: nil,
-      allow: { read_at: nil }
+      archived: false
     }
-    q_params.merge! params.permit(:read_at, 'read_at-not')
+    if params.key? 'read_at-not'
+      q_params.merge! 'read_at-not': nil, allow: { 'read_at-not': nil }
+    else
+      q_params.merge! read_at: nil, allow: { read_at: nil }
+    end
 
     current_member.apply_pending_annunciations
-    @notifications = current_member.notifications.order(read_at: :asc)
-    if params[:scope] == 'readed'
-      q_params.merge! 'read_at-not': nil
-    elsif params[:scope] == 'unread'
-      q_params.merge! read_at: nil
-    end
-    @notifications = @notifications.default_where(q_params).page(params[:page]).per(params[:per])
+    @notifications = current_member.notifications.order(read_at: :asc).default_where(q_params).page(params[:page]).per(params[:per])
   end
 
   def read_all
-    if params[:page]
-      @notifications = current_user.notifications.default_where(q_params).page(params[:page]).per(params[:per])
-    else
-      @notifications = current_user.notifications.default_where(q_params)
-    end
+    @notifications = current_user.notifications.default_where(q_params).page(params[:page]).per(params[:per])
     @notifications.update_all(read_at: Time.current)
     current_user.reset_unread_count
   end
