@@ -1,39 +1,26 @@
-<% content_for :breadcrumb do %>
-<div class="breadcrumb has-succeeds-separator">
-  <ul>
-    <li><%= link_to t('notice.admin.annunciations.index.title'), admin_annunciations_path %></li>
-    <li class="is-active"><%= @annunciation.title %></li>
-  </ul>
-</div>
-<% end %>
-
-<table class="table is-hoverable is-fullwidth">
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= Annunciation.human_attribute_name(:title) %></td>
-      <td><%= @annunciation.title %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Annunciation.human_attribute_name(:body) %></td>
-      <td><%= @annunciation.body %></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td>
-        <div class="ui labels">
-          <% @annunciation.annunciates.each do |annunciate| %>
-            <div class="ui label">
-              <%= annunciate.user_tag&.name %>
-              <%= link_to admin_annunciate_path(annunciate), method: :delete, remote: true do %>
-                <i class="fas fa-times"></i>
-              <% end %>
-            </div>
+<tr>
+  <td class="has-text-right"><%= Annunciation.human_attribute_name(:title) %></td>
+  <td><%= @annunciation.title %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Annunciation.human_attribute_name(:body) %></td>
+  <td><%= @annunciation.body %></td>
+</tr>
+<tr>
+  <td></td>
+  <td>
+    <div class="tags">
+      <% @annunciation.annunciates.each do |annunciate| %>
+        <div class="tag">
+          <%= annunciate.user_tag&.name %>
+          <%= link_to admin_annunciate_path(annunciate), method: :delete, remote: true do %>
+            <i class="fas fa-times"></i>
           <% end %>
         </div>
-        <%= link_to publish_admin_annunciation_path(@annunciation), aria: { label: '发布' }, remote: true, class: 'ui pink mini icon button' do %>
-          <i class="fas fa-bullhorn"></i>
-        <% end %>
-      </td>
-    </tr>
-  </tbody>
-</table>
+      <% end %>
+    </div>
+    <%= link_to publish_admin_annunciation_path(@annunciation), aria: { label: '发布' }, remote: true, class: 'button is-small is-rounded' do %>
+      <i class="fas fa-bullhorn"></i>
+    <% end %>
+  </td>
+</tr>

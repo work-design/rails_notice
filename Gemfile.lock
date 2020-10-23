@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: b339caca2dedef70b7235194884a7dacc4d060cc
+  revision: f2f90ba3d473bbd556ff9247aa750f9e42e8fdb0
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -9,10 +9,12 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 7acb5e104e4b299167a6e4a75eca5a0cbc2938df
+  revision: 108ee2f8c9ec1517f450521f7c32f8f3d4f650b5
   specs:
     rails_com (1.2.9)
       acme-client
+      acts_as_list (>= 1.0)
+      closure_tree (>= 7.2)
       default_where (~> 2.2)
       http-form_data (~> 2.2)
       httpx (~> 0.8)
@@ -86,8 +88,13 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    acts_as_list (1.0.2)
+      activerecord (>= 4.2)
     bcrypt (3.1.16)
     builder (3.2.4)
+    closure_tree (7.2.0)
+      activerecord (>= 4.2.10)
+      with_advisory_lock (>= 4.0.0)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
     default_where (2.2.0)
@@ -197,6 +204,8 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    with_advisory_lock (4.6.0)
+      activerecord (>= 4.2)
     zeitwerk (2.4.0)
 
 PLATFORMS
