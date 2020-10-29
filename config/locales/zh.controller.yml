@@ -1,0 +1,37 @@
+zh:
+  notice:
+    title: 通知
+    admin:
+      title: 通知管理
+      annunciations:
+        index:
+          title: 通告
+          publish: 发布
+      notifications:
+        index:
+          title: 通知
+      notification_settings:
+        index:
+          title: 通知设置
+    my:
+      title: 通知
+      notifications:
+        index:
+          title: 通知
+          unread: 未读
+          readed: 已读
+          detail: 详情请点击
+      notification_settings:
+        show:
+          title: 通知设置
+    me:
+      title: 通知
+      notifications:
+        index:
+          title: 通知
+          unread: 未读
+          readed: 已读
+          detail: 详情请点击
+      notification_settings:
+        show:
+          title: 通知设置
