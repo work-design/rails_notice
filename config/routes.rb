@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  scope :admin, module: 'notice/admin', as: :admin do
+  scope :admin, module: 'notice/admin', as: :admin, defaults: { namespace: 'admin', business: 'notice' } do
     resources :notifications do
       member do
         patch :push
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources :annunciates
   end
 
-  scope :me, module: 'notice/me', as: :me do
+  scope :me, module: 'notice/me', as: :me, defaults: { namespace: 'me', business: 'notice' } do
     resources :notifications, only: [:index, :show, :destroy] do
       collection do
         get :read_all
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     resource :notification_setting, only: [:show, :edit, :update]
   end
 
-  scope :my, module: 'notice/my', as: :my do
+  scope :my, module: 'notice/my', as: :my, defaults: { namespace: 'my', business: 'notice' } do
     resources :notifications, only: [:index, :show, :destroy] do
       collection do
         get :read_all
