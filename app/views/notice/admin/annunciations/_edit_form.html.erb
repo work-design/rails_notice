@@ -1,4 +1,4 @@
-<%= form_with model: @annunciation, scope: :annunciation, url: { action: 'update', id: @annunciation.id } do |f| %>
+<%= form_with model: @annunciation, scope: :annunciation, url: { action: 'update' } do |f| %>
   <%= render partial: 'form', locals: { f: f } %>
   <%= f.submit %>
 <% end %>
