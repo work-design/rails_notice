@@ -2,11 +2,7 @@ module RailsNoticeExt::Setting
   extend ActiveSupport::Concern
 
   included do
-    if connection.adapter_name == 'PostgreSQL'
-      attribute :notifiable_types, :string, array: true, default: []
-    else
-      serialize :notifiable_types, Array
-    end
+    attribute :notifiable_types, :string, array: true, default: []
     attribute :counters, :json, default: {}
     attribute :showtime, :integer, default: 0
     attribute :accept_email, :boolean, default: true
