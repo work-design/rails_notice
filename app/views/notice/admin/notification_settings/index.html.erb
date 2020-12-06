@@ -1,53 +1,5 @@
-<%= render 'filter_form' %>
-
-<table class="table is-hoverable is-fullwidth">
-  <thead>
-    <tr>
-      <th><%= Member.human_attribute_name(:user_id) %></th>
-      <th><%= Member.human_attribute_name(:showtime) %></th>
-      <th><%= Member.human_attribute_name(:accept_email) %></th>
-      <th><%= Member.human_attribute_name(:notifiable_types) %></th>
-      <th><%= Member.human_attribute_name(:counters) %></th>
-      <th>
-        <%= link_to new_admin_notification_setting_path, remote: true, class: 'ui mini button' do %>
-          <%= t('.new') %>
-        <% end %>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-  <% @notification_settings.each do |notification_setting| %>
-    <tr>
-      <td><%= notification_setting.user_id %></td>
-      <td><%= notification_setting.showtime %></td>
-      <td>
-        <div class="ui toggle checkbox">
-          <%= check_box_tag '[notification_setting]accept_email', nil, notification_setting.accept_email, data: { method: :patch, remote: true, url: admin_notification_setting_path(notification_setting), submit: true }, id: nil %>
-        </div>
-      </td>
-      <td class="ui labels">
-        <% notification_setting.notifiable_types.each do |notifiable_type| %>
-          <span class="ui label"><%= notifiable_type %></span>
-        <% end %>
-      </td>
-      <td>
-        <%= simple_format(notification_setting.counters) %>
-      </td>
-      <td>
-        <%= link_to admin_notification_setting_path(notification_setting), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-info"></i>
-        <% end %>
-        <%= link_to edit_admin_notification_setting_path(notification_setting), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-pencil-alt"></i>
-        <% end %>
-        <%= link_to admin_notification_setting_path(notification_setting), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-trash"></i>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<%= render layout: 'index_table', locals: { cache_key: NotificationSetting.column_names.hash } do %>
+  <%= render partial: 'index_tbody', collection: @notification_settings, as: :notification_setting %>
+<% end %>
 
 <%= paginate @notification_settings %>
