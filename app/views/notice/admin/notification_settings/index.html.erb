@@ -1,5 +1,0 @@
-<%= render layout: 'index_table', locals: { cache_key: NotificationSetting.column_names.hash } do %>
-  <%= render partial: 'index_tbody', collection: @notification_settings, as: :notification_setting %>
-<% end %>
-
-<%= paginate @notification_settings %>
