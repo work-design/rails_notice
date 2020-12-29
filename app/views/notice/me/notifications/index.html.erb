@@ -15,11 +15,11 @@
         <%= link_to notification.body, notification.link %>
       </div>
       <div class="extra">
-        <time><%= notification.created_at.to_s(:rfc822) %></time>
+        <time data-controller="time"><%= notification.created_at.to_s(:rfc822) %></time>
       </div>
     </div>
     <div class="media-right">
-      <%= link_to({ action: 'read', id: notification.id }, { class: 'button is-small is-rounded', id: "check_#{notification.id}", remote: true }) do %>
+      <%= link_to({ action: 'read', id: notification.id }, { class: 'button is-small is-rounded', id: "check_#{notification.id}" }) do %>
         <i class="fas fa-check has-text-danger"></i>Mark
       <% end unless params[:scope] == 'readed' %>
     </div>

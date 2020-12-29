@@ -7,6 +7,6 @@
     <% end %>
   </div>
   <div class="level-right">
-    <div class="level-item"><time><%= notification.created_at.to_s(:rfc822) %></time></div>
+    <div class="level-item"><time data-controller="time"><%= notification.created_at.to_s(:rfc822) %></time></div>
   </div>
 </div>

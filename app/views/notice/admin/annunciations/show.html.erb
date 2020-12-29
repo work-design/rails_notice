@@ -13,13 +13,13 @@
       <% @annunciation.annunciates.each do |annunciate| %>
         <div class="tag">
           <%= annunciate.user_tag&.name %>
-          <%= link_to admin_annunciate_path(annunciate), method: :delete, remote: true do %>
+          <%= link_to admin_annunciate_path(annunciate), method: :delete do %>
             <i class="fas fa-times"></i>
           <% end %>
         </div>
       <% end %>
     </div>
-    <%= link_to publish_admin_annunciation_path(@annunciation), aria: { label: '发布' }, remote: true, class: 'button is-small is-rounded' do %>
+    <%= link_to publish_admin_annunciation_path(@annunciation), aria: { label: '发布' }, class: 'button is-small is-rounded' do %>
       <i class="fas fa-bullhorn"></i>
     <% end %>
   </td>

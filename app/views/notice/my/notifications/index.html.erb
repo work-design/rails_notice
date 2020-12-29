@@ -13,9 +13,9 @@
           <%= link_to notification.body, notification.link %>
         </div>
         <div class="extra">
-          <time><%= notification.created_at.to_s(:rfc822) %></time>
+          <time data-controller="time"><%= notification.created_at.to_s(:rfc822) %></time>
           <% unless params[:scope] == 'readed' %>
-            <%= link_to read_my_notification_path(notification), class: 'right floated notification', id: "check_#{notification.id}", remote: true do %>
+            <%= link_to read_my_notification_path(notification), class: 'right floated notification', id: "check_#{notification.id}" do %>
               <i class="checkmark red icon"></i>Mark
             <% end %>
           <% end %>

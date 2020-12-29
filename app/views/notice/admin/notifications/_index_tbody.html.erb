@@ -1,41 +1,33 @@
 <tr>
   <td>
-    <p><%= notification.user.name %></p>
-    <p class="has-text-gray"><%= notification.member&.name %></p>
+    <p><%= model.user.name %></p>
+    <p class="has-text-gray"><%= model.member&.name %></p>
   </td>
   <td>
-    <p><%= notification.title %></p>
-    <p><%= notification.body %></p>
-    <p><%= notification.link %></p>
+    <p><%= model.title %></p>
+    <p><%= model.body %></p>
+    <p><%= model.link %></p>
   </td>
   <td>
-    <p><%= notification.notifiable_type_i18n %></p>
-    <p><%= notification.notifiable_id %></p>
+    <p><%= model.notifiable_type_i18n %></p>
+    <p><%= model.notifiable_id %></p>
   </td>
   <td>
-    <p><%= notification.sender_type %></p>
-    <p><%= notification.sender_id %></p>
+    <p><%= model.sender_type %></p>
+    <p><%= model.sender_id %></p>
   </td>
   <td>
-    <p><%= notification.linked_type %></p>
-    <p><%= notification.linked_id %></p>
+    <p><%= model.linked_type %></p>
+    <p><%= model.linked_id %></p>
   </td>
   <td>
-    <p><time class="has-text-gray"><%= notification.created_at.to_s(:rfc822) %></time></p>
-    <p><time class="has-text-primary"><%= notification.read_at.to_s(:rfc822) if notification.read_at.present? %></time></p>
+    <p><time class="has-text-gray"><%= model.created_at.to_s(:rfc822) %></time></p>
+    <p><time class="has-text-primary"><%= model.read_at.to_s(:rfc822) if model.read_at.present? %></time></p>
   </td>
   <td>
-    <p><%= notification.official %></p>
+    <p><%= model.official %></p>
   </td>
   <td>
-    <%= link_to edit_admin_notification_path(notification), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-pencil-alt"></i>
-    <% end %>
-    <%= link_to push_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-plane"></i><span>推送</span>
-    <% end %>
-    <%= link_to email_admin_notification_path(notification), method: :patch, remote: true, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-mail"></i><span>Email</span>
-    <% end %>
+  
   </td>
 </tr>

@@ -1,36 +1,23 @@
-<tr>
-  <td><%= image_tag annunciation.cover.variant(resize_to_limit: [100, 100]) if annunciation.cover.present? %></td>
-  <td><%= annunciation.type_i18n %></td>
-  <td>
-    <h6><%= annunciation.title %></h6>
-    <p><%= annunciation.body %></p>
-  </td>
-  <td><%= annunciation.link %></td>
-  <td>
-    <p><%= link_to annunciation.notifications_count, admin_notifications_path(notifiable_type: annunciation.class_name, notifiable_id: annunciation.id) %></p>
-    <p class="has-text-success"><%= annunciation.readed_count %></p>
-  </td>
-  <td><time><%= annunciation.created_at.to_s(:rfc822) %></time></td>
-  <td class="tags">
-    <% annunciation.annunciates.each do |annunciate| %>
-      <div class="tag"><%= annunciate.department&.name %></div>
-    <% end %>
-    <%= link_to user_admin_annunciation_path(annunciation), aria: { label: t('.publish') }, remote: true, class: 'button is-small is-rounded is-link' do %>
-      <i class="fas fa-bullhorn"></i>
-    <% end if annunciation.is_a?(UserAnnunciation) %>
-    <%= link_to member_admin_annunciation_path(annunciation), aria: { label: t('.publish') }, remote: true, class: 'button is-small is-rounded is-link' do %>
-      <i class="fas fa-bullhorn"></i>
-    <% end if annunciation.is_a?(MemberAnnunciation) %>
-  </td>
-  <td>
-    <%= link_to admin_annunciation_path(annunciation), aria: { label: t('.show') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-info"></i>
-    <% end %>
-    <%= link_to edit_admin_annunciation_path(annunciation), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-pencil-alt"></i>
-    <% end %>
-    <%= link_to admin_annunciation_path(annunciation), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-trash-alt"></i>
-    <% end %>
-  </td>
-</tr>
+<td><%= image_tag model.cover.variant(resize_to_limit: [100, 100]) if model.cover.present? %></td>
+<td><%= model.type_i18n %></td>
+<td>
+  <h6><%= model.title %></h6>
+  <p><%= model.body %></p>
+</td>
+<td><%= model.link %></td>
+<td>
+  <p><%= link_to model.notifications_count, admin_notifications_path(notifiable_type: model.class_name, notifiable_id: model.id) %></p>
+  <p class="has-text-success"><%= model.readed_count %></p>
+</td>
+<td><time data-controller="time"><%= model.created_at.to_s(:rfc822) %></time></td>
+<td class="tags">
+  <% model.annunciates.each do |annunciate| %>
+    <div class="tag"><%= annunciate.department&.name %></div>
+  <% end %>
+  <%= link_to user_admin_annunciation_path(model), aria: { label: t('.publish') }, class: 'button is-small is-rounded is-link' do %>
+    <i class="fas fa-bullhorn"></i>
+  <% end if model.is_a?(UserAnnunciation) %>
+  <%= link_to member_admin_annunciation_path(model), aria: { label: t('.publish') }, class: 'button is-small is-rounded is-link' do %>
+    <i class="fas fa-bullhorn"></i>
+  <% end if model.is_a?(MemberAnnunciation) %>
+</td>

@@ -3,7 +3,7 @@
   <%= link_to t('notice.my.notification_settings.show.title'), my_notification_setting_path, class: active_helper(controllers: ['notification_settings']) %>
   <div class="right menu">
     <% unless params[:scope] == 'readed' %>
-    <%= link_to read_all_my_notifications_path, class: 'item', remote: true do %>
+    <%= link_to read_all_my_notifications_path, class: 'item' do %>
       <i class="checkmark box icon"></i><%= t('.read_all') %>
     <% end %>
     <% end %>
