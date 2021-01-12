@@ -1,4 +1,4 @@
 class UserTagged < ApplicationRecord
-  include RailsAuth::UserTagged
+  include AuthModel::UserTagged
   include RailsNotice::UserTagged
-end unless defined? UserTagged
+end
