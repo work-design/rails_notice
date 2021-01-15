@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  scope :admin, module: 'notice/admin', as: :admin, defaults: { namespace: 'admin', business: 'notice' } do
+  scope 'notice/admin', module: 'notice/admin', defaults: { namespace: 'admin', business: 'notice' } do
     resources :notifications do
       member do
         patch :push
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       end
     end
     resources :users
+    resources :members
     resources :annunciations do
       member do
         get 'user' => :edit_user
