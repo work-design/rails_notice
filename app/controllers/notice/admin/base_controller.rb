@@ -1,3 +1,4 @@
-class Notice::Admin::BaseController < AdminController
-
-end unless defined? Notice::Admin::BaseController
+module Notice
+  class Admin::BaseController < AdminController
+  end
+end

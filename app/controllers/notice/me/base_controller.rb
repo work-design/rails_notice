@@ -1,3 +1,4 @@
-class Notice::Me::BaseController < MeController
-
-end unless defined? Notice::Me::BaseController
+module Notice
+  class Me::BaseController < MeController
+  end
+end
