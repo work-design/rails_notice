@@ -1,3 +1,5 @@
-class MemberAnnunciation < Annunciation
-  include RailsNotice::Annunciation::MemberAnnunciation
-end unless defined? MemberAnnunciation
+module Notice
+  class MemberAnnunciation < Annunciation
+    include Model::Annunciation::MemberAnnunciation
+  end
+end
