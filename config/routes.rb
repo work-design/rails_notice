@@ -12,7 +12,8 @@ Rails.application.routes.draw do
         get :columns
       end
     end
-    resources :notification_settings
+    resources :users
+    resources :members
     resources :annunciations do
       member do
         get 'user' => :edit_user
