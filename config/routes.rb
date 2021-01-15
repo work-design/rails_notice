@@ -13,7 +13,6 @@ Rails.application.routes.draw do
       end
     end
     resources :users
-    resources :members
     resources :annunciations do
       member do
         get 'user' => :edit_user
