@@ -1,8 +1,8 @@
 <div class="<%= active_helper(modules: 'notice/admin', active: 'menu ex-accordion is-active', item: 'menu ex-accordion') %>" data-controller="menu">
   <%= content_tag :div, class: 'menu-list' do %>
-    <%= link_to t('notice.admin.annunciations.index.title'), { controller: 'annunciations' }, class: active_helper(controllers: 'annunciations', active: 'is-active') %>
-    <%= link_to t('notice.admin.notifications.index.title'), { controller: 'notifications' }, class: active_helper(controllers: 'notifications', active: 'is-active') %>
-    <%= link_to t('notice.admin.members.index.title'), { controller: 'members' }, class: active_helper(controllers: ['members'], active: 'is-active') -%>
+    <%= link_to t('notice.admin.annunciations.index.title'), { controller: 'notice/admin/annunciations' }, class: active_helper(controllers: 'annunciations', active: 'is-active') %>
+    <%= link_to t('notice.admin.notifications.index.title'), { controller: 'notice/admin/notifications' }, class: active_helper(controllers: 'notifications', active: 'is-active') %>
+    <%= link_to t('notice.admin.members.index.title'), { controller: 'notice/admin/members' }, class: active_helper(controllers: ['members'], active: 'is-active') -%>
   <% end %>
   <a class="menu-label" data-action="menu#toggle">
     <i class="fas fa-inbox fa-fw"></i>
