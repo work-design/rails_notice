@@ -10,11 +10,11 @@ ApplicationCable.subscriptions.create('ReceiverChannel', {
       message: data.body,
       type: 'info',
       showCloseButton: true
-    });
-    document.getElementById('notify_show').style.color = '#ff7f24';
-    document.getElementById('notice_count').innerHTML = data.count;
+    })
+    document.getElementById('notify_show').style.color = '#ff7f24'
+    document.getElementById('notice_count').innerHTML = data.count
   },
   connected: function() {
-    console.log('connected success');
+    console.log('connected success')
   }
-});
+})

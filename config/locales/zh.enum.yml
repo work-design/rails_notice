@@ -1,14 +1,14 @@
 zh:
   activerecord:
     enum:
-      notification:
+      notice/notification:
         notifiable_type:
-          MemberAnnunciation: 内部通告
-          UserAnnunciation: 公开信息
-      annunciation:
+          Notice::MemberAnnunciation: 内部通告
+          Notice::UserAnnunciation: 公开信息
+      notice/annunciation:
         state:
           init: 草稿
           published: 已发布
         type:
-          MemberAnnunciation: 内部通告
-          UserAnnunciation: 公开信息
+          Notice::MemberAnnunciation: 内部通告
+          Notice::UserAnnunciation: 公开信息

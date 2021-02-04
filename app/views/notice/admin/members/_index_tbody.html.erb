@@ -1,11 +1,12 @@
 <td><%= model.user_id %></td>
 <td><%= model.showtime %></td>
 <td>
-  <div class="ui toggle checkbox">
-    <%= check_box_tag '[model]accept_email', nil, model.accept_email, data: { method: :patch, url: admin_model_path(model), submit: true }, id: nil %>
-  </div>
+  <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :accept_email, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check"></label>
+  <% end %>
 </td>
-<td class="tags">
+<td>
   <% model.notifiable_types.each do |notifiable_type| %>
     <span class="tag"><%= notifiable_type %></span>
   <% end %>

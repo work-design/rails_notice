@@ -3,7 +3,7 @@ module Notice
     extend ActiveSupport::Concern
 
     included do
-      has_many :notifications, dependent: :delete_all
+      has_many :notifications, class_name: 'Notice::Notification', dependent: :delete_all
       has_many :user_annunciates, through: :user_taggeds
     end
 
