@@ -6,14 +6,13 @@ module Notice
 
       return unless user
       user.authorized_tokens.each do |authorized_token|
-        ActionCable.server.broadcast(
-          authorized_token.token,
+        ActionCable.server.broadcast(authorized_token.token, {
           id: id,
           body: body,
-          count: unread_count,
+          count: user.unread_count,
           link: link,
-          showtime: notification_setting.showtime
-        )
+          showtime: user.showtime
+        })
         self.notification_sendings.find_or_create_by(way: 'websocket', sent_to: authorized_token.token)
       end
     end

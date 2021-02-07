@@ -4,7 +4,7 @@ module Notice
 
     included do
       has_many :notifications, class_name: 'Notice::Notification', dependent: :delete_all
-      has_many :user_annunciates, through: :user_taggeds
+      has_many :user_annunciates, class_name: 'Notice::UserAnnunciate', through: :user_taggeds
     end
 
     def apply_pending_annunciations
@@ -37,28 +37,28 @@ module Notice
 
     def pending_annunciation_ids
       all_annunciation_ids = user_annunciates.default_where('created_at-gte': self.created_at).order(annunciation_id: :desc).pluck(:annunciation_id).compact
-      made_annunciation_ids = notifications.where(notifiable_type: 'UserAnnunciation').pluck(:notifiable_id)
+      made_annunciation_ids = notifications.where(notifiable_type: 'Notice::UserAnnunciation').pluck(:notifiable_id)
 
       all_annunciation_ids - made_annunciation_ids
     end
 
     def compute_unread_count
       no = notifications.where(archived: false, read_at: nil)
-      counters = {
-        total: no.count,
-        official: no.where(official: true).count
+      _counters = {
+        'total' => no.count,
+        'official' => no.where(official: true).count
       }
 
       Notification.notifiable_types.map do |nt|
-        counters.merge! nt.to_sym => no.where(notifiable_type: nt).count
+        _counters.merge! nt => no.where(notifiable_type: nt).count
       end
 
       added_count = pending_annunciation_ids.size
-      [:total, :official, :'UserAnnunciation'].each do |counter|
-        counters[counter] = counters[counter].to_i + added_count
+      ['total', 'official', 'Notice::UserAnnunciation'].each do |counter|
+        _counters[counter] = _counters[counter].to_i + added_count
       end
 
-      counters
+      self.counters = _counters
     end
 
   end
