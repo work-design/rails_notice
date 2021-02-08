@@ -14,7 +14,7 @@ consumer.subscriptions.create('ReceiverChannel', {
     //   type: 'info',
     //   showCloseButton: true
     // })
-    //$('#notify_show').css('color', '#ff7f24')
+    document.getElementById('notify_show').classList.add('has-text-danger')
     document.getElementById('notice_count').innerText = data.count
   },
 
