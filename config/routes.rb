@@ -29,11 +29,11 @@ Rails.application.routes.draw do
   scope :me, module: 'notice/me', as: :me, defaults: { namespace: 'me', business: 'notice' } do
     resources :notifications, only: [:index, :show, :destroy] do
       collection do
-        get :read_all
+        post :read_all
       end
       member do
         get :url
-        get :read
+        patch :read
         match :archive, via: [:put, :patch]
       end
     end
@@ -43,11 +43,11 @@ Rails.application.routes.draw do
   scope :my, module: 'notice/my', as: :my, defaults: { namespace: 'my', business: 'notice' } do
     resources :notifications, only: [:index, :show, :destroy] do
       collection do
-        get :read_all
+        post :read_all
       end
       member do
         get :url
-        get :read
+        patch :read
         match :archive, via: [:put, :patch]
       end
     end
