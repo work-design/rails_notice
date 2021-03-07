@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 31d94209305f5903b0910c41f765738a3300348a
+  revision: a03ded18c299d27ab44a1e1bd0bdaebd2ae260bc
   specs:
     rails_auth (1.1.0)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: eb1e06f2469cc0576919246e25e71023bf94ae9d
+  revision: 72cbbcf79fdafa7429ad29124b21805b992e706e
   specs:
     rails_com (1.2.9)
       acme-client
@@ -116,9 +116,9 @@ GEM
     faraday-net_http (1.0.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    http-2-next (0.3.0)
+    http-2-next (0.4.0)
     http-form_data (2.3.0)
-    httpx (0.11.1)
+    httpx (0.12.0)
       http-2-next (>= 0.1.2)
       timers
     i18n (1.8.5)
@@ -199,7 +199,7 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
     thor (1.0.1)
-    timers (4.3.2)
+    timers (4.3.3)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)

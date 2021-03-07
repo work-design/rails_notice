@@ -60,7 +60,7 @@ module Notice
       q_params = {}
       q_params.merge! default_params
 
-      @departments = Department.default_where(q_params)
+      @departments = Org::Department.default_where(q_params)
     end
 
     def update_member
