@@ -46,21 +46,21 @@ module Notice
 
     def compute_unread_count
       no = notifications.where(archived: false, read_at: nil)
-      counters = {
-        total: no.count,
-        official: no.where(official: true).count
+      _counters = {
+        'total' => no.count,
+        'official' => no.where(official: true).count
       }
 
       Notification.notifiable_types.map do |nt|
-        counters.merge! nt.to_sym => no.where(notifiable_type: nt).count
+        _counters.merge! nt.to_sym => no.where(notifiable_type: nt).count
       end
 
       added_count = pending_annunciation_ids.size
-      [:total, :official, :'Notice::MemberAnnunciation'].each do |counter|
-        counters[counter] = counters[counter].to_i + added_count
+      ['total', 'official', 'Notice::MemberAnnunciation'].each do |counter|
+        _counters[counter] = _counters[counter].to_i + added_count
       end
 
-      counters
+      self.counters = _counters
     end
 
   end
