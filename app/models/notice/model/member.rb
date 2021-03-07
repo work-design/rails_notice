@@ -26,7 +26,8 @@ module Notice
             notifiable_id: annunciation.id,
             official: true,
             archived: false,
-            created_at: annunciation.created_at
+            created_at: annunciation.created_at,
+            updated_at: Time.current
           )
           r
         end
