@@ -3,8 +3,8 @@ module Notice
     extend ActiveSupport::Concern
 
     included do
-      has_many :notifications, dependent: :delete_all
-      has_many :member_annunciates, through: :member_departments
+      has_many :notifications, class_name: 'Notice::Notification', dependent: :delete_all
+      has_many :member_annunciates, class_name: 'Notice::MemberAnnunciate', through: :member_departments
     end
 
     def apply_pending_annunciations
@@ -38,7 +38,7 @@ module Notice
 
     def pending_annunciation_ids
       all_annunciation_ids = member_annunciates.default_where('created_at-gte': self.created_at).order(annunciation_id: :desc).pluck(:annunciation_id).compact
-      made_annunciation_ids = notifications.where(notifiable_type: 'MemberAnnunciation').pluck(:notifiable_id)
+      made_annunciation_ids = notifications.where(notifiable_type: 'Notice::MemberAnnunciation').pluck(:notifiable_id)
 
       all_annunciation_ids - made_annunciation_ids
     end
@@ -55,7 +55,7 @@ module Notice
       end
 
       added_count = pending_annunciation_ids.size
-      [:total, :official, :'MemberAnnunciation'].each do |counter|
+      [:total, :official, :'Notice::MemberAnnunciation'].each do |counter|
         counters[counter] = counters[counter].to_i + added_count
       end
 
