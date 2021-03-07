@@ -1,7 +1,3 @@
-<% content_for :breadcrumb do %>
-  <%= render 'navbar' %>
-<% end %>
-
 <div class="box">
 <% @notifications.each do |notification| %>
   <div class="media">
@@ -19,7 +15,7 @@
       </div>
     </div>
     <div class="media-right">
-      <%= link_to({ action: 'read', id: notification.id }, { class: 'button is-small is-rounded', id: "check_#{notification.id}" }) do %>
+      <%= button_to({ action: 'read', id: notification.id }, class: 'button is-small is-rounded', id: "check_#{notification.id}") do %>
         <i class="fas fa-check has-text-danger"></i>Mark
       <% end unless params[:scope] == 'readed' %>
     </div>
