@@ -1,5 +1,5 @@
 <span class="menu-label"><%= t('notice.my.title') %></span>
 <div class="menu-list">
-  <%= link_to t('notice.my.notifications.index.unread'), my_notifications_path(receiver: params[:receiver]), class: active_params(scope: '', active: 'si-active') %>
-  <%= link_to t('notice.my.notifications.index.readed'), my_notifications_path(receiver: params[:receiver], scope: 'readed'), class: active_params(scope: 'readed', active: 'is-active') %>
+  <%= link_to t('notice.my.notifications.index.unread'), { controller: 'notice/my/notifications' }, class: active_params(controller: 'notifications', active: 'is-active') %>
+  <%= link_to t('notice.my.notifications.index.readed'),  { controller: 'notice/my/notifications', scope: 'readed' }, class: active_params(scope: 'readed', active: 'is-active') %>
 </div>
