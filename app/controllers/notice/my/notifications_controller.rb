@@ -72,5 +72,9 @@ module Notice
       @notification = Notification.find(params[:id])
     end
 
+    def self.local_prefixes
+      [controller_path, 'notice/me/notifications', 'notice/me/base']
+    end
+
   end
 end
