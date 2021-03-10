@@ -1,33 +1,28 @@
-<tr>
-  <td>
-    <p><%= model.user.name %></p>
-    <p class="has-text-gray"><%= model.member&.name %></p>
-  </td>
-  <td>
-    <p><%= model.title %></p>
-    <p><%= model.body %></p>
-    <p><%= model.link %></p>
-  </td>
-  <td>
-    <p><%= model.notifiable_type_i18n %></p>
-    <p><%= model.notifiable_id %></p>
-  </td>
-  <td>
-    <p><%= model.sender_type %></p>
-    <p><%= model.sender_id %></p>
-  </td>
-  <td>
-    <p><%= model.linked_type %></p>
-    <p><%= model.linked_id %></p>
-  </td>
-  <td>
-    <p><time class="has-text-gray"><%= model.created_at.to_s(:rfc822) %></time></p>
-    <p><time class="has-text-primary"><%= model.read_at.to_s(:rfc822) if model.read_at.present? %></time></p>
-  </td>
-  <td>
-    <p><%= model.official %></p>
-  </td>
-  <td>
-  
-  </td>
-</tr>
+<td>
+  <p><%= model.user.name %></p>
+  <p class="has-text-gray"><%= model.member&.name %></p>
+</td>
+<td>
+  <p><%= model.title %></p>
+  <p><%= model.body %></p>
+  <p><%= model.link %></p>
+</td>
+<td>
+  <p><%= model.notifiable_type_i18n %></p>
+  <p><%= model.notifiable_id %></p>
+</td>
+<td>
+  <p><%= model.sender_type %></p>
+  <p><%= model.sender_id %></p>
+</td>
+<td>
+  <p><%= model.linked_type %></p>
+  <p><%= model.linked_id %></p>
+</td>
+<td>
+  <p><time data-controller="time" class="has-text-gray"><%= model.created_at.to_s(:rfc822) %></time></p>
+  <p><time data-controller="time" class="has-text-primary"><%= model.read_at.to_s(:rfc822) if model.read_at.present? %></time></p>
+</td>
+<td>
+  <p><%= model.official %></p>
+</td>
