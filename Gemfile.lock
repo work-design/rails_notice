@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: f18c4b4d15f7b6552eecd918fa446b10890d6f5f
+  revision: bcc6729a90b280b1d9413fd0f19d49cab18adba0
   specs:
     rails_auth (1.1.0)
       bcrypt (~> 3.1)
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: bd3d4d895d9e8523345c4749ec2b8bd125cf5957
+  revision: 8d90901e7eaec2db0def7257f5d125f3cbbcc5e3
   specs:
     rails_com (1.2.9)
       acme-client
@@ -110,12 +110,16 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faraday (1.4.1)
+    faraday (1.4.2)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
       faraday-net_http (~> 1.0)
       faraday-net_http_persistent (~> 1.1)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords (>= 0.0.4)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
     faraday-excon (1.1.0)
     faraday-net_http (1.0.1)
     faraday-net_http_persistent (1.1.0)
@@ -123,10 +127,10 @@ GEM
       activesupport (>= 4.2.0)
     groupdate (5.2.2)
       activesupport (>= 5)
-    http-2-next (0.4.1)
+    http-2-next (0.4.3)
     http-form_data (2.3.0)
-    httpx (0.13.2)
-      http-2-next (>= 0.1.2)
+    httpx (0.14.4)
+      http-2-next (>= 0.4.1)
       timers
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
