@@ -52,4 +52,4 @@ end
 ```
 
 ## 许可证
-许可证采用 [MIT](https://opensource.org/licenses/MIT).
+遵循 [MIT](https://opensource.org/licenses/MIT) 协议

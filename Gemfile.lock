@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 9bd60ff5b62722d1e57093f3c3b2268046ec2438
+  revision: e58c354ea6985a57b7ef6501bde11f0c7b7fb869
   specs:
     rails_auth (1.1.0)
       bcrypt (~> 3.1)
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: ed9f1b7309d212eb7595bc72877a1215a8ebb8ea
+  revision: da60c3e4c9bce9a1380b3ef1c664887d6ee706f7
   specs:
     rails_com (1.2.9)
       acme-client
@@ -97,7 +97,7 @@ GEM
       activerecord (>= 4.2)
     bcrypt (3.1.16)
     builder (3.2.4)
-    closure_tree (7.2.0)
+    closure_tree (7.3.0)
       activerecord (>= 4.2.10)
       with_advisory_lock (>= 4.0.0)
     concurrent-ruby (1.1.8)
@@ -129,7 +129,7 @@ GEM
       activesupport (>= 5)
     http-2-next (0.4.3)
     http-form_data (2.3.0)
-    httpx (0.14.4)
+    httpx (0.15.3)
       http-2-next (>= 0.4.1)
       timers
     i18n (1.8.10)
