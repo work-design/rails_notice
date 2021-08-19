@@ -1,4 +1,4 @@
-<%= render 'shared/error_messages', target: @annunciation %>
+<%= render 'error_messages', target: @annunciation %>
 <%= f.select :type, options_for_select(Notice::Annunciation.options_i18n(:type), @annunciation.type) %>
 <%= f.text_field :title %>
 <%= f.text_area :body %>
