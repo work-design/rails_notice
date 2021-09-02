@@ -29,6 +29,13 @@ GIT
       rails (>= 6.1)
       turbo-rails
 
+GIT
+  remote: https://github.com/work-design/rails_ui.git
+  revision: 75f6e0066cd052b2c050ff1103a05099f4ef984e
+  specs:
+    rails_ui (0.0.1)
+      rails
+
 PATH
   remote: .
   specs:
@@ -244,6 +251,7 @@ DEPENDENCIES
   rails_auth!
   rails_com!
   rails_notice!
+  rails_ui!
   viter!
 
 BUNDLED WITH
