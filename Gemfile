@@ -3,13 +3,16 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gemspec
 
 gem 'rails'
+gem 'pg'
+gem 'puma'
+
 gem 'jbuilder'
-gem 'turbolinks'
-gem 'sqlite3'
-gem 'webpacker'
-
-gem 'factory_bot_rails', require: false
-
 gem 'kaminari'
+
+gem 'viter', github: 'qinmingyuan/viter'
 gem 'rails_com', github: 'work-design/rails_com'
 gem 'rails_auth', github: 'work-design/rails_auth'
+
+group :development, :test do
+  gem 'debug', '>= 1.0.0.beta'
+end

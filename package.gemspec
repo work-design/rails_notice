@@ -1,9 +1,6 @@
-$:.push File.expand_path('lib', __dir__)
-require 'rails_notice/version'
-
 Gem::Specification.new do |s|
   s.name = 'rails_notice'
-  s.version = RailsNotice::VERSION
+  s.version = '1.0.2'
   s.authors = ['qinmingyuan']
   s.email = ['mingyuan0715@foxmail.com']
   s.homepage = 'https://github.com/work-design/rails_notice'
@@ -19,5 +16,4 @@ Gem::Specification.new do |s|
   ]
 
   s.add_dependency 'rails_com', '~> 1.2'
-  s.add_dependency 'rails_auth'
 end
