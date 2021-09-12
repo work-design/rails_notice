@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/qinmingyuan/default_form.git
-  revision: 476ba7231079b1071415ad4e953b55ce16ae1d0d
-  specs:
-    default_form (1.5.1)
-      rails_com (~> 1.2)
-
-GIT
   remote: https://github.com/qinmingyuan/viter.git
   revision: a6c36456e695b32d427179c1bfc1c0df2c66792c
   specs:
@@ -14,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 267d181bafa9abc3e0fe1f0c8048b2ea792a3c1f
+  revision: 94b24f83e9ac5e8ecf374a9163d76ebbd89ac050
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -23,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: fedd2efe9fa7259958ef59ff5ea8d3596b92e08e
+  revision: 62d866862c729077c67329a0faf255ebaa49eba2
   specs:
     rails_com (1.2.9)
       acme-client
@@ -34,19 +27,27 @@ GIT
       httpx (~> 0.16)
       kaminari
       rails (>= 6.1)
+      rails_extend
       turbo-rails
 
 GIT
-  remote: https://github.com/work-design/rails_ui.git
-  revision: 75f6e0066cd052b2c050ff1103a05099f4ef984e
+  remote: https://github.com/work-design/rails_design.git
+  revision: 074ee48cd8cd754977c8946f73479fe4a7e9b3f5
   specs:
-    rails_ui (0.0.1)
+    rails_design (0.0.1)
       rails
+
+GIT
+  remote: https://github.com/work-design/rails_extend.git
+  revision: 9f79c3ba99e3d590841736b4a7855f54035a43cc
+  specs:
+    rails_extend (1.0.0)
+      rails (>= 6.0)
 
 PATH
   remote: .
   specs:
-    rails_notice (1.0.2)
+    rails_notice (1.0.3)
       rails_com (~> 1.2)
 
 GEM
@@ -122,8 +123,9 @@ GEM
       with_advisory_lock (>= 4.0.0)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
-    debug (1.0.0.beta8)
+    debug (1.0.0)
       irb
+      reline (>= 0.2.7)
     default_where (2.3.0)
       activerecord (>= 4.0, <= 7.0)
     erubi (1.10.0)
@@ -234,7 +236,7 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.1.0)
     timers (4.3.3)
-    turbo-rails (0.7.10)
+    turbo-rails (0.7.11)
       rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -249,17 +251,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  debug (>= 1.0.0.beta)
-  default_form!
+  debug
   jbuilder
-  kaminari
   pg
   puma
   rails
   rails_auth!
   rails_com!
+  rails_design!
+  rails_extend!
   rails_notice!
-  rails_ui!
   viter!
 
 BUNDLED WITH

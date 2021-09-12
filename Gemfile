@@ -5,16 +5,15 @@ gemspec
 gem 'rails'
 gem 'pg'
 gem 'puma'
-
 gem 'jbuilder'
-gem 'kaminari'
 
 gem 'viter', github: 'qinmingyuan/viter'
-gem 'default_form', github: 'qinmingyuan/default_form'
+
+gem 'rails_extend', github: 'work-design/rails_extend'
 gem 'rails_com', github: 'work-design/rails_com'
 gem 'rails_auth', github: 'work-design/rails_auth'
-gem 'rails_ui', github: 'work-design/rails_ui'
+gem 'rails_design', github: 'work-design/rails_design'
 
 group :development, :test do
-  gem 'debug', '>= 1.0.0.beta'
+  gem 'debug'
 end

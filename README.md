@@ -1,4 +1,9 @@
 # RailsNotice
+
+[![测试](https://github.com/work-design/rails_notice/actions/workflows/test.yml/badge.svg)](https://github.com/work-design/rails_notice/actions/workflows/test.yml)
+[![Docker构建](https://github.com/work-design/rails_notice/actions/workflows/cd.yml/badge.svg)](https://github.com/work-design/rails_notice/actions/workflows/cd.yml)
+[![Gem](https://github.com/work-design/rails_notice/actions/workflows/gempush.yml/badge.svg)](https://github.com/work-design/rails_notice/actions/workflows/gempush.yml)
+
 `RailsNotice` 用于处理通告(Annunciation)，消息(Notification);
 
 ## 特性
