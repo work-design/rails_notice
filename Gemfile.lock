@@ -1,13 +1,6 @@
 GIT
-  remote: https://github.com/qinmingyuan/viter.git
-  revision: a6c36456e695b32d427179c1bfc1c0df2c66792c
-  specs:
-    viter (0.1)
-      rails
-
-GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 94b24f83e9ac5e8ecf374a9163d76ebbd89ac050
+  revision: 82d5f4ba6117a98be22b725534cd7316fa72ba3d
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -16,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 62d866862c729077c67329a0faf255ebaa49eba2
+  revision: 804e713f38f9a204c0c6f934b4a2bb6a4c51a0b2
   specs:
     rails_com (1.2.9)
       acme-client
@@ -25,6 +18,7 @@ GIT
       default_where (~> 2.2)
       http-form_data (~> 2.3)
       httpx (~> 0.16)
+      jbuilder
       kaminari
       rails (>= 6.1)
       rails_extend
@@ -32,17 +26,24 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 074ee48cd8cd754977c8946f73479fe4a7e9b3f5
+  revision: 17b43fce2ddc8fcc98f5380c7cdb8e8de581c409
   specs:
     rails_design (0.0.1)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_extend.git
-  revision: 9f79c3ba99e3d590841736b4a7855f54035a43cc
+  revision: a01f5bcfbe28b070f92ef4edefe781497cc69a23
   specs:
     rails_extend (1.0.0)
-      rails (>= 6.0)
+      rails (>= 5.0)
+
+GIT
+  remote: https://github.com/work-design/rails_vite.git
+  revision: fc5c34bce125a277b71b61b8f9764b4555f477f8
+  specs:
+    rails_vite (0.0.1)
+      rails
 
 PATH
   remote: .
@@ -129,7 +130,7 @@ GEM
     default_where (2.3.0)
       activerecord (>= 4.0, <= 7.0)
     erubi (1.10.0)
-    faraday (1.7.1)
+    faraday (1.8.0)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
@@ -236,7 +237,7 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.1.0)
     timers (4.3.3)
-    turbo-rails (0.7.11)
+    turbo-rails (0.8.1)
       rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -252,7 +253,6 @@ PLATFORMS
 
 DEPENDENCIES
   debug
-  jbuilder
   pg
   puma
   rails
@@ -261,7 +261,7 @@ DEPENDENCIES
   rails_design!
   rails_extend!
   rails_notice!
-  viter!
+  rails_vite!
 
 BUNDLED WITH
    2.2.22
