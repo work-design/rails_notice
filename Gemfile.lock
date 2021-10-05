@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 82d5f4ba6117a98be22b725534cd7316fa72ba3d
+  revision: 5f705eb8c65cfa1ff4cb24b77e7b7b84d76b5c8f
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 804e713f38f9a204c0c6f934b4a2bb6a4c51a0b2
+  revision: 118a97a7d19b3f166e7caffa473a8c49f32b8eec
   specs:
     rails_com (1.2.9)
       acme-client
@@ -26,21 +26,21 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 17b43fce2ddc8fcc98f5380c7cdb8e8de581c409
+  revision: ed9e75f94cc6b3397115e4945d651491bcbb95c6
   specs:
     rails_design (0.0.1)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_extend.git
-  revision: a01f5bcfbe28b070f92ef4edefe781497cc69a23
+  revision: 00ac38dd8fe41406d97377b87df53b48e2b2beb6
   specs:
     rails_extend (1.0.0)
       rails (>= 5.0)
 
 GIT
   remote: https://github.com/work-design/rails_vite.git
-  revision: fc5c34bce125a277b71b61b8f9764b4555f477f8
+  revision: 231c4cf7eb14fc610ffd8d36b686df8e5d2351cd
   specs:
     rails_vite (0.0.1)
       rails
@@ -124,8 +124,8 @@ GEM
       with_advisory_lock (>= 4.0.0)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
-    debug (1.0.0)
-      irb
+    debug (1.2.2)
+      irb (>= 1.3.6)
       reline (>= 0.2.7)
     default_where (2.3.0)
       activerecord (>= 4.0, <= 7.0)
@@ -153,9 +153,8 @@ GEM
       activesupport (>= 5.0)
     http-2-next (0.5.0)
     http-form_data (2.3.0)
-    httpx (0.17.0)
+    httpx (0.18.0)
       http-2-next (>= 0.4.1)
-      timers
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     io-console (0.5.9)
@@ -163,7 +162,7 @@ GEM
       reline (>= 0.2.7)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
-    jwt (2.2.3)
+    jwt (2.3.0)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.1)
@@ -181,18 +180,18 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
-    marcel (1.0.1)
+    marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.1)
     mini_portile2 (2.6.1)
     minitest (5.14.4)
     multipart-post (2.1.1)
     nio4r (2.5.8)
-    nokogiri (1.12.4)
+    nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     pg (1.2.3)
-    puma (5.4.0)
+    puma (5.5.0)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
@@ -236,7 +235,6 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     thor (1.1.0)
-    timers (4.3.3)
     turbo-rails (0.8.1)
       rails (>= 6.0.0)
     tzinfo (2.0.4)
