@@ -1,6 +1,6 @@
 <% if defined?(current_user) && current_user %>
   <%= link_to({ controller: 'notice/my/notifications' }, class: 'navbar-item', id: 'notify_show') do %>
-    <i class="fas fa-bell"></i>
+    <i class="fa-light fa-bell"></i>
     <span id="notice_count"><%= current_user.unread_count %></span>
   <% end %>
 <% end %>

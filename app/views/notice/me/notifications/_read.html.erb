@@ -3,7 +3,7 @@
     <% unless params[:scope] == 'readed' %>
     <li>
     <%= link_to({ controller: 'notifications', action: 'read_all' }, class: 'item') do %>
-      <i class="fas fa-check-double"></i><%= t('.read_all') %>
+      <i class="fa-light fa-check-double"></i><%= t('.read_all') %>
     <% end %>
     </li>
     <% end %>
