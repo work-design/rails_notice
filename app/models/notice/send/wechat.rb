@@ -21,11 +21,11 @@ module Notice
     end
 
     def wechat_app
-      WechatApp.where(organ_id: self.organ_id).default
+      Wechat::App.where(organ_id: self.organ_id).default
     end
 
     def wechat_template
-      template_config = TemplateConfig.find_by(notifiable_type: self.notifiable_type, code: self.code)
+      template_config = Wechat::TemplateConfig.find_by(notifiable_type: self.notifiable_type, code: self.code)
       wechat_app.wechat_templates.find_by(template_config_id: template_config.id) if template_config
     end
 
