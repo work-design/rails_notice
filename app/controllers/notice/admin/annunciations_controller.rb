@@ -15,30 +15,12 @@ module Notice
       @annunciations = Annunciation.includes(:annunciates).with_attached_cover.default_where(q_params).order(id: :desc).page(params[:page])
     end
 
-    def new
-      @annunciation = Annunciation.new
-    end
-
     def create
       @annunciation = Annunciation.new(annunciation_params)
       @annunciation.publisher = current_user if defined? current_user
 
       unless @annunciation.save
         render :new, locals: { model: @annunciation }, status: :unprocessable_entity
-      end
-    end
-
-    def show
-    end
-
-    def edit
-    end
-
-    def update
-      @annunciation.assign_attributes(annunciation_params)
-
-      unless @annunciation.save
-        render :edit, locals: { model: @annunciation }, status: :unprocessable_entity
       end
     end
 
@@ -67,10 +49,6 @@ module Notice
       params[:department_ids].reject(&:blank?).each do |department_id|
         @annunciation.annunciates.find_or_create_by(department_id: department_id)
       end
-    end
-
-    def destroy
-      @annunciation.destroy
     end
 
     private

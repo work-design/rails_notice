@@ -12,42 +12,12 @@ module Notice
       @notifications = Notification.default_where(q_params).page(params[:page])
     end
 
-    def show
-    end
-
     def push
       @notification.process_job
     end
 
     def email
       @notification.send_email
-    end
-
-    def new
-      @notification = Notification.new
-    end
-
-    def edit
-    end
-
-    def create
-      @notification = Notification.new(notification_params)
-
-      unless @notification.save
-        render :new, locals: { model: @notification }, status: :unprocessable_entity
-      end
-    end
-
-    def update
-      @notification.assign_attributes(notification_params)
-
-      unless @notification.save
-        render :edit, locals: { model: @notification }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @notification.destroy
     end
 
     private
