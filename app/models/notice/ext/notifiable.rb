@@ -5,7 +5,7 @@ module Notice
     included do
       delegate :url_helpers, to: 'Rails.application.routes'
 
-      has_many :notifications, as: :notifiable
+      has_many :notifications, class_name: 'Notice::Notication', as: :notifiable
     end
 
     def to_notification(user: nil, member: nil, **other_params)
