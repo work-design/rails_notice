@@ -5,15 +5,15 @@ module Notice
       super if defined? super
 
       return unless wechat_template
-      user.wechat_users.where(app_id: wechat_app.appid).map do |wechat_user|
-        wechat_notice = wechat_user.wechat_notices.build
-        wechat_notice.wechat_template = wechat_template
-        wechat_notice.wechat_subscribed = user.wechat_subscribeds.first
+      user.wechat_users.where(appid: wechat_app.appid).map do |wechat_user|
+        wechat_notice = wechat_user.notices.build
+        wechat_notice.template = wechat_template
+        wechat_notice.subscribed = wechat_subscribeds.first
         wechat_notice.notification = self
-        if wechat_app.is_a?(WechatPublic)
-          wechat_notice.type = 'PublicNotice'
+        if wechat_app.is_a?(Wechat::PublicApp)
+          wechat_notice.type = 'Wechat::PublicNotice'
         else
-          wechat_notice.type = 'ProgramNotice'
+          wechat_notice.type = 'Wechat::ProgramNotice'
         end
         wechat_notice.save
         wechat_notice
