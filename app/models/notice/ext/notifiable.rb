@@ -35,6 +35,7 @@ module Notice
       n.organ_id ||= self.organ_id if respond_to?(:organ_id)
 
       n.save!
+      n
     end
 
   end
