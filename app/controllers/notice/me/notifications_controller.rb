@@ -1,7 +1,6 @@
 module Notice
   class Me::NotificationsController < Me::BaseController
     before_action :set_notification, only: [:show, :url, :read, :update, :archive, :destroy]
-    protect_from_forgery except: :read
 
     def index
       q_params = {
