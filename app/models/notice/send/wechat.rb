@@ -5,7 +5,7 @@ module Notice
       super if defined? super
 
       return unless template_config
-      user.wechat_users.where('app.organ_id': self.organ_id).map do |wechat_user|
+      user.wechat_users.default_where('app.organ_id': self.organ_id).map do |wechat_user|
         if wechat_user.app.is_a?(Wechat::PublicApp)
           wechat_notice = wechat_user.notices.build type: 'Wechat::PublicNotice'
         else
