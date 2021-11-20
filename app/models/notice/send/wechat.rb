@@ -12,7 +12,7 @@ module Notice
           wechat_notice = wechat_user.notices.build type: 'Wechat::ProgramNotice'
         end
 
-        wechat_template = wechat_user.app.wechat_templates.find_by(template_config_id: template_config.id)
+        wechat_template = wechat_user.app.templates.find_by(template_config_id: template_config.id)
         wechat_notice.template = wechat_template
         wechat_notice.msg_request = wechat_template.msg_requests.where(open_id: wechat_user.uid).first
         wechat_notice.notification = self
