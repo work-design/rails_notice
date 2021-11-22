@@ -33,7 +33,7 @@ development:
 ```ruby
 # which model can receive notifications
 class User < ApplicationRecord
-  include RailsNotice::Receiver
+  include Notice::Ext::Receiver
 end
 
 ```
