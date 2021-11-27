@@ -1,4 +1,3 @@
-<%= render 'error_messages', target: f.object %>
 <%= f.number_field :showtime, step: 1 %>
 <%= f.check_box :accept_email %>
 <%= f.collection_check_boxes :notifiable_types, Notice::Notification.notifiable_types, :to_s, :to_s %>
