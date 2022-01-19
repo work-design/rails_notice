@@ -9,7 +9,7 @@
   <p><%= link_to model.notifications_count, { controller: 'notifications', notifiable_type: model.class_name, notifiable_id: model.id } %></p>
   <p class="has-text-success"><%= model.readed_count %></p>
 </td>
-<td><time data-controller="time"><%= model.created_at.to_s(:iso8601) %></time></td>
+<td><time data-controller="time"><%= model.created_at.to_formatted_s(:iso8601) %></time></td>
 <td class="tags">
   <% model.annunciates.each do |annunciate| %>
     <div class="tag"><%= annunciate.department&.name %></div>
