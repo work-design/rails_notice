@@ -6,6 +6,10 @@ module RailsNotice
       "#{config.root}/app/models/annunciation"
     ]
 
+    config.eager_load_paths += Dir[
+      "#{config.root}/app/models/annunciation"
+    ]
+
     config.generators do |g|
       g.rails = {
         system_tests: false,
