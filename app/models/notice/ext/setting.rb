@@ -34,9 +34,9 @@ module Notice
         update_all sql
       end
 
-      def reset_counters
+      def reset_notice_counters
         self.find_each do |ns|
-          ns.user.reset_unread_count if ns.user
+          ns.reset_unread_count
         end
       end
 
