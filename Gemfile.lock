@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 7fad0b2cb1ceaf963343ea1af0fbb948b6ec3df2
+  revision: 27ec28cac8be317e736ca98e13b6461ef1fe23df
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 1c4fd014e3002841d5faf698cd3f7b16211e17fc
+  revision: 03d6f866d6229d5d2b6b5d214a99e9dceccb4481
   specs:
     rails_com (1.3.0)
       acme-client
@@ -17,26 +17,23 @@ GIT
       closure_tree (>= 7.3)
       default_where (~> 2.2)
       http-form_data (~> 2.3)
-      httpx (~> 0.16)
+      httpx
       kaminari
       net-http
-      net-imap
-      net-pop
-      net-smtp
-      rails (>= 6.1)
+      rails (>= 7.0)
       rails_extend
       turbo-rails
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 75e58d5f5fc22189c5290aed86142540a26acac3
+  revision: db9fb3375d23a7221aaac63b8dee6c7e34c4aff3
   specs:
     rails_design (0.0.1)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_extend.git
-  revision: 4dd6986bf4c2397b1fb79a4f12d0bdefdef3849f
+  revision: 1fd5b79b9b81d775486fa3f3976ffb64010bc66f
   specs:
     rails_extend (1.0.1)
       rails (>= 5.0)
@@ -197,7 +194,7 @@ GEM
     puma (5.6.4)
       nio4r (~> 2.0)
     racc (1.6.0)
-    rack (2.2.3)
+    rack (2.2.3.1)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (7.0.3)
@@ -232,7 +229,7 @@ GEM
     ruby2_keywords (0.0.5)
     strscan (3.0.3)
     thor (1.2.1)
-    timeout (0.2.0)
+    timeout (0.3.0)
     turbo-rails (1.1.1)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
