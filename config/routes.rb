@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   namespace :notice, defaults: { business: 'notice' } do
     namespace :admin, defaults: { namespace: 'admin' } do
+      root 'home#index'
       resources :notifications do
         member do
           patch :push
