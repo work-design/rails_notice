@@ -3,6 +3,9 @@ zh:
     title: 通知
     admin:
       title: 通知管理
+      home:
+        index:
+          title: 通知管理
       annunciations:
         index:
           title: 通告
