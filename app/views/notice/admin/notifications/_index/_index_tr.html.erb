@@ -1,16 +1,18 @@
 <tr id="tr_<%= model.id %>" data-controller="show" data-action="mouseenter->show#show mouseleave->show#hide">
   <%= yield %>
   <td>
-    <span data-show-target="item" style="visibility: hidden">
+    <div data-show-target="item" style="visibility: hidden">
       <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-light fa-pencil"></i>
       <% end %>
       <%= button_to({ action: 'push', id: model.id }, method: :patch, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-plane"></i><span>推送</span>
+        <i class="fa-light fa-plane"></i>
+        <span class="pl-1">推送</span>
       <% end %>
       <%= button_to({ action: 'email', id: model.id }, method: :patch, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-mail"></i><span>Email</span>
+        <i class="fa-light fa-mail"></i>
+        <span class="pl-1">Email</span>
       <% end %>
-    </span>
+    </div>
   </td>
 </tr>
