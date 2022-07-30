@@ -1,12 +1,17 @@
 module Notice
   module Send::Wechat
+    extend ActiveSupport::Concern
+
+    included do
+      belongs_to :template_config, ->(o) { where(notifiable_type: o.notifiable_type) }, class_name: 'Wechat::TemplateConfig', foreign_key: :code, primary_key: :code, optional: true
+    end
 
     def send_out
       super if defined? super
-
       return unless template_config
+
       user.wechat_users.default_where('app.organ_id': self.organ_id).map do |wechat_user|
-        wechat_template = wechat_user.app.templates.find_by(template_config_id: template_config.id)
+        wechat_template = template_config.templates.find_by(appid: wechat_user.appid)
         next if wechat_template.nil?
 
         if wechat_user.app.is_a?(Wechat::PublicApp)
@@ -21,11 +26,6 @@ module Notice
         wechat_notice.save
         wechat_notice
       end
-    end
-
-    def template_config
-      return @template_config if defined? @template_config
-      @template_config = Wechat::TemplateConfig.find_by(notifiable_type: self.notifiable_type, code: self.code)
     end
 
   end
