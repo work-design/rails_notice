@@ -1,0 +1,21 @@
+<div class="media">
+  <div class="media-content">
+    <% if notification.title %>
+      <div class="header">
+        <%= link_to notification.title, notification.link %>
+      </div>
+    <% end %>
+    <div class="description">
+      <%= link_to notification.body, notification.link %>
+    </div>
+    <div class="extra">
+      <time data-controller="time"><%= notification.created_at.to_formatted_s(:iso8601) %></time>
+    </div>
+  </div>
+  <div class="media-right">
+    <%= button_to({ action: 'read', id: notification.id }, method: :patch, class: 'button is-small is-rounded', id: "check_#{notification.id}") do %>
+      <i class="fa-light fa-check has-text-danger"></i>
+      <span class="pl-1">已读</span>
+    <% end unless params[:scope] == 'readed' %>
+  </div>
+</div>

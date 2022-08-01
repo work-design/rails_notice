@@ -41,20 +41,8 @@ module Notice
       @notification.make_as_read
     end
 
-    def update
-      @notification.update(notification_params)
-
-      unless @notification.save
-        render :edit, locals: { model: @notification }, status: :unprocessable_entity
-      end
-    end
-
     def archive
       @notification.archive
-    end
-
-    def destroy
-      @notification.destroy
     end
 
     private
@@ -71,8 +59,14 @@ module Notice
       @notification = Notification.find(params[:id])
     end
 
-    def self.local_prefixes
-      [controller_path, 'notice/me/notifications', 'notice/me/base']
+    def _prefixes
+      super do |pres|
+        if ['index'].include?(params[:action])
+          pres + ['notice/me/notifications', 'notice/me/notifications/_index']
+        else
+          pres
+        end
+      end
     end
 
   end
