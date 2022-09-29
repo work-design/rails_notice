@@ -5,11 +5,11 @@
       <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-pencil"></i>
       <% end %>
-      <%= button_to({ action: 'push', id: model.id }, method: :patch, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
+      <%= button_to({ action: 'push', id: model.id }, method: :patch, data: { turbo_confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-regular fa-plane"></i>
         <span class="pl-1">推送</span>
       <% end %>
-      <%= button_to({ action: 'email', id: model.id }, method: :patch, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
+      <%= button_to({ action: 'email', id: model.id }, method: :patch, data: { turbo_confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-regular fa-mail"></i>
         <span class="pl-1">Email</span>
       <% end %>
