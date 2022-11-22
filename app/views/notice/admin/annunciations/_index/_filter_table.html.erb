@@ -2,9 +2,9 @@
   <tr>
     <th><%= Notice::Annunciation.human_attribute_name(:type) %></th>
     <td>
-      <%= link_to t('.all'), filter_params(except: [:type]), class: active_params(type: '', active: 'button is-info', item: 'button is-light') %>
+      <%= link_to t('.all'), filter_params(except: [:type]), class: 'button is-light' %>
       <% Notice::Annunciation.options_i18n(:type).each do |_, type| %>
-        <%= link_to Notice::Annunciation.enum_i18n(:type, type), filter_params(type: type), class: active_params(type: type, active: 'button is-info', item: 'button is-light') %>
+        <%= link_to Notice::Annunciation.enum_i18n(:type, type), filter_params(type: type), class: active_helper(type: type, active: 'button is-info', item: 'button is-light') %>
       <% end %>
     </td>
   </tr>
