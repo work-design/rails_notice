@@ -1,5 +1,5 @@
 <span class="menu-label"><%= t('notice.my.title') %></span>
 <div class="menu-list">
-  <%= link_to t('notice.my.notifications.index.unread'), { controller: 'notice/my/notifications' }, class: active_helper(controller: 'notifications', active: 'is-active') %>
+  <%= link_to t('notice.my.notifications.index.unread'), { controller: 'notice/my/notifications' }, class: active_helper(controllers: 'notifications', active: 'is-active') %>
   <%= link_to t('notice.my.notifications.index.readed'),  { controller: 'notice/my/notifications', scope: 'readed' }, class: active_helper(scope: 'readed', active: 'is-active') %>
 </div>
