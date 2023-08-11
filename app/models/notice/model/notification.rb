@@ -46,7 +46,7 @@ module Notice
 
     def notifiable_detail
       r = self.notifiable.attributes.slice(*notify_setting[:only])
-      notify_setting[:methods].each do |m|
+      Array(notify_setting[:methods]).each do |m|
         r.merge! notifiable.try(m)
       end
       r
