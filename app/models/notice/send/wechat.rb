@@ -10,11 +10,11 @@ module Notice
       super if defined? super
       return unless template_config
 
-      user.wechat_users.default_where('app.organ_id': self.organ_id).map do |wechat_user|
+      user.wechat_users.default_where(appid: organ.apps.where(type: ['Wechat::PublicApp', 'Wechat::PublicAgency']).pluck(:appid)).map do |wechat_user|
         wechat_template = template_config.templates.find_by(appid: wechat_user.appid)
         next if wechat_template.nil?
 
-        if wechat_user.app.is_a?(Wechat::PublicApp)
+        if ['Wechat::PublicApp', 'Wechat::PublicAgency'].include? wechat_user.app.type
           wechat_notice = wechat_user.notices.build type: 'Wechat::PublicNotice'
         else
           wechat_notice = wechat_user.notices.build type: 'Wechat::ProgramNotice'
