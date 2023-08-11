@@ -15,13 +15,14 @@ module Notice
       attribute :verbose, :boolean, default: false
       attribute :created_at, :datetime, null: false, index: true
 
-      belongs_to :user, class_name: 'Auth::User'
+      belongs_to :user, class_name: 'Auth::User', optional: true
       belongs_to :member, class_name: 'Org::Member', optional: true
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
       belongs_to :sender, polymorphic: true, optional: true
       belongs_to :notifiable, polymorphic: true, optional: true
       belongs_to :linked, polymorphic: true, optional: true
+
       has_many :notification_sendings, dependent: :delete_all
 
       default_scope -> { order(created_at: :desc) }
