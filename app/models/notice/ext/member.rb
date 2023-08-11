@@ -1,5 +1,5 @@
 module Notice
-  module Model::Member
+  module Ext::Member
     extend ActiveSupport::Concern
 
     included do
