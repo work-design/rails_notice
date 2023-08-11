@@ -45,8 +45,11 @@ module Notice
     end
 
     def notifiable_detail
-      r = self.notifiable.as_json(**notify_setting.slice(:only, :except, :include, :methods))
-      Hash(r)
+      r = self.notifiable.attributes.slice(*notify_setting[:only])
+      notify_setting[:methods].each do |m|
+        r.merge! notifiable.try(m)
+      end
+      r
     end
 
     def linked_detail
