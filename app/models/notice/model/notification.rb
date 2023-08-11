@@ -33,6 +33,25 @@ module Notice
       after_destroy_commit :decrement_unread, if: -> { read_at.blank? }
     end
 
+    def store_other_params(other_params)
+      if other_params[:sender]
+        #return if other_params[:sender] == receiver  # do not send notification to himself
+        self.sender_id = other_params[:sender].id
+        self.sender_type = other_params[:sender].class
+      end
+
+      if other_params[:linked]
+        self.linked_type = other_params[:linked].class.name
+        self.linked_id = other_params[:linked].id
+      end
+
+      self.assign_attributes other_params.slice(
+        :title, :body, :link, :organ_id,
+        :verbose, :code,
+        :cc_emails
+      )
+    end
+
     def process_job
       if sending_at
         NotificationJob.set(wait_until: sending_at).perform_later(self)
