@@ -6,26 +6,12 @@ module Notice
       q_params = {}
       q_params.merge! params.permit(:id)
 
-      @members = Member.default_where(q_params).order(id: :desc).page(params[:page])
-    end
-
-    def show
-    end
-
-    def edit
-    end
-
-    def update
-      @member.assign_attributes(member_params)
-
-      unless @member.save
-        render :edit, locals: { model: @member }, status: :unprocessable_entity
-      end
+      @members = Org::Member.default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     private
     def set_member
-      @member = Member.find(params[:id])
+      @member = Org::Member.find(params[:id])
     end
 
     def member_params
