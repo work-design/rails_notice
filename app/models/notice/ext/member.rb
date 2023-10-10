@@ -63,5 +63,9 @@ module Notice
       self.counters = _counters
     end
 
+    def unread_count
+      counters['total'] || 0
+    end
+
   end
 end
