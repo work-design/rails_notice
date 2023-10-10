@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       namespace :me, defaults: { namespace: 'me' } do
         resources :notifications, only: [:index, :show, :destroy] do
           collection do
+            get :readed
             post :read_all
           end
           member do

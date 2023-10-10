@@ -16,6 +16,11 @@ module Notice
       @notifications = current_member.notifications.order(read_at: :asc).default_where(q_params).page(params[:page]).per(params[:per])
     end
 
+    def readed
+      q_params = {}
+      @notifications = current_member.notifications.where.not(read_at: nil).order(read_at: :asc).default_where(q_params).page(params[:page]).per(params[:per])
+    end
+
     def read_all
       @notifications = current_user.notifications.default_where(q_params).page(params[:page]).per(params[:per])
       @notifications.update_all(read_at: Time.current)
