@@ -1,5 +1,6 @@
 module Notice
-  class Me::NotificationsController < Me::BaseController
+  class Me::NotificationsController < My::NotificationsController
+    include Controller::Me
     before_action :set_notification, only: [:show, :url, :read, :update, :archive, :destroy]
 
     def index

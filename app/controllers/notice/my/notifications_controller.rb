@@ -18,6 +18,11 @@ module Notice
       @notifications = @notifications.default_where(q_params).page(params[:page]).per(params[:per])
     end
 
+    def readed
+      q_params = {}
+      @notifications = current_user.notifications.where.not(read_at: nil).order(read_at: :asc).default_where(q_params).page(params[:page]).per(params[:per])
+    end
+
     def read_all
       if params[:page]
         @notifications = current_user.notifications.default_where(q_params).page(params[:page]).per(params[:per])
@@ -57,16 +62,6 @@ module Notice
 
     def set_notification
       @notification = Notification.find(params[:id])
-    end
-
-    def _prefixes
-      super do |pres|
-        if ['index'].include?(params[:action])
-          pres + ['notice/me/notifications', 'notice/me/notifications/_index']
-        else
-          pres
-        end
-      end
     end
 
   end
