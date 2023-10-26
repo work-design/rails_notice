@@ -10,7 +10,7 @@ module Notice
     end
 
     def unread_count
-      r = counters.fetch('total', 0)
+      r = counters&.fetch('total', 0)
       r.to_i
     end
 
