@@ -12,7 +12,7 @@ module Notice
       q_params.merge! default_params
       q_params.merge! params.permit(:type)
 
-      @annunciations = Annunciation.includes(:annunciates).with_attached_cover.default_where(q_params).order(id: :desc).page(params[:page])
+      @annunciations = Annunciation.with_attached_cover.default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     def create

@@ -13,7 +13,7 @@
 <td class="tags">
   <% model.annunciates.each do |annunciate| %>
     <div class="tag"><%= annunciate.department&.name %></div>
-  <% end %>
+  <% end if model.respond_to? :annunciates %>
   <%= link_to({ action: 'edit_user', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.publish') }, class: 'button is-small is-rounded is-link') do %>
     <i class="fa-regular fa-bullhorn"></i>
   <% end if model.is_a?(Notice::UserAnnunciation) %>

@@ -2,17 +2,17 @@ en:
   notice:
     title: Notice
     admin:
-      title: 通知管理
+      title: Notice
       annunciations:
         index:
-          title: 通告
+          title: Annunciations
           publish: 发布
       notifications:
         index:
-          title: 通知
+          title: Notifications List
       members:
         index:
-          title: 通知设置
+          title: Member Notice Settings
     my:
       title: Notice
       notifications:
