@@ -1,0 +1,4 @@
+<%= link_to({ controller: 'notice/me/notifications' }, class: 'navbar-item', id: 'notify_show') do %>
+  <i class="fa-regular fa-bell"></i>
+  <span class="pl-1" id="notice_count"><%= current_member.unread_count %></span>
+<% end %>
