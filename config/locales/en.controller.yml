@@ -19,19 +19,20 @@ en:
         index:
           title: Notifications
           unread: Unread
-          readed: Have Readed
-          detail: Detail
+        readed:
+          title: Have Readed
+        detail: Detail
       notification_settings:
         show:
           title: Notify Settings
     me:
-      title: 通知
+      title: Notice
       notifications:
         index:
-          title: 通知
-          unread: 未读
-          readed: 已读
-          detail: 详情请点击
+          title: Notifications
+        readed:
+          title: Readed
+        detail: 详情请点击
       notification_settings:
         show:
-          title: 通知设置
+          title: Notify Settings

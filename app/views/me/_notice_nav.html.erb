@@ -6,8 +6,8 @@
 </div>
 <div class="menu-list">
   <%= link_to({ controller: 'notice/me/notifications' }, class: active_helper(notifications: 'index', active: 'is-active')) do %>
-    <span><%= t('notice.me.notifications.index.unread') %></span>
+    <span><%= t('notice.me.notifications.index.title') %></span>
     <span class="tag"><%= current_member.unread_count %></span>
   <% end %>
-  <%= link_to t('notice.me.notifications.index.readed'), { controller: 'notice/me/notifications', action: 'readed' }, class: active_helper(notifications: 'readed', active: 'is-active') %>
+  <%= link_to t('notice.me.notifications.readed.title'), { controller: 'notice/me/notifications', action: 'readed' }, class: active_helper(notifications: 'readed', active: 'is-active') %>
 </div>
