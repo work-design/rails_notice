@@ -1,6 +1,5 @@
 module Notice
-  class Me::NotificationsController < My::NotificationsController
-    include Controller::Me
+  class Me::NotificationsController < Me::BaseController
     before_action :set_notification, only: [:show, :url, :read, :update, :archive, :destroy]
 
     def index
@@ -41,20 +40,8 @@ module Notice
       @notification.make_as_read
     end
 
-    def update
-      @notification.update(notification_params)
-
-      unless @notification.save
-        render :edit, locals: { model: @notification }, status: :unprocessable_entity
-      end
-    end
-
     def archive
       @notification.archive
-    end
-
-    def destroy
-      @notification.destroy
     end
 
     private
@@ -69,6 +56,16 @@ module Notice
 
     def set_notification
       @notification = Notification.find(params[:id])
+    end
+
+    def _prefixes
+      super do |pres|
+        if ['index', 'show', 'readed'].include?(params[:action])
+          pres + ['notice/my/notifications', 'notice/my/notifications/_base']
+        else
+          pres
+        end
+      end
     end
 
   end
