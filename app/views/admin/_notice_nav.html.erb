@@ -5,8 +5,8 @@
     <i class="fa-solid fa-fw dropdown"></i>
   </a>
   <div class="menu-list">
-    <%= link_to t('notice.admin.annunciations.index.title'), { controller: 'notice/admin/annunciations' }, class: active_helper(controllers: 'annunciations', active: 'is-active') %>
-    <%= link_to t('notice.admin.notifications.index.title'), { controller: 'notice/admin/notifications' }, class: active_helper(controllers: 'notifications', active: 'is-active') %>
-    <%= link_to t('notice.admin.members.index.title'), { controller: 'notice/admin/members' }, class: active_helper(controllers: ['members'], active: 'is-active') %>
+    <%= link_to t('notice.admin.annunciations.index.title'), { controller: 'notice/admin/annunciations' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: 'annunciations', active: 'is-active') %>
+    <%= link_to t('notice.admin.notifications.index.title'), { controller: 'notice/admin/notifications' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: 'notifications', active: 'is-active') %>
+    <%= link_to t('notice.admin.members.index.title'), { controller: 'notice/admin/members' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: ['members'], active: 'is-active') %>
   </div>
 </div>
