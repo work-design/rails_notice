@@ -1,10 +1,9 @@
 module Notice
   class Admin::AnnunciationsController < Admin::BaseController
     before_action :set_annunciation, only: [
-      :show, :edit, :update,
-      :edit_user, :update_user,
-      :edit_member, :update_member,
-      :options, :destroy
+      :show, :edit, :update, :destroy, :actions,
+      :edit_user, :update_user, :edit_member, :update_member,
+      :options
     ]
 
     def index
@@ -25,7 +24,7 @@ module Notice
     end
 
     def edit_user
-      @user_tags = UserTag.where.not(id: @annunciation.user_tag_ids)
+      @user_tags = Auth::UserTag.where.not(id: @annunciation.user_tag_ids)
     end
 
     def update_user

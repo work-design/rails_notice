@@ -14,13 +14,13 @@
         <div class="tag">
           <%= annunciate.user_tag&.name %>
           <%= link_to admin_annunciate_path(annunciate), method: :delete do %>
-            <i class="fa-regular fa-times"></i>
+            <i class="fa-solid fa-times"></i>
           <% end %>
         </div>
       <% end %>
     </div>
     <%= link_to publish_admin_annunciation_path(@annunciation), aria: { label: '发布' }, class: 'button is-small is-rounded' do %>
-      <i class="fa-regular fa-bullhorn"></i>
+      <i class="fa-solid fa-bullhorn"></i>
     <% end %>
   </td>
 </tr>

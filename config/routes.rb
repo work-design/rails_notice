@@ -33,11 +33,12 @@ Rails.application.routes.draw do
         resources :members
         resources :annunciations do
           member do
-            get 'user' => :edit_user
+            match :edit_user, via: [:get, :post]
             patch 'user' => :update_user
-            get 'member' => :edit_member
+            match :edit_member, via: [:get, :post]
             patch 'member' => :update_member
             get 'publish/options' => :options
+            match :publish, via: [:get, :post]
           end
         end
         resources :annunciates

@@ -6,7 +6,10 @@ en:
       annunciations:
         index:
           title: Annunciations
-          publish: 发布
+        edit_user:
+          title: Publish to Users
+        edit_member:
+          title: Publish to Staffs
       notifications:
         index:
           title: Notifications List

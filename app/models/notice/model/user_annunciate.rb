@@ -8,7 +8,8 @@ module Notice
       attribute :annunciated_at, :datetime
 
       belongs_to :annunciation
-      belongs_to :user_tag, optional: true
+      belongs_to :user_tag, class_name: 'Auth::UserTag', optional: true
+
       has_many :user_taggeds, foreign_key: :user_tag_id, primary_key: :user_tag_id
       has_many :notification_settings, through: :user_taggeds
       has_many :same_annunciates, class_name: self.name, foreign_key: :annunciation_id, primary_key: :annunciation_id
