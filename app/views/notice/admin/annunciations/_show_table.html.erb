@@ -13,7 +13,7 @@
       <% @annunciation.annunciates.each do |annunciate| %>
         <div class="tag">
           <%= annunciate.user_tag&.name %>
-          <%= link_to admin_annunciate_path(annunciate), method: :delete do %>
+          <%= button_to admin_annunciate_path(annunciate), method: :delete do %>
             <i class="fa-solid fa-times"></i>
           <% end %>
         </div>
