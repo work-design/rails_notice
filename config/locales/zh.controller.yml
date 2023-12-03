@@ -9,7 +9,8 @@ zh:
       annunciations:
         index:
           title: 通告
-          publish: 发布
+        publish:
+          title: 发布
       notifications:
         index:
           title: 通知
@@ -21,9 +22,12 @@ zh:
       notifications:
         index:
           title: 通知
-          unread: 未读
-          readed: 已读
-          detail: 详情请点击
+        unread:
+          title: 未读
+        readed:
+          title: 已读
+        show:
+          title: 详情请点击
       notification_settings:
         show:
           title: 通知设置
@@ -32,9 +36,12 @@ zh:
       notifications:
         index:
           title: 通知
-          unread: 未读
-          readed: 已读
-          detail: 详情请点击
+        unread:
+          title: 未读
+        readed:
+          title: 已读
+        show:
+          title: 详情请点击
       notification_settings:
         show:
           title: 通知设置
