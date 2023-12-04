@@ -6,7 +6,8 @@ module Notice
     included do
       belongs_to :department, class_name: 'Org::Department'
 
-      has_many :notification_settings, through: :user_taggeds
+
+      has_many :members, through: :member_departments
 
       #after_create :increment_unread_count
       #after_destroy :decrement_unread_count
