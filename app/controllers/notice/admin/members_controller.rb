@@ -4,6 +4,7 @@ module Notice
 
     def index
       q_params = {}
+      q_params.merge! default_params
       q_params.merge! params.permit(:id)
 
       @members = Org::Member.default_where(q_params).order(id: :desc).page(params[:page])

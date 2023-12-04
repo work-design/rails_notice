@@ -7,9 +7,9 @@
   <% end %>
 </td>
 <td>
-  <% model.notifiable_types.each do |notifiable_type| %>
-    <span class="tag"><%= notifiable_type %></span>
-  <% end %>
+<% model.notifiable_types.each do |notifiable_type| %>
+  <span class="tag"><%= notifiable_type %></span>
+<% end %>
 </td>
 <td>
   <%= simple_format(model.counters) %>
