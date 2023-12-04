@@ -5,8 +5,6 @@ module Notice
     included do
       belongs_to :organ, class_name: 'Org::Organ'
 
-      has_many :notification_settings, through: :user_taggeds
-      has_many :same_annunciates, class_name: self.name, foreign_key: :annunciation_id, primary_key: :annunciation_id
 
       #after_create :increment_unread_count
       #after_destroy :decrement_unread_count
