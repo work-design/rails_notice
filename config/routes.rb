@@ -31,17 +31,16 @@ Rails.application.routes.draw do
         end
         resources :users
         resources :members
-        resources :annunciations do
+        resources :announcements do
           member do
             match :edit_user, via: [:get, :post]
             patch 'user' => :update_user
-            match :edit_member, via: [:get, :post]
             get 'publish/options' => :options
             match :publish, via: [:get, :post]
           end
-          resources :member_annunciates
+          resources :announcement_user_tags
+          resources :announcement_organs
         end
-        resources :annunciates
       end
 
       namespace :me, defaults: { namespace: 'me' } do

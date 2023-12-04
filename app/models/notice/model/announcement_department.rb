@@ -5,7 +5,7 @@ module Notice
 
     included do
       belongs_to :department, class_name: 'Org::Department'
-
+      belongs_to :organ, class_name: 'Org::Organ'
 
       has_many :members, through: :member_departments
 
