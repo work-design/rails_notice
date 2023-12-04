@@ -10,7 +10,7 @@ module Notice
       attribute :notifications_count, :integer, default: 0
       attribute :readed_count, :integer, default: 0
 
-      belongs_to :organ, optional: true
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
       belongs_to :publisher, polymorphic: true, optional: true
       has_many :notifications, as: :notifiable
 

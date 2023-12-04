@@ -5,6 +5,8 @@ gemspec
 gem 'rails'
 gem 'pg'
 gem 'puma'
+gem 'good_job'
+gem 'propshaft'
 
 gem 'rails_extend', github: 'work-design/rails_extend'
 gem 'rails_com', github: 'work-design/rails_com'
@@ -13,4 +15,5 @@ gem 'rails_design', github: 'work-design/rails_design'
 
 group :development, :test do
   gem 'debug'
+  gem 'listen'
 end

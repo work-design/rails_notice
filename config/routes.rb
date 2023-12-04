@@ -40,6 +40,7 @@ Rails.application.routes.draw do
             get 'publish/options' => :options
             match :publish, via: [:get, :post]
           end
+          resources :member_annunciates
         end
         resources :annunciates
       end
