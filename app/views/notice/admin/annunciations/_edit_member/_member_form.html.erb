@@ -1,4 +1,0 @@
-<%= form_with url: { action: 'update_member' }, method: :patch, class: 'modal-card' do |f| %>
-  <%= f.collection_select :department_ids, @departments, :id, :name, { label: Notice::Annunciation.human_attribute_name(:user_tags) }, { multiple: true, data: { controller: 'choice' } } %>
-  <%= f.submit %>
-<% end %>

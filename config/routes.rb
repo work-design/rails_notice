@@ -36,7 +36,6 @@ Rails.application.routes.draw do
             match :edit_user, via: [:get, :post]
             patch 'user' => :update_user
             match :edit_member, via: [:get, :post]
-            patch 'member' => :update_member
             get 'publish/options' => :options
             match :publish, via: [:get, :post]
           end
