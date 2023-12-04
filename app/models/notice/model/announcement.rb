@@ -1,5 +1,5 @@
 module Notice
-  module Model::Annunciation
+  module Model::Announcement
     extend ActiveSupport::Concern
 
     included do

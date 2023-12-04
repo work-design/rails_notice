@@ -1,14 +1,14 @@
 module Notice
-  module Model::UserAnnunciate
+  module Model::AnnouncementUserTag
     extend ActiveSupport::Concern
 
     included do
       attribute :notifications_count, :integer, default: 0
       attribute :state, :string
-      attribute :annunciated_at, :datetime
+      attribute :announce_at, :datetime
 
-      belongs_to :annunciation
-      belongs_to :user_tag, class_name: 'Auth::UserTag', optional: true
+      belongs_to :announcement
+      belongs_to :user_tag, class_name: 'Auth::UserTag'
 
       has_many :user_taggeds, foreign_key: :user_tag_id, primary_key: :user_tag_id
       has_many :notification_settings, through: :user_taggeds

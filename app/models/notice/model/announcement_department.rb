@@ -1,15 +1,15 @@
 module Notice
-  module Model::MemberAnnunciate
+  module Model::AnnouncementDepartment
     extend ActiveSupport::Concern
 
     included do
       attribute :notifications_count, :integer, default: 0
       attribute :state, :string
-      attribute :annunciated_at, :datetime
+      attribute :announce_at, :datetime
 
-      belongs_to :job_title, class_name: 'Org::JobTitle', optional: true
       belongs_to :department, class_name: 'Org::Department', optional: true
-      belongs_to :annunciation
+      belongs_to :announcement
+
       has_many :notification_settings, through: :user_taggeds
       has_many :same_annunciates, class_name: self.name, foreign_key: :annunciation_id, primary_key: :annunciation_id
 
