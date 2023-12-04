@@ -1,5 +1,5 @@
 module Notice
-  module Model::Publisher
+  module Ext::Publisher
     extend ActiveSupport::Concern
 
     included do

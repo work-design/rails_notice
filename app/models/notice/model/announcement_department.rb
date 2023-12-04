@@ -1,17 +1,12 @@
 module Notice
   module Model::AnnouncementDepartment
     extend ActiveSupport::Concern
+    include Inner::Announce
 
     included do
-      attribute :notifications_count, :integer, default: 0
-      attribute :state, :string
-      attribute :announce_at, :datetime
-
-      belongs_to :department, class_name: 'Org::Department', optional: true
-      belongs_to :announcement
+      belongs_to :department, class_name: 'Org::Department'
 
       has_many :notification_settings, through: :user_taggeds
-      has_many :same_annunciates, class_name: self.name, foreign_key: :annunciation_id, primary_key: :annunciation_id
 
       #after_create :increment_unread_count
       #after_destroy :decrement_unread_count

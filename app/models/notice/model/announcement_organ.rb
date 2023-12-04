@@ -1,10 +1,10 @@
 module Notice
   module Model::AnnouncementOrgan
     extend ActiveSupport::Concern
+    include Inner::Announce
 
     included do
       belongs_to :organ, class_name: 'Org::Organ'
-
 
       #after_create :increment_unread_count
       #after_destroy :decrement_unread_count

@@ -1,5 +1,5 @@
 module Notice
-  module Model::UserTagged
+  module Ext::UserTagged
     extend ActiveSupport::Concern
 
     included do
