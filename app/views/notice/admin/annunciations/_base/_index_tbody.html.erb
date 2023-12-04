@@ -10,14 +10,14 @@
   <p class="has-text-success"><%= model.readed_count %></p>
 </td>
 <td><time data-controller="time"><%= model.created_at.to_formatted_s(:iso8601) %></time></td>
-<td class="tags">
+<td>
   <% model.annunciates.each do |annunciate| %>
     <div class="tag"><%= annunciate.department&.name %></div>
   <% end if model.respond_to? :annunciates %>
-  <%= button_to({ action: 'edit_user', id: model.id }, aria: { label: t('.edit_user.title') }, class: 'button is-small is-rounded is-link') do %>
-    <i class="fa-solid fa-bullhorn"></i>
+  <%= button_to({ action: 'edit_user', id: model.id }, aria: { label: t('.edit_user.title') }, class: 'button is-small is-rounded') do %>
+    <i class="fa-solid fa-bullhorn has-text-danger"></i>
   <% end if model.is_a?(Notice::UserAnnunciation) %>
-  <%= button_to({ action: 'edit_member', id: model.id }, aria: { label: t('.edit_member.title') }, class: 'button is-small is-rounded is-link') do %>
-    <i class="fa-solid fa-bullhorn"></i>
+  <%= button_to({ action: 'edit_member', id: model.id }, aria: { label: t('.edit_member.title') }, class: 'button is-small is-rounded') do %>
+    <i class="fa-solid fa-bullhorn has-text-primary"></i>
   <% end if model.is_a?(Notice::MemberAnnunciation) %>
 </td>
