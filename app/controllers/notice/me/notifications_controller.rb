@@ -12,7 +12,7 @@ module Notice
         q_params.merge! read_at: nil, allow: { read_at: nil }
       end
 
-      current_member.apply_pending_annunciations
+      current_member.apply_pending_announcements
       @notifications = current_member.notifications.order(read_at: :asc).default_where(q_params).page(params[:page]).per(params[:per])
     end
 
