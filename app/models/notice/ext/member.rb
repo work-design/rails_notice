@@ -4,7 +4,9 @@ module Notice
 
     included do
       has_many :notifications, class_name: 'Notice::Notification', dependent: :delete_all
-      has_many :announcements, class_name: 'Notice::MemberAnnouncement', through: :member_departments
+      has_many :announcement_departments, class_name: 'Notice::AnnouncementDepartment', through: :member_departments
+      has_many :announcement_job_titles, class_name: 'Notice::AnnouncementJobTitle', through: :member_departments, source: :job_title
+      has_many :announcement_organs, class_name: 'Notice::AnnouncementOrgan', primary_key: :organ_id, foreign_key: :organ_id
     end
 
     def apply_pending_annunciations
