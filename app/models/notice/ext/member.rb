@@ -9,33 +9,31 @@ module Notice
       has_many :announcement_organs, class_name: 'Notice::AnnouncementOrgan', primary_key: :organ_id, foreign_key: :organ_id
     end
 
-    def apply_pending_annunciations
+    def apply_pending_announcements
       announcement_ids = pending_announcement_ids
       return if announcement_ids.blank?
 
       announcement_ids.each_slice(50) do |ids|
-        annunciations = Announcement.where(id: ids)
-        annunciation_attributes = annunciations.map do |annunciation|
+        announcements = Announcement.where(id: ids)
+        announcement_attributes = announcements.map do |announcement|
           r = {}
-          r.merge! annunciation.attributes.slice(:organ_id, :link)
+          r.merge! announcement.attributes.slice(:link)
           r.merge!(
             member_id: self.id,
-            user_id: self.user_id,
-            organ_id: self.organ_id,
-            sender_type: annunciation.publisher_type,
-            sender_id: annunciation.publisher_id,
-            notifiable_type: annunciation.class.name,
-            notifiable_id: annunciation.id,
+            organ_id: announcement.organ_id,
+            sender_type: announcement.publisher_type,
+            sender_id: announcement.publisher_id,
+            notifiable_type: announcement.class.name,
+            notifiable_id: announcement.id,
             official: true,
             archived: false,
-            created_at: annunciation.created_at,
-            updated_at: Time.current
+            created_at: announcement.created_at
           )
           r
         end
 
-        Annunciation.increment_counter(:notifications_count, ids)
-        Notification.insert_all(annunciation_attributes)
+        Announcement.increment_counter(:notifications_count, ids)
+        Notification.insert_all(announcement_attributes)
       end
     end
 
