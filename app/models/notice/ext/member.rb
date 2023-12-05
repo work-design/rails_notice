@@ -10,11 +10,11 @@ module Notice
     end
 
     def apply_pending_annunciations
-      annunciation_ids = pending_annunciation_ids
-      return if annunciation_ids.blank?
+      announcement_ids = pending_announcement_ids
+      return if announcement_ids.blank?
 
-      annunciation_ids.each_slice(50) do |ids|
-        annunciations = Annunciation.where(id: ids)
+      announcement_ids.each_slice(50) do |ids|
+        annunciations = Announcement.where(id: ids)
         annunciation_attributes = annunciations.map do |annunciation|
           r = {}
           r.merge! annunciation.attributes.slice(:organ_id, :link)
@@ -39,11 +39,14 @@ module Notice
       end
     end
 
-    def pending_annunciation_ids
-      all_annunciation_ids = member_annunciates.default_where('created_at-gte': self.created_at).order(annunciation_id: :desc).pluck(:annunciation_id).compact
-      made_annunciation_ids = notifications.where(notifiable_type: 'Notice::MemberAnnunciation').pluck(:notifiable_id)
+    def pending_announcement_ids
+      organ_ids = announcement_organs.default_where('created_at-gte': self.created_at).pluck(:announcement_id)
+      department_ids = announcement_departments.default_where('created_at-gte': self.created_at).pluck(:announcement_id)
+      job_title_ids = announcement_job_titles.default_where('created_at-gte': self.created_at).pluck(:announcement_id)
+      all_ids = (organ_ids + department_ids + job_title_ids).uniq
+      made_ids = notifications.where(notifiable_type: 'Notice::MemberAnnouncement').pluck(:notifiable_id)
 
-      all_annunciation_ids - made_annunciation_ids
+      all_ids - made_ids
     end
 
     def compute_unread_count
@@ -57,8 +60,8 @@ module Notice
         _counters.merge! nt.to_sym => no.where(notifiable_type: nt).count
       end
 
-      added_count = pending_annunciation_ids.size
-      ['total', 'official', 'Notice::MemberAnnunciation'].each do |counter|
+      added_count = pending_announcement_ids.size
+      ['total', 'official', 'Notice::MemberAnnouncement'].each do |counter|
         _counters[counter] = _counters[counter].to_i + added_count
       end
 
