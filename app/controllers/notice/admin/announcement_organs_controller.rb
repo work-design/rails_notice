@@ -5,12 +5,12 @@ module Notice
     before_action :set_new_announcement_organ, only: [:new, :create]
 
     def index
-      @announcement_organs = @annunciation.announcement_organs
+      @announcement_organs = @announcement.announcement_organs
     end
 
     private
     def set_announcement
-      @annunciation = Announcement.find params[:annunciation_id]
+      @announcement = Announcement.find params[:announcement_id]
     end
 
     def set_departments
@@ -22,9 +22,10 @@ module Notice
     end
 
     def announcement_organ_params
-      params.fetch(:announcement_organ, {}).permit(
+      _p = params.fetch(:announcement_organ, {}).permit(
         :organ_id
       )
+      _p.with_defaults! default_form_params
     end
 
   end
