@@ -14,13 +14,8 @@ module Notice
         })
         self.notification_sendings.find_or_create_by(way: 'websocket', sent_to: user_id)
       elsif member
-        ReceiverChannel.broadcast_to(member.identity, {
-          id: id,
-          body: body,
-          count: member.unread_count,
-          link: link,
-          showtime: member.showtime
-        })
+        content = ApplicationController.render(formats: [:turbo_stream], partial: 'notice_push', locals: { model: self })
+        ReceiverChannel.broadcast_to(member.identity, content)
         self.notification_sendings.find_or_create_by(way: 'websocket', sent_to: member_id)
       end
     end

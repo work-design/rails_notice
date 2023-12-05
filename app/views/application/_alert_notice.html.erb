@@ -1,0 +1,9 @@
+<div id="alert">
+  <div data-controller="notice" data-turbo-cache="false" class="has-animate-autoFade">
+    <div class="notification is-radiusless is-danger mb-0">
+      <button class="delete" data-action="notice#close"></button>
+      <div><%= model.body %></div>
+    </div>
+    <progress data-notice-target="progress" class="progress is-tiny is-danger is-radiusless" max="100" value="100"></progress>
+  </div>
+</div>
