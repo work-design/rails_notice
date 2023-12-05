@@ -3,12 +3,12 @@ en:
     enum:
       notice/notification:
         notifiable_type:
-          Notice::MemberAnnunciation: 内部通告
-          Notice::UserAnnunciation: 公开信息
-      notice/annunciation:
+          Notice::MemberAnnouncement: 内部通告
+          Notice::UserAnnouncement: 公开信息
+      notice/announcement:
         state:
           init: 草稿
           published: 已发布
         type:
-          Notice::MemberAnnunciation: 内部通告
-          Notice::UserAnnunciation: 公开信息
+          Notice::MemberAnnouncement: 内部通告
+          Notice::UserAnnouncement: 公开信息

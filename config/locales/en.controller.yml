@@ -3,7 +3,7 @@ en:
     title: Notice
     admin:
       title: Notice
-      annunciations:
+      announcements:
         index:
           title: Announcements
         edit_user:

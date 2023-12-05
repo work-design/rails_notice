@@ -14,10 +14,10 @@
   <% model.annunciates.each do |annunciate| %>
     <div class="tag"><%= annunciate.department&.name %></div>
   <% end if model.respond_to? :annunciates %>
-  <%= button_to({ action: 'edit_user', id: model.id }, aria: { label: t('.edit_user.title') }, class: 'button is-small is-rounded') do %>
+  <%= button_to({ controller: 'announcement_user_tags', action: 'new', id: model.id }, aria: { label: t('.announcement_user_tags.new.title') }, class: 'button is-small is-rounded') do %>
     <i class="fa-solid fa-bullhorn has-text-danger"></i>
-  <% end if model.is_a?(Notice::UserAnnunciation) %>
-  <%= button_to({ controller: 'member_annunciates', action: 'new', annunciation_id: model.id }, aria: { label: t('.member_annunciates.new.title') }, class: 'button is-small is-rounded') do %>
+  <% end if model.is_a?(Notice::UserAnnouncement) %>
+  <%= button_to({ controller: 'announcement_organs', action: 'new', announcement_id: model.id }, aria: { label: t('.announcement_organs.new.title') }, class: 'button is-small is-rounded') do %>
     <i class="fa-solid fa-bullhorn has-text-primary"></i>
-  <% end if model.is_a?(Notice::MemberAnnunciation) %>
+  <% end if model.is_a?(Notice::MemberAnnouncement) %>
 </td>

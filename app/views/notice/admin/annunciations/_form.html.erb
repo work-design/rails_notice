@@ -1,6 +1,0 @@
-<%= render 'error_messages', target: @annunciation %>
-<%= f.select :type, options_for_select(Notice::Annunciation.options_i18n(:type), @annunciation.type) %>
-<%= f.text_field :title, autofocus: true %>
-<%= f.text_area :body %>
-<%= f.file_field :cover %>
-<%= f.text_field :link %>
