@@ -1,6 +1,7 @@
 module Notice
   module Model::AnnouncementUserTag
     extend ActiveSupport::Concern
+    include Inner::Announce
 
     included do
       belongs_to :user_tag, class_name: 'Auth::UserTag'

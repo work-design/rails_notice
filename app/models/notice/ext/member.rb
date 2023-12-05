@@ -4,7 +4,7 @@ module Notice
 
     included do
       has_many :notifications, class_name: 'Notice::Notification', dependent: :delete_all
-      has_many :member_annunciates, class_name: 'Notice::MemberAnnunciate', through: :member_departments
+      has_many :announcements, class_name: 'Notice::MemberAnnouncement', through: :member_departments
     end
 
     def apply_pending_annunciations

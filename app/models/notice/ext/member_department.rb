@@ -3,7 +3,7 @@ module Notice
     extend ActiveSupport::Concern
 
     included do
-      has_many :annunciate_departments, class: 'M', foreign_key: :department_id, primary_key: :department_id
+      has_many :announcement_departments, class_name: 'Notice::AnnouncementDepartment', primary_key: :department_id, foreign_key: :department_id
     end
 
   end

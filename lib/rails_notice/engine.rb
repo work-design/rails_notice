@@ -3,11 +3,11 @@ module RailsNotice
   class Engine < ::Rails::Engine
 
     config.autoload_paths += Dir[
-      "#{config.root}/app/models/annunciation"
+      "#{config.root}/app/models/announcement"
     ]
 
     config.eager_load_paths += Dir[
-      "#{config.root}/app/models/annunciation"
+      "#{config.root}/app/models/announcement"
     ]
 
     config.generators do |g|

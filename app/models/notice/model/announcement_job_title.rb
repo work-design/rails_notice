@@ -5,8 +5,8 @@ module Notice
 
     included do
       belongs_to :job_title, class_name: 'Org::JobTitle'
-
-      has_many :notification_settings, through: :user_taggeds
+      belongs_to :department, class_name: 'Org::Department', optional: true
+      belongs_to :organ, class_name: 'Org::Organ'
 
       #after_create :increment_unread_count
       #after_destroy :decrement_unread_count

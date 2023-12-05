@@ -4,7 +4,7 @@ module Notice
 
     included do
       has_many :notifications, class_name: 'Notice::Notification', dependent: :delete_all
-      has_many :user_annunciates, class_name: 'Notice::UserAnnunciate', through: :user_taggeds
+      has_many :announcements, class_name: 'Notice::UserAnnouncement', through: :user_taggeds
     end
 
     def apply_pending_annunciations
