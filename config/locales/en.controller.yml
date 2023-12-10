@@ -39,3 +39,5 @@ en:
       notification_settings:
         show:
           title: Notify Settings
+    board:
+      title: Notice
