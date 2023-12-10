@@ -21,10 +21,10 @@ en:
       notifications:
         index:
           title: Notifications
-          unread: Unread
         readed:
           title: Have Readed
-        detail: Detail
+        show:
+          title: Detail
       notification_settings:
         show:
           title: Notify Settings
@@ -35,7 +35,6 @@ en:
           title: Notifications
         readed:
           title: Readed
-        detail: 详情请点击
       notification_settings:
         show:
           title: Notify Settings
