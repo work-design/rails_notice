@@ -40,3 +40,8 @@ en:
           title: Notify Settings
     board:
       title: Notice
+      notifications:
+        index:
+          title: Notifications
+        readed:
+          title: Have Readed
