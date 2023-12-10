@@ -50,6 +50,10 @@ Rails.application.routes.draw do
       namespace :my, defaults: { namespace: 'my' } do
         concerns :notice
       end
+
+      namespace :board, defaults: { namespace: 'board' } do
+        concerns :notice
+      end
     end
   end
 end

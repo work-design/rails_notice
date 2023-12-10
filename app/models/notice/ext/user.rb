@@ -4,7 +4,7 @@ module Notice
 
     included do
       has_many :notifications, class_name: 'Notice::Notification', dependent: :delete_all
-      has_many :announcements, class_name: 'Notice::UserAnnouncement', through: :user_taggeds
+      has_many :announcement_user_tags, class_name: 'Notice::AnnouncementUserTag', through: :user_taggeds
     end
 
     def apply_pending_annunciations
@@ -36,7 +36,7 @@ module Notice
     end
 
     def pending_annunciation_ids
-      all_annunciation_ids = user_annunciates.default_where('created_at-gte': self.created_at).order(annunciation_id: :desc).pluck(:annunciation_id).compact
+      all_annunciation_ids = announcement_user_tags.default_where('created_at-gte': self.created_at).order(announcement_id: :desc).pluck(:announcement_id).compact
       made_annunciation_ids = notifications.where(notifiable_type: 'Notice::UserAnnunciation').pluck(:notifiable_id)
 
       all_annunciation_ids - made_annunciation_ids
