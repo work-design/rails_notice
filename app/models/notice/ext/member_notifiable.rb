@@ -3,11 +3,11 @@ module Notice
     extend ActiveSupport::Concern
 
     included do
-      has_many :notifications, class_name: 'Notice::MemberNotification', as: :notifiable
+      has_many :member_notifications, class_name: 'Notice::MemberNotification', as: :notifiable
     end
 
     def to_member_notice(member:, **other_params)
-      n = self.notifications.build
+      n = self.member_notifications.build
       n.member = member
       n.organ_id = member.organ_id
       n.store_other_params(other_params)
