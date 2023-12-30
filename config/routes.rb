@@ -18,7 +18,13 @@ Rails.application.routes.draw do
     namespace :notice, defaults: { business: 'notice' } do
       namespace :admin, defaults: { namespace: 'admin' } do
         root 'home#index'
-        resources :notifications do
+        resources :user_notifications do
+          member do
+            patch :push
+            patch :email
+          end
+        end
+        resources :member_notifications do
           member do
             patch :push
             patch :email

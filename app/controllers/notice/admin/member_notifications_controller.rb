@@ -1,5 +1,5 @@
 module Notice
-  class Admin::NotificationsController < Admin::BaseController
+  class Admin::MemberNotificationsController < Admin::BaseController
     before_action :set_notification, only: [:show, :push, :email, :edit, :update, :destroy]
 
     def index
@@ -9,7 +9,7 @@ module Notice
       q_params.merge! default_params
       q_params.merge! params.permit(:archived, :receiver_id, :notifiable_type, :notifiable_id, 'user.name-like')
 
-      @notifications = Notification.default_where(q_params).page(params[:page])
+      @notifications = MemberNotification.default_where(q_params).page(params[:page])
     end
 
     def push
@@ -27,7 +27,7 @@ module Notice
     end
 
     def set_notification
-      @notification = Notification.find(params[:id])
+      @notification = MemberNotification.find(params[:id])
     end
 
     def notification_params
