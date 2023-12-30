@@ -3,7 +3,7 @@
   <p class="has-text-gray"><%= model.member&.name %></p>
 </td>
 <td>
-  <p><%= model.title %></p>
+  <p><%= link_to model.title, { action: 'show', id: model.id }, text: true %></p>
   <p><%= model.body %></p>
   <p><%= model.link %></p>
 </td>
