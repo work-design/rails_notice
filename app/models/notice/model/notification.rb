@@ -164,35 +164,6 @@ module Notice
       end
     end
 
-    def increment_unread
-      counters = ['total', notifiable_type]
-      counters << 'official' if self.official
-      counters.each do |counter|
-        user.counters[counter] = user.counters[counter].to_i + 1 if user
-        member.counters[counter] = member.counters[counter].to_i + 1 if member
-      end
-
-      user.save if user
-      member.save if member
-    end
-
-    def decrement_unread
-      counters = ['total', notifiable_type]
-      counters << 'official' if self.official
-      counters.each do |counter|
-        user.counters[counter] = user.counters[counter].to_i - 1 if user
-        member.counters[counter] = member.counters[counter].to_i - 1 if member
-      end
-
-      user.save if user
-      member.save if member
-    end
-
-    def reset_unread_count
-      self.user.reset_unread_count
-      self.member&.reset_unread_count
-    end
-
     def link
       if super.present?
         super
