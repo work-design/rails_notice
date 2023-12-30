@@ -7,7 +7,7 @@ module Notice
         archived: false
       }
       q_params.merge! default_params
-      q_params.merge! params.permit(:archived, :user_id, :notifiable_type, :notifiable_id, 'user.name-like')
+      q_params.merge! params.permit(:archived, :receiver_id, :notifiable_type, :notifiable_id, 'user.name-like')
 
       @notifications = Notification.default_where(q_params).page(params[:page])
     end
