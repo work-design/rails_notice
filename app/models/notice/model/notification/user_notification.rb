@@ -6,6 +6,10 @@ module Notice
       belongs_to :user, class_name: 'Auth::User', foreign_key: :receiver_id
     end
 
+    def wechat_users
+      user.wechat_users.default_where(appid: organ.apps.where(type: ['Wechat::PublicApp', 'Wechat::PublicAgency']).pluck(:appid))
+    end
+
     def increment_unread
       counters = ['total', notifiable_type]
       counters << 'official' if self.official

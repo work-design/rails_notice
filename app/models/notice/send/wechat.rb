@@ -10,12 +10,6 @@ module Notice
       super if defined? super
       return unless template_config
 
-      if user
-        wechat_users = user.wechat_users.default_where(appid: organ.apps.where(type: ['Wechat::PublicApp', 'Wechat::PublicAgency']).pluck(:appid))
-      else
-        wechat_users = [member.wechat_user].presence || member.wechat_users.default_where(appid: organ.apps.where(type: ['Wechat::PublicApp', 'Wechat::PublicAgency']).pluck(:appid))
-      end
-
       wechat_users.map do |wechat_user|
         wechat_template = template_config.templates.find_by(appid: wechat_user.appid)
         next if wechat_template.nil?
