@@ -4,20 +4,20 @@ module Notice
     def send_out
       super if defined? super
 
-      if user
-        ReceiverChannel.broadcast_to(user_id, {
-          id: id,
-          body: body,
-          count: user.unread_count,
-          link: link,
-          showtime: user.showtime
-        })
-        self.notification_sendings.find_or_create_by(way: 'websocket', sent_to: user_id)
-      elsif member
-        content = ApplicationController.render(formats: [:turbo_stream], partial: 'notice_push', locals: { model: self })
-        ReceiverChannel.broadcast_to(member.identity, content)
-        self.notification_sendings.find_or_create_by(way: 'websocket', sent_to: member_id)
-      end
+      content = ApplicationController.render(formats: [:turbo_stream], partial: 'notice_push', locals: { model: self })
+      ReceiverChannel.broadcast_to(member.identity, content)
+      self.notification_sendings.find_or_create_by(way: 'websocket', sent_to: receiver_id)
+    end
+
+    def sent_member_out
+      ReceiverChannel.broadcast_to(user_id, {
+        id: id,
+        body: body,
+        count: user.unread_count,
+        link: link,
+        showtime: user.showtime
+      })
+      self.notification_sendings.find_or_create_by(way: 'websocket', sent_to: receiver_id)
     end
 
   end
