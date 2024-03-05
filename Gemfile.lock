@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 6b86131485787d3fd39ad2e150baa527e4f005d2
+  revision: 28c098dba506854455140664983aed9142111e80
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 32753599577b0738c84784f7c2b8809f4b7eda42
+  revision: e091734eb5322b06e3e38791d1457004a14b4d86
   specs:
     rails_com (1.3.0)
       acme-client
@@ -27,14 +27,14 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 07fde3a7499238a148e0905ce86d270455c48e62
+  revision: dcf39a68ccd5899f34ca55d51228cd83d0737191
   specs:
     rails_design (0.0.1)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_extend.git
-  revision: 05b450a2c994f8e595287751b6e9f7cd65a71abe
+  revision: 4ef698021ff5603f47b3d0b87d3b9513df591af6
   specs:
     rails_extend (1.0.1)
       rails (>= 5.0)
@@ -169,7 +169,7 @@ GEM
       thor (>= 0.14.1)
     http-2-next (1.0.3)
     http-form_data (2.3.0)
-    httpx (1.2.2)
+    httpx (1.2.3)
       http-2-next (>= 1.0.3)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
@@ -206,7 +206,7 @@ GEM
     minitest (5.21.2)
     monetize (1.13.0)
       money (~> 6.12)
-    money (6.16.0)
+    money (6.18.0)
       i18n (>= 0.6.4, <= 2)
     money-rails (1.15.0)
       activesupport (>= 3.0)
@@ -361,7 +361,7 @@ CHECKSUMS
   good_job (3.22.0) sha256=496afbd8100e3e47a19d0fae7f2887c0c6027ba75bef303f7952d2e13b6229b9
   http-2-next (1.0.3) sha256=7df55ef84e9a66f71b260c497414983a3ba787e0d92cc38391a70fe63f5d5fc5
   http-form_data (2.3.0) sha256=cc4eeb1361d9876821e31d7b1cf0b68f1cf874b201d27903480479d86448a5f3
-  httpx (1.2.2) sha256=008683423f4b91a181f066f30da7580038b0517f36ef80354c7bd4c747971e07
+  httpx (1.2.3) sha256=bff92313af0e0c47fd6e8aba89fa57d1825ed1d12d7a03833b225955d48f19cb
   i18n (1.14.1) sha256=9d03698903547c060928e70a9bc8b6b87fda674453cda918fc7ab80235ae4a61
   io-console (0.7.2) sha256=f0dccff252f877a4f60d04a4dc6b442b185ebffb4b320ab69212a92b48a7a221
   irb (1.11.1) sha256=0700d626c92f7d47d12e73932ddb0c11b73c1f00608f5eae78dbc44968690842
@@ -377,7 +377,7 @@ CHECKSUMS
   mini_portile2 (2.8.5) sha256=7a37db8ae758086c3c3ac3a59c036704d331e965d5e106635e4a42d6e66089ce
   minitest (5.21.2) sha256=7685cdb8db964c7f68fcee974f21b62f0b60aaea2a6c898782e27e720ffebac2
   monetize (1.13.0) sha256=0c1f8ae28aa21bbf1a6d014138d9bb0a5ce756c1a99b8b7f7d409c258b01d3b3
-  money (6.16.0) sha256=cf476f5f19188e247ec20f6509cff64dc35d395ee018bad799b1a9ea8bd4754a
+  money (6.18.0) sha256=147fbeafa709b328c6cf94aeeb5d5c002269e231afc7a010b30243b731fd4ce1
   money-rails (1.15.0) sha256=cace7c3af76a0685747f57b96fdb321a4d966294e0a11b51f8e28c3ac08e4903
   mutex_m (0.2.0) sha256=b6ef0c6c842ede846f2ec0ade9e266b1a9dac0bc151682b04835e8ebd54840d5
   net-http (0.4.1) sha256=a96efc5ea18bcb9715e24dda4159d10f67ff0345c8a980d04630028055b2c282
