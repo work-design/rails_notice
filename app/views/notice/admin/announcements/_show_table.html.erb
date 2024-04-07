@@ -1,14 +1,14 @@
-<tr>
-  <td><%= Notice::Annunciation.human_attribute_name(:title) %></td>
-  <td><%= @annunciation.title %></td>
-</tr>
-<tr>
-  <td><%= Notice::Annunciation.human_attribute_name(:body) %></td>
-  <td><%= @annunciation.body %></td>
-</tr>
-<tr>
-  <td></td>
-  <td>
+<div>
+  <dt><%= Notice::Annunciation.human_attribute_name(:title) %></dt>
+  <dd><%= @annunciation.title %></dd>
+</div>
+<div>
+  <dt><%= Notice::Annunciation.human_attribute_name(:body) %></dt>
+  <dd><%= @annunciation.body %></dd>
+</div>
+<div>
+  <dt></dt>
+  <dd>
     <div class="tags">
       <% @annunciation.annunciates.each do |annunciate| %>
         <div class="tag">
@@ -22,5 +22,5 @@
     <%= link_to publish_admin_annunciation_path(@annunciation), aria: { label: '发布' }, class: 'button is-small is-rounded' do %>
       <i class="fa-solid fa-bullhorn"></i>
     <% end %>
-  </td>
-</tr>
+  </dd>
+</div>
