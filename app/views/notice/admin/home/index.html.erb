@@ -4,9 +4,9 @@
       <strong><%= Notice::Announcement.default_where(default_params).count %></strong>
       <p><%= t('.announcements.index.title') %></p>
     <% end %>
-    <%= link_to({ controller: 'notice/admin/user_notifications' }, class: 'cell is-box has-column-centered') do %>
-      <strong><%= Notice::UserNotification.default_where(default_params).count %></strong>
-      <p><%= t('.user_notifications.index.title') %></p>
+    <%= link_to({ controller: 'notice/admin/member_notifications' }, class: 'cell is-box has-column-centered') do %>
+      <strong><%= Notice::MemberNotification.default_where(default_params).count %></strong>
+      <p><%= t('.member_notifications.index.title') %></p>
     <% end %>
     <%= link_to({ controller: 'members' }, class: 'cell is-box has-column-centered') do %>
       <p><%= t('.members.index.title') %></p>
