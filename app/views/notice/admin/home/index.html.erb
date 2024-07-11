@@ -1,15 +1,3 @@
-<div class="fixed-grid has-auto-count px-3">
-  <div class="grid">
-    <%= link_to({ controller: 'announcements' }, class: 'cell is-box has-column-centered') do %>
-      <strong><%= Notice::Announcement.default_where(default_params).count %></strong>
-      <p><%= t('.announcements.index.title') %></p>
-    <% end %>
-    <%= link_to({ controller: 'notice/admin/member_notifications' }, class: 'cell is-box has-column-centered') do %>
-      <strong><%= Notice::MemberNotification.default_where(default_params).count %></strong>
-      <p><%= t('.member_notifications.index.title') %></p>
-    <% end %>
-    <%= link_to({ controller: 'members' }, class: 'cell is-box has-column-centered') do %>
-      <p><%= t('.members.index.title') %></p>
-    <% end %>
-  </div>
+<div class="section">
+  <%= render 'index_column' %>
 </div>
