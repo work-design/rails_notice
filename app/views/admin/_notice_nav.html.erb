@@ -1,9 +1,10 @@
-<div data-controller="menu" class="<%= active_helper(modules: 'notice/admin', active: 'menu ex-accordion is-active', item: 'menu ex-accordion') %>">
-  <a class="menu-label" data-action="menu#toggle">
-    <i class="fa-solid fa-fw fa-inbox"></i>
-    <span><%= t('notice.admin.title') %></span>
-    <i class="fa-solid fa-fw dropdown"></i>
-  </a>
+<div data-controller="menu" class="menu ex-accordion is-active">
+  <div class="menu-label">
+    <div>
+      <i class="fa-solid fa-fw fa-inbox"></i>
+      <span><%= t('notice.admin.title') %></span>
+    </div>
+  </div>
   <div class="menu-list">
     <%= link_to t('notice.admin.announcements.index.title'), { controller: 'notice/admin/announcements' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: 'announcements', active: 'is-active') %>
     <%= link_to t('notice.admin.user_notifications.index.title'), { controller: 'notice/admin/user_notifications' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: 'notifications', active: 'is-active') %>
