@@ -6,7 +6,7 @@
 </td>
 <td><%= model.link %></td>
 <td>
-  <p><%= link_to model.notifications_count, { controller: 'notifications', notifiable_type: model.class_name, notifiable_id: model.id } %></p>
+  <p><%= link_to model.member_notifications.count, { controller: 'member_notifications' } %></p>
   <p class="color-success"><%= model.readed_count %></p>
 </td>
 <td><time data-controller="time"><%= model.created_at.to_formatted_s(:iso8601) %></time></td>

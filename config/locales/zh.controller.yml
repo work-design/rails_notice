@@ -11,7 +11,7 @@ zh:
           title: 通告
         publish:
           title: 发布
-      notifications:
+      member_notifications:
         index:
           title: 通知
       members:
