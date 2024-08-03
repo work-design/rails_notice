@@ -2,7 +2,7 @@
 <div class="menu-list">
   <%= link_to({ controller: 'notice/board/notifications' }, class: active_helper(notifications: 'index', active: 'is-active')) do %>
     <span><%= t('notice.board.notifications.index.title') %></span>
-    <span class="tag"><%= current_member.unread_count %></span>
+    <span class="tag"><%= current_user.unread_count %></span>
   <% end %>
   <%= link_to t('notice.board.notifications.readed.title'), { controller: 'notice/board/notifications', action: 'readed' }, class: active_helper(notifications: 'readed', active: 'is-active') %>
 </div>
