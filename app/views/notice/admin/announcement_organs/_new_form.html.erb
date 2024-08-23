@@ -1,12 +1,7 @@
-<%= form_with model: @announcement_organ, url: { action: 'create' }, class: 'modal-card' do |f| %>
-  <header class="modal-card-head">
-    <p class="modal-card-title"><%= t('.title') %></p>
-    <button type="button" data-action="modal#close" class="delete"></button>
-  </header>
+<%= form_with theme: 'modal', model: @announcement_organ, url: { action: 'create' } do |f| %>
+  <%= render 'modal_header' %>
   <section class="modal-card-body">
     <%= f.collection_select :organ_id, @departments, :id, :name, { data: { controller: 'choice' } } %>
   </section>
-  <footer class="modal-card-foot">
-    <%= f.submit %>
-  </footer>
+  <%= f.submit %>
 <% end %>
