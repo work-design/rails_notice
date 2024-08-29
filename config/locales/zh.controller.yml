@@ -17,6 +17,13 @@ zh:
       members:
         index:
           title: 通知设置
+    board:
+      title: 通知
+      notifications:
+        index:
+          title: 通知
+        readed:
+          title: 已读
     my:
       title: 通知
       notifications:
