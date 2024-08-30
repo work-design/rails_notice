@@ -3,10 +3,10 @@
   <td>
     <div data-show-target="item" class="visibility-hidden">
       <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-pencil color-link"></i>
+        <i class="fa-solid fa-pencil text-link"></i>
       <% end %>
       <%= button_to({ action: 'push', id: model.id }, method: :patch, data: { turbo_confirm: t('.push.confirm') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-plane color-success"></i>
+        <i class="fa-solid fa-plane text-success"></i>
         <span class="pl-1">推送</span>
       <% end %>
       <%= button_to({ action: 'email', id: model.id }, method: :patch, data: { turbo_confirm: t('.email.confirm') }, class: 'button is-small is-rounded is-light') do %>

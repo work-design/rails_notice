@@ -7,7 +7,7 @@
 <td><%= model.link %></td>
 <td>
   <p><%= link_to model.member_notifications.count, { controller: 'member_notifications' } %></p>
-  <p class="color-success"><%= model.readed_count %></p>
+  <p class="text-success"><%= model.readed_count %></p>
 </td>
 <td><time data-controller="time"><%= model.created_at.to_formatted_s(:iso8601) %></time></td>
 <td>
@@ -15,7 +15,7 @@
     <div class="tag"><%= annunciate.department&.name %></div>
   <% end if model.respond_to? :annunciates %>
   <%= button_to({ controller: 'announcement_user_tags', action: 'new', id: model.id }, aria: { label: t('.announcement_user_tags.new.title') }, class: 'button is-small is-rounded') do %>
-    <i class="fa-solid fa-bullhorn color-danger"></i>
+    <i class="fa-solid fa-bullhorn text-danger"></i>
   <% end if model.is_a?(Notice::UserAnnouncement) %>
   <%= button_to({ controller: 'announcement_organs', action: 'new', announcement_id: model.id }, aria: { label: t('.announcement_organs.new.title') }, class: 'button is-small is-rounded') do %>
     <i class="fa-solid fa-bullhorn has-text-primary"></i>
