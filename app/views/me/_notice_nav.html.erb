@@ -1,13 +1,15 @@
-<div class="menu-label">
-  <span><%= t('notice.me.title') %></span>
-  <%= link_to({ controller: 'notice/admin/home' }, aria: { label: '管理' }) do %>
-    <i class="fa-solid fa-cog"></i>
-  <% end %>
-</div>
-<div class="menu-list">
-  <%= link_to({ controller: 'notice/me/notifications' }, class: active_helper(notifications: 'index', active: 'is-active')) do %>
-    <span><%= t('notice.me.notifications.index.title') %></span>
-    <span class="tag"><%= current_member.unread_count %></span>
-  <% end %>
-  <%= link_to t('notice.me.notifications.readed.title'), { controller: 'notice/me/notifications', action: 'readed' }, class: active_helper(notifications: 'readed', active: 'is-active') %>
-</div>
+<% if role_permit?(business: 'notice', namespace: 'me') %>
+  <div class="menu-label">
+    <span><%= t('notice.me.title') %></span>
+    <%= link_to({ controller: 'notice/admin/home' }, aria: { label: '管理' }) do %>
+      <i class="fa-solid fa-cog"></i>
+    <% end %>
+  </div>
+  <div class="menu-list">
+    <%= link_to({ controller: 'notice/me/notifications' }, class: active_helper(notifications: 'index', active: 'is-active')) do %>
+      <span><%= t('notice.me.notifications.index.title') %></span>
+      <span class="tag"><%= current_member.unread_count %></span>
+    <% end %>
+    <%= link_to t('notice.me.notifications.readed.title'), { controller: 'notice/me/notifications', action: 'readed' }, class: active_helper(notifications: 'readed', active: 'is-active') %>
+  </div>
+<% end %>
