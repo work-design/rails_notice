@@ -1,4 +1,4 @@
-<div data-controller="menu" class="menu ex-accordion is-active">
+<div data-controller="menu" class="<%= role_permit?(business: 'notice', namespace: 'admin') ? 'menu ex-accordion is-active' : 'display-none' %>">
   <div class="menu-label">
     <div>
       <i class="fa-solid fa-fw fa-inbox"></i>
