@@ -10,7 +10,7 @@
         <span class="pl-1">推送</span>
       <% end %>
       <%= button_to({ action: 'email', id: model.id }, method: :patch, data: { turbo_confirm: t('.email.confirm') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-mail has-text-primary"></i>
+        <i class="fa-solid fa-mail text-primary"></i>
         <span class="pl-1">Email</span>
       <% end %>
     </div>
