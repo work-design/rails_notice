@@ -10,7 +10,7 @@ module Notice
 
       belongs_to :notification
 
-      enum way: {
+      enum :way, {
         email: 'email',
         websocket: 'websocket',
         wechat: 'wechat'
