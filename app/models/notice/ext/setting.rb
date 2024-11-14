@@ -7,6 +7,8 @@ module Notice
       attribute :counters, :json, default: {}
       attribute :showtime, :integer, default: 0
       attribute :accept_email, :boolean, default: true
+
+      normalizes :notifiable_types, with: -> (params) { params.compact_blank }
     end
 
     def unread_count
