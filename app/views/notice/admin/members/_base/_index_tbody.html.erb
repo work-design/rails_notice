@@ -1,4 +1,7 @@
-<td><%= model.identity %></td>
+<td>
+  <p><%= model.name %></p>
+  <p class="text-grey"><%= model.identity %></p>
+</td>
 <td><%= model.showtime %></td>
 <td>
   <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
