@@ -3,7 +3,11 @@ module Notice
     extend ActiveSupport::Concern
 
     included do
-      attribute :notifiable_types, :json, default: []
+      if connection.adapter_name == 'PostgreSQL'
+        attribute :notifiable_types, :string, array: true
+      else
+        attribute :notifiable_types, :json, default: []
+      end
       attribute :counters, :json, default: {}
       attribute :showtime, :integer, default: 0
       attribute :accept_email, :boolean, default: true
