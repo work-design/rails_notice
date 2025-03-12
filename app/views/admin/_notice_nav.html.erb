@@ -1,10 +1,10 @@
 <div data-controller="menu" class="<%= role_permit?(business: 'notice', namespace: 'admin') ? 'menu ex-accordion is-active' : 'display-none' %>">
-  <div class="menu-label">
+  <%= link_to({ controller: 'notice/admin/home' }, text: true, class: 'menu-label') do %>
     <div>
       <i class="fa-solid fa-fw fa-inbox"></i>
       <span><%= t('notice.admin.title') %></span>
     </div>
-  </div>
+  <% end %>
   <div class="menu-list">
     <%= link_to t('notice.admin.announcements.index.title'), { controller: 'notice/admin/announcements' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: 'announcements', active: 'is-active') %>
     <%= link_to t('notice.admin.members.index.title'), { controller: 'notice/admin/members' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: ['members'], active: 'is-active') if defined? current_member %>
