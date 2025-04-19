@@ -4,7 +4,7 @@ module Notice
 
     included do
       if connection.adapter_name == 'PostgreSQL'
-        attribute :notifiable_types, :string, array: true
+        attribute :notifiable_types, :string, array: true, default: []
       else
         attribute :notifiable_types, :json, default: []
       end
